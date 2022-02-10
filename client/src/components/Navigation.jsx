@@ -2,34 +2,29 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import './navigation.scss'
 
+
 function Navigation() {
     return (
         <div className="nav-wrap">
-            <nav id='mainNav' className="navbar navbar-expand navbar-dark">
-                <div className="container-fluid">
-                    <a className="navbar-brand js-scroll-trigger">
+            <div className="nav-primary-wrap">
+                <NavLink className="nav-home" to="/">
+                    <img className="nav-watchlist-home" src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
+                         alt="H" />
+                    Home
+                </NavLink>
 
-                    </a>
+                <NavLink className="nav-watchlist" to="/watchlist">
+                    <img className="nav-watchlist-heart" src="https://www.iconpacks.net/icons/1/free-heart-icon-492-thumb.png"
+                         alt="<3" />
+                    <span>Wishlist</span>
+                </NavLink>
 
-                    <ul className="navbar-nav ml-auto text-uppercase">
-                        <li className="nav-item mx-0 mx-lg-1">
-                            <NavLink className="nav-link" to="/">
-                                Home
-                            </NavLink>
-                        </li>
-                        <li className="nav-item mx-0 mx-lg-1">
-                            <NavLink className="nav-link" to="/wishlist">
-                                Wishlist
-                            </NavLink>
-                        </li>
-                        <li className="nav-item mx-0 mx-lg-1">
-                            <NavLink className="nav-link" to="/join">
-                                Sign in/Join
-                            </NavLink>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+                <NavLink className="nav-join" to="/join">
+                    <img className="nav-watchlist-heart" src="http://cdn.onlinewebfonts.com/svg/img_24787.png"
+                         alt="I" />
+                    Sign in/Join
+                </NavLink>
+            </div>
         </div>
     );
 }
