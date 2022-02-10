@@ -6,6 +6,7 @@ import {
   Navigation,
   Footer,
   Home,
+  Join,
 } from "./components";
 
 ReactDOM.render(
@@ -14,6 +15,7 @@ ReactDOM.render(
 
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/join" element={<Join />} />
     </Routes>
 
     <Footer />
