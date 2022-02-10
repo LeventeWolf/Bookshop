@@ -23,7 +23,7 @@ function Navigation() {
                             </NavLink>
                         </li>
                         <li className="nav-item mx-0 mx-lg-1">
-                            <NavLink className="nav-link" to="/join">
+                            <NavLink className="nav-link" to="/user">
                                 Sign in/Join
                             </NavLink>
                         </li>
