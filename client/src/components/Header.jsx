@@ -1,34 +1,44 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
+import './header.scss';
 
 function Header() {
     return (
-        <nav id='mainNav' className="navbar navbar-expand navbar-dark bg-dark fixed-top">
-            <div className="container-fluid">
-                <a className="navbar-brand js-scroll-trigger">
-                    <img src={'https://d3ogvdx946i4sr.cloudfront.net/assets/v2.25.14/img/logo.svg'} alt="Logo" width={'120px'}/>
-                </a>
+        <div className="header-wrap">
+            <header className="header">
+                <div className="primary-wrap">
+                    <div className="brand-wrap">
+                        <h1>
+                            <a href="/" className="brand-link">
+                                <img src="https://d3ogvdx946i4sr.cloudfront.net/assets/v2.25.14/img/logo.svg"
+                                     alt="Bookdepository.com"/>
+                            </a>
+                        </h1>
+                    </div>
 
-                <ul className="navbar-nav ml-auto text-uppercase">
-                    <li className="nav-item mx-0 mx-lg-1">
-                        <NavLink className="nav-link" to="/">
-                            Home
-                        </NavLink>
-                    </li>
-                    <li className="nav-item mx-0 mx-lg-1">
-                        <NavLink className="nav-link" to="/wishlist">
-                            Wishlist
-                        </NavLink>
-                    </li>
-                    <li className="nav-item mx-0 mx-lg-1">
-                        <NavLink className="nav-link" to="/join">
-                            Sign in/Join
-                        </NavLink>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+                    <div className="search-wrap">
+                        <img
+                            src="https://i0.wp.com/www.thinkafrica.fi/wp-content/uploads/2019/04/search-icon.png?fit=1200%2C1200&ssl=1&w=640"
+                            alt="go" className="search-icon"/>
+
+                        <input type="text" placeholder="Search for books by keyword / title / author / ISBN"
+                               name="search"
+                               className="text-input"/>
+
+                        <button aria-label="Search" className="header-search-btn" type="submit">
+                            <span className="text">Search</span>
+                        </button>
+
+                        <button aria-label="Search" className="header-advanced-search-btn" type="submit">
+                            <span>Advanced Search</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+        </div>
     );
 }
+
+
 
 export default Header;

@@ -1,0 +1,87 @@
+.header-wrap {
+    color: #fff;
+    background: #4c394e;
+    position: relative;
+    z-index: 10;
+
+    height: 80px;
+}
+
+.header {
+    max-width: 1440px;
+}
+.header, .header-wrap {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.primary-wrap {
+    box-sizing: border-box;
+    padding: 10px;
+
+    display: flex;
+}
+.primary-wrap .brand-link {
+    display: block;
+    width: 154px;
+    max-width: 100%;
+}
+
+.search-wrap {
+    margin: auto;
+}
+
+.search-icon {
+    width: 23px;
+    position: relative;
+    left: 35px;
+    bottom: 2px;
+}
+
+.text-input {
+    width: 770px;
+    height: 44px;
+
+    padding-left: 40px;
+}
+
+.header-search-btn, .header-advanced-search-btn {
+    width: 150px;
+    height: 45px;
+
+    box-sizing: border-box;
+
+    margin-left: 10px;
+    font-size: 11pt;
+}
+
+.header-search-btn {
+    border-radius: 5px;
+    border: none;
+
+    background-color: rgb(16, 187, 213);
+    transition: background .3s;
+
+    &:hover {
+        background-color: #29D5EF;
+    }
+}
+
+.header-advanced-search-btn {
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    background-color: inherit;
+    color: rgba(255, 255, 255, 0.7);
+
+    transition: all .3s;
+
+    &:hover {
+        border: 1px solid white;
+        color: white;
+    }
+}
+
+.text {
+    color: white;
+}
