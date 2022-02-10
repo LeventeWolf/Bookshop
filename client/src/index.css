@@ -11,3 +11,11 @@ h1 {
     text-align: center;
     width: 100%;
 }
+
+.main-wrap {
+    border: 2px solid rgb(167, 165, 165);
+    max-width: 1440px;
+
+    margin: auto;
+    padding: 10px 20px;
+}
