@@ -2,12 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import {Navigation, Header, Footer, Home, Join} from "./components";
+import {Navigation, Header, HeaderSecondary, Home, Join, Footer} from "./components";
 
 ReactDOM.render(
     <Router>
         <Navigation/>
         <Header/>
+        <HeaderSecondary/>
 
         <Routes>
             <Route path="/" element={<Home/>}/>
