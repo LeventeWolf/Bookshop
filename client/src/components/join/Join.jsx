@@ -1,8 +1,9 @@
 import React from "react";
+import './join.scss';
 
 function Join() {
     return (
-        <div id="main">
+        <div className="main-wrap">
             <h1>Sign In/Join</h1>
         </div>
     );
