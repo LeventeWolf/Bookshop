@@ -8,7 +8,7 @@ function Join() {
         // <Box w='70%' height={500}  margin="auto" marginTop={150} marginBottom={150} 
         // boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)" opacity={0.86} borderRadius={6}
         // style={{filter: "blur(2.5px)"}} bg="#CDC9C95C">
-    <Box w='70%' height={500}  margin="auto" marginTop={150} marginBottom={150} bg="#CDC9C95C" borderRadius={16} boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)">
+    <Box w='70%' height={500}  margin="auto" marginTop={10} bg="#CDC9C95C" maxWidth={1440} borderRadius={16} boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)">
         <Flex>
             <Box margin={50}>
                 <Register/>

@@ -33,6 +33,7 @@ export function Register() {
                 <InputLeftElement ml={3} mr={1} children={
                             <FontAwesomeIcon icon={faUser}  color='gray'/>}/>
                 <Input
+                    bgColor='white'
                     mx='3'
                     variant="outline"
                     placeholder='Username'
@@ -50,6 +51,7 @@ export function Register() {
                                                     {passwordVisible ? "Hide" : "Show"}
                                                     </Button>}/>
                 <Input
+                    bgColor='white'
                     mx='3'
                     variant="outline"
                     type={passwordVisible ? "text" : "password"}
@@ -67,6 +69,7 @@ export function Register() {
                 <InputLeftElement ml={3} mr={1} children={
                             <FontAwesomeIcon icon={faAt}  color='gray'/>}/>
                 <Input
+                    bgColor='white'
                     mx='3'
                     variant="outline"
                     placeholder='Email'
