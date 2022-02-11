@@ -3,7 +3,7 @@ import { Box, Input, ButtonGroup, Text, InputGroup, InputLeftElement, Button } f
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
 
-function Register() {
+export function Register() {
 
     const submit = async()=>{
         const response = await fetch('http:/localhost:3000/registration', {
@@ -87,5 +87,3 @@ function Register() {
         </Box>
     )
 }
-
-export default Register;

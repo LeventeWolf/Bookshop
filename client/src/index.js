@@ -14,7 +14,7 @@ ReactDOM.render(
   
             <Routes>
                 <Route path="/" element={<Home/>}/>
-                <Route path="/user" element={<Join/>}/>
+                <Route path="/join" element={<Join/>}/>
             </Routes>
 
             <Footer/>

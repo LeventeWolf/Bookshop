@@ -1,8 +1,9 @@
 import React from "react";
-import { Register, Signin } from '..'
+import { Register } from './Register'
+import { Signin } from './Signin'
 import { Flex, Spacer, Box } from '@chakra-ui/react'
 
-export default function Join() {
+function Join() {
     return (
         // <Box w='70%' height={500}  margin="auto" marginTop={150} marginBottom={150} 
         // boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)" opacity={0.86} borderRadius={6}
@@ -20,3 +21,5 @@ export default function Join() {
     </Box>
     );
 }
+
+export default Join;

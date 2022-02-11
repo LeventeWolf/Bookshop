@@ -3,7 +3,7 @@ import { Flex, Spacer, Box, Input, ButtonGroup, Text, InputGroup, InputLeftEleme
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
 
-function Signin() {
+export function Signin() {
 
     const submit = async()=>{
         const response = await fetch('http:/localhost:3000/signin', {
@@ -71,5 +71,3 @@ function Signin() {
         </Box>
     )
 }
-
-export default Signin;
