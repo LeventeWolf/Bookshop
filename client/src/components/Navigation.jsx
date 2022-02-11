@@ -1,9 +1,12 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import './navigation.scss'
+import {useSelector} from "react-redux";
 
 
 function Navigation() {
+    const user = useSelector(state => state.user)
+
     return (
         <div className="nav-wrap">
             <div className="nav-primary-wrap">
@@ -19,11 +22,22 @@ function Navigation() {
                     <span>Wishlist</span>
                 </NavLink>
 
-                <NavLink className="nav-join" to="/join">
-                    <img className="nav-icon" src="http://cdn.onlinewebfonts.com/svg/img_24787.png"
-                         alt="I" />
-                    Sign in/Join
-                </NavLink>
+                {
+                    !user.isLoggedIn ?
+                        <NavLink className="nav-join" to="/join">
+                            <img className="nav-icon" src="http://cdn.onlinewebfonts.com/svg/img_24787.png"
+                                 alt="I" />
+                            Sign in/Join
+                        </NavLink>
+                    :
+                        <NavLink className="nav-join" to="/profile">
+                            <img className="nav-icon" src="http://cdn.onlinewebfonts.com/svg/img_24787.png"
+                                 alt="I" />
+                            Hello!
+                        </NavLink>
+                }
+
+
             </div>
         </div>
     );
