@@ -7,10 +7,16 @@ import {ChakraProvider} from '@chakra-ui/react'
 
 import {Provider} from 'react-redux';
 import store from './redux/store'
+import {QueryClient, QueryClientProvider} from "react-query";
+import {ReactQueryDevtools} from "react-query/devtools";
 
 document.body.style.backgroundColor = '#F0F0F0';
 
+const queryClient = new QueryClient()
+
 ReactDOM.render(
+    <QueryClientProvider client={queryClient}>
+    <ReactQueryDevtools />
     <Provider store={store}>
         <ChakraProvider>
             <Router>
@@ -20,7 +26,7 @@ ReactDOM.render(
 
                 <Routes>
                     <Route path="/" element={<Home/>}/>
-                    <Route path="/join" element={<Join/>}/>
+                    <Route path="/Join" element={<Join/>}/>
                     <Route path="/wishlist" element={<Wishlist/>}/>
                     <Route path="/basket" element={<Basket/>}/>
                 </Routes>
@@ -28,7 +34,8 @@ ReactDOM.render(
                 <Footer/>
             </Router>
         </ChakraProvider>
-    </Provider>,
+    </Provider>
+    </QueryClientProvider>,
 
 
     document.getElementById("root")

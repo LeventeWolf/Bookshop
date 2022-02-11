@@ -19,7 +19,7 @@ function Navigation() {
                     <span>Wishlist</span>
                 </NavLink>
 
-                <NavLink className="nav-join" to="/join">
+                <NavLink className="nav-join" to="Join">
                     <img className="nav-icon" src="http://cdn.onlinewebfonts.com/svg/img_24787.png"
                          alt="I" />
                     Sign in/Join
