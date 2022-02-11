@@ -30,6 +30,7 @@ export const basketReducer = (basket = [], {type, payload}) => {
             }
 
             return (basketCopy.filter(product => product.quantity !== 0));
+
         default:
             return basket;
     }

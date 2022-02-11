@@ -1,9 +1,12 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import './navigation.scss'
+import {useSelector} from "react-redux";
 
 
 function Navigation() {
+    const user = useSelector(state => state.user);
+
     return (
         <div className="nav-wrap">
             <div className="nav-primary-wrap">
@@ -22,7 +25,8 @@ function Navigation() {
                 <NavLink className="nav-join" to="Join">
                     <img className="nav-icon" src="http://cdn.onlinewebfonts.com/svg/img_24787.png"
                          alt="I" />
-                    Sign in/Join
+
+                    {!user.isLoggedIn ? 'Sign in/Join' : 'Hello!:)'}
                 </NavLink>
             </div>
         </div>
