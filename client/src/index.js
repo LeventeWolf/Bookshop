@@ -5,6 +5,8 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {Navigation, Header, HeaderSecondary, Footer, Home, Join} from "./components";
 import { ChakraProvider } from '@chakra-ui/react'
 
+document.body.style.backgroundColor = '#F0F0F0';
+
 ReactDOM.render(
     <ChakraProvider>
         <Router>

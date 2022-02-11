@@ -1,0 +1,30 @@
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'bestsellers featuring'
+    'bestsellers supply';
+  grid-gap: 10px;
+  //background-color: #2196F3;
+  box-sizing: border-box;
+
+  // rows: Featuring, Supply
+  grid-template-rows: 200px;
+  // columns: Bestsellers, Featuring/Supply
+  grid-template-columns: 250px 1138px;
+}
+
+.featuring-wrap, .supply-wrap, .bestsellers-wrap {
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+
+  h1 {
+    text-align: left;
+    font-size: 12pt;
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
+    //text-transform: uppercase;
+
+    border-bottom: 1px solid rgba(100, 100, 100, 0.31);
+  }
+}
