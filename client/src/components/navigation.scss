@@ -16,7 +16,7 @@
   color: rgba(255,255,255,0.8);
   font-size: 12pt;
 
-  padding: 10px;
+  padding: 15px;
 
   margin-left: 15px;
 
@@ -37,15 +37,14 @@
   }
 }
 
-.nav-watchlist-heart, .nav-watchlist-home {
+.nav-icon {
+  display: inline;
   position: relative;
-  bottom: 1px;
-
+  bottom: 2px;
   width: 20px;
-
   margin-right: 10px;
 
-  transition: all .3s;
 
+  transition: all .3s;
   filter: brightness(0) invert(0.9);
 }
