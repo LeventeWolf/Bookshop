@@ -32,15 +32,22 @@
   max-width: 100px;
 }
 
+.supply-product-author {
+  font-size: 11pt;
+  font-weight: 100;
+}
+
 .supply-product-price {
   color: #ff0072;
   font-weight: bold;
+  margin-top: 10px;
 }
+
 
 .supply-product-add-to-basket {
   height: 36px;
   width: 100%;
-  padding: 0 16px;
+  box-sizing: border-box;
 
   margin-top: 10px;
   border-radius: 5px;

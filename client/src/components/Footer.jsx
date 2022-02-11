@@ -3,9 +3,9 @@ import React from "react";
 function Footer() {
   return (
     <div className="footer" style={{height: "20px"}}>
-      <footer className="p-1 bg-dark">
+      <footer className="p-1 bg-dark fixed-bottom">
         <div className="container">
-          <p className="m-0 text-center text-white font-italic">
+          <p className="m-0 text-center text-white">
             Follow Us
           </p>
         </div>
