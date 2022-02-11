@@ -1,18 +1,32 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useSelector} from "react-redux";
 import SupplyProduct from "../home/SupplyProduct";
 import {v4} from "uuid";
 
+import './basket.scss'
+import BasketProduct from "./BasketProduct";
+
 export default function Basket() {
     const basket = useSelector(state => state.basket)
 
+    useEffect(() => {
+        document.title = "Your basket"
+    }, []);
+
     return (
         <div className="main-wrap">
-            <div className="supply-wrap">
-                <h1>Basket</h1>
+            <h1 className="basket-page-title">Your basket</h1>
 
-                <div className="supply-container">
-                    {basket.map(product => <SupplyProduct product={product} key={v4()}/>)}
+            <div className="basket-page-wrap">
+                <h2 className="basket-page-title-secondary">Shopping basket details</h2>
+
+                <div className="basket-page-container">
+                    {
+                        basket.length !== 0 ?
+                            basket.map(product => <BasketProduct product={product} key={v4()}/>)
+                        :
+                            <div className="basket-empty">Your Basket is empty!</div>
+                    }
                 </div>
             </div>
         </div>

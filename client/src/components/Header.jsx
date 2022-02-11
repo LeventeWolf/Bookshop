@@ -1,5 +1,6 @@
 import React from "react";
 import './header.scss';
+import {NavLink} from "react-router-dom";
 
 function Header() {
     return (
@@ -8,10 +9,10 @@ function Header() {
                 <div className="primary-wrap">
                     <div className="brand-wrap">
                         <h1>
-                            <a href="/" className="brand-link">
+                            <NavLink to="/" className="brand-link">
                                 <img src="https://d3ogvdx946i4sr.cloudfront.net/assets/v2.25.14/img/logo.svg"
                                      alt="Bookdepository.com"/>
-                            </a>
+                            </NavLink>
                         </h1>
                     </div>
 

@@ -1,13 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './home.scss';
 import Bestsellers from "./Bestsellers";
 import Featuring from "./Featuring";
 import Supply from "./Supply";
 
-import {useSelector, useDispatch} from "react-redux";
-import {decrement, increment} from "../../redux/actions/counterActions";
 
 function Home() {
+    useEffect(() => {
+        document.title = "Bookshop"
+    }, []);
+
     return (
         <div className="main-wrap">
             <div className="grid-container">
