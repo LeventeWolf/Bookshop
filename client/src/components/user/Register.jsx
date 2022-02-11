@@ -1,92 +1,68 @@
 import React, {useState, useRef} from "react";
-import { Box, Input, ButtonGroup, Text, InputGroup, InputLeftElement, Button } from '@chakra-ui/react'
+import {FormControl, Box, Input, ButtonGroup, Text, InputGroup, InputLeftElement, Button } from '@chakra-ui/react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
+import Axios from "axios";
 
 export function Register() {
-
-    const submit = async()=>{
-        const response = await fetch('http:/localhost:3000/registration', {
-            method: 'POST',
-            headers:{
-                'Content-Type':"application/json"
-            },
-            body: JSON.stringify(userdata)
-        }).then('Successfull fetch')
-        .catch(e => {console.log(e)})
-    }
-
-    const [userdata, setUserdata] = useState({
-        name:'',
-        password:'',
-        email:'',
-        age:0
-    })
-
+    const [errors, setErrors] = useState({username: false, password: false, email: false});
     const [passwordVisible, setPasswordVisible] = useState(false);
     const showPassword = () => setPasswordVisible(!passwordVisible);
+
+    const emailRef = useRef('');
+    const usernameRef = useRef('');
+    const passwordRef = useRef('');
+
+    function handleSubmit() {
+        Axios.post('http:/localhost:3001/registration', {
+            email: emailRef.current.value,
+            username: usernameRef.current.value,
+            password: passwordRef.current.value,
+        }).then(response => {
+            console.log('Successful registration!');
+        }).catch(response => {
+            setErrors({username: true, password: true, email: true})
+
+            console.log(`Error: ${response}`)
+        });
+    }
 
     return (
         <Box margin={50}>
             <Text fontSize='2xl' mb={35} ml={2}>Register</Text>
-            <InputGroup id="Username"  mb={2}>
-                <InputLeftElement ml={3} mr={1} children={
-                            <FontAwesomeIcon icon={faUser}  color='gray'/>}/>
-                <Input
-                    bgColor='white'
-                    mx='3'
-                    variant="outline"
-                    placeholder='Username'
-                    w="100%"
-                    focusBorderColor="grey"
-                    placeholderTextColor={'white'}
-                    onChangeText={text => setUserdata(userdata => ({    name: text,
-                                                                        password: userdata.password,
-                                                                        email:userdata.email,
-                                                                        age:userdata.age}))}
-                />
-            </InputGroup>
-            <InputGroup id="Password" mb={2}>
-                <InputLeftElement ml={3} mr={1} children={<Button variant='subtle' size="xs" h="full" onClick={showPassword}>
-                                                    {passwordVisible ? "Hide" : "Show"}
-                                                    </Button>}/>
-                <Input
-                    bgColor='white'
-                    mx='3'
-                    variant="outline"
-                    type={passwordVisible ? "text" : "password"}
-                    placeholder='Password'
-                    w="100%"
-                    focusBorderColor="grey"
-                    placeholderTextColor={'white'}
-                    onChangeText={text => setUserdata(userdata => ({    name: userdata.name,
-                                                                        password: text,
-                                                                        email:userdata.email,
-                                                                        age:userdata.age}))}
-                />
-            </InputGroup>
-            <InputGroup id="Email" mb={2}>
-                <InputLeftElement ml={3} mr={1} children={
-                            <FontAwesomeIcon icon={faAt}  color='gray'/>}/>
-                <Input
-                    bgColor='white'
-                    mx='3'
-                    variant="outline"
-                    placeholder='Email'
-                    w="100%"
-                    focusBorderColor="grey"
-                    placeholderTextColor={'white'}
-                    onChangeText={text => setUserdata(userdata => ({    name: userdata.name,
-                                                                        password: userdata.password,
-                                                                        email:text,
-                                                                        age:userdata.age}))}
-                />
-            </InputGroup>
-            <ButtonGroup variant="solid" spacing='6'>
-            <Button color='blue.300' mt={15}>
-                Register
-            </Button>
-            </ButtonGroup>
+
+            <FormControl>
+                <InputGroup id="Username" mb={2}>
+                    <InputLeftElement ml={3} mr={1} children={<FontAwesomeIcon icon={faUser}  color='gray'/>}/>
+                    <Input ref={usernameRef} placeholder='Username' bgColor='white' mx='3' variant="outline" w="100%"
+                           focusBorderColor={!errors.username ? 'grey' : 'red'}
+                           borderColor={!errors.username ? 'grey' : 'red'}/>
+                </InputGroup>
+
+                <InputGroup id="Password"mb={2}>
+                    <InputLeftElement ml={3} mr={1} children={<Button variant='subtle' size="xs" h="full" onClick={showPassword}>{passwordVisible ? "Hide" : "Show"}</Button>}/>
+
+
+                    <Input ref={passwordRef} placeholder='Password' bgColor='white' mx='3' variant="outline" type={passwordVisible ? "text" : "password"} w="100%"
+                           focusBorderColor={!errors.password ? 'grey' : 'red'}
+                           borderColor={!errors.password ? 'grey' : 'red'}
+                    />
+                </InputGroup>
+
+                <InputGroup id="Email" mb={2}>
+                    <InputLeftElement ml={3} mr={1} children={<FontAwesomeIcon icon={faAt}  color='gray'/>}/>
+                    <Input ref={emailRef} laceholder='Email' bgColor='white' mx='3' variant="outline" p w="100%"
+                           focusBorderColor={!errors.email ? 'grey' : 'red'}
+                           borderColor={!errors.email ? 'grey' : 'red'}
+                    />
+                </InputGroup>
+
+                <ButtonGroup variant="solid" spacing='6'>
+                    <Button color='blue.300' mt={15} onClick={handleSubmit}>
+                        Register
+                    </Button>
+                </ButtonGroup>
+            </FormControl>
         </Box>
     )
 }
