@@ -9,6 +9,19 @@ import {useQuery, useQueryClient} from "react-query";
 import axios from "axios";
 
 export function Signin() {
+
+    const checkTextValidity = (text) => {
+        const textLength = text.length;
+        const numbersInText = text.split().filter(charachter => '0' <= charachter <= '9').reduce((next, curr) => {return curr + next}, 0).length;
+        const isFirstElementCapital = textLength > 0 && text[0] === text[0].toUpperCase() && Boolean(text[0].match(/[A-Z]/));
+        if(textLength > 6 && numbersInText && isFirstElementCapital){
+            isValidText(() => true)
+        }else{
+            isValidText(() => false)
+        }
+    }
+
+    const [validtext, isValidText] = useState(false)
     const [userdata, setUserdata] = useState({
         name:'',
         password:''
@@ -16,6 +29,7 @@ export function Signin() {
 
     const handleChange = event =>{
         const {name, value} = event.target;
+        console.log(checkTextValidity(value));
         setUserdata(prevState => ({
             ...prevState,
             [name]:value
@@ -25,7 +39,7 @@ export function Signin() {
     const queryClient = useQueryClient();
 
     const { data, isLoading, error, refetch } = useQuery('user',
-        ()=>(axios.post('http://localhost:3001/signin', {userdata}).then(res => console.log('working'))), {enabled: false});
+        ()=>(axios.post('http://localhost:3001/signin', {userdata}).then(res => console.log(res))), {enabled: false});
 
 
     const dispatch = useDispatch();
@@ -34,9 +48,9 @@ export function Signin() {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const showPassword = () => setPasswordVisible(!passwordVisible);
 
-    const handleSubmit = () => {
-        console.log(userdata.password)
+    const handleLogin = () => {
         refetch();
+        dispatch(login())
     }
 
     return (
@@ -51,7 +65,7 @@ export function Signin() {
                     variant="outline"
                     placeholder='Username'
                     w="100%"
-                    focusBorderColor="grey"
+                    focusBorderColor={validtext ? "green.300" : "red.300"}
                     value={userdata.name}
                     type='text'
                     name='name'
@@ -76,11 +90,8 @@ export function Signin() {
                 />
             </InputGroup>
             <ButtonGroup variant="solid" spacing='6'>
-            <Button color='blue.300' mt={15} onClick={ () => dispatch(login())}>
+            <Button color='blue.300' mt={15} onClick={handleLogin}>
                 Sign in
-            </Button>
-            <Button color='blue.300' mt={15} onClick={handleSubmit}>
-                Submit Query
             </Button>
             </ButtonGroup>
             <Text> password: {userdata.password}</Text>
