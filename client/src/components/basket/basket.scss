@@ -77,12 +77,20 @@
     align-items: center;
     justify-content: space-between;
 
+    .quantity-wrap {
+      //border: 1px solid black;
+
+      span {
+        color: grey;
+        margin-right: 10px;
+      }
+    }
+
     .product-quantity, .product-remove {
-      width: 100%;
       border-radius: 5px;
       height: 30px;
 
-      margin: 20px 0;
+      margin: 10px 0;
 
       transition: hover .3s;
     }
@@ -90,6 +98,8 @@
     .product-quantity {
       border: 1px solid grey;
       box-shadow: 1px 1px 2px rgba(198, 174, 174, 0.72);
+
+      width: 25px;
 
       color: grey;
 
@@ -100,13 +110,20 @@
     }
 
     .product-remove {
-      border: 1px solid red;
-      box-shadow: 1px 1px 2px rgba(255, 0, 0, 0.56);
+      border: 1px solid grey;
+      box-shadow: 1px 1px 2px rgba(198, 174, 174, 0.72);
 
-      color: red;
+      width: 75px;
+
+      position: relative;
+      left: 22px;
+
+      color: grey;
+
 
       &:hover {
-        background-color: rgba(255, 0, 0, 0.1);
+        background-color: rgba(128, 128, 128, 0.07);
+        color: #7d7b7b;
       }
     }
 

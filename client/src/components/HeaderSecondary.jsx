@@ -6,10 +6,12 @@ import {useSelector} from "react-redux";
 function HeaderSecondary() {
     const basket = useSelector(state => state.basket)
 
+    let basketNumberOfProducts = 0;
     let sum = 0;
 
     basket.forEach(product => {
-        sum += product.price;
+        basketNumberOfProducts += product.quantity;
+        sum += product.quantity * product.price;
     })
 
     return (
@@ -42,7 +44,7 @@ function HeaderSecondary() {
 
                     <div className="basket-wrap">
                         <NavLink className="navlink" to="/basket">
-                            <span>{basket.length}</span>
+                            <span>{basketNumberOfProducts}</span>
                             <img className="basket-icon" src="https://image.flaticon.com/icons/png/512/68/68892.png"
                                  alt="B"/>
                         </NavLink>
