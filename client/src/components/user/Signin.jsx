@@ -2,8 +2,11 @@ import React, {useState, useRef} from "react";
 import { Flex, Spacer, Box, Input, ButtonGroup, Text, InputGroup, InputLeftElement, Button } from '@chakra-ui/react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
+import {useDispatch} from "react-redux";
+import {login} from "../../redux/actions/userActions";
 
 export function Signin() {
+    const dispatch = useDispatch();
 
     const submit = async()=>{
         const response = await fetch('http:/localhost:3000/signin', {
@@ -66,7 +69,7 @@ export function Signin() {
                 />
             </InputGroup>
             <ButtonGroup variant="solid" spacing='6'>
-            <Button color='blue.300' mt={15}>
+            <Button color='blue.300' mt={15} onClick={ () => dispatch(login())}>
                 Sign in
             </Button>
             </ButtonGroup>

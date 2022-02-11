@@ -15,6 +15,6 @@ export const BasketActionTypes = {
 }
 
 export const UserActionTypes = {
-  INCREMENT: "INCREMENT",
-  DECREMENT: "DECREMENT",
+  LOGIN: "LOGIN",
+  LOGOUT: "LOGOUT",
 }

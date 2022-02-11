@@ -5,21 +5,19 @@ const initialUser = {
     isLoggedIn: false
 };
 
-export const userReducer = (state = initialUser, { type, payload }) => {
+export const userReducer = (state = initialUser, { type }) => {
     switch (type) {
-        case UserActionTypes.SET_USERNAME:
-            const userCopy = Object.assign({}, state);
+        case UserActionTypes.LOGIN:
+            return {
+                ...state,
+                isLoggedIn: true,
+            };
 
-            userCopy.name = payload;
-
-            return state;
-
-        case UserActionTypes.SET_LOGIN:
-
-
-            userCopy.isLoggedIn = payload;
-
-            return userCopy;
+        case UserActionTypes.LOGOUT:
+            return {
+                ...state,
+                isLoggedIn: false,
+            };
 
         default:
             return state;

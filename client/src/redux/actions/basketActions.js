@@ -9,7 +9,7 @@ export const addProduct = (product) => {
 
 export const removeProduct = (product) => {
     return {
-        type: 'DECREMENT',
+        type: BasketActionTypes.REMOVE_PRODUCT,
         payload: product
     }
 }
