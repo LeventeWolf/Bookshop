@@ -13,7 +13,7 @@ function Navigation() {
                     Home
                 </NavLink>
 
-                <NavLink className="nav-watchlist" to="/watchlist">
+                <NavLink className="nav-watchlist" to="/wishlist">
                     <img className="nav-icon" src="https://www.iconpacks.net/icons/1/free-heart-icon-492-thumb.png"
                          alt="<3" />
                     <span>Wishlist</span>

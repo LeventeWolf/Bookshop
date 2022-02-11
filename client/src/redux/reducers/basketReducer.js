@@ -1,12 +1,14 @@
 import { BasketActionTypes } from "../constants/action-types";
 
-export const basketReducer = (state = [], {type, payload}) => {
+export const basketReducer = (basket = [], {type, payload}) => {
     switch (type) {
         case BasketActionTypes.ADD_PRODUCT:
-            return [...state, payload];
+            return [...basket, payload];
         case BasketActionTypes.REMOVE_PRODUCT:
-            return state - 1;
+            const prevBasket = [...basket];
+
+            return prevBasket.filter(product => product.title !== payload);
         default:
-            return state;
+            return basket;
     }
 }

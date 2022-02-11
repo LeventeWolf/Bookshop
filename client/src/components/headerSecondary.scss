@@ -91,6 +91,10 @@
   .basket-wrap {
     transition: filter .3s;
 
+    a:hover {
+      color: white;
+    }
+
     &:hover {
       filter: invert(0.2);
       cursor: pointer;

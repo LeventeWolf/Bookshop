@@ -10,9 +10,10 @@ export default function Supply() {
 
     for (let i = 1; i <= 24; i++) {
         const product = {
-            name: 'book     #' + i,
+            title: 'book     #' + i,
             author: faker.name.findName(),
             price: 10000 + i * 500,
+            imageUrl: 'https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1323/9780132350884.jpg',
         }
 
         supply.push(product)

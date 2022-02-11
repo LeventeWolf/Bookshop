@@ -1,0 +1,132 @@
+.basket-page-wrap {
+  background-color: white;
+
+  padding: 10px;
+
+  box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+}
+
+.basket-page-title {
+  color: black;
+  font-weight: bold;
+  font-size: 2rem;
+  font-family: Roboto, sans-serif;
+
+  margin-bottom: 10px;
+
+  letter-spacing: -1.5px;
+
+}
+
+.basket-page-title-secondary {
+
+  text-align: left;
+  font-size: 12pt;
+  font-family: Roboto, sans-serif;
+  font-weight: bold;
+  //text-transform: uppercase;
+}
+
+.basket-product-wrap {
+  //border: 1px solid blue;
+
+  border-top: 1px solid rgba(100, 100, 100, 0.31);
+
+  padding-top: 10px;
+  margin-top: 10px;
+
+  display: flex;
+  justify-content: space-between;
+
+
+  .product-image {
+    width: 130px;
+    height: 160px;
+
+    display: inline;
+  }
+
+  .product-description-container {
+    //border: 1px solid blue;
+
+    margin-left: 20px;
+    flex-grow: 2;
+
+    .product-title {
+      font-size: 15pt;
+      font-weight: bold;
+      letter-spacing: -1px;
+    }
+
+    .product-author {
+      margin-top: 40px;
+    }
+
+    .product-price {
+      margin-top: 40px;
+    }
+  }
+
+  .product-actions-container {
+    //border: 1px solid blue;
+
+    width: 130px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .product-quantity, .product-remove {
+      width: 100%;
+      border-radius: 5px;
+      height: 30px;
+
+      margin: 20px 0;
+
+      transition: hover .3s;
+    }
+
+    .product-quantity {
+      border: 1px solid grey;
+      box-shadow: 1px 1px 2px rgba(198, 174, 174, 0.72);
+
+      color: grey;
+
+      &:hover {
+        background-color: rgba(128, 128, 128, 0.07);
+        color: #7d7b7b;
+      }
+    }
+
+    .product-remove {
+      border: 1px solid red;
+      box-shadow: 1px 1px 2px rgba(255, 0, 0, 0.56);
+
+      color: red;
+
+      &:hover {
+        background-color: rgba(255, 0, 0, 0.1);
+      }
+    }
+
+    .product-price {
+      font-size: 16pt;
+    }
+  }
+}
+
+.product-price {
+  color: #ff0072;
+  font-size: 14pt;
+}
+
+.basket-empty {
+  border-top: 1px solid rgba(100, 100, 100, 0.31);
+
+  margin-top: 10px;
+  padding-top: 10px;
+  width: 100%;
+
+  font-style: italic;
+}

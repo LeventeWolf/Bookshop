@@ -41,10 +41,11 @@ function HeaderSecondary() {
                     <div className="line"/>
 
                     <div className="basket-wrap">
-                        <span>{basket.length}</span>
-                        <img className="basket-icon" src="https://image.flaticon.com/icons/png/512/68/68892.png"
-                             alt="B"/>
-
+                        <NavLink className="navlink" to="/basket">
+                            <span>{basket.length}</span>
+                            <img className="basket-icon" src="https://image.flaticon.com/icons/png/512/68/68892.png"
+                                 alt="B"/>
+                        </NavLink>
                     </div>
                 </div>
             </div>
