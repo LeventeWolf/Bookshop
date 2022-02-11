@@ -3,6 +3,7 @@ import {FormControl, Box, Input, ButtonGroup, Text, InputGroup, InputLeftElement
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
 import Axios from "axios";
+import {motion} from 'framer-motion';
 
 export function Register() {
     const [errors, setErrors] = useState({username: false, password: false, email: false});
@@ -27,10 +28,14 @@ export function Register() {
         });
     }
 
+    const MotionBox = motion(Box);
+    const mountAnimation = {
+        "hidden" : {opacity: 0, scale: 0.7, y:100},
+        "visible" : {opacity: 1, scale: 1, y:0, transition:{type:"spring"}}
+    }
     return (
-        <Box margin={50}>
+        <MotionBox variants={mountAnimation} initial="hidden" animate="visible" margin={50}>
             <Text fontSize='2xl' mb={35} ml={2}>Register</Text>
-
             <FormControl>
                 <InputGroup id="Username" mb={2}>
                     <InputLeftElement ml={3} mr={1} children={<FontAwesomeIcon icon={faUser}  color='gray'/>}/>
@@ -63,6 +68,6 @@ export function Register() {
                     </Button>
                 </ButtonGroup>
             </FormControl>
-        </Box>
+        </MotionBox>
     )
 }

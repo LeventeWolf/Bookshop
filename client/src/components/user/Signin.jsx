@@ -7,6 +7,7 @@ import {login} from "../../redux/actions/userActions";
 import { registerUser } from './UserAPI';
 import {useQuery, useQueryClient} from "react-query";
 import axios from "axios";
+import {motion} from 'framer-motion'
 
 export function Signin() {
 
@@ -53,8 +54,14 @@ export function Signin() {
         dispatch(login())
     }
 
+    const MotionBox = motion(Box);
+    const mountAnimation = {
+        "hidden" : {opacity: 0, scale: 0.7, y:100},
+        "visible" : {opacity: 1, scale: 1, y:0, transition:{type:"spring"}}
+    }
+
     return (
-        <Box margin={50}>
+        <MotionBox variants={mountAnimation} initial="hidden" animate="visible" margin={50}>
             <Text fontSize='2xl' mb={35} ml={2}>Sign in</Text>
             <InputGroup id="Username"  mb={2}>
                 <InputLeftElement ml={3} mr={1} children={
@@ -94,9 +101,6 @@ export function Signin() {
                 Sign in
             </Button>
             </ButtonGroup>
-            <Text> password: {userdata.password}</Text>
-            <Text> name : {userdata.name}</Text>
-            <Text>{data ? data : 'no data'}</Text>
-        </Box>
+        </MotionBox>
     )
 }
