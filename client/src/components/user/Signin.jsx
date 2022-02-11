@@ -4,30 +4,40 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
 import {useDispatch} from "react-redux";
 import {login} from "../../redux/actions/userActions";
+import { registerUser } from './UserAPI';
+import {useQuery, useQueryClient} from "react-query";
+import axios from "axios";
 
 export function Signin() {
-    const dispatch = useDispatch();
-
-    const submit = async()=>{
-        const response = await fetch('http:/localhost:3000/signin', {
-            method: 'POST',
-            headers:{
-                'Content-Type':"application/json"
-            },
-            body: JSON.stringify(userdata)
-        }).then('Successfull fetch')
-        .catch(e => {console.log(e)})
-    }
-
     const [userdata, setUserdata] = useState({
         name:'',
-        password:'',
-        email:'',
-        age:0
+        password:''
     })
+
+    const handleChange = event =>{
+        const {name, value} = event.target;
+        setUserdata(prevState => ({
+            ...prevState,
+            [name]:value
+        }))
+    }
+
+    const queryClient = useQueryClient();
+
+    const { data, isLoading, error, refetch } = useQuery('user',
+        ()=>(axios.post('http://localhost:3001/signin', {userdata}).then(res => console.log('working'))), {enabled: false});
+
+
+    const dispatch = useDispatch();
+
 
     const [passwordVisible, setPasswordVisible] = useState(false);
     const showPassword = () => setPasswordVisible(!passwordVisible);
+
+    const handleSubmit = () => {
+        console.log(userdata.password)
+        refetch();
+    }
 
     return (
         <Box margin={50}>
@@ -42,11 +52,10 @@ export function Signin() {
                     placeholder='Username'
                     w="100%"
                     focusBorderColor="grey"
-                    placeholderTextColor={'white'}
-                    onChangeText={text => setUserdata(userdata => ({    name: text,
-                                                                        password: userdata.password,
-                                                                        email:userdata.email,
-                                                                        age:userdata.age}))}
+                    value={userdata.name}
+                    type='text'
+                    name='name'
+                    onChange={handleChange}
                 />
             </InputGroup>
             <InputGroup id="Password" mb={2}>
@@ -61,18 +70,22 @@ export function Signin() {
                     placeholder='Password'
                     w="100%"
                     focusBorderColor="grey"
-                    placeholderTextColor={'white'}
-                    onChangeText={text => setUserdata(userdata => ({    name: userdata.name,
-                                                                        password: text,
-                                                                        email:userdata.email,
-                                                                        age:userdata.age}))}
+                    name='password'
+                    value={userdata.password}
+                    onChange={handleChange}
                 />
             </InputGroup>
             <ButtonGroup variant="solid" spacing='6'>
             <Button color='blue.300' mt={15} onClick={ () => dispatch(login())}>
                 Sign in
             </Button>
+            <Button color='blue.300' mt={15} onClick={handleSubmit}>
+                Submit Query
+            </Button>
             </ButtonGroup>
+            <Text> password: {userdata.password}</Text>
+            <Text> name : {userdata.name}</Text>
+            <Text>{data ? data : 'no data'}</Text>
         </Box>
     )
 }
