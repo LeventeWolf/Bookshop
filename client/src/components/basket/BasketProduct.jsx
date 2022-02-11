@@ -7,7 +7,7 @@ export default function BasketProduct( {product} ) {
 
     return (
         <div className="basket-product-wrap">
-            <img className='basket-product-image' src={product.imageUrl} alt="alt" />
+            <img className='product-image' src={product.imageUrl} alt="alt"/>
 
             <div className='product-description-container'>
                 <h3 className="product-title">{product.title}</h3>
@@ -16,10 +16,13 @@ export default function BasketProduct( {product} ) {
             </div>
 
             <div className="product-actions-container">
-                <button className="product-quantity" onClick={() => dispatch(addProduct(product))}>
-                    Add
-                </button>
-                <h3 className="product-price">{numberWithSpaces(product.price)} Ft</h3>
+                <div className="quantity-wrap">
+                    <span>Quantity: {product.quantity}</span>
+                    <button className="product-quantity" onClick={() => dispatch(addProduct(product))}>
+                        +
+                    </button>
+                </div>
+                <h3 className="product-price">{numberWithSpaces(product.quantity * product.price)} Ft</h3>
                 <button className="product-remove" onClick={() => dispatch(removeProduct(product.title))}>
                     Remove
                 </button>

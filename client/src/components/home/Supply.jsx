@@ -14,6 +14,7 @@ export default function Supply() {
             author: faker.name.findName(),
             price: 10000 + i * 500,
             imageUrl: 'https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9780/1323/9780132350884.jpg',
+            quantity: 1,
         }
 
         supply.push(product)
