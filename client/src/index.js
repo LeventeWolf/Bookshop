@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import {Navigation, Header, HeaderSecondary, Footer, Home, Join} from "./components";
+import {Navigation, Header, HeaderSecondary, Footer, Home, Join, Basket, Wishlist} from "./components";
 import {ChakraProvider} from '@chakra-ui/react'
 
 import {Provider} from 'react-redux';
@@ -21,6 +21,8 @@ ReactDOM.render(
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/join" element={<Join/>}/>
+                    <Route path="/wishlist" element={<Wishlist/>}/>
+                    <Route path="/basket" element={<Basket/>}/>
                 </Routes>
 
                 <Footer/>
