@@ -1,8 +1,17 @@
 import React from "react";
 import './headerSecondary.scss';
 import {NavLink} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 function HeaderSecondary() {
+    const basket = useSelector(state => state.basket)
+
+    let sum = 0;
+
+    basket.forEach(product => {
+        sum += product.price;
+    })
+
     return (
         <div className="header-secondary-wrap">
             <div className="header-secondary-primary-wrap">
@@ -26,16 +35,15 @@ function HeaderSecondary() {
 
                 <div className="right-section">
                     <div className="total">
-                        0 Ft
+                        {numberWithSpaces(sum)} Ft
                     </div>
 
-                    <div className="line"></div>
-
+                    <div className="line"/>
 
                     <div className="basket-wrap">
-                        <span>0</span>
+                        <span>{basket.length}</span>
                         <img className="basket-icon" src="https://image.flaticon.com/icons/png/512/68/68892.png"
-                             alt="B" />
+                             alt="B"/>
 
                     </div>
                 </div>
@@ -44,5 +52,9 @@ function HeaderSecondary() {
     );
 }
 
+
+function numberWithSpaces(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
 
 export default HeaderSecondary;

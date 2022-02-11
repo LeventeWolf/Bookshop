@@ -1,11 +1,17 @@
-export const increment = () => {
+import { CounterActionTypes } from "../constants/action-types";
+
+
+export const increment = (amount) => {
     return {
-        type: 'INCREMENT'
+        type: CounterActionTypes.INCREMENT,
+        payload: amount
     }
 }
 
-export const decrement = () => {
+export const decrement = (amount) => {
     return {
-        type: 'DECREMENT'
+        type: CounterActionTypes.DECREMENT,
+        payload: amount,
+
     }
 }

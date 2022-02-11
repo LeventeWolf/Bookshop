@@ -12,9 +12,9 @@ export default function Featuring() {
         <div className="featuring-wrap">
             <h1>Featuring (2022)</h1>
 
-            <button className="supply-product-add-to-basket" onClick={() => dispatch(decrement())}>-</button>
+            <button className="supply-product-add-to-basket" onClick={() => dispatch(decrement(5))}>-</button>
             <div> Counter: {counter}</div>
-            <button className="supply-product-add-to-basket" onClick={() => dispatch(increment())}>+</button>
+            <button className="supply-product-add-to-basket" onClick={() => dispatch(increment(5))}>+</button>
 
             <div className="featuring-product-container">
 

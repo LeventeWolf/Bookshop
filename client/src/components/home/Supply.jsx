@@ -12,7 +12,7 @@ export default function Supply() {
         const product = {
             name: 'book     #' + i,
             author: faker.name.findName(),
-            price: numberWithSpaces(10000 + i * 500),
+            price: 10000 + i * 500,
         }
 
         supply.push(product)
@@ -29,8 +29,4 @@ export default function Supply() {
             </div>
         </div>
     )
-}
-
-function numberWithSpaces(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }

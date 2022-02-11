@@ -3,3 +3,18 @@ export const ActionTypes = {
   SELECTED_PRODUCT: "SELECTED_PRODUCT",
   REMOVE_SELECTED_PRODUCT: "REMOVE_SELECTED_PRODUCT",
 };
+
+export const CounterActionTypes = {
+  INCREMENT: "INCREMENT",
+  DECREMENT: "DECREMENT",
+};
+
+export const BasketActionTypes = {
+  ADD_PRODUCT: "ADD_PRODUCT",
+  REMOVE_PRODUCT: "REMOVE_PRODUCT",
+}
+
+export const UserActionTypes = {
+  INCREMENT: "INCREMENT",
+  DECREMENT: "DECREMENT",
+}

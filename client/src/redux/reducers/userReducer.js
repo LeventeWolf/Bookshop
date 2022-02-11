@@ -1,4 +1,4 @@
-import { UserActionTypes } from "../constants/user-action-types";
+import { UserActionTypes } from "../constants/action-types";
 
 const initialUser = {
     username: undefined,

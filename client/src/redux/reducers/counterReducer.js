@@ -1,14 +1,12 @@
-import { CounterActionTypes } from "../constants/counter-action-types";
+import { CounterActionTypes } from "../constants/action-types";
 
-const counterReducer = (state = 0, {type}) => {
+export const counterReducer = (state = 0, {type, payload}) => {
     switch (type) {
         case CounterActionTypes.INCREMENT:
-            return state + 1;
+            return state + payload;
         case CounterActionTypes.DECREMENT:
-            return state - 1;
+            return state - payload;
         default:
             return state;
     }
 }
-
-export default counterReducer;
