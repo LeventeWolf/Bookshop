@@ -3,6 +3,13 @@
 
   display: flex;
   overflow: hidden;
+  position: relative;
+
+  .container-wrap {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+  }
 }
 
 .featuring-product {
@@ -48,4 +55,47 @@
   .product-image {
 
   }
+}
+
+.slider-next-wrap, .slider-previous-wrap {
+  z-index: 10;
+
+  width: 30px;
+  height: 170px;
+  position: absolute;
+  background-color: rgba(57, 57, 57, 0.5);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(57, 57, 57, 0.3);
+  }
+}
+
+.slider-previous-wrap {
+  left: 0;
+
+  .previous-arrow {
+    transform: scaleX(-1);
+  }
+}
+
+.slider-next-wrap {
+  right: 0;
+
+  .next-arrow {
+
+  }
+}
+
+.previous-arrow, .next-arrow {
+  height: 20px;
+
+  -webkit-user-drag: none;
 }
