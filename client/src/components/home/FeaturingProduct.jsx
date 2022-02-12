@@ -2,8 +2,8 @@ import React from "react";
 import './featuring.scss';
 import {addProductToBasket} from "../../redux/actions/basketActions";
 import {useDispatch} from "react-redux";
-import {Link} from "@chakra-ui/react";
 import {select} from "../../redux/actions/productActions";
+import {Link} from "react-router-dom"
 
 export function FeaturingProduct( {product} ) {
     const dispatch = useDispatch();
