@@ -4,60 +4,52 @@ import faker from "faker";
 import {v4} from "uuid";
 import {FeaturingProduct} from "./FeaturingProduct";
 import arrowImage from '../../assets/featuring-arrow.png';
+import Axios from "axios";
 
 
 
 export default function Featuring() {
-    let featuringContainer;
-    const featuringProducts = [];
+    const [products, setProducts] = useState([]);
+
+    let featuringContainer = document.getElementsByClassName('container-wrap')[0];
+    const scrollAmount = 1175;
     let autoScrollInterval;
 
-    for (let i = 1; i <= 100; i++) {
-        const product = {
-            title: 'F-book #' + i,
-            longTitle: 'F-book #' + i + ' : A Handbook of Agile Software Craftsmanship',
-            description: 'Even bad code can function. But if code isn\'t clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn\'t have to be that way.',
-            author: faker.name.findName(),
-            price: Math.floor(Math.random() * 20000) + 100,
-            imageUrl: 'https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1323/9780132350884.jpg',
-            type: 'Paperback',
-            language: 'English',
-            quantity: 1,
-        }
-
-        featuringProducts.push(product)
-    }
-
     useEffect(() => {
-        featuringContainer = document.getElementsByClassName('container-wrap')[0];
-        startAutoScroll();
-    }, []);
+        Axios.get('http://localhost:3001/api/all-books')
+            .then(response => {
+                shuffleArray(response.data);
+                setProducts(response.data);
+
+                featuringContainer = document.getElementsByClassName('container-wrap')[0];
+                startAutoScroll()
+            })
+            .catch(response => {
+                console.log(response)
+            });
+
+    }, [])
 
     function scrollLeft() {
-        const container = document.getElementsByClassName('container-wrap')[0];
-        container.scroll({left: container.scrollLeft - 1175, behavior: 'smooth'})
+        featuringContainer.scroll({left: featuringContainer.scrollLeft - scrollAmount, behavior: 'smooth'})
     }
 
-    function scrollRight() {
-        const container = document.getElementsByClassName('container-wrap')[0];
-        container.scroll({left: container.scrollLeft + 1175, behavior: 'smooth'})
-    }
-
-    function autoScroll() {
-        featuringContainer.scroll({left: featuringContainer.scrollLeft + 2, behavior: 'auto'})
+    function scrollRight(scrollAmount, type) {
+        featuringContainer.scroll({left: featuringContainer.scrollLeft + scrollAmount, behavior: type})
     }
 
     function stopAutoScroll() {
+        // TODO: BUG: WON'T STOP!
         clearInterval(autoScrollInterval);
     }
 
     function startAutoScroll () {
-        autoScrollInterval = setInterval(autoScroll, 50)
+        autoScrollInterval = setInterval(() => scrollRight(scrollAmount, 'smooth'), 8000);
     }
 
 
     return (
-        <div onMouseEnter={stopAutoScroll} onMouseLeave={startAutoScroll} className="featuring-wrap">
+        <div className="featuring-wrap">
             <h1>Featuring (2022)</h1>
 
             <div className="featuring-product-container">
@@ -66,13 +58,22 @@ export default function Featuring() {
                 </div>
 
                 <div className="container-wrap">
-                    {featuringProducts.map(product => <FeaturingProduct product={product} key={v4()}/>)}
+                    {products.map(product => <FeaturingProduct product={product} key={v4()}/>)}
                 </div>
 
-                <div onClick={scrollRight} className="slider-next-wrap">
+                <div onClick={() => scrollRight(scrollAmount, 'smooth')} className="slider-next-wrap">
                     <img className="next-arrow" src={arrowImage} alt=">"/>
                 </div>
             </div>
         </div>
     )
 };
+
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}

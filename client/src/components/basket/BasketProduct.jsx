@@ -1,16 +1,23 @@
 import React from "react";
 import {useDispatch} from "react-redux";
 import {addProductToBasket, removeProductFromBasket} from "../../redux/actions/basketActions";
+import {select} from "../../redux/actions/productActions";
+import {Link} from "react-router-dom";
 
-export default function BasketProduct( {product} ) {
+export default function BasketProduct({product}) {
     const dispatch = useDispatch();
 
     return (
         <div className="basket-product-wrap">
-            <img className='product-image' src={product.imageUrl} alt="alt"/>
+            <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                <img className='product-image' src={product.imageUrl} alt="alt"/>
+            </Link>
 
             <div className='product-description-container'>
-                <h3 className="product-title">{product.title}</h3>
+                <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                    <h3 className="product-title">{product.title}</h3>
+                </Link>
+
                 <h4 className="product-author">{product.author}</h4>
                 <h4 className="product-price">{numberWithSpaces(product.price)} Ft</h4>
             </div>
