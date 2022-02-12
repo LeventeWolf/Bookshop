@@ -11,5 +11,20 @@ router.post("/api/all-books", async (req, res) => {
     return res.status(200).send(allBooks);
 });
 
+router.post('/signin', async (req, res) =>{
+    const userData = req.body;
+    return res.send(userData)
+    // return res.send("Working")
+})
+
+router.post('/registration', async (req, res) =>{
+    const userData = req.body;
+    return res.status(200).send(userData)
+    // return res.send("Working")
+})
+
+router.get('/test', async (req, res) =>{
+    return res.status(200).send('Working')
+})
 
 module.exports = router;
