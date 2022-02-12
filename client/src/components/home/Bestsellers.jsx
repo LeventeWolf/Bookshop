@@ -26,7 +26,9 @@ export default function Bestsellers() {
             <h1>Bestsellers</h1>
 
             <div className="bestsellers-product-container">
-                {bestsellerProducts.map(product => <SupplyProduct product={product} key={v4()}/>)}
+                <div className="bestsellers-product-wrap">
+                    {bestsellerProducts.map(product => <SupplyProduct product={product} key={v4()}/>)}
+                </div>
             </div>
 
         </div>

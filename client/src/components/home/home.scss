@@ -11,6 +11,18 @@
   grid-template-rows: 200px;
   // columns: Bestsellers, Featuring/Supply
   grid-template-columns: 250px 1138px;
+
+  animation: appear .5s ease-out;
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 .featuring-wrap, .supply-wrap, .bestsellers-wrap {
