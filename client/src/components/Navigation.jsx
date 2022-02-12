@@ -24,7 +24,7 @@ function Navigation() {
                 </NavLink>
                 {user.isLoggedIn ?
                     <>
-                        <NavLink className="nav-watchlist" to="/Profile">
+                        <NavLink className="nav-profile" to="/Profile">
                             <Avatar name={user.username} size={"xs"} marginRight={2} src={user.useravatar}/>
                             Profile
                         </NavLink>
