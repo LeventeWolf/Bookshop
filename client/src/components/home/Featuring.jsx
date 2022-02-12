@@ -38,22 +38,18 @@ export default function Featuring() {
         featuringContainer.scroll({left: featuringContainer.scrollLeft + scrollAmount, behavior: type})
     }
 
-    function autoScroll() {
-        scrollRight(scrollAmount, 'smooth')
-    }
-
     function stopAutoScroll() {
         // TODO: BUG: WON'T STOP!
         clearInterval(autoScrollInterval);
     }
 
     function startAutoScroll () {
-        autoScrollInterval = setInterval(autoScroll, 6000);
+        autoScrollInterval = setInterval(() => scrollRight(scrollAmount, 'smooth'), 8000);
     }
 
 
     return (
-        <div onMouseEnter={stopAutoScroll} onMouseLeave={startAutoScroll} className="featuring-wrap">
+        <div className="featuring-wrap">
             <h1>Featuring (2022)</h1>
 
             <div className="featuring-product-container">
