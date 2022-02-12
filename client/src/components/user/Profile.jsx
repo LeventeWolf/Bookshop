@@ -6,7 +6,7 @@ import apiClient from '../../http-common'
 function Profile(){
 
     return (
-        <Box>
+        <Box className="main-wrap">
             Működök
         </Box>
     )
