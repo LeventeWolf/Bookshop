@@ -1,12 +1,16 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './featuring.scss';
 import faker from "faker";
 import {v4} from "uuid";
 import {FeaturingProduct} from "./FeaturingProduct";
 import arrowImage from '../../assets/featuring-arrow.png';
 
+
+
 export default function Featuring() {
+    let featuringContainer;
     const featuringProducts = [];
+    let autoScrollInterval;
 
     for (let i = 1; i <= 100; i++) {
         const product = {
@@ -20,6 +24,11 @@ export default function Featuring() {
         featuringProducts.push(product)
     }
 
+    useEffect(() => {
+        featuringContainer = document.getElementsByClassName('container-wrap')[0];
+        startAutoScroll();
+    }, []);
+
     function scrollLeft() {
         const container = document.getElementsByClassName('container-wrap')[0];
         container.scroll({left: container.scrollLeft - 1175, behavior: 'smooth'})
@@ -28,14 +37,23 @@ export default function Featuring() {
     function scrollRight() {
         const container = document.getElementsByClassName('container-wrap')[0];
         container.scroll({left: container.scrollLeft + 1175, behavior: 'smooth'})
+    }
 
-        const scrollLeftContainer = document.getElementsByClassName('slider-previous-wrap')[0];
-        scrollLeftContainer.style.display = 'flex';
+    function autoScroll() {
+        featuringContainer.scroll({left: featuringContainer.scrollLeft + 1, behavior: 'auto'})
+    }
+
+    function stopAutoScroll() {
+        clearInterval(autoScrollInterval);
+    }
+
+    function startAutoScroll () {
+        autoScrollInterval = setInterval(autoScroll, 40)
     }
 
 
     return (
-        <div className="featuring-wrap">
+        <div onMouseEnter={stopAutoScroll} onMouseLeave={startAutoScroll} className="featuring-wrap">
             <h1>Featuring (2022)</h1>
 
             <div className="featuring-product-container">
