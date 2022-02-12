@@ -26,7 +26,7 @@ function Navigation() {
                     <img className="nav-icon" src="http://cdn.onlinewebfonts.com/svg/img_24787.png"
                          alt="I" />
 
-                    {!user.isLoggedIn ? 'Sign in/Join' : 'Hello!:)'}
+                    {!user.isLoggedIn ? 'Sign in/Join' : user.username}
                 </NavLink>
             </div>
         </div>
