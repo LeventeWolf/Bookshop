@@ -1,13 +1,11 @@
-import Axios from 'axios'
+import apiClient from '../../http-common'
 
 export async function signin(userdata) {
-    console.log(userdata)
-    await Axios.post('http://localhost:3001/signin', {userdata})
+    await apiClient.post('/signin', {userdata})
 }
 
 export async function register(emailRef, usernameRef, passwordRef, callback) {
-    console.log(usernameRef)
-    await Axios.post('http://localhost:3001/registration', {
+    await apiClient.post('/registration', {
         email: emailRef,
         username: usernameRef,
         password: passwordRef,
@@ -20,6 +18,9 @@ export async function register(emailRef, usernameRef, passwordRef, callback) {
     });
 }
 
+export async function getUserData(username){
+
+}
 
 
 export default {signin, register}
