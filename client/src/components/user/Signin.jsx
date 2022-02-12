@@ -45,7 +45,7 @@ export function Signin() {
 
     const handleLogin = () => {
         refetch();
-        dispatch(login())
+        dispatch(login(userdata.name))
     }
 
     // const MotionBox = motion(Box);

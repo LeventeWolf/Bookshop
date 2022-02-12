@@ -2,12 +2,14 @@ import React, {useState, useRef} from "react";
 import {FormControl, Box, Input, ButtonGroup, Text, InputGroup, InputLeftElement, Button } from '@chakra-ui/react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
-import Axios from "axios";
+import {login} from "../../redux/actions/userActions";
 import {motion} from 'framer-motion';
 import {register, signin} from './UserAPI'
 import {useQuery} from "react-query";
+import {useDispatch} from "react-redux";
 
 export function Register() {
+    const dispatch = useDispatch()
     const [errors, setErrors] = useState({username: false, password: false, email: false});
     const [passwordVisible, setPasswordVisible] = useState(false);
     const showPassword = () => setPasswordVisible(!passwordVisible);
@@ -35,6 +37,7 @@ export function Register() {
     function handleSubmit() {
         if(validtext){
             refetch();
+            dispatch(login(usernameRef.current.value))
         }
     }
 
