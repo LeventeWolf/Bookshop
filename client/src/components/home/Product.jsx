@@ -2,28 +2,53 @@ import React from "react";
 import {useDispatch} from "react-redux";
 import {addProductToBasket} from "../../redux/actions/basketActions";
 import {
+    ActionsContainer,
     BasketButton,
     DescriptionContainer,
     ProductAuthor, ProductContainer,
     ProductImage,
     ProductPrice,
-    ProductTitle
+    ProductTitle,
+    Container, WishlistButton, Section, ProductType
 } from "../Component.styles";
 
 export default function Product( {product} ) {
     const dispatch = useDispatch();
 
     return (
-        <ProductContainer>
-            <ProductImage w={250} src={product.imageUrl} alt="productImage"/>
+        <Container>
+            <ProductContainer>
+                <ProductImage w={280} src={product.imageUrl} alt="productImage"/>
 
-            <DescriptionContainer>
-                <ProductTitle>{product.title}</ProductTitle>
-                <ProductAuthor>{product.author}</ProductAuthor>
-                <ProductPrice>{numberWithSpaces(product.price)} Ft</ProductPrice>
-                <BasketButton w={200} h={30} onClick={() => dispatch(addProductToBasket(product))}>Add to basket</BasketButton>
-            </DescriptionContainer>
-        </ProductContainer>
+                <DescriptionContainer>
+                    <Section border>
+                        <ProductTitle fontSize='20pt'>{product.longTitle}</ProductTitle>
+                    </Section>
+
+                    <Section style={{marginBottom: 'auto', marginTop: '40px'}}>
+                        <ProductType>{product.type}</ProductType>
+                        <ProductAuthor>By (author): {product.author}</ProductAuthor>
+                    </Section>
+
+                    <Section style={{marginBottom: '20px'}}>
+                        <ProductAuthor>{product.description}</ProductAuthor>
+                    </Section>
+
+                </DescriptionContainer>
+
+            </ProductContainer>
+
+            <ActionsContainer>
+                <Section border style={{marginBottom: 'auto'}}>
+                    <ProductPrice fontSize='22pt'>{numberWithSpaces(product.price)} Ft</ProductPrice>
+                </Section>
+
+                <Section style={{gap: '10px'}}>
+                    <BasketButton w={300} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to basket</BasketButton>
+                    <WishlistButton w={300} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to wishlist</WishlistButton>
+                </Section>
+            </ActionsContainer>
+        </Container>
     )
 }
 
