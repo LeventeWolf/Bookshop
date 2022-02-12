@@ -1,16 +1,16 @@
 import { UserActionTypes } from "../constants/action-types";
 
 
-export const login = (username) => {
+export const login = (userData) => {
     return {
         type: UserActionTypes.LOGIN,
-        payload: username
+        payload: userData
     }
 }
 
-export const logout = (username) => {
+export const logout = (userData) => {
     return {
         type: UserActionTypes.LOGOUT,
-        payload: username
+        payload: userData
     }
 }
