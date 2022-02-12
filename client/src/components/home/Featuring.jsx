@@ -4,224 +4,51 @@ import faker from "faker";
 import {v4} from "uuid";
 import {FeaturingProduct} from "./FeaturingProduct";
 import arrowImage from '../../assets/featuring-arrow.png';
+import Axios from "axios";
 
 
 
 export default function Featuring() {
-    let featuringContainer;
+    const [products, setProducts] = useState([]);
+
+    let featuringContainer = document.getElementsByClassName('container-wrap')[0];
+    const scrollAmount = 1175;
     let autoScrollInterval;
 
-    const featuringProducts = [
-        {
-            "title": "Clean Code",
-            "longTitle": "Clean Code : A Handbook of Agile Software Craftsmanship",
-            "description": "Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn't have to be that way.",
-            "author": "Robert Martin",
-            "price": 10265,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1323/9780132350884.jpg",
-            "type": "Paperback",
-            "language": "English",
-            "quantity": 1
-        },
-        {
-            "title": "Clean Architecture",
-            "longTitle": "Clean Architecture : A Craftsman's Guide to Software Structure and Design",
-            "description": "Building upon the success of best-sellers The Clean Coder and Clean Code, legendary software craftsman Robert C. \"Uncle Bob\" Martin shows how to bring greater professionalism and discipline to application architecture and design.",
-            "author": "Robert Martin",
-            "price": 8735,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1344/9780134494166.jpg",
-            "type": "Robert Martin",
-            "language": "English",
-            "quantity": 1
-        },
-        {
-            "title": "Clean Coder",
-            "longTitle": "Clean Coder, The : A Code of Conduct for Professional Programmers",
-            "description": "Programmers who endure and succeed amidst swirling uncertainty and nonstop pressure share a common attribute: They care deeply about the practice of creating software. They treat it as a craft. They are professionals.\n",
-            "author": "Robert Martin",
-            "price": 9693,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1370/9780137081073.jpg",
-            "type": "Paperback",
-            "language": "English",
-            "quantity": 1
-        },
-        {
-            "title": "Clean Agile",
-            "longTitle": "Clean Agile : Back to Basics",
-            "description": "Agile Values and Principles for a New Generation\n\"In the journey to all things Agile, Uncle Bob has been there, done that, and has the both the t-shirt and the scars to show for it. This delightful book is part history, part personal stories, and all wisdom. If you want to understand what Agile is and how it came to be, this is the book for you.\"\n-Grady Booch",
-            "author": "Robert Martin",
-            "price": 8915,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1357/9780135781869.jpg",
-            "type": "Paperback",
-            "language": "English",
-            "quantity": 1
-        },
-        {
-            "title": "Clean Craftsmanship",
-            "longTitle": "Clean Craftsmanship : Disciplines, Standards, and Ethics",
-            "description": "ow to Write Code You're Proud of . . . Every Single Day\n\". . . [A] timely and humble reminder of the ever-increasing complexity of our programmatic world and how we owe it to the legacy of humankind--and to ourselves--to practice ethical development. Take your time reading Clean Craftsmanship. . . . Keep this book on your go-to bookshelf. Let this book be your old friend--your Uncle Bob, your guide--as you make your way through this world with curiosity and courage.\"\n--From the Foreword by Stacia Heimgartner Viscardi, CST & Agile Mentor",
-            "author": "Robert Martin",
-            "price": 11283,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1369/9780136915713.jpg",
-            "type": "Paperback",
-            "language": "English",
-            "quantity": 1
-        },
-        {
-            "title": "Clean Code",
-            "longTitle": "Clean Code : A Handbook of Agile Software Craftsmanship",
-            "description": "Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn't have to be that way.",
-            "author": "Robert Martin",
-            "price": 10265,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1323/9780132350884.jpg",
-            "type": "Paperback",
-            "language": "English",
-            "quantity": 1
-        },
-        {
-            "title": "Clean Architecture",
-            "longTitle": "Clean Architecture : A Craftsman's Guide to Software Structure and Design",
-            "description": "Building upon the success of best-sellers The Clean Coder and Clean Code, legendary software craftsman Robert C. \"Uncle Bob\" Martin shows how to bring greater professionalism and discipline to application architecture and design.",
-            "author": "Robert Martin",
-            "price": 8735,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1344/9780134494166.jpg",
-            "type": "Robert Martin",
-            "language": "English",
-            "quantity": 1
-        },
-        {
-            "title": "Clean Coder",
-            "longTitle": "Clean Coder, The : A Code of Conduct for Professional Programmers",
-            "description": "Programmers who endure and succeed amidst swirling uncertainty and nonstop pressure share a common attribute: They care deeply about the practice of creating software. They treat it as a craft. They are professionals.\n",
-            "author": "Robert Martin",
-            "price": 9693,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1370/9780137081073.jpg",
-            "type": "Paperback",
-            "language": "English",
-            "quantity": 1
-        },
-        {
-            "title": "Clean Agile",
-            "longTitle": "Clean Agile : Back to Basics",
-            "description": "Agile Values and Principles for a New Generation\n\"In the journey to all things Agile, Uncle Bob has been there, done that, and has the both the t-shirt and the scars to show for it. This delightful book is part history, part personal stories, and all wisdom. If you want to understand what Agile is and how it came to be, this is the book for you.\"\n-Grady Booch",
-            "author": "Robert Martin",
-            "price": 8915,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1357/9780135781869.jpg",
-            "type": "Paperback",
-            "language": "English",
-            "quantity": 1
-        },
-        {
-            "title": "Clean Craftsmanship",
-            "longTitle": "Clean Craftsmanship : Disciplines, Standards, and Ethics",
-            "description": "ow to Write Code You're Proud of . . . Every Single Day\n\". . . [A] timely and humble reminder of the ever-increasing complexity of our programmatic world and how we owe it to the legacy of humankind--and to ourselves--to practice ethical development. Take your time reading Clean Craftsmanship. . . . Keep this book on your go-to bookshelf. Let this book be your old friend--your Uncle Bob, your guide--as you make your way through this world with curiosity and courage.\"\n--From the Foreword by Stacia Heimgartner Viscardi, CST & Agile Mentor",
-            "author": "Robert Martin",
-            "price": 11283,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1369/9780136915713.jpg",
-            "type": "Paperback",
-            "language": "English",
-            "quantity": 1
-        },
-        {
-            "title": "Clean Code",
-            "longTitle": "Clean Code : A Handbook of Agile Software Craftsmanship",
-            "description": "Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn't have to be that way.",
-            "author": "Robert Martin",
-            "price": 10265,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1323/9780132350884.jpg",
-            "type": "Paperback",
-            "language": "English",
-            "quantity": 1
-        },
-        {
-            "title": "Clean Architecture",
-            "longTitle": "Clean Architecture : A Craftsman's Guide to Software Structure and Design",
-            "description": "Building upon the success of best-sellers The Clean Coder and Clean Code, legendary software craftsman Robert C. \"Uncle Bob\" Martin shows how to bring greater professionalism and discipline to application architecture and design.",
-            "author": "Robert Martin",
-            "price": 8735,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1344/9780134494166.jpg",
-            "type": "Robert Martin",
-            "language": "English",
-            "quantity": 1
-        },
-        {
-            "title": "Clean Coder",
-            "longTitle": "Clean Coder, The : A Code of Conduct for Professional Programmers",
-            "description": "Programmers who endure and succeed amidst swirling uncertainty and nonstop pressure share a common attribute: They care deeply about the practice of creating software. They treat it as a craft. They are professionals.\n",
-            "author": "Robert Martin",
-            "price": 9693,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1370/9780137081073.jpg",
-            "type": "Paperback",
-            "language": "English",
-            "quantity": 1
-        },
-        {
-            "title": "Clean Agile",
-            "longTitle": "Clean Agile : Back to Basics",
-            "description": "Agile Values and Principles for a New Generation\n\"In the journey to all things Agile, Uncle Bob has been there, done that, and has the both the t-shirt and the scars to show for it. This delightful book is part history, part personal stories, and all wisdom. If you want to understand what Agile is and how it came to be, this is the book for you.\"\n-Grady Booch",
-            "author": "Robert Martin",
-            "price": 8915,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1357/9780135781869.jpg",
-            "type": "Paperback",
-            "language": "English",
-            "quantity": 1
-        },
-        {
-            "title": "Clean Craftsmanship",
-            "longTitle": "Clean Craftsmanship : Disciplines, Standards, and Ethics",
-            "description": "ow to Write Code You're Proud of . . . Every Single Day\n\". . . [A] timely and humble reminder of the ever-increasing complexity of our programmatic world and how we owe it to the legacy of humankind--and to ourselves--to practice ethical development. Take your time reading Clean Craftsmanship. . . . Keep this book on your go-to bookshelf. Let this book be your old friend--your Uncle Bob, your guide--as you make your way through this world with curiosity and courage.\"\n--From the Foreword by Stacia Heimgartner Viscardi, CST & Agile Mentor",
-            "author": "Robert Martin",
-            "price": 11283,
-            "imageUrl": "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1369/9780136915713.jpg",
-            "type": "Paperback",
-            "language": "English",
-            "quantity": 1
-        },
-    ]
-
-    shuffleArray(featuringProducts)
-
-    for (let i = 1; i <= 100; i++) {
-        const product = {
-            title: 'F-book #' + i,
-            longTitle: 'F-book #' + i + ' : A Handbook of Agile Software Craftsmanship',
-            description: 'Even bad code can function. But if code isn\'t clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn\'t have to be that way.',
-            author: faker.name.findName(),
-            price: Math.floor(Math.random() * 20000) + 100,
-            imageUrl: 'https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1323/9780132350884.jpg',
-            type: 'Paperback',
-            language: 'English',
-            quantity: 1,
-        }
-
-        featuringProducts.push(product)
-    }
-
     useEffect(() => {
-        featuringContainer = document.getElementsByClassName('container-wrap')[0];
-        startAutoScroll();
-    }, []);
+        Axios.get('http://localhost:3001/api/all-books')
+            .then(response => {
+                shuffleArray(response.data);
+                setProducts(response.data);
+
+                featuringContainer = document.getElementsByClassName('container-wrap')[0];
+                startAutoScroll()
+            })
+            .catch(response => {
+                console.log(response)
+            });
+
+    }, [])
 
     function scrollLeft() {
-        const container = document.getElementsByClassName('container-wrap')[0];
-        container.scroll({left: container.scrollLeft - 1175, behavior: 'smooth'})
+        featuringContainer.scroll({left: featuringContainer.scrollLeft - scrollAmount, behavior: 'smooth'})
     }
 
-    function scrollRight() {
-        const container = document.getElementsByClassName('container-wrap')[0];
-        container.scroll({left: container.scrollLeft + 1175, behavior: 'smooth'})
+    function scrollRight(scrollAmount, type) {
+        featuringContainer.scroll({left: featuringContainer.scrollLeft + scrollAmount, behavior: type})
     }
 
     function autoScroll() {
-        featuringContainer.scroll({left: featuringContainer.scrollLeft + 2, behavior: 'auto'})
+        scrollRight(scrollAmount, 'smooth')
     }
 
     function stopAutoScroll() {
+        // TODO: BUG: WON'T STOP!
         clearInterval(autoScrollInterval);
     }
 
     function startAutoScroll () {
-        autoScrollInterval = setInterval(autoScroll, 50)
+        autoScrollInterval = setInterval(autoScroll, 6000);
     }
 
 
@@ -235,10 +62,10 @@ export default function Featuring() {
                 </div>
 
                 <div className="container-wrap">
-                    {featuringProducts.map(product => <FeaturingProduct product={product} key={v4()}/>)}
+                    {products.map(product => <FeaturingProduct product={product} key={v4()}/>)}
                 </div>
 
-                <div onClick={scrollRight} className="slider-next-wrap">
+                <div onClick={() => scrollRight(scrollAmount, 'smooth')} className="slider-next-wrap">
                     <img className="next-arrow" src={arrowImage} alt=">"/>
                 </div>
             </div>
