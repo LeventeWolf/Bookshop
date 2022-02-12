@@ -22,14 +22,15 @@ export default function Featuring() {
 
     function scrollLeft() {
         const container = document.getElementsByClassName('container-wrap')[0];
-        container.scroll({left: container.scrollLeft - 1170, behavior: 'smooth'})
+        container.scroll({left: container.scrollLeft - 1175, behavior: 'smooth'})
     }
 
-    function scrollRight () {
+    function scrollRight() {
         const container = document.getElementsByClassName('container-wrap')[0];
-        // container.scrollLeft += 1170;
+        container.scroll({left: container.scrollLeft + 1175, behavior: 'smooth'})
 
-        container.scroll({left: container.scrollLeft + 1170, behavior: 'smooth'})
+        const scrollLeftContainer = document.getElementsByClassName('slider-previous-wrap')[0];
+        scrollLeftContainer.style.display = 'flex';
     }
 
 
