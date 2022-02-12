@@ -23,17 +23,18 @@ function Navigation() {
                     <span>Wishlist</span>
                 </NavLink>
                 {user.isLoggedIn ?
-                    <NavLink className="nav-watchlist" to="/Profile">
-                    Profile
-                    </NavLink> :
-                    ''
-                }
+                    <>
+                        <NavLink className="nav-watchlist" to="/Profile">
+                        <Avatar name={user.username} size='sm' marginRight={5} src={user.useravatar}/>
+                        Profile
+                        </NavLink>
+                    </>
+                :
                 <NavLink className="nav-join" to="Join">
-
-                    {!user.isLoggedIn ? <img className="nav-icon" src="http://cdn.onlinewebfonts.com/svg/img_24787.png"alt="I" /> :
-                                        <Avatar name={user.username} size='sm' marginRight={5} src={user.useravatar}/>}
+                    <img className="nav-icon" src="http://cdn.onlinewebfonts.com/svg/img_24787.png"alt="I" />
                     {!user.isLoggedIn ? 'Sign in/Join' : user.username}
                 </NavLink>
+                }
             </div>
         </div>
     );
