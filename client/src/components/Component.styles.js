@@ -6,23 +6,33 @@ const sectionBorder = `1px solid rgba(0, 0, 0, 0.1)`
 export const Container = styled.div`
   display: flex;
   gap: 15px;
-  
-  letter-spacing: 0px;
+
+  letter-spacing: 0;
+
+  animation: appear .3s ease-out;
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
 export const Section = styled.div`
   display: flex;
   flex-direction: column;
-  
-  
-  border-bottom: ${props => props.border ? sectionBorder : '' };
+
+  border-bottom: ${props => props.border ? sectionBorder : ''};
   width: 100%;
 `;
 
 export const ProductContainer = styled.div`
   padding: 10px 20px;
   background-color: white;
-  
+
   display: flex;
   box-shadow: ${boxShadow};
 `
@@ -32,14 +42,14 @@ export const ProductContainer = styled.div`
 
 export const DescriptionContainer = styled.div`
   margin-left: 40px;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 
 export const ProductImage = styled.img`
-    width: ${props => props.w + 'px'};
+  width: ${props => props.w + 'px'};
 `;
 
 export const ProductTitle = styled.h3`
@@ -105,19 +115,19 @@ export const WishlistButton = styled.button`
 
 export const ActionsContainer = styled.div`
   background-color: white;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: end;
   align-items: center;
-  
+
   flex-grow: 2;
 
   box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
-  
+
   padding: 20px 15px 10px 15px;
-  
-  
+
+
   //border: 2px solid black;
   height: 400px;
   width: 400px;

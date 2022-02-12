@@ -12,7 +12,7 @@ export default function ProductPage() {
             <div id="product-page">
                 <h1 className="page-title">Product Details</h1>
 
-                <Product product={product}/>
+                {Object.keys(product).length !== 0 ? <Product product={product}/> : 'Please select a product!:)'}
             </div>
         </div>
     );
