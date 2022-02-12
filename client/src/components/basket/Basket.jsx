@@ -14,7 +14,7 @@ export default function Basket() {
 
     return (
         <div className="main-wrap">
-            <h1 className="basket-page-title">Your basket</h1>
+            <h1 className="page-title">Your basket</h1>
 
             <div className="basket-page-wrap">
                 <h2 className="basket-page-title-secondary">Shopping basket details</h2>

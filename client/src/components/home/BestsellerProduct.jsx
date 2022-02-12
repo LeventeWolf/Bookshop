@@ -1,7 +1,7 @@
 
 import React from "react";
 import './bestsellers.scss';
-import {addProduct} from "../../redux/actions/basketActions";
+import {addProductToBasket} from "../../redux/actions/basketActions";
 import {useDispatch} from "react-redux";
 
 export function BestsellerProduct( {product} ) {
@@ -28,7 +28,7 @@ export function BestsellerProduct( {product} ) {
                     </h2>
 
                     <button className="product-basket-btn"
-                            onClick={() => dispatch(addProduct(product))}>
+                            onClick={() => dispatch(addProductToBasket(product))}>
                         +
                     </button>
                 </div>

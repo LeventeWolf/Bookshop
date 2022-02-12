@@ -6,3 +6,4 @@ export { default as Join } from "./user/Join";
 export { default as Home } from "./home/Home";
 export { default as Basket } from "./basket/Basket";
 export { default as Wishlist } from "./wishlist/Wishlist";
+export { default as ProductPage } from "./productPage/ProductPage";

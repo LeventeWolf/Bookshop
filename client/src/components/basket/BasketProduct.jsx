@@ -1,6 +1,6 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import {addProduct, removeProduct} from "../../redux/actions/basketActions";
+import {addProductToBasket, removeProductFromBasket} from "../../redux/actions/basketActions";
 
 export default function BasketProduct( {product} ) {
     const dispatch = useDispatch();
@@ -18,12 +18,12 @@ export default function BasketProduct( {product} ) {
             <div className="product-actions-container">
                 <div className="quantity-wrap">
                     <span>Quantity: {product.quantity}</span>
-                    <button className="product-quantity" onClick={() => dispatch(addProduct(product))}>
+                    <button className="product-quantity" onClick={() => dispatch(addProductToBasket(product))}>
                         +
                     </button>
                 </div>
                 <h3 className="product-price">{numberWithSpaces(product.quantity * product.price)} Ft</h3>
-                <button className="product-remove" onClick={() => dispatch(removeProduct(product.title))}>
+                <button className="product-remove" onClick={() => dispatch(removeProductFromBasket(product.title))}>
                     Remove
                 </button>
             </div>

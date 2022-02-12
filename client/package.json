@@ -51,6 +51,7 @@
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.2",
     "sass": "^1.49.7",
+    "styled-components": "^5.3.3",
     "uuid": "^3.4.0",
     "uuidv4": "^6.2.12"
   }

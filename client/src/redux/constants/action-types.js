@@ -18,3 +18,7 @@ export const UserActionTypes = {
   LOGIN: "LOGIN",
   LOGOUT: "LOGOUT",
 }
+
+export const ProductActionTypes = {
+  SELECT: "SELECT",
+}

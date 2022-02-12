@@ -1,6 +1,6 @@
 import React from "react";
 import './featuring.scss';
-import {addProduct} from "../../redux/actions/basketActions";
+import {addProductToBasket} from "../../redux/actions/basketActions";
 import {useDispatch} from "react-redux";
 
 export function FeaturingProduct( {product} ) {
@@ -26,7 +26,7 @@ export function FeaturingProduct( {product} ) {
                 </h2>
 
                 <button className="product-basket-btn"
-                        onClick={() => dispatch(addProduct(product))}>
+                        onClick={() => dispatch(addProductToBasket(product))}>
                     +
                 </button>
             </div>

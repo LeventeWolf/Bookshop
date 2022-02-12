@@ -1,22 +1,11 @@
 .basket-page-wrap {
   background-color: white;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
 
   padding: 10px;
-
-  box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+  animation: appear .3s;
 }
 
-.basket-page-title {
-  color: black;
-  font-weight: bold;
-  font-size: 2rem;
-  font-family: Roboto, sans-serif;
-
-  margin-bottom: 10px;
-
-  letter-spacing: -1.5px;
-
-}
 
 .basket-page-title-secondary {
 

@@ -1,0 +1,26 @@
+.main-wrap {
+    max-width: 1440px;
+
+    margin: auto;
+    padding: 10px 20px;
+}
+
+
+a {
+    color: inherit;
+
+    &:hover {
+        color: inherit;
+    }
+}
+
+.page-title {
+    color: black;
+    font-weight: bold;
+    font-size: 2rem;
+    font-family: Roboto, sans-serif;
+
+    margin-bottom: 10px;
+
+    letter-spacing: -1.5px;
+}
