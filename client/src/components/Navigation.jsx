@@ -2,6 +2,7 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import './navigation.scss'
 import {useSelector} from "react-redux";
+import {Avatar} from "@chakra-ui/react";
 
 
 function Navigation() {
@@ -21,11 +22,16 @@ function Navigation() {
                          alt="<3" />
                     <span>Wishlist</span>
                 </NavLink>
-
+                {user.isLoggedIn ?
+                    <NavLink className="nav-watchlist" to="/Profile">
+                    Profile
+                    </NavLink> :
+                    ''
+                }
                 <NavLink className="nav-join" to="Join">
-                    <img className="nav-icon" src="http://cdn.onlinewebfonts.com/svg/img_24787.png"
-                         alt="I" />
 
+                    {!user.isLoggedIn ? <img className="nav-icon" src="http://cdn.onlinewebfonts.com/svg/img_24787.png"alt="I" /> :
+                                        <Avatar name={user.username} size='sm' marginRight={5} src={user.useravatar}/>}
                     {!user.isLoggedIn ? 'Sign in/Join' : user.username}
                 </NavLink>
             </div>
