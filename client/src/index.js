@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import {Navigation, Header, HeaderSecondary, Footer, Home, Join, Basket, Wishlist, ProductPage} from "./components";
+import {Navigation, Header, HeaderSecondary, Footer, Home, Join, Basket, Wishlist, ProductPage, Profile} from "./components";
 import {ChakraProvider} from '@chakra-ui/react'
 
 import {Provider} from 'react-redux';
@@ -12,7 +12,16 @@ import {ReactQueryDevtools} from "react-query/devtools";
 
 document.body.style.backgroundColor = '#F0F0F0';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+    defaultOptions:{
+        queries:{
+            refetchOnMount: false,
+            refetchOnReconnect: false,
+            refetchOnWindowFocus: false,
+            retry:false
+        }
+    }
+})
 
 ReactDOM.render(
     <QueryClientProvider client={queryClient}>
@@ -30,6 +39,7 @@ ReactDOM.render(
                     <Route path="/wishlist" element={<Wishlist/>}/>
                     <Route path="/basket" element={<Basket/>}/>
                     <Route path="/product/:productName" element={<ProductPage/>}/>
+                    <Route path="/Profile" element={<Profile/>}/>
                 </Routes>
 
                 <Footer/>
