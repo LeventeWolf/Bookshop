@@ -45,7 +45,7 @@ export function Signin() {
 
     const handleLogin = () => {
         refetch();
-        dispatch(login(userdata.name))
+        dispatch(login({username:userdata.name, useravatar:'./Avatars/Wolf.jfif'}))
     }
 
     // const MotionBox = motion(Box);
