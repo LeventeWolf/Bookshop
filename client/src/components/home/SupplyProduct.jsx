@@ -1,9 +1,8 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {addProduct} from "../../redux/actions/basketActions";
 
 export default function SupplyProduct( {product} ) {
-    const basket = useSelector(state => state.basket)
     const dispatch = useDispatch();
 
     return (
@@ -11,19 +10,19 @@ export default function SupplyProduct( {product} ) {
             <img src={product.imageUrl}
                  className="supply-product-image" alt="img" />
 
-            <h2 className="supply-product-title">
+            <h2 className="product-title">
                 {product.title}
             </h2>
 
-            <h2 className="supply-product-author">
+            <h2 className="product-author">
                 {product.author}
             </h2>
 
-            <h2 className="supply-product-price">
+            <h2 className="product-price">
                 {numberWithSpaces(product.price)} Ft
             </h2>
 
-            <button className="supply-product-add-to-basket"
+            <button className="product-basket-btn"
                     onClick={() => dispatch(addProduct(product))}>
                 Add to basket
             </button>

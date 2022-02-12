@@ -133,11 +133,6 @@
   }
 }
 
-.product-price {
-  color: #ff0072;
-  font-size: 14pt;
-}
-
 .basket-empty {
   border-top: 1px solid rgba(100, 100, 100, 0.31);
 
@@ -146,4 +141,15 @@
   width: 100%;
 
   font-style: italic;
+
+  animation: appear .3s;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

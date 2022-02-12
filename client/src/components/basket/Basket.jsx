@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import {useSelector} from "react-redux";
-import SupplyProduct from "../home/SupplyProduct";
 import {v4} from "uuid";
 
 import './basket.scss'

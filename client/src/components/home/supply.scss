@@ -19,48 +19,24 @@
   padding: 10px;
 
   margin: 7px;
-}
 
-.supply-product-title {
-  margin: 5px 0 10px 0;
+  .product-basket-btn {
+    height: 36px;
+    width: 100%;
+    box-sizing: border-box;
 
-  font-size: 11pt;
-  font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .product-title {
+    margin: 5px 0 10px 0;
+  }
+
+  .product-price {
+    margin-top: 10px;
+  }
 }
 
 .supply-product-image {
   max-width: 100px;
-}
-
-.supply-product-author {
-  font-size: 11pt;
-  font-weight: 100;
-}
-
-.supply-product-price {
-  color: #ff0072;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-
-.supply-product-add-to-basket {
-  height: 36px;
-  width: 100%;
-  box-sizing: border-box;
-
-  margin-top: 10px;
-  border-radius: 5px;
-
-  background-color: #10bbd5;
-  color: white;
-  font-size: 11pt;
-  font-weight: bold;
-  font-family: Roboto, sans-serif;
-
-  transition: all .3s;
-
-  &:hover {
-    background-color: #29D5EF;
-  }
 }

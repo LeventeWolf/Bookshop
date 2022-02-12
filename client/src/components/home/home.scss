@@ -28,3 +28,38 @@
     border-bottom: 1px solid rgba(100, 100, 100, 0.31);
   }
 }
+
+
+// Shared properties along all Home-Components
+
+.product-title {
+  font-size: 11pt;
+  font-weight: bold;
+}
+
+.product-price {
+  color: #ff0072;
+  font-weight: bold;
+  font-size: 12pt;
+}
+
+.product-basket-btn {
+  border-radius: 5px;
+
+  background-color: #10bbd5;
+  color: white;
+  font-size: 11pt;
+  font-weight: bold;
+  font-family: Roboto, sans-serif;
+
+  transition: all .3s;
+
+  &:hover {
+    background-color: #29D5EF;
+  }
+}
+
+.product-author {
+  font-size: 11pt;
+  font-weight: 100;
+}

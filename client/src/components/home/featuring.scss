@@ -1,10 +1,51 @@
-.featuring-wrap {
-  grid-area: featuring;
-}
-
 .featuring-product-container {
-  //border: 1px solid black;
+  //border: 3px solid black;
 
   display: flex;
   overflow: hidden;
+}
+
+.featuring-product {
+  margin: 10px 20px 5px 5px;
+
+  padding: 5px;
+
+  box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+
+  display: grid;
+  grid-template-areas: "image description";
+
+  grid-template-columns: 100px 100px;
+}
+
+.featuring-product-description-wrap {
+  grid-area: description;
+
+  margin-left: 5px;
+  height: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+
+  .product-basket-btn {
+
+  }
+
+  .product-title {
+
+  }
+
+  .product-author {
+    height: 40px;
+  }
+
+  .product-price {
+    margin-top: 10px;
+  }
+
+  .product-image {
+
+  }
 }
