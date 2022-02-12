@@ -17,6 +17,7 @@ export const BasketActionTypes = {
 export const UserActionTypes = {
   LOGIN: "LOGIN",
   LOGOUT: "LOGOUT",
+  REGISTER: "REGISTER",
 }
 
 export const ProductActionTypes = {

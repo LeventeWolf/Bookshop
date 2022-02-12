@@ -5,17 +5,17 @@ const initialUser = {
     isLoggedIn: false
 };
 
-export const userReducer = (state = initialUser, { type }) => {
+export const userReducer = (state = initialUser, { type, payload }) => {
     switch (type) {
         case UserActionTypes.LOGIN:
             return {
-                ...state,
+                username: payload,
                 isLoggedIn: true,
             };
 
         case UserActionTypes.LOGOUT:
             return {
-                ...state,
+                username: payload,
                 isLoggedIn: false,
             };
 
