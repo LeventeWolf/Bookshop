@@ -1,9 +1,7 @@
 import React from "react";
 import './bestsellers.scss';
 import faker from "faker";
-import {FeaturingProduct} from "./FeaturingProduct";
 import {v4} from "uuid";
-import {BestsellerProduct} from "./BestsellerProduct";
 import SupplyProduct from "./SupplyProduct";
 
 export default function Bestsellers() {

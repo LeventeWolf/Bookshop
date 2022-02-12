@@ -2,20 +2,24 @@ import React from "react";
 import './featuring.scss';
 import {addProductToBasket} from "../../redux/actions/basketActions";
 import {useDispatch} from "react-redux";
+import {Link} from "@chakra-ui/react";
+import {select} from "../../redux/actions/productActions";
 
 export function FeaturingProduct( {product} ) {
     const dispatch = useDispatch();
 
     return (
         <div className="featuring-product">
-            <img src={product.imageUrl}
-                 className="featuring-product-image" alt="img" />
-
+            <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                <img src={product.imageUrl} className="featuring-product-image" alt="img"/>
+            </Link>
 
             <div className="featuring-product-description-wrap">
-                <h2 className="product-title">
-                    {product.title}
-                </h2>
+                <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                    <h2 className="product-title">
+                        {product.title}
+                    </h2>
+                </Link>
 
                 <h2 className="product-author">
                     {product.author}
@@ -32,6 +36,7 @@ export function FeaturingProduct( {product} ) {
             </div>
         </div>
     );
+
 }
 
 function numberWithSpaces(x) {
