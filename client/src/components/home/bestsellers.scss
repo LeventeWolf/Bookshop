@@ -1,3 +1,16 @@
 .bestsellers-wrap {
    grid-area: bestsellers;
+
+   position: relative;
+}
+
+.bestsellers-product-container {
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.bestsellers-product-wrap {
+
 }

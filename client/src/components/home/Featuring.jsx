@@ -40,7 +40,7 @@ export default function Featuring() {
     }
 
     function autoScroll() {
-        featuringContainer.scroll({left: featuringContainer.scrollLeft + 1, behavior: 'auto'})
+        featuringContainer.scroll({left: featuringContainer.scrollLeft + 2, behavior: 'auto'})
     }
 
     function stopAutoScroll() {
@@ -48,7 +48,7 @@ export default function Featuring() {
     }
 
     function startAutoScroll () {
-        autoScrollInterval = setInterval(autoScroll, 40)
+        autoScrollInterval = setInterval(autoScroll, 50)
     }
 
 
