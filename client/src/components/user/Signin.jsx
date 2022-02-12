@@ -1,28 +1,23 @@
-import React, {useState, useRef} from "react";
-import { Flex, Spacer, Box, Input, ButtonGroup, Text, InputGroup, InputLeftElement, Button } from '@chakra-ui/react'
+import React, {useState} from "react";
+import {
+    Box,
+    Input,
+    ButtonGroup,
+    Text,
+    InputGroup,
+    InputLeftElement,
+    Button,
+    FormControl
+} from '@chakra-ui/react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
 import {useDispatch} from "react-redux";
 import {login} from "../../redux/actions/userActions";
-import { registerUser } from './UserAPI';
+import {signin}  from './UserAPI';
 import {useQuery, useQueryClient} from "react-query";
-import axios from "axios";
 import {motion} from 'framer-motion'
 
 export function Signin() {
-
-    const checkTextValidity = (text) => {
-        const textLength = text.length;
-        const numbersInText = text.split().filter(charachter => '0' <= charachter <= '9').reduce((next, curr) => {return curr + next}, 0).length;
-        const isFirstElementCapital = textLength > 0 && text[0] === text[0].toUpperCase() && Boolean(text[0].match(/[A-Z]/));
-        if(textLength > 6 && numbersInText && isFirstElementCapital){
-            isValidText(() => true)
-        }else{
-            isValidText(() => false)
-        }
-    }
-
-    const [validtext, isValidText] = useState(false)
     const [userdata, setUserdata] = useState({
         name:'',
         password:''
@@ -30,7 +25,6 @@ export function Signin() {
 
     const handleChange = event =>{
         const {name, value} = event.target;
-        console.log(checkTextValidity(value));
         setUserdata(prevState => ({
             ...prevState,
             [name]:value
@@ -39,8 +33,8 @@ export function Signin() {
 
     const queryClient = useQueryClient();
 
-    const { data, isLoading, error, refetch } = useQuery('user',
-        ()=>(axios.post('http://localhost:3001/signin', {userdata}).then(res => console.log(res))), {enabled: false});
+    const { data, isLoading, error, refetch } = useQuery('signin', signin(userdata)
+        , {enabled: false});
 
 
     const dispatch = useDispatch();
@@ -54,14 +48,14 @@ export function Signin() {
         dispatch(login())
     }
 
-    const MotionBox = motion(Box);
-    const mountAnimation = {
-        "hidden" : {opacity: 0, scale: 0.7, y:100},
-        "visible" : {opacity: 1, scale: 1, y:0, transition:{type:"spring"}}
-    }
+    // const MotionBox = motion(Box);
+    // const mountAnimation = {
+    //     "hidden" : {opacity: 0, scale: 0.7, y:100},
+    //     "visible" : {opacity: 1, scale: 1, y:0, transition:{type:"spring"}}
+    // }
 
     return (
-        <MotionBox variants={mountAnimation} initial="hidden" animate="visible" margin={50}>
+        <Box margin={50}>
             <Text fontSize='2xl' mb={35} ml={2}>Sign in</Text>
             <InputGroup id="Username"  mb={2}>
                 <InputLeftElement ml={3} mr={1} children={
@@ -72,7 +66,7 @@ export function Signin() {
                     variant="outline"
                     placeholder='Username'
                     w="100%"
-                    focusBorderColor={validtext ? "green.300" : "red.300"}
+                    borderColor='grey.300'
                     value={userdata.name}
                     type='text'
                     name='name'
@@ -90,7 +84,7 @@ export function Signin() {
                     type={passwordVisible ? "text" : "password"}
                     placeholder='Password'
                     w="100%"
-                    focusBorderColor="grey"
+                    borderColor='grey.300'
                     name='password'
                     value={userdata.password}
                     onChange={handleChange}
@@ -101,6 +95,6 @@ export function Signin() {
                 Sign in
             </Button>
             </ButtonGroup>
-        </MotionBox>
+        </Box>
     )
 }

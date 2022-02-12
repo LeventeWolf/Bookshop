@@ -4,28 +4,38 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
 import Axios from "axios";
 import {motion} from 'framer-motion';
+import {register, signin} from './UserAPI'
+import {useQuery} from "react-query";
 
 export function Register() {
     const [errors, setErrors] = useState({username: false, password: false, email: false});
     const [passwordVisible, setPasswordVisible] = useState(false);
     const showPassword = () => setPasswordVisible(!passwordVisible);
 
+    const [validtext, isValidText] = useState(false)
     const emailRef = useRef('');
     const usernameRef = useRef('');
     const passwordRef = useRef('');
 
-    function handleSubmit() {
-        Axios.post('http:/localhost:3001/registration', {
-            email: emailRef.current.value,
-            username: usernameRef.current.value,
-            password: passwordRef.current.value,
-        }).then(response => {
-            console.log('Successful registration!');
-        }).catch(response => {
-            setErrors({username: true, password: true, email: true})
+    const { data, isLoading, error, refetch } = useQuery('register', register(emailRef.current.value, usernameRef.current.value, passwordRef.current.value, setErrors)
+        , {enabled: false});
 
-            console.log(`Error: ${response}`)
-        });
+
+    const checkTextValidity = (text) => {
+        const textLength = text.length;
+        const numbersInText = text.split().filter(charachter => '0' <= charachter <= '9').reduce((next, curr) => {return curr + next}, 0).length;
+        const isFirstElementCapital = textLength > 0 && text[0] === text[0].toUpperCase() && Boolean(text[0].match(/[A-Z]/));
+        if(textLength > 6 && numbersInText && isFirstElementCapital){
+            isValidText(() => true)
+        }else{
+            isValidText(() => false)
+        }
+    }
+
+    function handleSubmit() {
+        if(validtext){
+            refetch();
+        }
     }
 
     const MotionBox = motion(Box);
@@ -34,7 +44,7 @@ export function Register() {
         "visible" : {opacity: 1, scale: 1, y:0, transition:{type:"spring"}}
     }
     return (
-        <MotionBox variants={mountAnimation} initial="hidden" animate="visible" margin={50}>
+        <Box margin={50}>
             <Text fontSize='2xl' mb={35} ml={2}>Register</Text>
             <FormControl>
                 <InputGroup id="Username" mb={2}>
@@ -44,19 +54,22 @@ export function Register() {
                            borderColor={!errors.username ? 'grey' : 'red'}/>
                 </InputGroup>
 
-                <InputGroup id="Password"mb={2}>
+                <InputGroup id="Password" mb={2}>
                     <InputLeftElement ml={3} mr={1} children={<Button variant='subtle' size="xs" h="full" onClick={showPassword}>{passwordVisible ? "Hide" : "Show"}</Button>}/>
 
 
-                    <Input ref={passwordRef} placeholder='Password' bgColor='white' mx='3' variant="outline" type={passwordVisible ? "text" : "password"} w="100%"
-                           focusBorderColor={!errors.password ? 'grey' : 'red'}
-                           borderColor={!errors.password ? 'grey' : 'red'}
+                    <Input ref={passwordRef} placeholder='Password' bgColor='white' mx='3' variant="outline"
+                           type={passwordVisible ? "text" : "password"} w="100%"
+                           onChange={e => checkTextValidity(e.currentTarget.value)}
+                           focusBorderColor={validtext ? 'green.300' : 'red.300'}
+                           borderColor='grey.300'
+
                     />
                 </InputGroup>
 
                 <InputGroup id="Email" mb={2}>
                     <InputLeftElement ml={3} mr={1} children={<FontAwesomeIcon icon={faAt}  color='gray'/>}/>
-                    <Input ref={emailRef} laceholder='Email' bgColor='white' mx='3' variant="outline" p w="100%"
+                    <Input ref={emailRef} placeholder='Email' type='email' bgColor='white' mx='3' variant="outline" p w="100%"
                            focusBorderColor={!errors.email ? 'grey' : 'red'}
                            borderColor={!errors.email ? 'grey' : 'red'}
                     />
@@ -67,7 +80,8 @@ export function Register() {
                         Register
                     </Button>
                 </ButtonGroup>
+                <p>{data ? data.username : ''}</p>
             </FormControl>
-        </MotionBox>
+        </Box>
     )
 }
