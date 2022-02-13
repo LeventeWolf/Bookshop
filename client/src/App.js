@@ -1,15 +1,15 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {
     Basket,
-    Books, Films, Footer,
+    Footer,
     Header,
     HeaderSecondary,
     Home,
     Join,
     Navigation,
     ProductPage,
-    Profile, Songs,
-    Wishlist
+    Profile,
+    TemplatePage
 } from "./components";
 import React from "react";
 
@@ -28,13 +28,13 @@ export default function App(){
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/Join" element={<Join/>}/>
-                <Route path="/wishlist" element={<Wishlist/>}/>
+                <Route path="/wishlist" element={<TemplatePage name={'Wishlist'}/>}/>
                 <Route path="/basket" element={<Basket/>}/>
                 <Route path="/product/:productName" element={<ProductPage/>}/>
                 <Route path="/Profile" element={<Profile/>}/>
-                <Route path="/Books" element={<Books/>}/>
-                <Route path="/Films" element={<Films/>}/>
-                <Route path="/Songs" element={<Songs/>}/>
+                <Route path="/Books" element={<TemplatePage name={'Books'}/>}/>
+                <Route path="/Films" element={<TemplatePage name={'Films'}/>}/>
+                <Route path="/Songs" element={<TemplatePage name={'Songs'}/>}/>
             </Routes>
 
             <Footer/>

@@ -13,9 +13,9 @@ export const Main = styled.div`
 export const Container = styled.div`
   display: flex;
   gap: 15px;
+  margin-bottom: 10px;
 
   letter-spacing: 0;
-
   animation: appear .3s ease-out;
 
   @keyframes appear {
@@ -32,7 +32,7 @@ export const Section = styled.div`
   display: flex;
   flex-direction: column;
 
-  border-bottom: ${props => props.border ? sectionBorder : ''};
+  border-bottom: ${props => props.borderBottom ? sectionBorder : ''};
   width: 100%;
 `;
 
@@ -71,7 +71,8 @@ export const DescriptionContainer = styled.div`
 `;
 
 export const ProductImage = styled.img`
-  width: ${props => props.w + 'px'};
+  width: ${props => props.w};
+  height: ${props => props.h};
 `;
 
 export const ProductTitle = styled.h3`
