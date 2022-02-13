@@ -20,27 +20,11 @@ export function Signin() {
     const dispatch = useDispatch();
     const [userdata, setUserdata] = useState({name: '', password: ''})
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const {isLoading, refetch: authenticate} = useQuery('signin', () => signin(userdata), {enabled: false});
+    const {isLoading, refetch: authenticate, isError, isSuccess} = useQuery('signin', () => signin(userdata, dispatch), {enabled: false, refetchOnWindowFocus:false});
 
-    const handleLogin = () => {
-        authenticate().then(response => {
-            if (isLoading) {
-                console.log('Loading')
-                return;
-            }
 
-            const isAuthenticated = response.data.data.isAuthenticated;
-
-            if (isAuthenticated) {
-                dispatch(login({
-                    username: userdata.name,
-                    useravatar: './Avatars/Wolf.jfif'
-                }))
-            } else {
-                console.log('Wrong username & password');
-            }
-        });
-    }
+    if(isLoading) return (<Text>Loading ...</Text>)
+    if(isError) return (<Text>Error occured</Text>)
 
     const showPassword = () => setPasswordVisible(!passwordVisible);
 
@@ -90,7 +74,7 @@ export function Signin() {
                 />
             </InputGroup>
             <ButtonGroup variant="solid" spacing='6'>
-                <Button color='blue.300' mt={15} onClick={handleLogin}>
+            <Button color='blue.300' mt={15} onClick={() => authenticate()}>
                     {/*{isAuthenticated ? <Navigate to="/" /> : 'Sign in'}*/}
                 </Button>
             </ButtonGroup>

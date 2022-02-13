@@ -1,12 +1,22 @@
+import React from 'react'
 import apiClient from '../http-common'
+import {login} from "../redux/actions/userActions";
 
 /**
  * Send userdata to server for authentication
  * @param userdata: {username, password}
  * @returns {Promise<AxiosResponse<any>>}
  */
-export function signin(userdata) {
-    return apiClient.post('/signin', {userdata})
+
+export function signin(userdata, dispatch) {
+    const auth = apiClient.post("/signin", {userdata}).then((response) => {
+        if(response.data.isAuthenticated) {
+            dispatch(login({
+                username: userdata.name,
+                useravatar: './Avatars/Wolf.jfif'
+            }))
+        }
+    })
 }
 
 export function register(emailRef, usernameRef, passwordRef, callback) {
