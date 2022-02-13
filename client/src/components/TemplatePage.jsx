@@ -12,7 +12,7 @@ import {
 import Axios from "axios";
 import {uuid} from "uuidv4";
 import {numberWithSpaces} from "../lib/helper";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {select} from "../redux/actions/productActions";
 import {addProductToBasket} from "../redux/actions/basketActions";
@@ -45,6 +45,7 @@ export default function TemplatePage( {name} ) {
 
 function TemplateProduct( {product} ) {
     const dispatch = useDispatch();
+    const isMember = useSelector(state => state.user.isMember);
 
     return (
         <Container style={{height: '200px'}}>
@@ -72,7 +73,16 @@ function TemplateProduct( {product} ) {
 
                 <Section style={{marginLeft: '50px', width: '200px'}}>
                     <Section borderBottom style={{marginBottom: 'auto'}}>
-                        <ProductPrice fontSize='22pt'>{numberWithSpaces(product.price)} Ft</ProductPrice>
+                        <div className="price-container-row">
+                            {isMember ?
+                                <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
+                                : null
+                            }
+
+                            <h2 className="product-price" style={{fontSize: 22}}>
+                                {numberWithSpaces(isMember ? Math.round(product.price * 0.9) : product.price)} Ft
+                            </h2>
+                        </div>
                     </Section>
 
                     <Section style={{gap: '10px'}}>

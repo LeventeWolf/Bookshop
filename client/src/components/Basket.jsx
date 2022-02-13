@@ -31,7 +31,6 @@ export default function Basket() {
     const basket = useSelector(state => state.basket)
     const user = useSelector(state => state.user)
 
-    const MEMBER_PRODUCT_AMOUNT = 1;
 
     let productsNum = 0;
     let sum = 0;
@@ -98,6 +97,8 @@ export default function Basket() {
 
 function BasketProduct({product}) {
     const dispatch = useDispatch();
+    const isMember = useSelector(state => state.user.isMember);
+
 
     return (
         <div className="basket-product-wrap">
@@ -111,7 +112,16 @@ function BasketProduct({product}) {
                 </Link>
 
                 <h4 className="product-author">{product.author}</h4>
-                <h4 className="product-price">{numberWithSpaces(product.price)} Ft</h4>
+                <div className="price-container">
+                    {isMember ?
+                        <h3 className="original-price">{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
+                        : null
+                    }
+
+                    <h2 className="product-price">
+                        {numberWithSpaces(isMember ? Math.round(product.price * 0.9) : product.price)} Ft
+                    </h2>
+                </div>
             </div>
 
             <div className="product-actions-container">

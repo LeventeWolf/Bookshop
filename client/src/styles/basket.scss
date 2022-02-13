@@ -37,6 +37,10 @@
   .product-description-container {
     //border: 1px solid blue;
 
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+
     margin-left: 20px;
     flex-grow: 2;
 
@@ -51,7 +55,7 @@
     }
 
     .product-price {
-      margin-top: 40px;
+      margin-top: 5px;
     }
   }
 

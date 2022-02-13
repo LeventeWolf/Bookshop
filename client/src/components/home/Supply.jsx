@@ -3,7 +3,7 @@ import '../../styles/supply.scss';
 import {v4} from "uuid";
 import Axios from "axios";
 import {numberWithSpaces, shuffleArray} from "../../lib/helper";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {select} from "../../redux/actions/productActions";
 import {addProductToBasket} from "../../redux/actions/basketActions";
@@ -35,12 +35,13 @@ export default function Supply() {
 
 export function SupplyProduct( {product} ) {
     const dispatch = useDispatch();
+    const isMember = useSelector(state => state.user.isMember);
 
     return (
         <div className="supply-product">
             <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
                 <img src={product.imageUrl}
-                     className="supply-product-image" alt="img" />
+                     className="supply-product-image" alt="img"/>
 
                 <h2 className="product-title">
                     {product.title}
@@ -51,15 +52,25 @@ export function SupplyProduct( {product} ) {
                 {product.author}
             </h2>
 
-            <h2 className="product-price">
-                {numberWithSpaces(product.price)} Ft
-            </h2>
+            <div className="price-container">
+                {isMember ?
+                    <h3 className="original-price">{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
+                    : null
+                }
+
+                <h2 className="product-price">
+                    {numberWithSpaces(isMember ? Math.round(product.price * 0.9) : product.price)} Ft
+                </h2>
+            </div>
+
+
+
 
             <button className="product-basket-btn"
                     onClick={() => dispatch(addProductToBasket(product))}>
                 Add to basket
             </button>
         </div>
-    )
+    );
 }
 

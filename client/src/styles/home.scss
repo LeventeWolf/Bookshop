@@ -82,3 +82,30 @@
   font-family: Roboto, sans-serif;
   font-weight: bold;
 }
+
+.original-price {
+  font-size: 11pt;
+  text-decoration: line-through;
+  text-decoration-color: rgba(128, 128, 128, 0.58);
+
+  color: rgba(0, 0, 0, 0.57);
+
+}
+
+.price-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  justify-items: end;
+
+  margin-top: auto;
+}
+
+.price-container-row {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: start;
+  align-items: center;
+
+  gap: 10px;
+}

@@ -10,7 +10,7 @@
     "username": "wolf",
     "password": "yolo",
     "avatar": "Wolf.jfif",
-    "isMember": false,
+    "isMember": true,
     "boughtAmount": 0
   },
   {

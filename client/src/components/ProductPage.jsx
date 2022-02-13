@@ -42,6 +42,7 @@ export default function ProductPage() {
 
 function Product( {product} ) {
     const dispatch = useDispatch();
+    const isMember = useSelector(state => state.user.isMember);
 
     return (
         <Container h={'500px'}>
@@ -68,7 +69,16 @@ function Product( {product} ) {
 
             <ActionsContainer>
                 <Section borderBottom style={{marginBottom: 'auto'}}>
-                    <ProductPrice fontSize='22pt'>{numberWithSpaces(product.price)} Ft</ProductPrice>
+                    <div className="price-container-row">
+                        {isMember ?
+                            <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
+                            : null
+                        }
+
+                        <h2 className="product-price" style={{fontSize: 25}}>
+                            {numberWithSpaces(isMember ? Math.round(product.price * 0.9) : product.price)} Ft
+                        </h2>
+                    </div>
                 </Section>
 
                 <Section style={{gap: '10px'}}>
