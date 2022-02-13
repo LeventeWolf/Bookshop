@@ -12,7 +12,7 @@ export default function Featuring() {
     const [products, setProducts] = useState([]);
 
     let featuringContainer = document.getElementsByClassName('container-wrap')[0];
-    const scrollAmount = 1175;
+    const scrollAmount = 1185;
     let autoScrollInterval;
 
     useEffect(() => {
