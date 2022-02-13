@@ -10,14 +10,14 @@ export const userReducer = (state = initialUser, { type, payload }) => {
     switch (type) {
         case UserActionTypes.LOGIN:
             return {
+                isLoggedIn: true,
                 username: payload.username,
                 useravatar: payload.useravatar,
-                isLoggedIn: true,
             };
 
         case UserActionTypes.LOGOUT:
             return {
-                username: payload,
+                ...state,
                 isLoggedIn: false,
             };
 

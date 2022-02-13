@@ -8,9 +8,8 @@ export const login = (userData) => {
     }
 }
 
-export const logout = (userData) => {
+export const logout = () => {
     return {
         type: UserActionTypes.LOGOUT,
-        payload: userData
     }
 }
