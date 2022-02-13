@@ -13,8 +13,10 @@ router.get("/api/all-books", async (req, res) => {
 });
 
 router.post('/api/signin', async (req, res) =>{
-    const userData = req.body;
-    return res.send(userData)
+    // console.log(req.body.userdata.name)
+    const users = fileHandler.authenticateUser(req.body.userdata.name, req.body.userdata.password)
+    console.log(users)
+    return res.status(200).send({authenticated: users})
     // return res.send("Working")
 })
 
