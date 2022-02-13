@@ -6,22 +6,23 @@ import {
     Text,
     InputGroup,
     InputLeftElement,
-    Button,
-    FormControl
+    Button
 } from '@chakra-ui/react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
 import {useDispatch} from "react-redux";
 import {login} from "../../redux/actions/userActions";
-import {signin}  from './UserAPI';
-import {useQuery, useQueryClient} from "react-query";
-import {motion} from 'framer-motion'
+import {signin}  from '../../api/UserAPI';
+import {useQuery} from "react-query";
+import {Navigate} from "react-router-dom";
 
 export function Signin() {
     const [userdata, setUserdata] = useState({
         name:'',
         password:''
     })
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const dispatch = useDispatch();
 
     const handleChange = event =>{
         const {name, value} = event.target;
@@ -30,29 +31,14 @@ export function Signin() {
             [name]:value
         }))
     }
+    const {data, refetch: authenticate } = useQuery('signin', () => signin(userdata), {enabled: false});
 
-    const queryClient = useQueryClient();
-
-    const { data, isLoading, error, refetch } = useQuery('signin', signin(userdata)
-        , {enabled: false});
-
-
-    const dispatch = useDispatch();
-
-
-    const [passwordVisible, setPasswordVisible] = useState(false);
     const showPassword = () => setPasswordVisible(!passwordVisible);
-
     const handleLogin = () => {
-        refetch();
-        dispatch(login({username:userdata.name, useravatar:'./Avatars/Wolf.jfif'}))
-    }
+        authenticate();
+        {!data ? dispatch(login({username:userdata.name, useravatar:'./Avatars/Wolf.jfif'})) : console.log('Loading')}
 
-    // const MotionBox = motion(Box);
-    // const mountAnimation = {
-    //     "hidden" : {opacity: 0, scale: 0.7, y:100},
-    //     "visible" : {opacity: 1, scale: 1, y:0, transition:{type:"spring"}}
-    // }
+    }
 
     return (
         <Box margin={50}>
@@ -92,7 +78,7 @@ export function Signin() {
             </InputGroup>
             <ButtonGroup variant="solid" spacing='6'>
             <Button color='blue.300' mt={15} onClick={handleLogin}>
-                Sign in
+                {/*{isAuthenticated ? <Navigate to="/" /> : 'Sign in'}*/}
             </Button>
             </ButtonGroup>
         </Box>

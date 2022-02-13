@@ -4,9 +4,10 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
 import {login} from "../../redux/actions/userActions";
 import {motion} from 'framer-motion';
-import {register, signin} from './UserAPI'
+import {register} from '../../api/UserAPI'
 import {useQuery} from "react-query";
 import {useDispatch} from "react-redux";
+import {Navigate} from "react-router-dom";
 
 export function Register() {
     const dispatch = useDispatch()
@@ -38,6 +39,7 @@ export function Register() {
         if(validtext){
             refetch();
             dispatch(login(usernameRef.current.value))
+            (<><Navigate to="/" /></>)
         }
     }
 
