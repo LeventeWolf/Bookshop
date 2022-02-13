@@ -31,6 +31,9 @@ export const basketReducer = (basket = [], {type, payload}) => {
 
             return (basketCopy.filter(product => product.quantity !== 0));
 
+        case BasketActionTypes.CHECKOUT:
+            return [];
+
         default:
             return basket;
     }

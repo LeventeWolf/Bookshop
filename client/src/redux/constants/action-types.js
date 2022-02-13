@@ -12,6 +12,7 @@ export const CounterActionTypes = {
 export const BasketActionTypes = {
   ADD_PRODUCT: "ADD_PRODUCT",
   REMOVE_PRODUCT: "REMOVE_PRODUCT",
+  CHECKOUT: 'CHECKOUT'
 }
 
 export const UserActionTypes = {

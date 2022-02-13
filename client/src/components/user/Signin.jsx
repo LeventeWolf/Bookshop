@@ -74,8 +74,8 @@ export function Signin() {
                 />
             </InputGroup>
             <ButtonGroup variant="solid" spacing='6'>
-            <Button color='blue.300' mt={15} onClick={() => authenticate()}>
-                    {/*{isAuthenticated ? <Navigate to="/" /> : 'Sign in'}*/}
+                <Button color='blue.300' mt={15} onClick={() => authenticate()}>
+                    Sign in
                 </Button>
             </ButtonGroup>
         </Box>

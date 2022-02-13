@@ -13,3 +13,9 @@ export const removeProductFromBasket = (product) => {
         payload: product
     }
 }
+
+export const checkout = () => {
+    return {
+        type: BasketActionTypes.CHECKOUT,
+    }
+}

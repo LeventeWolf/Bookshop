@@ -40,7 +40,7 @@ export default function App(){
                 <Route path="/Bestsellers" element={<TemplatePage name={'Bestsellers'}/>}/>
             </Routes>
 
-            <Footer/>
+            {/*<Footer/>*/}
         </Router>
     )
 }
