@@ -43,7 +43,7 @@ export function Signin() {
     }
 
     if (isError) {
-        console.log('Error!)
+        console.log('Error!');
     }
 
     if (isSuccess) {
