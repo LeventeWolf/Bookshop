@@ -22,9 +22,11 @@ export async function signin(userdata, dispatch) {
             data.isAuthenticated = true;
         } else {
             console.log(`[SIGN-IN] Wrong Username or password!`);
+            data.isAuthenticated = false;
         }
     }).catch(response => {
         console.log(`[SIGN-IN] Error: ${response}`)
+        data.isAuthenticated = false;
     })
 
     return data;

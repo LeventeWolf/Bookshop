@@ -39,11 +39,11 @@ export function Signin() {
     }
 
     if (isLoading) {
-        console.log('Error')
+        console.log('Loading!')
     }
 
     if (isError) {
-        console.log('Error')
+        console.log('Error!)
     }
 
     if (isSuccess) {
