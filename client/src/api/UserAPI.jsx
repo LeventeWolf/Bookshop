@@ -15,14 +15,7 @@ export  function signin(userdata, dispatch) {
     ).then(response => {
         if (response.data.isAuthenticated) {
             dispatch(login(response.data.user))
-            return true;
-        } else {
-            console.log(`[SIGN-IN] Wrong Username or password!`);
-            return false;
         }
-    }).catch(response => {
-        console.log(`[SIGN-IN] Error: ${response}`)
-        return false;
     })
 }
 

@@ -19,11 +19,11 @@ router.post('/api/signin', async (req, res) => {
 
     if (user) {
         console.log(`[SIGN-IN] Welcome ${username}!`)
+        return res.status(200).send({user, isAuthenticated: user});
     } else {
-        console.log(`[SIGN-IN] Wrong Username || Password!`)
+        return res.status(404).send(`[SIGN-IN] Wrong Username || Password!`);
     }
 
-    return res.status(200).send({user, isAuthenticated: user ? true : false});
 });
 
 router.post('/api/registration', async (req, res) =>{

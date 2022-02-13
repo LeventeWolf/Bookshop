@@ -24,10 +24,7 @@ export function Signin() {
     const submitClicked = useRef();
     const [userdata, setUserdata] = useState({name: '', password: ''})
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const {isLoading, data : status, refetch: authenticate, isError, isSuccess, isStale} = useQuery('signin', async () => await signin(userdata, dispatch), {enabled: false, refetchOnWindowFocus:false});
-
-    if(isLoading) return (<Text><Progress size='xs' isIndeterminate /></Text>)
-    if(isError) return (<Text>Error occured</Text>)
+    const {isLoading, refetch: authenticate, isError, isSuccess, error} = useQuery('signin', async () => await signin(userdata, dispatch), {enabled: false, refetchOnWindowFocus:false});
 
     const showPassword = () => setPasswordVisible(!passwordVisible);
 
@@ -39,11 +36,8 @@ export function Signin() {
         }))
     }
 
-    if (isLoading) {
-        console.log('Loading!')
-    }
 
-    if (isError) {
+    if (error) {
         alert.error('Wrong username or password!');
         console.log('X USERNAME OR PASSORD X')
     }
@@ -54,6 +48,8 @@ export function Signin() {
 
 
     return (
+        <>
+        {isLoading ?  <Progress size='xs' isIndeterminate /> : ''}
         <Box margin={50}>
             <Text fontSize='2xl' mb={35} ml={2}>Sign in</Text>
             <InputGroup id="Username" mb={2}>
@@ -101,5 +97,6 @@ export function Signin() {
                 </Button>
             </ButtonGroup>
         </Box>
+        </>
     )
 }
