@@ -21,7 +21,7 @@ export function Signin() {
     const dispatch = useDispatch();
     const [userdata, setUserdata] = useState({name: '', password: ''})
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const {isLoading, data : status, refetch: authenticate, isError, isSuccess} = useQuery('signin', () => signin(userdata, dispatch), {enabled: false, refetchOnWindowFocus:false});
+    const {isLoading, data, refetch: authenticate, isError, isSuccess} = useQuery('signin', () => signin(userdata, dispatch), {enabled: false, refetchOnWindowFocus:false});
 
     if(isLoading) return (<Text><Progress size='xs' isIndeterminate /></Text>)
     if(isError) return (<Text>Error occured</Text>)
@@ -36,8 +36,20 @@ export function Signin() {
         }))
     }
 
-    function handleLogin() {
-        authenticate();
+    async function handleLogin() {
+        await authenticate();
+
+        if (isLoading) {
+            console.log('Error')
+        }
+
+        if (isError) {
+            console.log('Error')
+        }
+
+        if (isSuccess) {
+            console.log('Success!');
+        }
     }
 
     return (

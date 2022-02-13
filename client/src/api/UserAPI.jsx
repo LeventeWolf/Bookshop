@@ -1,7 +1,6 @@
 import React from 'react'
 import apiClient from '../http-common'
 import {login} from "../redux/actions/userActions";
-import {Navigate} from 'react-router-dom'
 
 /**
  * Send userdata to server for authentication
@@ -9,17 +8,13 @@ import {Navigate} from 'react-router-dom'
  * @returns {{isAuthenticated: Promise<AxiosResponse<any>>}}
  */
 
-export function signin(userdata, dispatch) {
-    apiClient.post(
+export async function signin(userdata, dispatch) {
+    await apiClient.post(
         "/signin",
         {userdata}
     ).then(response => {
         if (response.data.isAuthenticated) {
-            const user = response.data.user;
-
-            console.log(`user: ${JSON.stringify(user)}`);
-            dispatch(login(user))
-
+            dispatch(login(response.data.user))
             return true;
         } else {
             console.log(`[SIGN-IN] Wrong Username or password!`);
