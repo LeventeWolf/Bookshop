@@ -15,8 +15,10 @@ import {login} from "../../redux/actions/userActions";
 import {signin} from '../../api/UserAPI';
 import {useQuery} from "react-query";
 import {Navigate} from "react-router-dom";
+import {useAlert} from "react-alert";
 
 export function Signin() {
+    const alert = useAlert();
     const dispatch = useDispatch();
     const [userdata, setUserdata] = useState({name: '', password: ''})
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -32,12 +34,14 @@ export function Signin() {
             const isAuthenticated = response.data.data.isAuthenticated;
 
             if (isAuthenticated) {
+                alert.success(`Login successful!`);
+
                 dispatch(login({
                     username: userdata.name,
                     useravatar: './Avatars/Wolf.jfif'
                 }))
             } else {
-                console.log('Wrong username & password');
+                alert.error(`Wrong username & password`);
             }
         });
     }
