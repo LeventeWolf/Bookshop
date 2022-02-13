@@ -28,6 +28,10 @@ function Navigation() {
                             <Avatar name={user.username} size={"xs"} marginRight={2} src={user.useravatar}/>
                             Profile
                         </NavLink>
+                        <NavLink className="nav-profile" to="/Logout">
+                            Logout
+                        </NavLink>
+
                     </>
                     :
                     <NavLink className="nav-join" to="Join">
