@@ -2,6 +2,7 @@ import React from "react";
 import '../styles/headerSecondary.scss';
 import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
+import {numberWithSpaces} from "../lib/helper";
 
 function HeaderSecondary() {
     const basket = useSelector(state => state.basket)
@@ -55,9 +56,5 @@ function HeaderSecondary() {
     );
 }
 
-
-function numberWithSpaces(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-}
 
 export default HeaderSecondary;
