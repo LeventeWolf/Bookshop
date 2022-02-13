@@ -1,7 +1,7 @@
-import apiClient from '../../http-common'
+import apiClient from '../http-common'
 
 export async function signin(userdata) {
-    await apiClient.post('/signin', {userdata})
+    return await apiClient.post('/signin', {userdata})
 }
 
 export async function register(emailRef, usernameRef, passwordRef, callback) {
@@ -17,10 +17,5 @@ export async function register(emailRef, usernameRef, passwordRef, callback) {
         console.log(`Error: ${response}`)
     });
 }
-
-export async function getUserData(username){
-
-}
-
 
 export default {signin, register}
