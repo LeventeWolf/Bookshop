@@ -20,7 +20,7 @@ export function Register() {
     const usernameRef = useRef('');
     const passwordRef = useRef('');
 
-    const { data, isLoading, error, refetch } = useQuery('register', register(emailRef.current.value, usernameRef.current.value, passwordRef.current.value, setErrors)
+    const { data, refetch } = useQuery('register', (() => register(emailRef.current.value, usernameRef.current.value, passwordRef.current.value, setErrors))
         , {enabled: false});
 
 
