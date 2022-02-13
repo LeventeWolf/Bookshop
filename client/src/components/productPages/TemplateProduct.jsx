@@ -11,6 +11,8 @@ import {
     ProductTitle,
     Container, WishlistButton, Section, ProductType
 } from "../../styles/Component.styles";
+import {select} from "../../redux/actions/productActions";
+import {Link} from "react-router-dom";
 
 export default function TemplateProduct( {product} ) {
     const dispatch = useDispatch();
@@ -22,7 +24,9 @@ export default function TemplateProduct( {product} ) {
 
                 <DescriptionContainer>
                     <Section borderBottom>
-                        <ProductTitle fontSize='18pt'>{product.longTitle}</ProductTitle>
+                        <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                            <ProductTitle fontSize='18pt'>{product.longTitle}</ProductTitle>
+                        </Link>
                     </Section>
 
                     <Section style={{marginBottom: 'auto', marginTop: '40px'}}>

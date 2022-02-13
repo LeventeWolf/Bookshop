@@ -6,6 +6,7 @@ import Product from "../home/Product";
 import {v4} from "uuid";
 import {uuid} from "uuidv4";
 import TemplateProduct from "./TemplateProduct";
+import {shuffleArray} from "../../lib/helper";
 
 
 export default function TemplatePage( {name} ) {

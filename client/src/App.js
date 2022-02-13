@@ -37,6 +37,7 @@ export default function App(){
                 <Route path="/Films" element={<TemplatePage name={'Films'}/>}/>
                 <Route path="/Logout" element={<><Logout/><Join/></>}/>
                 <Route path="/Songs" element={<TemplatePage name={'Songs'}/>}/>
+                <Route path="/Bestsellers" element={<TemplatePage name={'Bestsellers'}/>}/>
             </Routes>
 
             <Footer/>
