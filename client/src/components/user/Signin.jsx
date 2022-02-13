@@ -84,10 +84,10 @@ export function Signin() {
                   children={
                       <Button variant='subtle' size="xs" h="full" onClick={showPassword} tabIndex={-1}>
                           {passwordVisible ?
-                              <img src="https://cdn-icons-png.flaticon.com/512/159/159078.png"
+                              <img className="pwd-eye" src="https://cdn-icons-png.flaticon.com/512/159/159078.png"
                                    alt={'Show'}/>
                               :
-                              <img
+                              <img className="pwd-eye"
                                   src="https://www.pngkey.com/png/full/926-9265778_png-file-svg-eye-on-off-icon.png"
                                   alt={'Hide'}/>
                           }
