@@ -49,8 +49,10 @@ export function Signin() {
     if (isSuccess) {
         if (data.isAuthenticated) {
             alert.success('Login successful');
+            console.log('LOGIN OK')
         } else {
             alert.error('Wrong username or password!');
+            console.log('X USERNAME OR PASSORD X')
         }
     }
 

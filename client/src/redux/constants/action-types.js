@@ -12,14 +12,15 @@ export const CounterActionTypes = {
 export const BasketActionTypes = {
   ADD_PRODUCT: "ADD_PRODUCT",
   REMOVE_PRODUCT: "REMOVE_PRODUCT",
-  CHECKOUT: 'CHECKOUT'
+  CHECKOUT: 'CHECKOUT',
 }
 
 export const UserActionTypes = {
   LOGIN: "LOGIN",
   LOGOUT: "LOGOUT",
   REGISTER: "REGISTER",
-  SET_MEMBER: "SET_MEMBER"
+  UPDATE_MEMBER: "UPDATE_MEMBER",
+  SET_BOUGHT_AMOUNT: "SET_BOUGHT_AMOUNT"
 }
 
 export const ProductActionTypes = {

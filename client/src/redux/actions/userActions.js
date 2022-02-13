@@ -1,4 +1,4 @@
-import { UserActionTypes } from "../constants/action-types";
+import {UserActionTypes} from "../constants/action-types";
 
 
 export const login = (userData) => {
@@ -14,9 +14,15 @@ export const logout = () => {
     }
 }
 
-export const setMember = (payload) => {
+export const updateMember = () => {
     return {
-        type: UserActionTypes.LOGOUT,
-        payload: payload
+        type: UserActionTypes.UPDATE_MEMBER,
+    }
+}
+
+export const setBoughtAmount = (amount) => {
+    return {
+        type: UserActionTypes.SET_BOUGHT_AMOUNT,
+        payload: amount,
     }
 }
