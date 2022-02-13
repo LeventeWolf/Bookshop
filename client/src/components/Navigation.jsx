@@ -36,6 +36,9 @@ function Navigation() {
                         <NavLink className="nav-profile" to="/Profile">
                             <Avatar name={user.username} size={"xs"} marginRight={2} src={'./Avatars/' + user.avatar}/>
                             Profile
+                            {user.isMember ? <img className="nav-icon member-star" src="http://simpleicon.com/wp-content/uploads/star.png" alt="#" />
+                                : null
+                            }
                         </NavLink>
                         <NavLink to={'#'} className="nav-profile" onClick={handleLogout}>
                             <img className="nav-icon" src="https://icons-for-free.com/iconfiles/png/512/logout-1324760598547500271.png"
