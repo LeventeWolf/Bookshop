@@ -11,7 +11,7 @@ export function FeaturingProduct( {product} ) {
     return (
         <div className="featuring-product">
             <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
-                <img src={product.imageUrl} className="featuring-product-image" alt="img"/>
+                <img src={product.imageUrl} className="product-image" alt="img"/>
             </Link>
 
             <div className="featuring-product-description-wrap">
