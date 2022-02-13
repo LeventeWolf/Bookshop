@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {v4} from "uuid";
 
 import '../../styles/basket.scss'
@@ -7,6 +7,8 @@ import BasketProduct from "./BasketProduct";
 import {BasketButton, Container, Main, PageTitle} from "../../styles/Component.styles";
 import {numberWithSpaces} from "../../lib/helper";
 import styled from "styled-components";
+import {useAlert} from "react-alert";
+import {checkout} from "../../redux/actions/basketActions";
 
 const BasketDetails = styled.div`
   padding: 10px;
@@ -21,6 +23,8 @@ const BasketDetailsContainer = styled.div`
 `;
 
 export default function Basket() {
+    const dispatch = useDispatch();
+    const alert = useAlert();
     const basket = useSelector(state => state.basket)
 
     let productsNum = 0;
@@ -34,6 +38,11 @@ export default function Basket() {
     useEffect(() => {
         document.title = "Your basket"
     }, []);
+
+    function handleCheckout() {
+        dispatch(checkout());
+        alert.success('Checkout successful!')
+    }
 
     return (
         <Main>
@@ -50,7 +59,7 @@ export default function Basket() {
                             </span>
                         </BasketDetails>
 
-                        <BasketButton w={200} h={40}>
+                        <BasketButton w={200} h={40} onClick={handleCheckout}>
                             Checkout
                         </BasketButton>
                     </BasketDetailsContainer>
