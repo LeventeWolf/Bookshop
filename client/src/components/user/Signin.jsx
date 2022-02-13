@@ -47,6 +47,7 @@ export function Signin() {
         console.log('Error!');
     }
     const handleLogin = () =>{
+        authenticate()
         if (status && status.isAuthenticated) {
             alert.success('Login successful');
         } else {
