@@ -7,14 +7,16 @@ function getAllBooks(){
     return result;
 }
 
-function authenticateUser(name, password){
+function authenticateUser(username, password){
     const rawdata = fs.readFileSync('./database/users.json')
-    const result = JSON.parse(rawdata)
-    for (const user of result) {
-        if(user.name === name && user.password === password && name === undefined && password===undefined){
+    const users = JSON.parse(rawdata)
+
+    for (const user of users) {
+        if(user.name === username && user.password === password){
             return true
         }
     }
+
     return false
 }
 

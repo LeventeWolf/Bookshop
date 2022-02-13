@@ -12,40 +12,52 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
 import {useDispatch} from "react-redux";
 import {login} from "../../redux/actions/userActions";
-import {signin}  from '../../api/UserAPI';
+import {signin} from '../../api/UserAPI';
 import {useQuery} from "react-query";
 import {Navigate} from "react-router-dom";
 
 export function Signin() {
-    const [userdata, setUserdata] = useState({
-        name:'',
-        password:''
-    })
-    const [passwordVisible, setPasswordVisible] = useState(false);
     const dispatch = useDispatch();
+    const [userdata, setUserdata] = useState({name: '', password: ''})
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const {isLoading, refetch: authenticate} = useQuery('signin', () => signin(userdata), {enabled: false});
 
-    const handleChange = event =>{
+    const handleLogin = () => {
+        authenticate().then(response => {
+            if (isLoading) {
+                console.log('Loading')
+                return;
+            }
+
+            const isAuthenticated = response.data.data.isAuthenticated;
+
+            if (isAuthenticated) {
+                dispatch(login({
+                    username: userdata.name,
+                    useravatar: './Avatars/Wolf.jfif'
+                }))
+            } else {
+                console.log('Wrong username & password');
+            }
+        });
+    }
+
+    const showPassword = () => setPasswordVisible(!passwordVisible);
+
+    const handleChange = event => {
         const {name, value} = event.target;
         setUserdata(prevState => ({
             ...prevState,
-            [name]:value
+            [name]: value
         }))
-    }
-    const {data, refetch: authenticate } = useQuery('signin', () => signin(userdata), {enabled: false});
-
-    const showPassword = () => setPasswordVisible(!passwordVisible);
-    const handleLogin = () => {
-        authenticate();
-        {!data ? dispatch(login({username:userdata.name, useravatar:'./Avatars/Wolf.jfif'})) : console.log('Loading')}
-
     }
 
     return (
         <Box margin={50}>
             <Text fontSize='2xl' mb={35} ml={2}>Sign in</Text>
-            <InputGroup id="Username"  mb={2}>
+            <InputGroup id="Username" mb={2}>
                 <InputLeftElement ml={3} mr={1} children={
-                            <FontAwesomeIcon icon={faUser}  color='gray'/>}/>
+                    <FontAwesomeIcon icon={faUser} color='gray'/>}/>
                 <Input
                     bgColor='white'
                     mx='3'
@@ -60,9 +72,10 @@ export function Signin() {
                 />
             </InputGroup>
             <InputGroup id="Password" mb={2}>
-                <InputLeftElement ml={3} mr={1} children={<Button variant='subtle' size="xs" h="full" onClick={showPassword}>
-                                                    {passwordVisible ? "Hide" : "Show"}
-                                                    </Button>}/>
+                <InputLeftElement ml={3} mr={1}
+                                  children={<Button variant='subtle' size="xs" h="full" onClick={showPassword}>
+                                      {passwordVisible ? "Hide" : "Show"}
+                                  </Button>}/>
                 <Input
                     bgColor='white'
                     mx='3'
@@ -77,9 +90,9 @@ export function Signin() {
                 />
             </InputGroup>
             <ButtonGroup variant="solid" spacing='6'>
-            <Button color='blue.300' mt={15} onClick={handleLogin}>
-                {/*{isAuthenticated ? <Navigate to="/" /> : 'Sign in'}*/}
-            </Button>
+                <Button color='blue.300' mt={15} onClick={handleLogin}>
+                    {/*{isAuthenticated ? <Navigate to="/" /> : 'Sign in'}*/}
+                </Button>
             </ButtonGroup>
         </Box>
     )

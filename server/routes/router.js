@@ -12,13 +12,19 @@ router.get("/api/all-books", async (req, res) => {
     return res.status(200).send(allBooks);
 });
 
-router.post('/api/signin', async (req, res) =>{
-    // console.log(req.body.userdata.name)
-    const users = fileHandler.authenticateUser(req.body.userdata.name, req.body.userdata.password)
-    console.log(users)
-    return res.status(200).send({authenticated: users})
-    // return res.send("Working")
-})
+router.post('/api/signin', async (req, res) => {
+    const username = req.body.userdata.name;
+    const password = req.body.userdata.password;
+    const isAuthenticated = fileHandler.authenticateUser(username, password)
+
+    if (isAuthenticated) {
+        console.log(`Successful login: ${username}`);
+    } else {
+        console.log(`Wrong password for: ${username}`)
+    }
+
+    return res.status(200).send({isAuthenticated})
+});
 
 router.post('/api/registration', async (req, res) =>{
     const userData = req.body;
