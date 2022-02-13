@@ -24,7 +24,7 @@ export function Signin() {
     const submitClicked = useRef();
     const [userdata, setUserdata] = useState({name: '', password: ''})
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const {isLoading, data : status, refetch: authenticate, isError, isSuccess} = useQuery('signin', () => signin(userdata, dispatch), {enabled: false, refetchOnWindowFocus:false});
+    const {isLoading, data : status, refetch: authenticate, isError, isSuccess, isStale} = useQuery('signin', async () => await signin(userdata, dispatch), {enabled: false, refetchOnWindowFocus:false});
 
     if(isLoading) return (<Text><Progress size='xs' isIndeterminate /></Text>)
     if(isError) return (<Text>Error occured</Text>)
@@ -44,17 +44,12 @@ export function Signin() {
     }
 
     if (isError) {
-        console.log('Error!');
+        alert.error('Wrong username or password!');
+        console.log('X USERNAME OR PASSORD X')
     }
-    const handleLogin = () =>{
-        authenticate()
-        if (status && status.isAuthenticated) {
-            alert.success('Login successful');
-            console.log('LOGIN OK')
-        } else {
-            alert.error('Wrong username or password!');
-            console.log('X USERNAME OR PASSORD X')
-        }
+    if(isSuccess && user.isLoggedIn){
+        alert.success('Login successful');
+        console.log('LOGIN OK')
     }
 
 
@@ -100,7 +95,7 @@ export function Signin() {
                 />
             </InputGroup>
             <ButtonGroup variant="solid" spacing='6'>
-                <Button color='blue.300' mt={15} onClick={handleLogin}>
+                <Button color='blue.300' mt={15} onClick={authenticate}>
                     Sign in
                     {user.isLoggedIn ? <Navigate to="/" /> : ''}
                 </Button>

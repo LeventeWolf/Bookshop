@@ -8,8 +8,8 @@ import {login} from "../redux/actions/userActions";
  * @returns {{isAuthenticated: Promise<AxiosResponse<any>>}}
  */
 
-export async function signin(userdata, dispatch) {
-    const isAuthenticated = await apiClient.post(
+export  function signin(userdata, dispatch) {
+    return  apiClient.post(
         "/signin",
         {userdata}
     ).then(response => {
@@ -24,7 +24,6 @@ export async function signin(userdata, dispatch) {
         console.log(`[SIGN-IN] Error: ${response}`)
         return false;
     })
-    return {isAuthenticated};
 }
 
 export function register(emailRef, usernameRef, passwordRef, callback) {
