@@ -17,7 +17,8 @@ export const userReducer = (state = initialUser, { type, payload }) => {
 
         case UserActionTypes.LOGOUT:
             return {
-                ...state,
+                username: undefined,
+                useravatar: undefined,
                 isLoggedIn: false,
             };
 
