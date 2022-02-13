@@ -9,6 +9,7 @@ import {numberWithSpaces} from "../../lib/helper";
 import styled from "styled-components";
 import {useAlert} from "react-alert";
 import {checkout} from "../../redux/actions/basketActions";
+import {useNavigate} from "react-router-dom";
 
 const BasketDetails = styled.div`
   padding: 10px;
@@ -25,7 +26,9 @@ const BasketDetailsContainer = styled.div`
 export default function Basket() {
     const dispatch = useDispatch();
     const alert = useAlert();
+    const navigate = useNavigate();
     const basket = useSelector(state => state.basket)
+    const isLoggedIn = useSelector(state => state.user.isLoggedIn)
 
     let productsNum = 0;
     let sum = 0;
@@ -40,6 +43,12 @@ export default function Basket() {
     }, []);
 
     function handleCheckout() {
+        if (!isLoggedIn) {
+            navigate('/join')
+            alert.error('You have to be an user to buy products!');
+            return;
+        }
+
         dispatch(checkout());
         alert.success('Checkout successful!')
     }
