@@ -2,14 +2,14 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {v4} from "uuid";
 
-import '../../styles/basket.scss'
-import {BasketButton, Main, PageTitle} from "../../styles/Component.styles";
-import {numberWithSpaces} from "../../lib/helper";
+import '../styles/basket.scss'
+import {BasketButton, Main, PageTitle} from "../styles/Component.styles";
+import {numberWithSpaces} from "../lib/helper";
 import styled from "styled-components";
 import {useAlert} from "react-alert";
-import {addProductToBasket, checkout, removeProductFromBasket} from "../../redux/actions/basketActions";
+import {addProductToBasket, checkout, removeProductFromBasket} from "../redux/actions/basketActions";
 import {Link, useNavigate} from "react-router-dom";
-import {select} from "../../redux/actions/productActions";
+import {select} from "../redux/actions/productActions";
 
 const BasketDetails = styled.div`
   padding: 10px;

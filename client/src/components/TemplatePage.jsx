@@ -8,14 +8,14 @@ import {
     PageTitle, ProductAuthor,
     ProductContainer,
     ProductImage, ProductPrice, ProductTitle, ProductType, Section, WishlistButton
-} from "../../styles/Component.styles";
+} from "../styles/Component.styles";
 import Axios from "axios";
 import {uuid} from "uuidv4";
-import {numberWithSpaces} from "../../lib/helper";
+import {numberWithSpaces} from "../lib/helper";
 import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
-import {select} from "../../redux/actions/productActions";
-import {addProductToBasket} from "../../redux/actions/basketActions";
+import {select} from "../redux/actions/productActions";
+import {addProductToBasket} from "../redux/actions/basketActions";
 
 
 export default function TemplatePage( {name} ) {

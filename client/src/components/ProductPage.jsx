@@ -9,13 +9,13 @@ import {
     PageTitle, ProductAuthor,
     ProductContainer,
     ProductImage, ProductPrice, ProductTitle, ProductType, Section, WishlistButton
-} from "../../styles/Component.styles";
+} from "../styles/Component.styles";
 import Axios from "axios";
-import {numberWithSpaces, shuffleArray} from "../../lib/helper";
+import {numberWithSpaces, shuffleArray} from "../lib/helper";
 import {v4} from "uuid";
-import '../../styles/relatedProducts.scss'
-import {addProductToBasket} from "../../redux/actions/basketActions";
-import {FeaturingProduct} from "../home/Featuring";
+import '../styles/relatedProducts.scss'
+import {addProductToBasket} from "../redux/actions/basketActions";
+import {FeaturingProduct} from "./home/Featuring";
 
 
 export default function ProductPage() {
