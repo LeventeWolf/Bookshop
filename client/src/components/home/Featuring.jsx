@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import './featuring.scss';
+import '../../styles/featuring.scss';
 import faker from "faker";
 import {v4} from "uuid";
 import {FeaturingProduct} from "./FeaturingProduct";

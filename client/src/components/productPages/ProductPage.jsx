@@ -2,7 +2,7 @@ import React from "react";
 
 import {useSelector} from "react-redux";
 import Product from "../home/Product";
-import {Main, PageTitle} from "../Component.styles";
+import {Main, PageTitle} from "../../styles/Component.styles";
 
 
 export default function ProductPage() {

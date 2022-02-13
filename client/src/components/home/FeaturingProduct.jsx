@@ -1,5 +1,5 @@
 import React from "react";
-import './featuring.scss';
+import '../../styles/featuring.scss';
 import {addProductToBasket} from "../../redux/actions/basketActions";
 import {useDispatch} from "react-redux";
 import {select} from "../../redux/actions/productActions";

@@ -12,17 +12,17 @@ import {
     Container, WishlistButton, Section, ProductType
 } from "../../styles/Component.styles";
 
-export default function Product( {product} ) {
+export default function TemplateProduct( {product} ) {
     const dispatch = useDispatch();
 
     return (
-        <Container h={'500px'}>
+        <Container style={{height: '200px'}}>
             <ProductContainer>
-                <ProductImage w={'280px'} src={product.imageUrl} alt="productImage"/>
+                <ProductImage w={'175px'} h={'180px'} src={product.imageUrl} alt="productImage"/>
 
                 <DescriptionContainer>
                     <Section borderBottom>
-                        <ProductTitle fontSize='20pt'>{product.longTitle}</ProductTitle>
+                        <ProductTitle fontSize='18pt'>{product.longTitle}</ProductTitle>
                     </Section>
 
                     <Section style={{marginBottom: 'auto', marginTop: '40px'}}>
@@ -36,18 +36,19 @@ export default function Product( {product} ) {
 
                 </DescriptionContainer>
 
+
+                <Section style={{marginLeft: '50px', width: '200px'}}>
+                    <Section borderBottom style={{marginBottom: 'auto'}}>
+                        <ProductPrice fontSize='22pt'>{numberWithSpaces(product.price)} Ft</ProductPrice>
+                    </Section>
+
+                    <Section style={{gap: '10px'}}>
+                        <BasketButton w={200} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to basket</BasketButton>
+                        <WishlistButton w={200  } h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to wishlist</WishlistButton>
+                    </Section>
+                </Section>
             </ProductContainer>
 
-            <ActionsContainer>
-                <Section border style={{marginBottom: 'auto'}}>
-                    <ProductPrice fontSize='22pt'>{numberWithSpaces(product.price)} Ft</ProductPrice>
-                </Section>
-
-                <Section style={{gap: '10px'}}>
-                    <BasketButton w={300} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to basket</BasketButton>
-                    <WishlistButton w={300} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to wishlist</WishlistButton>
-                </Section>
-            </ActionsContainer>
         </Container>
     )
 }
