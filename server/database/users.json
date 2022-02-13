@@ -1,11 +1,20 @@
 [
   {
-    "name": "edem46",
-    "password": "zizzen"
+    "username": "edem46",
+    "password": "zizzen",
+    "avatar": "Kredam.jfif",
+    "isMember": true
   },
-
   {
-    "name": "wolf",
-    "password": "yolo"
+    "username": "wolf",
+    "password": "yolo",
+    "avatar": "Wolf.jfif",
+    "isMember": true
+  },
+  {
+    "username": "selim",
+    "password": "enhibam",
+    "avatar": "Selim.jfif",
+    "isMember": false
   }
 ]

@@ -1,18 +1,20 @@
-import { UserActionTypes } from "../constants/action-types";
+import {UserActionTypes} from "../constants/action-types";
 
 const initialUser = {
     username: undefined,
-    useravatar:undefined,
-    isLoggedIn: false
+    useravatar: undefined,
+    isLoggedIn: false,
+    isMember: false
 };
 
-export const userReducer = (state = initialUser, { type, payload }) => {
+export const userReducer = (state = initialUser, {type, payload}) => {
     switch (type) {
         case UserActionTypes.LOGIN:
             return {
                 isLoggedIn: true,
                 username: payload.username,
-                useravatar: payload.useravatar,
+                avatar: payload.avatar,
+                isMember: payload.isMember
             };
 
         case UserActionTypes.LOGOUT:
@@ -20,7 +22,11 @@ export const userReducer = (state = initialUser, { type, payload }) => {
                 username: undefined,
                 useravatar: undefined,
                 isLoggedIn: false,
+                isMember: false,
             };
+
+        case UserActionTypes.SET_MEMBER:
+            return {...state, isMember: payload}
 
         default:
             return state;

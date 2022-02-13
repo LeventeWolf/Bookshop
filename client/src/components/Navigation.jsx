@@ -34,7 +34,7 @@ function Navigation() {
                 {user.isLoggedIn ?
                     <>
                         <NavLink className="nav-profile" to="/Profile">
-                            <Avatar name={user.username} size={"xs"} marginRight={2} src={user.useravatar}/>
+                            <Avatar name={user.username} size={"xs"} marginRight={2} src={'./Avatars/' + user.avatar}/>
                             Profile
                         </NavLink>
                         <NavLink to={'#'} className="nav-profile" onClick={handleLogout}>

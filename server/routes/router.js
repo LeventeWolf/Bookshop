@@ -15,15 +15,15 @@ router.get("/api/all-books", async (req, res) => {
 router.post('/api/signin', async (req, res) => {
     const username = req.body.userdata.name;
     const password = req.body.userdata.password;
-    const isAuthenticated = fileHandler.authenticateUser(username, password)
+    const user = fileHandler.getUser(username, password)
 
-    if (isAuthenticated) {
-        console.log(`Successful login: ${username}`);
+    if (user) {
+        console.log(`[SIGN-IN] Welcome ${username}!`)
     } else {
-        console.log(`Wrong password for: ${username}`)
+        console.log(`[SIGN-IN] Wrong Username || Password!`)
     }
 
-    return res.status(200).send({isAuthenticated})
+    return res.status(200).send({user, isAuthenticated: user});
 });
 
 router.post('/api/registration', async (req, res) =>{

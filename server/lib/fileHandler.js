@@ -7,17 +7,17 @@ function getAllBooks(){
     return result;
 }
 
-function authenticateUser(username, password){
+function getUser(username, password){
     const rawdata = fs.readFileSync('./database/users.json')
     const users = JSON.parse(rawdata)
 
     for (const user of users) {
-        if(user.name === username && user.password === password){
-            return true
+        if(user.username === username && user.password === password){
+            return user
         }
     }
 
-    return false
+    return undefined
 }
 
-module.exports = {getAllBooks, authenticateUser}
+module.exports = {getAllBooks, getUser}

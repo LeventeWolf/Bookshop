@@ -36,6 +36,10 @@ export function Signin() {
         }))
     }
 
+    function handleLogin() {
+        authenticate();
+    }
+
     return (
         <Box margin={50}>
             <Text fontSize='2xl' mb={35} ml={2}>Sign in</Text>
@@ -78,7 +82,7 @@ export function Signin() {
                 />
             </InputGroup>
             <ButtonGroup variant="solid" spacing='6'>
-                <Button color='blue.300' mt={15} onClick={() => authenticate()}>
+                <Button color='blue.300' mt={15} onClick={handleLogin}>
                     Sign in
                     {isSuccess && status && status.isAuthenticated && user.isLoggedIn ? <Navigate to="/" /> : ''}
                 </Button>

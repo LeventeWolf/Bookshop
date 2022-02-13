@@ -19,6 +19,7 @@ export const UserActionTypes = {
   LOGIN: "LOGIN",
   LOGOUT: "LOGOUT",
   REGISTER: "REGISTER",
+  SET_MEMBER: "SET_MEMBER"
 }
 
 export const ProductActionTypes = {

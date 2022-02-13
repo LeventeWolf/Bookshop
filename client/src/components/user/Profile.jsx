@@ -1,17 +1,28 @@
 import React from 'react'
+
+import {Main, PageTitle} from "../../styles/Component.styles";
 import {useSelector} from "react-redux";
-import { Box, Input } from "@chakra-ui/react";
-// import { getUserData } from './UserApi'
-import apiClient from '../../http-common'
-import {PageTitle} from "../../styles/Component.styles";
+import {useNavigate} from "react-router-dom";
+
 function Profile(){
+    const user = useSelector(state => state.user);
+    const navigate = useNavigate();
+
+    if (!user.isLoggedIn) {
+        console.log('Should be navigating???');
+        navigate('/Join');
+    }
 
     return (
-        <Box className="main-wrap">
+        <Main>
             <PageTitle>Profile</PageTitle>
 
-        </Box>
-    )
+            <h2>Username: {user.username}</h2>
+            <h2>Avatar: {user.avatar}</h2>
+        </Main>
+
+
+    );
 
 }
 

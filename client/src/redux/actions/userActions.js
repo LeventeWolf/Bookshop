@@ -13,3 +13,10 @@ export const logout = () => {
         type: UserActionTypes.LOGOUT,
     }
 }
+
+export const setMember = (payload) => {
+    return {
+        type: UserActionTypes.LOGOUT,
+        payload: payload
+    }
+}
