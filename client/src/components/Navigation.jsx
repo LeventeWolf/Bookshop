@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Avatar, Link} from "@chakra-ui/react";
 import {logout} from "../redux/actions/userActions";
 import {useAlert} from "react-alert";
-
+import profilePlaceHolder from '../assets/profile-placeholder.png'
 
 function Navigation() {
     const user = useSelector(state => state.user);
@@ -46,7 +46,7 @@ function Navigation() {
                     </>
                     :
                     <NavLink className="nav-join" to="Join">
-                        <img className="nav-icon" src="http://cdn.onlinewebfonts.com/svg/img_24787.png" alt="I"/>
+                        <img className="nav-icon" src={profilePlaceHolder} alt="I"/>
                         Sign in/Join
                     </NavLink>
                 }
