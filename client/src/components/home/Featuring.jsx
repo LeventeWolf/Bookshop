@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/featuring.scss';
-import faker from "faker";
 import {v4} from "uuid";
-import {FeaturingProduct} from "./FeaturingProduct";
 import arrowImage from '../../assets/featuring-arrow.png';
 import Axios from "axios";
-
+import {useDispatch} from "react-redux";
+import {Link} from "react-router-dom";
+import {select} from "../../redux/actions/productActions";
+import {addProductToBasket} from "../../redux/actions/basketActions";
+import {numberWithSpaces, shuffleArray} from "../../lib/helper";
 
 
 export default function Featuring() {
@@ -69,11 +71,36 @@ export default function Featuring() {
     )
 };
 
-function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
+export function FeaturingProduct( {product} ) {
+    const dispatch = useDispatch();
+
+    return (
+        <div className="featuring-product">
+            <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                <img src={product.imageUrl} className="product-image" alt="img"/>
+            </Link>
+
+            <div className="featuring-product-description-wrap">
+                <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                    <h2 className="product-title">
+                        {product.title}
+                    </h2>
+                </Link>
+
+                <h2 className="product-author">
+                    {product.author}
+                </h2>
+
+                <h2 className="product-price">
+                    {numberWithSpaces(product.price)} Ft
+                </h2>
+
+                <button className="product-basket-btn"
+                        onClick={() => dispatch(addProductToBasket(product))}>
+                    +
+                </button>
+            </div>
+        </div>
+    );
+
 }

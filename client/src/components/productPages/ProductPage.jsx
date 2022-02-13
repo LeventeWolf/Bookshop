@@ -1,13 +1,21 @@
 import React, {useEffect, useState} from "react";
 
-import {useSelector} from "react-redux";
-import Product from "../home/Product";
-import {Main, PageTitle} from "../../styles/Component.styles";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    ActionsContainer, BasketButton,
+    Container,
+    DescriptionContainer,
+    Main,
+    PageTitle, ProductAuthor,
+    ProductContainer,
+    ProductImage, ProductPrice, ProductTitle, ProductType, Section, WishlistButton
+} from "../../styles/Component.styles";
 import Axios from "axios";
-import {shuffleArray} from "../../lib/helper";
-import {FeaturingProduct} from "../home/FeaturingProduct";
+import {numberWithSpaces, shuffleArray} from "../../lib/helper";
 import {v4} from "uuid";
 import '../../styles/relatedProducts.scss'
+import {addProductToBasket} from "../../redux/actions/basketActions";
+import {FeaturingProduct} from "../home/Featuring";
 
 
 export default function ProductPage() {
@@ -31,6 +39,46 @@ export default function ProductPage() {
         </Main>
     );
 };
+
+function Product( {product} ) {
+    const dispatch = useDispatch();
+
+    return (
+        <Container h={'500px'}>
+            <ProductContainer>
+                <ProductImage w={'280px'} src={product.imageUrl} alt="productImage"/>
+
+                <DescriptionContainer>
+                    <Section borderBottom>
+                        <ProductTitle fontSize='20pt'>{product.longTitle}</ProductTitle>
+                    </Section>
+
+                    <Section style={{marginBottom: 'auto', marginTop: '40px'}}>
+                        <ProductType>{product.type}</ProductType>
+                        <ProductAuthor>By (author): {product.author}</ProductAuthor>
+                    </Section>
+
+                    <Section style={{marginBottom: '20px'}}>
+                        <ProductAuthor>{product.description}</ProductAuthor>
+                    </Section>
+
+                </DescriptionContainer>
+
+            </ProductContainer>
+
+            <ActionsContainer>
+                <Section borderBottom style={{marginBottom: 'auto'}}>
+                    <ProductPrice fontSize='22pt'>{numberWithSpaces(product.price)} Ft</ProductPrice>
+                </Section>
+
+                <Section style={{gap: '10px'}}>
+                    <BasketButton w={300} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to basket</BasketButton>
+                    <WishlistButton w={300} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to wishlist</WishlistButton>
+                </Section>
+            </ActionsContainer>
+        </Container>
+    )
+}
 
 function RelatedProducts() {
     const [relatedProducts, setRelatedProducts] = useState([]);

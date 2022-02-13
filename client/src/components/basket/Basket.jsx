@@ -3,13 +3,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {v4} from "uuid";
 
 import '../../styles/basket.scss'
-import BasketProduct from "./BasketProduct";
-import {BasketButton, Container, Main, PageTitle} from "../../styles/Component.styles";
+import {BasketButton, Main, PageTitle} from "../../styles/Component.styles";
 import {numberWithSpaces} from "../../lib/helper";
 import styled from "styled-components";
 import {useAlert} from "react-alert";
-import {checkout} from "../../redux/actions/basketActions";
-import {useNavigate} from "react-router-dom";
+import {addProductToBasket, checkout, removeProductFromBasket} from "../../redux/actions/basketActions";
+import {Link, useNavigate} from "react-router-dom";
+import {select} from "../../redux/actions/productActions";
 
 const BasketDetails = styled.div`
   padding: 10px;
@@ -87,4 +87,38 @@ export default function Basket() {
         </Main>
 
     )
+}
+
+function BasketProduct({product}) {
+    const dispatch = useDispatch();
+
+    return (
+        <div className="basket-product-wrap">
+            <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                <img className='product-image' src={product.imageUrl} alt="alt"/>
+            </Link>
+
+            <div className='product-description-container'>
+                <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                    <h3 className="product-title">{product.title}</h3>
+                </Link>
+
+                <h4 className="product-author">{product.author}</h4>
+                <h4 className="product-price">{numberWithSpaces(product.price)} Ft</h4>
+            </div>
+
+            <div className="product-actions-container">
+                <div className="quantity-wrap">
+                    <span>Quantity: {product.quantity}</span>
+                    <button className="product-quantity" onClick={() => dispatch(addProductToBasket(product))}>
+                        +
+                    </button>
+                </div>
+                <h3 className="product-price">{numberWithSpaces(product.quantity * product.price)} Ft</h3>
+                <button className="product-remove" onClick={() => dispatch(removeProductFromBasket(product.title))}>
+                    Remove
+                </button>
+            </div>
+        </div>
+    );
 }
