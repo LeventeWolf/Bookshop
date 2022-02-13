@@ -9,21 +9,21 @@ import {
     Button
 } from '@chakra-ui/react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
-import {useDispatch} from "react-redux";
-import {login} from "../../redux/actions/userActions";
+import {faUser} from '@fortawesome/free-solid-svg-icons'
+import {useDispatch, useSelector} from "react-redux";
 import {signin} from '../../api/UserAPI';
+import { Progress } from '@chakra-ui/react'
 import {useQuery} from "react-query";
 import {Navigate} from "react-router-dom";
 
 export function Signin() {
+    const user = useSelector(state => state.user);
     const dispatch = useDispatch();
     const [userdata, setUserdata] = useState({name: '', password: ''})
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const {isLoading, refetch: authenticate, isError, isSuccess} = useQuery('signin', () => signin(userdata, dispatch), {enabled: false, refetchOnWindowFocus:false});
+    const {isLoading, data : status, refetch: authenticate, isError, isSuccess} = useQuery('signin', () => signin(userdata, dispatch), {enabled: false, refetchOnWindowFocus:false});
 
-
-    if(isLoading) return (<Text>Loading ...</Text>)
+    if(isLoading) return (<Text><Progress size='xs' isIndeterminate /></Text>)
     if(isError) return (<Text>Error occured</Text>)
 
     const showPassword = () => setPasswordVisible(!passwordVisible);
@@ -80,6 +80,7 @@ export function Signin() {
             <ButtonGroup variant="solid" spacing='6'>
                 <Button color='blue.300' mt={15} onClick={() => authenticate()}>
                     Sign in
+                    {isSuccess && status && status.isAuthenticated && user.isLoggedIn ? <Navigate to="/" /> : ''}
                 </Button>
             </ButtonGroup>
         </Box>
