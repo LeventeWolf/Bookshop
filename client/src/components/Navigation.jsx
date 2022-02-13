@@ -37,7 +37,7 @@ function Navigation() {
                             <Avatar name={user.username} size={"xs"} marginRight={2} src={user.useravatar}/>
                             Profile
                         </NavLink>
-                        <NavLink to={''} className="nav-profile" onClick={handleLogout}>
+                        <NavLink to={'#'} className="nav-profile" onClick={handleLogout}>
                             <img className="nav-icon" src="https://icons-for-free.com/iconfiles/png/512/logout-1324760598547500271.png"
                                  alt="<-" />
                              Logout
