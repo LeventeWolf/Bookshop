@@ -1,6 +1,6 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
-import './navigation.scss'
+import '../styles/navigation.scss'
 import {useSelector} from "react-redux";
 import {Avatar} from "@chakra-ui/react";
 

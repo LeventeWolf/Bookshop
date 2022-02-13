@@ -3,12 +3,19 @@ import styled from "styled-components";
 const boxShadow = `0 1px 3px rgb(0 0 0 / 20%);`
 const sectionBorder = `1px solid rgba(0, 0, 0, 0.1)`
 
+export const Main = styled.div`
+  max-width: 1440px;
+
+  margin: auto;
+  padding: 10px 20px;
+`;
+
 export const Container = styled.div`
   display: flex;
   gap: 15px;
+  margin-bottom: 10px;
 
   letter-spacing: 0;
-
   animation: appear .3s ease-out;
 
   @keyframes appear {
@@ -25,7 +32,7 @@ export const Section = styled.div`
   display: flex;
   flex-direction: column;
 
-  border-bottom: ${props => props.border ? sectionBorder : ''};
+  border-bottom: ${props => props.borderBottom ? sectionBorder : ''};
   width: 100%;
 `;
 
@@ -36,6 +43,21 @@ export const ProductContainer = styled.div`
   display: flex;
   box-shadow: ${boxShadow};
 `
+
+
+// Page templates
+
+export const PageTitle = styled.h1`
+  color: black;
+  font-weight: bold;
+  font-size: 2rem;
+  font-family: Roboto, sans-serif;
+
+  margin-bottom: 10px;
+
+  letter-spacing: -1.5px;
+`
+
 
 
 // Product Details
@@ -49,7 +71,8 @@ export const DescriptionContainer = styled.div`
 `;
 
 export const ProductImage = styled.img`
-  width: ${props => props.w + 'px'};
+  width: ${props => props.w};
+  height: ${props => props.h};
 `;
 
 export const ProductTitle = styled.h3`

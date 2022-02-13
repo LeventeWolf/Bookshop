@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import {Navigation, Header, HeaderSecondary, Footer, Home, Join, Basket, Wishlist, ProductPage, Profile, Logout} from "./components";
+import {Navigation, Header, HeaderSecondary, Footer, Home, Join, Basket, Wishlist, ProductPage, Profile} from "./components";
 import {ChakraProvider} from '@chakra-ui/react'
+
 import {Provider} from 'react-redux';
 import store from './redux/store'
 import {QueryClient, QueryClientProvider} from "react-query";
@@ -39,7 +40,6 @@ ReactDOM.render(
                     <Route path="/basket" element={<Basket/>}/>
                     <Route path="/product/:productName" element={<ProductPage/>}/>
                     <Route path="/Profile" element={<Profile/>}/>
-                    <Route path="/Logout" element={<><Logout/><Join/></>}/>
                 </Routes>
 
                 <Footer/>

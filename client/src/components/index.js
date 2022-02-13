@@ -7,5 +7,5 @@ export { default as Logout } from "./user/Logout";
 export { default as Profile } from "./user/Profile";
 export { default as Home } from "./home/Home";
 export { default as Basket } from "./basket/Basket";
-export { default as Wishlist } from "./wishlist/Wishlist";
-export { default as ProductPage } from "./productPage/ProductPage";
+export { default as ProductPage } from "./productPages/ProductPage";
+export { default as TemplatePage } from "./productPages/TemplatePage";
