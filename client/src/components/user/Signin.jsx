@@ -10,11 +10,11 @@ import {
 } from '@chakra-ui/react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {login} from "../../redux/actions/userActions";
 import {signin} from '../../api/UserAPI';
 import {useQuery} from "react-query";
-import {Navigate} from "react-router-dom";
+import {useNavigate}  from "react-router-dom";
 import {useAlert} from "react-alert";
 
 export function Signin() {
@@ -22,6 +22,8 @@ export function Signin() {
     const dispatch = useDispatch();
     const [userdata, setUserdata] = useState({name: '', password: ''})
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const isLoggedIn = useSelector(state => state.user.isLoggedIn)
+    const navigate = useNavigate();
     const {isLoading, refetch: authenticate} = useQuery('signin', () => signin(userdata), {enabled: false});
 
     const handleLogin = () => {
@@ -40,6 +42,8 @@ export function Signin() {
                     username: userdata.name,
                     useravatar: './Avatars/Wolf.jfif'
                 }))
+
+                navigate('/')
             } else {
                 alert.error(`Wrong username & password`);
             }
@@ -76,26 +80,23 @@ export function Signin() {
                 />
             </InputGroup>
             <InputGroup id="Password" mb={2}>
-                <InputLeftElement ml={3} mr={1}
-                                  children={<Button variant='subtle' size="xs" h="full" onClick={showPassword}>
-                                      {passwordVisible ? "Hide" : "Show"}
-                                  </Button>}/>
-                <Input
-                    bgColor='white'
-                    mx='3'
-                    variant="outline"
-                    type={passwordVisible ? "text" : "password"}
-                    placeholder='Password'
-                    w="100%"
-                    borderColor='grey.300'
-                    name='password'
-                    value={userdata.password}
-                    onChange={handleChange}
+                <InputLeftElement ml={3} mr={1} children={
+                    <Button variant='subtle' size="xs" h="full" onClick={showPassword} tabIndex={-1}>
+                        {passwordVisible ? "Hide" : "Show"}
+                    </Button>
+                }
+                />
+                <Input bgColor='white' w="100%" mx='3' variant="outline" borderColor='grey.300'
+                       type={passwordVisible ? "text" : "password"}
+                       placeholder='Password'
+                       name='password'
+                       value={userdata.password}
+                       onChange={handleChange}
                 />
             </InputGroup>
             <ButtonGroup variant="solid" spacing='6'>
                 <Button color='blue.300' mt={15} onClick={handleLogin}>
-                    {/*{isAuthenticated ? <Navigate to="/" /> : 'Sign in'}*/}
+                    Sign in
                 </Button>
             </ButtonGroup>
         </Box>

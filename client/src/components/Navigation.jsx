@@ -1,12 +1,21 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import '../styles/navigation.scss'
-import {useSelector} from "react-redux";
-import {Avatar} from "@chakra-ui/react";
+import {useDispatch, useSelector} from "react-redux";
+import {Avatar, Link} from "@chakra-ui/react";
+import {logout} from "../redux/actions/userActions";
+import {useAlert} from "react-alert";
 
 
 function Navigation() {
     const user = useSelector(state => state.user);
+    const dispatch = useDispatch();
+    const alert = useAlert();
+
+    function handleLogout() {
+        dispatch(logout());
+        alert.success('Logout successful!');
+    }
 
     return (
         <div className="nav-wrap">
@@ -28,8 +37,10 @@ function Navigation() {
                             <Avatar name={user.username} size={"xs"} marginRight={2} src={user.useravatar}/>
                             Profile
                         </NavLink>
-                        <NavLink className="nav-profile" to="/Logout">
-                            Logout
+                        <NavLink to={''} className="nav-profile" onClick={handleLogout}>
+                            <img className="nav-icon" src="https://icons-for-free.com/iconfiles/png/512/logout-1324760598547500271.png"
+                                 alt="<-" />
+                             Logout
                         </NavLink>
 
                     </>
