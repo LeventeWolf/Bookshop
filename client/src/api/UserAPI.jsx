@@ -10,8 +10,6 @@ import {Navigate} from 'react-router-dom'
  */
 
 export function signin(userdata, dispatch) {
-    console.log('signing in!')
-
     apiClient.post(
         "/signin",
         {userdata}

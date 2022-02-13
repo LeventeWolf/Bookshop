@@ -84,7 +84,7 @@ export function Signin() {
             <ButtonGroup variant="solid" spacing='6'>
                 <Button color='blue.300' mt={15} onClick={handleLogin}>
                     Sign in
-                    {isSuccess && status && status.isAuthenticated && user.isLoggedIn ? <Navigate to="/" /> : ''}
+                    {user.isLoggedIn ? <Navigate to="/" /> : ''}
                 </Button>
             </ButtonGroup>
         </Box>
