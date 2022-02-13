@@ -57,8 +57,12 @@ export function Signin() {
             </InputGroup>
             <InputGroup id="Password" mb={2}>
                 <InputLeftElement ml={3} mr={1}
-                                  children={<Button variant='subtle' size="xs" h="full" onClick={showPassword}>
-                                      {passwordVisible ? "Hide" : "Show"}
+                                  children={<Button variant='subtle' size="xs" h="full" onClick={showPassword} tabIndex={-1}>
+                                      {passwordVisible ?
+                                          <img className="pwd-eye" src="https://cdn-icons-png.flaticon.com/512/159/159078.png" alt={'Show'}/>
+                                          :
+                                          <img className="pwd-eye" src="https://www.pngkey.com/png/full/926-9265778_png-file-svg-eye-on-off-icon.png" alt={'Hide'}/>
+                                      }
                                   </Button>}/>
                 <Input
                     bgColor='white'
