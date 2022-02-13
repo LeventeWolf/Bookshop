@@ -5,6 +5,7 @@ import {
     Header,
     HeaderSecondary,
     Home,
+    Logout,
     Join,
     Navigation,
     ProductPage,
@@ -34,6 +35,7 @@ export default function App(){
                 <Route path="/Profile" element={<Profile/>}/>
                 <Route path="/Books" element={<TemplatePage name={'Books'}/>}/>
                 <Route path="/Films" element={<TemplatePage name={'Films'}/>}/>
+                <Route path="/Logout" element={<><Logout/><Join/></>}/>
                 <Route path="/Songs" element={<TemplatePage name={'Songs'}/>}/>
             </Routes>
 
