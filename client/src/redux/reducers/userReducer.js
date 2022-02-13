@@ -10,20 +10,10 @@ const initialUser = {
 export const userReducer = (state = initialUser, {type, payload}) => {
     switch (type) {
         case UserActionTypes.LOGIN:
-            return {
-                isLoggedIn: true,
-                username: payload.username,
-                avatar: payload.avatar,
-                isMember: payload.isMember
-            };
+            return {...payload, isLoggedIn: true};
 
         case UserActionTypes.LOGOUT:
-            return {
-                username: undefined,
-                useravatar: undefined,
-                isLoggedIn: false,
-                isMember: false,
-            };
+            return initialUser;
 
         case UserActionTypes.SET_MEMBER:
             return {...state, isMember: payload}

@@ -9,21 +9,25 @@ import {login} from "../redux/actions/userActions";
  */
 
 export async function signin(userdata, dispatch) {
+    let data = {
+        isAuthenticated: false
+    };
+
     await apiClient.post(
         "/signin",
         {userdata}
     ).then(response => {
         if (response.data.isAuthenticated) {
             dispatch(login(response.data.user))
-            return true;
+            data.isAuthenticated = true;
         } else {
             console.log(`[SIGN-IN] Wrong Username or password!`);
-            return false;
         }
     }).catch(response => {
         console.log(`[SIGN-IN] Error: ${response}`)
-        return false;
     })
+
+    return data;
 }
 
 export function register(emailRef, usernameRef, passwordRef, callback) {

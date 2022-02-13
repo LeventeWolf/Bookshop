@@ -15,10 +15,12 @@ import {signin} from '../../api/UserAPI';
 import { Progress } from '@chakra-ui/react'
 import {useQuery} from "react-query";
 import {Navigate} from "react-router-dom";
+import {useAlert} from "react-alert";
 
 export function Signin() {
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
+    const alert = useAlert()
     const [userdata, setUserdata] = useState({name: '', password: ''})
     const [passwordVisible, setPasswordVisible] = useState(false);
     const {isLoading, data, refetch: authenticate, isError, isSuccess} = useQuery('signin', () => signin(userdata, dispatch), {enabled: false, refetchOnWindowFocus:false});
@@ -36,19 +38,19 @@ export function Signin() {
         }))
     }
 
-    async function handleLogin() {
-        await authenticate();
+    if (isLoading) {
+        console.log('Error')
+    }
 
-        if (isLoading) {
-            console.log('Error')
-        }
+    if (isError) {
+        console.log('Error')
+    }
 
-        if (isError) {
-            console.log('Error')
-        }
-
-        if (isSuccess) {
-            console.log('Success!');
+    if (isSuccess) {
+        if (data.isAuthenticated) {
+            alert.success('Login successful');
+        } else {
+            alert.error('Wrong username or password!');
         }
     }
 
@@ -94,7 +96,7 @@ export function Signin() {
                 />
             </InputGroup>
             <ButtonGroup variant="solid" spacing='6'>
-                <Button color='blue.300' mt={15} onClick={handleLogin}>
+                <Button color='blue.300' mt={15} onClick={authenticate}>
                     Sign in
                     {user.isLoggedIn ? <Navigate to="/" /> : ''}
                 </Button>
