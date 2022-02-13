@@ -3,6 +3,13 @@ import styled from "styled-components";
 const boxShadow = `0 1px 3px rgb(0 0 0 / 20%);`
 const sectionBorder = `1px solid rgba(0, 0, 0, 0.1)`
 
+export const Main = styled.div`
+  max-width: 1440px;
+
+  margin: auto;
+  padding: 10px 20px;
+`;
+
 export const Container = styled.div`
   display: flex;
   gap: 15px;
@@ -36,6 +43,21 @@ export const ProductContainer = styled.div`
   display: flex;
   box-shadow: ${boxShadow};
 `
+
+
+// Page templates
+
+export const PageTitle = styled.h1`
+  color: black;
+  font-weight: bold;
+  font-size: 2rem;
+  font-family: Roboto, sans-serif;
+
+  margin-bottom: 10px;
+
+  letter-spacing: -1.5px;
+`
+
 
 
 // Product Details

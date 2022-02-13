@@ -7,7 +7,8 @@ function Profile(){
 
     return (
         <Box className="main-wrap">
-            Működök
+            <h1 className="page-title">Profile</h1>
+
         </Box>
     )
 
