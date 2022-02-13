@@ -31,13 +31,16 @@ export default function Basket() {
     const basket = useSelector(state => state.basket)
     const user = useSelector(state => state.user)
 
-
     let productsNum = 0;
     let sum = 0;
 
     basket.forEach(product => {
         productsNum += product.quantity;
-        sum += product.quantity * product.price;
+        if (user.isMember) {
+            sum += product.quantity * Math.round(product.price * 0.9);
+        } else {
+            sum += product.quantity * product.price;
+        }
     })
 
     useEffect(() => {
@@ -131,7 +134,7 @@ function BasketProduct({product}) {
                         +
                     </button>
                 </div>
-                <h3 className="product-price">{numberWithSpaces(product.quantity * product.price)} Ft</h3>
+                <h3 className="product-price">{numberWithSpaces(isMember ? product.quantity * Math.round(product.price * 0.9) : product.quantity * product.price)} Ft</h3>
                 <button className="product-remove" onClick={() => dispatch(removeProductFromBasket(product.title))}>
                     Remove
                 </button>

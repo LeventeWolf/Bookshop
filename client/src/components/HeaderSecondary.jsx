@@ -6,13 +6,18 @@ import {numberWithSpaces} from "../lib/helper";
 
 function HeaderSecondary() {
     const basket = useSelector(state => state.basket)
+    const user = useSelector(state => state.user);
 
     let basketNumberOfProducts = 0;
     let sum = 0;
 
     basket.forEach(product => {
         basketNumberOfProducts += product.quantity;
-        sum += product.quantity * product.price;
+        if (user.isMember) {
+            sum += product.quantity * Math.round(product.price * 0.9);
+        } else {
+            sum += product.quantity * product.price;
+        }
     })
 
     return (
