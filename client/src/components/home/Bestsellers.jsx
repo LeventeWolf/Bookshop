@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/bestsellers.scss';
 import {v4} from "uuid";
-import SupplyProduct from "./SupplyProduct";
 import Axios from "axios";
 import {shuffleArray} from "../../lib/helper";
+import {SupplyProduct} from "./Supply";
 
 export default function Bestsellers() {
     const [products, setProducts] = useState([]);

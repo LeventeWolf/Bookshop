@@ -1,20 +1,49 @@
-import React from "react";
-import {useDispatch} from "react-redux";
-import {addProductToBasket} from "../../redux/actions/basketActions";
-import {
-    ActionsContainer,
-    BasketButton,
-    DescriptionContainer,
-    ProductAuthor, ProductContainer,
-    ProductImage,
-    ProductPrice,
-    ProductTitle,
-    Container, WishlistButton, Section, ProductType
-} from "../../styles/Component.styles";
-import {select} from "../../redux/actions/productActions";
-import {Link} from "react-router-dom";
+import React, {useEffect, useState} from "react";
 
-export default function TemplateProduct( {product} ) {
+import {
+    BasketButton,
+    Container,
+    DescriptionContainer,
+    Main,
+    PageTitle, ProductAuthor,
+    ProductContainer,
+    ProductImage, ProductPrice, ProductTitle, ProductType, Section, WishlistButton
+} from "../styles/Component.styles";
+import Axios from "axios";
+import {uuid} from "uuidv4";
+import {numberWithSpaces} from "../lib/helper";
+import {useDispatch} from "react-redux";
+import {Link} from "react-router-dom";
+import {select} from "../redux/actions/productActions";
+import {addProductToBasket} from "../redux/actions/basketActions";
+
+
+export default function TemplatePage( {name} ) {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        Axios.get(`http://localhost:3001/api/all-books`)
+            .then(response => {
+                setProducts(response.data);
+            })
+            .catch(response => {
+                console.log(response)
+            })
+    }, [])
+
+
+    return (
+        <Main>
+            <div id="product-page">
+                <PageTitle>{name}</PageTitle>
+
+                {products.map(product => <TemplateProduct product={product} key={uuid()}/>)}
+            </div>
+        </Main>
+    );
+};
+
+function TemplateProduct( {product} ) {
     const dispatch = useDispatch();
 
     return (
@@ -55,8 +84,4 @@ export default function TemplateProduct( {product} ) {
 
         </Container>
     )
-}
-
-function numberWithSpaces(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
