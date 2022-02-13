@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import './home.scss';
+import '../../styles/home.scss';
 import Bestsellers from "./Bestsellers";
 import Featuring from "./Featuring";
 import Supply from "./Supply";

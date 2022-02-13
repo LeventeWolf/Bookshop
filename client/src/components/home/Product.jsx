@@ -10,7 +10,7 @@ import {
     ProductPrice,
     ProductTitle,
     Container, WishlistButton, Section, ProductType
-} from "../Component.styles";
+} from "../../styles/Component.styles";
 
 export default function Product( {product} ) {
     const dispatch = useDispatch();

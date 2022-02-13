@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import './bestsellers.scss';
+import '../../styles/bestsellers.scss';
 import {v4} from "uuid";
 import SupplyProduct from "./SupplyProduct";
 import Axios from "axios";

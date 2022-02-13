@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Main, PageTitle} from "../Component.styles";
+import {Main, PageTitle} from "../../styles/Component.styles";
 
 
 export default function Books() {

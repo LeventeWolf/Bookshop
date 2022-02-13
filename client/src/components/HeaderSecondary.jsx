@@ -1,5 +1,5 @@
 import React from "react";
-import './headerSecondary.scss';
+import '../styles/headerSecondary.scss';
 import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 

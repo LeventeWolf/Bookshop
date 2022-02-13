@@ -13,7 +13,7 @@ import {
 } from "./components";
 import React from "react";
 
-import "./index.scss";
+import "./styles/index.scss";
 
 document.body.style.backgroundColor = '#F0F0F0';
 
