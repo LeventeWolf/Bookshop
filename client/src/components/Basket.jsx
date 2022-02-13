@@ -10,6 +10,7 @@ import {useAlert} from "react-alert";
 import {addProductToBasket, checkout, removeProductFromBasket} from "../redux/actions/basketActions";
 import {Link, useNavigate} from "react-router-dom";
 import {select} from "../redux/actions/productActions";
+import {setBoughtAmount, updateMember} from "../redux/actions/userActions";
 
 const BasketDetails = styled.div`
   padding: 10px;
@@ -28,7 +29,9 @@ export default function Basket() {
     const alert = useAlert();
     const navigate = useNavigate();
     const basket = useSelector(state => state.basket)
-    const isLoggedIn = useSelector(state => state.user.isLoggedIn)
+    const user = useSelector(state => state.user)
+
+    const MEMBER_PRODUCT_AMOUNT = 1;
 
     let productsNum = 0;
     let sum = 0;
@@ -42,15 +45,19 @@ export default function Basket() {
         document.title = "Your basket"
     }, []);
 
-    function handleCheckout() {
-        if (!isLoggedIn) {
+    async function handleCheckout() {
+        if (!user.isLoggedIn) {
             navigate('/join')
             alert.error('You have to be an user to buy products!');
             return;
         }
 
         dispatch(checkout());
-        alert.success('Checkout successful!')
+        dispatch(setBoughtAmount(user.boughtAmount + productsNum))
+        dispatch(updateMember());
+
+
+        alert.success('Checkout successful!');
     }
 
     return (

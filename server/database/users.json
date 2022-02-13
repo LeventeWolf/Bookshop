@@ -3,18 +3,21 @@
     "username": "edem46",
     "password": "zizzen",
     "avatar": "Kredam.jfif",
-    "isMember": true
+    "isMember": true,
+    "boughtAmount": 0
   },
   {
     "username": "wolf",
     "password": "yolo",
     "avatar": "Wolf.jfif",
-    "isMember": true
+    "isMember": false,
+    "boughtAmount": 0
   },
   {
     "username": "selim",
     "password": "enhibam",
     "avatar": "Selim.jfif",
-    "isMember": false
+    "isMember": false,
+    "boughtAmount": 0
   }
 ]
