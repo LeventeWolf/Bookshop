@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import {
     Box,
     Input,
@@ -21,9 +21,10 @@ export function Signin() {
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
     const alert = useAlert()
+    const submitClicked = useRef();
     const [userdata, setUserdata] = useState({name: '', password: ''})
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const {isLoading, data, refetch: authenticate, isError, isSuccess} = useQuery('signin', () => signin(userdata, dispatch), {enabled: false, refetchOnWindowFocus:false});
+    const {isLoading, data : status, refetch: authenticate, isError, isSuccess} = useQuery('signin', () => signin(userdata, dispatch), {enabled: false, refetchOnWindowFocus:false});
 
     if(isLoading) return (<Text><Progress size='xs' isIndeterminate /></Text>)
     if(isError) return (<Text>Error occured</Text>)
@@ -45,9 +46,8 @@ export function Signin() {
     if (isError) {
         console.log('Error!');
     }
-
-    if (isSuccess) {
-        if (data.isAuthenticated) {
+    const handleLogin = () =>{
+        if (status && status.isAuthenticated) {
             alert.success('Login successful');
             console.log('LOGIN OK')
         } else {
@@ -55,6 +55,7 @@ export function Signin() {
             console.log('X USERNAME OR PASSORD X')
         }
     }
+
 
     return (
         <Box margin={50}>
@@ -98,7 +99,7 @@ export function Signin() {
                 />
             </InputGroup>
             <ButtonGroup variant="solid" spacing='6'>
-                <Button color='blue.300' mt={15} onClick={authenticate}>
+                <Button color='blue.300' mt={15} onClick={handleLogin}>
                     Sign in
                     {user.isLoggedIn ? <Navigate to="/" /> : ''}
                 </Button>
