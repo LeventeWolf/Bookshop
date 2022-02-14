@@ -11,7 +11,7 @@ export default function Bestsellers() {
     useEffect(() => {
         Axios.get('http://localhost:3001/api/all-books')
             .then(response => {
-                shuffleArray(response.data);
+                // shuffleArray(response.data);
                 setProducts(response.data.splice(0, 5));
             })
             .catch(response => {
