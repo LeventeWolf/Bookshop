@@ -16,20 +16,23 @@ export async function signin(userdata, dispatch) {
     if(response.data.isAuthenticated){
         dispatch(login(response.data.user))
     }
-        return response.data
+    return response.data
 }
 
-export function register(emailRef, usernameRef, passwordRef, callback) {
-    apiClient.post('/registration', {
+export async function register(emailRef, usernameRef, passwordRef, callback, dispatch) {
+    const response = await apiClient.post('/registration', {
         email: emailRef,
         username: usernameRef,
         password: passwordRef,
-    }).then(response => {
-        console.log('Successful registration!');
-    }).catch(response => {
-        callback({username: true, password: true, email: true})
-        console.log(`Error: ${response}`)
-    });
+    }).catch(
+        err => {
+            console.log(err.response.data)
+            callback(() => err.response.data)
+        }
+    )
+    if(response){
+        dispatch(login({username:usernameRef, avatar:'', isMember:true}))
+    }
 }
 
 export default {signin, register}

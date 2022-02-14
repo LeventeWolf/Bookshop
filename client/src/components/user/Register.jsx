@@ -1,16 +1,29 @@
 import React, {useState, useRef} from "react";
-import {FormControl, Box, Input, ButtonGroup, Text, InputGroup, InputLeftElement, Button } from '@chakra-ui/react'
+import {
+    FormControl,
+    Box,
+    Input,
+    ButtonGroup,
+    Text,
+    InputGroup,
+    InputLeftElement,
+    Button,
+    Progress
+} from '@chakra-ui/react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
 import {login} from "../../redux/actions/userActions";
 import {motion} from 'framer-motion';
 import {register} from '../../api/UserAPI'
 import {useQuery} from "react-query";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
+import {useAlert} from "react-alert";
 
 export function Register() {
     const dispatch = useDispatch()
+    const alert = useAlert()
+    const user = useSelector(state => state.user)
     const [errors, setErrors] = useState({username: false, password: false, email: false});
     const [passwordVisible, setPasswordVisible] = useState(false);
     const showPassword = () => setPasswordVisible(!passwordVisible);
@@ -20,8 +33,8 @@ export function Register() {
     const usernameRef = useRef('');
     const passwordRef = useRef('');
 
-    const { data, refetch } = useQuery('register', (() => register(emailRef.current.value, usernameRef.current.value, passwordRef.current.value, setErrors))
-        , {enabled: false});
+    const { data: userData, refetch: submitUser, error: registerError, isLoading } = useQuery('register', () => register(emailRef.current.value, usernameRef.current.value, passwordRef.current.value, setErrors, dispatch)
+        , {enabled: false, refetchOnWindowFocus:false, refetchOnMount:false, retry:false});
 
 
     const checkTextValidity = (text) => {
@@ -35,20 +48,26 @@ export function Register() {
         }
     }
 
-    function handleSubmit() {
+    const handleSubmit = () => {
         if(validtext){
-            refetch();
-            dispatch(login(usernameRef.current.value))
-            (<><Navigate to="/" /></>)
+            submitUser();
+            alertErrors()
+        }else{
+            alert.error("Not a valid password")
         }
     }
 
-    const MotionBox = motion(Box);
-    const mountAnimation = {
-        "hidden" : {opacity: 0, scale: 0.7, y:100},
-        "visible" : {opacity: 1, scale: 1, y:0, transition:{type:"spring"}}
+    const alertErrors = () => {
+        for (const error in errors) {
+            if(errors[error] === false){
+                alert.error(`${error} already in use`)
+            }
+        }
     }
+
     return (
+        <>
+        {isLoading ?  <Progress size='xs' isIndeterminate /> : ''}
         <Box margin={50}>
             <Text fontSize='2xl' mb={35} ml={2}>Register</Text>
             <FormControl>
@@ -82,7 +101,7 @@ export function Register() {
 
                 <InputGroup id="Email" mb={2}>
                     <InputLeftElement ml={3} mr={1} children={<FontAwesomeIcon icon={faAt}  color='gray'/>}/>
-                    <Input ref={emailRef} placeholder='Email' type='email' bgColor='white' mx='3' variant="outline" p w="100%"
+                    <Input ref={emailRef} placeholder='Email' type="email" bgColor='white' mx='3' variant="outline" p w="100%"
                            focusBorderColor={!errors.email ? 'grey' : 'red'}
                            borderColor={!errors.email ? 'grey' : 'red'}
                     />
@@ -91,10 +110,12 @@ export function Register() {
                 <ButtonGroup variant="solid" spacing='6'>
                     <Button color='blue.300' mt={15} onClick={handleSubmit}>
                         Register
+                        {user.isLoggedIn ? <><Navigate to="/"/></> : ''}
+
                     </Button>
                 </ButtonGroup>
-                <p>{data ? data.username : ''}</p>
             </FormControl>
         </Box>
+        </>
     )
 }
