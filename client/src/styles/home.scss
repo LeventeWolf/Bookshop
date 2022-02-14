@@ -47,7 +47,12 @@
 .product-title {
   font-size: 11pt;
   font-weight: bold;
-  height: 20px;
+  height: 35px;
+  overflow: hidden;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .product-price {

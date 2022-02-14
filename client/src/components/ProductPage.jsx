@@ -46,7 +46,7 @@ function Product( {product} ) {
 
     return (
         <Container h={'500px'}>
-            <ProductContainer>
+            <ProductContainer style={{height: 400}}>
                 <ProductImage w={'280px'} src={product.imageUrl} alt="productImage"/>
 
                 <DescriptionContainer>
@@ -67,7 +67,7 @@ function Product( {product} ) {
 
             </ProductContainer>
 
-            <ActionsContainer>
+            <ActionsContainer style={{width: 400, marginLeft: 'auto'}}>
                 <Section borderBottom style={{marginBottom: 'auto'}}>
                     <div className="price-container-row">
                         {isMember ?
