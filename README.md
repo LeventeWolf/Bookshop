@@ -4,7 +4,7 @@ Bookshop site in React (redux) + NodeJS + Express + Oracle
 
 ### Disclaimer!
 
-The design of the page was taken from the https://www.bookdepository.com/. We use this for educational purpose. We do **NOT** intend to produce any commercial content from this!
+The design of the page was taken from the https://www.bookdepository.com/. This project was created for only educational purposes. We do **NOT** intend to produce any commercial content from this!
 
 ### Insights
 
