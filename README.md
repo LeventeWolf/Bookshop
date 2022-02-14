@@ -6,11 +6,14 @@ Bookshop site in React (redux) + NodeJS + Express + Oracle
 
 The design of the page was taken from the https://www.bookdepository.com/. We use this for educational purpose. We do **NOT** intend to produce any commercial content from this!
 
-### Insight
+### Insights
 
 Home page
 
 <img src="./documentation/screenshots/Home.png">
+
+More: [documentation/screenshots](https://github.com/LeventeWolf/Bookshop/tree/master/documentation/screenshots)
+
 
 ## Setup & Run
 
