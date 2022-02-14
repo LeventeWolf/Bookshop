@@ -20,7 +20,7 @@ export default function Featuring() {
     useEffect(() => {
         Axios.get('http://localhost:3001/api/all-books')
             .then(response => {
-                shuffleArray(response.data);
+                // shuffleArray(response.data);
                 setProducts(response.data);
 
                 featuringContainer = document.getElementsByClassName('container-wrap')[0];
@@ -91,7 +91,6 @@ export function FeaturingProduct( {product} ) {
                 <h2 className="product-author">
                     {product.author}
                 </h2>
-
 
                 <div className="price-container">
                     {isMember ?

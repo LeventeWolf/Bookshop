@@ -14,7 +14,7 @@ export default function Supply() {
     useEffect(() => {
         Axios.get('http://localhost:3001/api/all-books')
             .then(response => {
-                shuffleArray(response.data);
+                // shuffleArray(response.data);
                 setProducts(response.data);
             })
             .catch(response => {
@@ -62,9 +62,6 @@ export function SupplyProduct( {product} ) {
                     {numberWithSpaces(isMember ? Math.round(product.price * 0.9) : product.price)} Ft
                 </h2>
             </div>
-
-
-
 
             <button className="product-basket-btn"
                     onClick={() => dispatch(addProductToBasket(product))}>

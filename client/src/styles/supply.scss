@@ -30,6 +30,8 @@
 
   .product-title {
     margin: 5px 0 17px 0;
+    height: 38px;
+    overflow: hidden;
   }
 
   .product-author {
@@ -42,5 +44,8 @@
 }
 
 .supply-product-image {
-  max-width: 100px;
+  max-width: 120px;
+  max-height: 150px;
+  height: 150px;
+  object-fit: fill;
 }

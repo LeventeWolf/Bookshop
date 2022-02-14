@@ -24,6 +24,11 @@
   grid-template-areas: "image description";
 
   grid-template-columns: 100px 100px;
+
+  .product-image {
+    height: 100%;
+    max-height: 140px;
+  }
 }
 
 .featuring-product-description-wrap {
@@ -31,7 +36,7 @@
 
   margin-left: 5px;
   height: 100%;
-  max-height: 130px;
+  max-height: 140px;
 
   display: flex;
   justify-content: space-between;
@@ -44,6 +49,7 @@
 
   .product-title {
     font-size: 10pt;
+    height: max-content;
   }
 
   .product-author {
@@ -52,10 +58,6 @@
 
   .product-price {
     margin-bottom: 2px;
-  }
-
-  .product-image {
-
   }
 }
 
