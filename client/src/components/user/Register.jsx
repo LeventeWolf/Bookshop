@@ -59,7 +59,7 @@ export function Register() {
 
     const alertErrors = () => {
         for (const error in errors) {
-            if(errors[error] === false){
+            if(errors[error] === true){
                 alert.error(`${error} already in use`)
             }
         }
