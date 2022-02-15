@@ -4,6 +4,9 @@ export const basketReducer = (basket = [], {type, payload}) => {
     let basketCopy = [...basket];
 
     switch (type) {
+        case BasketActionTypes.INIT_PRODUCTS:
+            return payload;
+
         case BasketActionTypes.ADD_PRODUCT:
             const product = payload;
 
@@ -19,10 +22,8 @@ export const basketReducer = (basket = [], {type, payload}) => {
             return [...basketCopy, product];
 
         case BasketActionTypes.REMOVE_PRODUCT:
-            const productTitle = payload;
-
             for (const basketProduct of basket) {
-                if (basketProduct.title === productTitle) {
+                if (basketProduct.title === payload.title) {
                     basketProduct.quantity--;
 
                     break;

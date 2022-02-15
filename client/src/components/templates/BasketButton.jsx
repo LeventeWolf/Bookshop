@@ -27,36 +27,8 @@ export default function BasketButton ( {children, product, style} ) {
 
     function handleAddProductToBasket() {
         dispatch(addProductToBasket(product));
-        console.log('Adding product to basket!');
-        cacheProducts();
     }
 
-    /**
-     * Store basket products in localStorage
-     */
-    function cacheProducts() {
-        // If cached basket is empty create new with the product
-        if (localStorage.basket === undefined) {
-            localStorage.setItem('basket', JSON.stringify([product]))
-            return;
-        }
-
-        // Append product to cached products
-        const cachedProducts = JSON.parse(localStorage.basket);
-
-        // If product already there, increase quantity
-        for (const cachedProduct of cachedProducts) {
-            if (cachedProduct.title === product.title) {
-                cachedProduct.quantity++;
-                localStorage.basket = JSON.stringify(cachedProducts);
-                return;
-            }
-        }
-
-        // Store product
-        cachedProducts.push(product);
-        localStorage.basket = JSON.stringify(cachedProducts);
-    }
 
     return (
         <Button style={style} onClick={handleAddProductToBasket}>

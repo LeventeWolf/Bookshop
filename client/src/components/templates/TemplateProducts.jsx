@@ -148,7 +148,7 @@ export function ProductB ( {product} ) {
                     </button>
                 </div>
                 <h3 className="product-price">{numberWithSpaces(isMember ? product.quantity * Math.round(product.price * 0.9) : product.quantity * product.price)} Ft</h3>
-                <button className="product-remove" onClick={() => dispatch(removeProductFromBasket(product.title))}>
+                <button className="product-remove" onClick={() => dispatch(removeProductFromBasket(product))}>
                     Remove
                 </button>
             </div>

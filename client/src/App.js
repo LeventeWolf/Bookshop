@@ -17,7 +17,7 @@ import React, {useEffect} from "react";
 import "./styles/index.scss";
 import {login} from "./redux/actions/userActions";
 import {useDispatch} from "react-redux";
-import {addProductToBasket} from "./redux/actions/basketActions";
+import {addProductToBasket, initBasketProducts} from "./redux/actions/basketActions";
 
 document.body.style.backgroundColor = '#F0F0F0';
 
@@ -36,7 +36,7 @@ export default function App(){
         if (localStorage.basket === undefined) return;
 
         const basketProducts = JSON.parse(localStorage.basket);
-        basketProducts.forEach(product => dispatch(addProductToBasket(product)))
+        dispatch(initBasketProducts(basketProducts));
     }
 
     useEffect(() => {

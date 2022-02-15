@@ -13,6 +13,8 @@ export const BasketActionTypes = {
   ADD_PRODUCT: "ADD_PRODUCT",
   REMOVE_PRODUCT: "REMOVE_PRODUCT",
   CHECKOUT: 'CHECKOUT',
+  INIT_PRODUCTS: 'INIT_PRODUCTS'
+
 }
 
 export const UserActionTypes = {
