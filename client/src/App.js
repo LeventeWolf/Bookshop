@@ -34,7 +34,7 @@ export default function App(){
 
     function loadCachedBasket() {
         if (localStorage.basket === undefined) return;
-        
+
         const basketProducts = JSON.parse(localStorage.basket);
         basketProducts.forEach(product => dispatch(addProductToBasket(product)))
     }
