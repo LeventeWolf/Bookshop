@@ -64,9 +64,9 @@ export default function Basket() {
     }
 
     function clearBasketCache() {
-        if (localStorage.basket !== undefined) {
-            localStorage.removeItem('basket');
-        }
+        if (localStorage.basket === undefined) return;
+
+        localStorage.removeItem('basket');
     }
 
     return (

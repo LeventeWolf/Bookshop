@@ -26,18 +26,17 @@ export default function App(){
     const dispatch = useDispatch();
 
     function loadCachedUser() {
-        if (localStorage.login !== undefined) {
-            const user = JSON.parse(localStorage.login);
-            dispatch(login(user))
-        }
+        if (localStorage.login === undefined) return;
+
+        const user = JSON.parse(localStorage.login);
+        dispatch(login(user))
     }
 
     function loadCachedBasket() {
-        if (localStorage.basket !== undefined) {
-            const basketProducts = JSON.parse(localStorage.basket);
-
-            basketProducts.forEach(product => dispatch(addProductToBasket(product)))
-        }
+        if (localStorage.basket === undefined) return;
+        
+        const basketProducts = JSON.parse(localStorage.basket);
+        basketProducts.forEach(product => dispatch(addProductToBasket(product)))
     }
 
     useEffect(() => {
