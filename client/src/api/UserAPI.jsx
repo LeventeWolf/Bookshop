@@ -14,6 +14,8 @@ export async function signin(userdata, dispatch) {
         {userdata}
     )
     if(response.data.isAuthenticated){
+        response.data.user.password = '*******';
+        localStorage.setItem('login', JSON.stringify(response.data.user));
         dispatch(login(response.data.user))
     }
     return response.data

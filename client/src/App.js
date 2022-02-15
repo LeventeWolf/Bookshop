@@ -12,14 +12,31 @@ import {
     Profile,
     TemplatePage
 } from "./components";
-import React from "react";
+import React, {useEffect} from "react";
 
 import "./styles/index.scss";
+import {login} from "./redux/actions/userActions";
+import {useDispatch} from "react-redux";
 
 document.body.style.backgroundColor = '#F0F0F0';
 
 
 export default function App(){
+    const dispatch = useDispatch();
+
+    function loadCachedUser() {
+        if (localStorage.key('login')) {
+            console.log('logged in!');
+            const user = JSON.parse(localStorage.login);
+            dispatch(login(user))
+        }
+    }
+
+    useEffect(() => {
+        loadCachedUser();
+    }, [])
+
+
     return (
         <Router>
             <Navigation/>

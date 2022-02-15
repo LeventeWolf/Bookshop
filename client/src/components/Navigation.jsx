@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useEffect, useLayoutEffect} from "react";
 import {NavLink} from "react-router-dom";
 import '../styles/navigation.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {Avatar, Link} from "@chakra-ui/react";
-import {logout} from "../redux/actions/userActions";
+import {login, logout} from "../redux/actions/userActions";
 import {useAlert} from "react-alert";
 import profilePlaceHolder from '../assets/profile-placeholder.png'
 
@@ -15,7 +15,9 @@ function Navigation() {
     function handleLogout() {
         dispatch(logout());
         alert.success('Logout successful!');
+        localStorage.removeItem('login');
     }
+
 
     return (
         <div className="nav-wrap">
