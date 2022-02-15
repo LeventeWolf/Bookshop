@@ -8,4 +8,4 @@ export { default as Profile } from "./user/Profile";
 export { default as Home } from "./home/Home";
 export { default as Basket } from "./Basket";
 export { default as ProductPage } from "./ProductPage";
-export { default as TemplatePage } from "./TemplatePage";
+export { default as TemplatePage } from "./templates/TemplatePage";

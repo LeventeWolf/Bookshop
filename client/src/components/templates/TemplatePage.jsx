@@ -1,21 +1,21 @@
 import React, {useEffect, useState} from "react";
 
 import {
-    BasketButton,
     Container,
     DescriptionContainer,
     Main,
     PageTitle, ProductAuthor,
     ProductContainer,
     ProductImage, ProductPrice, ProductTitle, ProductType, Section, WishlistButton
-} from "../styles/Component.styles";
+} from "../../styles/Component.styles";
 import Axios from "axios";
 import {uuid} from "uuidv4";
-import {numberWithSpaces} from "../lib/helper";
+import {numberWithSpaces} from "../../lib/helper";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {select} from "../redux/actions/productActions";
-import {addProductToBasket} from "../redux/actions/basketActions";
+import {select} from "../../redux/actions/productActions";
+import {addProductToBasket} from "../../redux/actions/basketActions";
+import BasketButton from "./BasketButton";
 
 
 export default function TemplatePage( {name} ) {
@@ -86,8 +86,11 @@ function TemplateProduct( {product} ) {
                     </Section>
 
                     <Section style={{gap: '10px'}}>
-                        <BasketButton w={200} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to basket</BasketButton>
-                        <WishlistButton w={200  } h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to wishlist</WishlistButton>
+                        <BasketButton style={{height: 40}} product={product}>
+                            Add to Basket
+                        </BasketButton>
+
+                        <WishlistButton w={200} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to wishlist</WishlistButton>
                     </Section>
                 </Section>
             </ProductContainer>

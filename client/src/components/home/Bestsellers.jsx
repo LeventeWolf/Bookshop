@@ -2,8 +2,7 @@ import React, {useEffect, useState} from "react";
 import '../../styles/bestsellers.scss';
 import {v4} from "uuid";
 import Axios from "axios";
-import {shuffleArray} from "../../lib/helper";
-import {SupplyProduct} from "./Supply";
+import {ProductM} from "../templates/TemplateProduct";
 
 export default function Bestsellers() {
     const [products, setProducts] = useState([]);
@@ -25,7 +24,7 @@ export default function Bestsellers() {
 
             <div className="bestsellers-product-container">
                 <div className="bestsellers-product-wrap">
-                    {products.map(product => <SupplyProduct product={product} key={v4()}/>)}
+                    {products.map(product => <ProductM product={product} key={v4()}/>)}
                 </div>
             </div>
 
