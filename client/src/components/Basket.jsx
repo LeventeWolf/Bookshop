@@ -3,13 +3,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {v4} from "uuid";
 
 import '../styles/basket.scss'
-import {BasketButton, Main, PageTitle} from "../styles/Component.styles";
+import {ButtonStyle, Main, PageTitle} from "../styles/Component.styles";
 import {numberWithSpaces} from "../lib/helper";
 import styled from "styled-components";
 import {useAlert} from "react-alert";
-import {addProductToBasket, checkout, removeProductFromBasket} from "../redux/actions/basketActions";
-import {Link, useNavigate} from "react-router-dom";
-import {select} from "../redux/actions/productActions";
+import {checkout} from "../redux/actions/basketActions";
+import {useNavigate} from "react-router-dom";
 import {setBoughtAmount, updateMember} from "../redux/actions/userActions";
 import {ProductB} from "./templates/TemplateProducts";
 
@@ -78,9 +77,9 @@ export default function Basket() {
                             </span>
                         </BasketDetails>
 
-                        <BasketButton w={200} h={40} onClick={handleCheckout}>
+                        <ButtonStyle style={{width: 200, height: 40}} onClick={handleCheckout}>
                             Checkout
-                        </BasketButton>
+                        </ButtonStyle>
                     </BasketDetailsContainer>
                     :
                     <div className="basket-empty">Your basket is empty!</div>

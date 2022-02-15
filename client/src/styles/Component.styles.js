@@ -99,7 +99,7 @@ export const ProductPrice = styled.span`
 
 // Actions
 
-export const BasketButton = styled.button`
+export const ButtonStyle = styled.button`
   border-radius: 5px;
 
   background-color: #0cceeb;
