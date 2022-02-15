@@ -59,10 +59,9 @@ export function ProductSM ( {product} ) {
                     </h2>
                 </div>
 
-                <button className="product-basket-btn"
-                        onClick={() => dispatch(addProductToBasket(product))}>
+                <BasketButton style={{backgroundColor: '#10bbd5'}} product={product}>
                     +
-                </button>
+                </BasketButton>
             </div>
         </div>
     );
@@ -108,6 +107,7 @@ export function ProductM ( {product} ) {
         </div>
     );
 }
+
 
 /**
  * B  : Basket - used for Basket

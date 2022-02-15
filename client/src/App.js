@@ -17,6 +17,7 @@ import React, {useEffect} from "react";
 import "./styles/index.scss";
 import {login} from "./redux/actions/userActions";
 import {useDispatch} from "react-redux";
+import {addProductToBasket} from "./redux/actions/basketActions";
 
 document.body.style.backgroundColor = '#F0F0F0';
 
@@ -25,15 +26,23 @@ export default function App(){
     const dispatch = useDispatch();
 
     function loadCachedUser() {
-        if (localStorage.key('login')) {
-            console.log('logged in!');
+        if (localStorage.login !== undefined) {
             const user = JSON.parse(localStorage.login);
             dispatch(login(user))
         }
     }
 
+    function loadCachedBasket() {
+        if (localStorage.basket !== undefined) {
+            const basketProducts = JSON.parse(localStorage.basket);
+
+            basketProducts.forEach(product => dispatch(addProductToBasket(product)))
+        }
+    }
+
     useEffect(() => {
         loadCachedUser();
+        loadCachedBasket();
     }, [])
 
 

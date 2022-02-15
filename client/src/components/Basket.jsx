@@ -47,6 +47,7 @@ export default function Basket() {
         document.title = "Your basket"
     }, []);
 
+
     async function handleCheckout() {
         if (!user.isLoggedIn) {
             navigate('/join')
@@ -58,8 +59,14 @@ export default function Basket() {
         dispatch(setBoughtAmount(user.boughtAmount + productsNum))
         dispatch(updateMember());
 
-
+        clearBasketCache();
         alert.success('Checkout successful!');
+    }
+
+    function clearBasketCache() {
+        if (localStorage.basket !== undefined) {
+            localStorage.removeItem('basket');
+        }
     }
 
     return (
