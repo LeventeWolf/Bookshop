@@ -20,6 +20,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 import {useAlert} from "react-alert";
 
+
 export function Register() {
     const dispatch = useDispatch()
     const alert = useAlert()
@@ -109,13 +110,21 @@ export function Register() {
 
                 <ButtonGroup variant="solid" spacing='6'>
                     <Button color='blue.300' mt={15} onClick={handleSubmit}>
-                        Register
-                        {user.isLoggedIn ? <><Navigate to="/"/></> : ''}
-
+                        Register{user.isLoggedIn ? <SuccessfulLogin /> : ''}
                     </Button>
                 </ButtonGroup>
             </FormControl>
         </Box>
         </>
+    )
+}
+
+
+function SuccessfulLogin() {
+    const alert = useAlert()
+    alert.success('OK!');
+
+    return (
+        <Navigate to={'/'} />
     )
 }
