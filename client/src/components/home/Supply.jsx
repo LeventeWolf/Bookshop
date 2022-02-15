@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import '../../styles/supply.scss';
 import {v4} from "uuid";
 import Axios from "axios";
-import {ProductM} from "../templates/TemplateProduct";
+import {ProductM} from "../templates/TemplateProducts";
 
 export default function Supply() {
     const [products, setProducts] = useState([]);

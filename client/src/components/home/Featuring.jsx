@@ -3,11 +3,7 @@ import '../../styles/featuring.scss';
 import {v4} from "uuid";
 import arrowImage from '../../assets/featuring-arrow.png';
 import Axios from "axios";
-import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
-import {select} from "../../redux/actions/productActions";
-import {addProductToBasket} from "../../redux/actions/basketActions";
-import {numberWithSpaces, shuffleArray} from "../../lib/helper";
+import {ProductSM} from "../templates/TemplateProducts";
 
 
 export default function Featuring() {
@@ -60,7 +56,7 @@ export default function Featuring() {
                 </div>
 
                 <div className="container-wrap">
-                    {products.map(product => <FeaturingProduct product={product} key={v4()}/>)}
+                    {products.map(product => <ProductSM product={product} key={v4()}/>)}
                 </div>
 
                 <div onClick={() => scrollRight(scrollAmount, 'smooth')} className="slider-next-wrap">
@@ -70,45 +66,3 @@ export default function Featuring() {
         </div>
     )
 };
-
-export function FeaturingProduct( {product} ) {
-    const dispatch = useDispatch();
-    const isMember = useSelector(state => state.user.isMember);
-
-    return (
-        <div className="featuring-product">
-            <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
-                <img src={product.imageUrl} className="product-image" alt="img"/>
-            </Link>
-
-            <div className="featuring-product-description-wrap">
-                <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
-                    <h2 className="product-title">
-                        {product.title}
-                    </h2>
-                </Link>
-
-                <h2 className="product-author">
-                    {product.author}
-                </h2>
-
-                <div className="price-container">
-                    {isMember ?
-                        <h3 className="original-price">{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
-                        : null
-                    }
-
-                    <h2 className="product-price">
-                        {numberWithSpaces(isMember ? Math.round(product.price * 0.9) : product.price)} Ft
-                    </h2>
-                </div>
-
-                <button className="product-basket-btn"
-                        onClick={() => dispatch(addProductToBasket(product))}>
-                    +
-                </button>
-            </div>
-        </div>
-    );
-
-}

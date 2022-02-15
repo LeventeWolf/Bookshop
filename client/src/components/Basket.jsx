@@ -11,6 +11,7 @@ import {addProductToBasket, checkout, removeProductFromBasket} from "../redux/ac
 import {Link, useNavigate} from "react-router-dom";
 import {select} from "../redux/actions/productActions";
 import {setBoughtAmount, updateMember} from "../redux/actions/userActions";
+import {ProductB} from "./templates/TemplateProducts";
 
 const BasketDetails = styled.div`
   padding: 10px;
@@ -87,7 +88,7 @@ export default function Basket() {
 
                 <div className="basket-page-container">
                     {basket.length !== 0 ?
-                        basket.map(product => <BasketProduct product={product} key={v4()}/>)
+                        basket.map(product => <ProductB product={product} key={v4()}/>)
                         :
                         null
                     }
@@ -96,49 +97,4 @@ export default function Basket() {
         </Main>
 
     )
-}
-
-function BasketProduct({product}) {
-    const dispatch = useDispatch();
-    const isMember = useSelector(state => state.user.isMember);
-
-
-    return (
-        <div className="basket-product-wrap">
-            <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
-                <img className='product-image' src={product.imageUrl} alt="alt"/>
-            </Link>
-
-            <div className='product-description-container'>
-                <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
-                    <h3 className="product-title">{product.title}</h3>
-                </Link>
-
-                <h4 className="product-author">{product.author}</h4>
-                <div className="price-container">
-                    {isMember ?
-                        <h3 className="original-price">{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
-                        : null
-                    }
-
-                    <h2 className="product-price">
-                        {numberWithSpaces(isMember ? Math.round(product.price * 0.9) : product.price)} Ft
-                    </h2>
-                </div>
-            </div>
-
-            <div className="product-actions-container">
-                <div className="quantity-wrap">
-                    <span>Quantity: {product.quantity}</span>
-                    <button className="product-quantity" onClick={() => dispatch(addProductToBasket(product))}>
-                        +
-                    </button>
-                </div>
-                <h3 className="product-price">{numberWithSpaces(isMember ? product.quantity * Math.round(product.price * 0.9) : product.quantity * product.price)} Ft</h3>
-                <button className="product-remove" onClick={() => dispatch(removeProductFromBasket(product.title))}>
-                    Remove
-                </button>
-            </div>
-        </div>
-    );
 }

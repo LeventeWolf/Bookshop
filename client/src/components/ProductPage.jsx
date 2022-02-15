@@ -8,14 +8,14 @@ import {
     Main,
     PageTitle, ProductAuthor,
     ProductContainer,
-    ProductImage, ProductPrice, ProductTitle, ProductType, Section, WishlistButton
+    ProductImage, ProductTitle, ProductType, Section, WishlistButton
 } from "../styles/Component.styles";
 import Axios from "axios";
 import {numberWithSpaces, shuffleArray} from "../lib/helper";
 import {v4} from "uuid";
 import '../styles/relatedProducts.scss'
 import {addProductToBasket} from "../redux/actions/basketActions";
-import {FeaturingProduct} from "./home/Featuring";
+import {ProductL, ProductSM} from "./templates/TemplateProducts";
 
 
 export default function ProductPage() {
@@ -28,7 +28,7 @@ export default function ProductPage() {
 
                 {Object.keys(product).length !== 0 ?
                     <>
-                        <Product product={product}/>
+                        <ProductL product={product}/>
 
                         <RelatedProducts />
                     </>
@@ -40,55 +40,6 @@ export default function ProductPage() {
     );
 };
 
-function Product( {product} ) {
-    const dispatch = useDispatch();
-    const isMember = useSelector(state => state.user.isMember);
-
-    return (
-        <Container h={'500px'}>
-            <ProductContainer style={{height: 400}}>
-                <ProductImage w={'280px'} src={product.imageUrl} alt="productImage"/>
-
-                <DescriptionContainer>
-                    <Section borderBottom>
-                        <ProductTitle fontSize='20pt'>{product.longTitle}</ProductTitle>
-                    </Section>
-
-                    <Section style={{marginBottom: 'auto', marginTop: '40px'}}>
-                        <ProductType>{product.type}</ProductType>
-                        <ProductAuthor>By (author): {product.author}</ProductAuthor>
-                    </Section>
-
-                    <Section style={{marginBottom: '20px'}}>
-                        <ProductAuthor>{product.description}</ProductAuthor>
-                    </Section>
-
-                </DescriptionContainer>
-
-            </ProductContainer>
-
-            <ActionsContainer style={{width: 400, marginLeft: 'auto'}}>
-                <Section borderBottom style={{marginBottom: 'auto'}}>
-                    <div className="price-container-row">
-                        {isMember ?
-                            <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
-                            : null
-                        }
-
-                        <h2 className="product-price" style={{fontSize: 25}}>
-                            {numberWithSpaces(isMember ? Math.round(product.price * 0.9) : product.price)} Ft
-                        </h2>
-                    </div>
-                </Section>
-
-                <Section style={{gap: '10px'}}>
-                    <BasketButton w={300} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to basket</BasketButton>
-                    <WishlistButton w={300} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to wishlist</WishlistButton>
-                </Section>
-            </ActionsContainer>
-        </Container>
-    )
-}
 
 function RelatedProducts() {
     const [relatedProducts, setRelatedProducts] = useState([]);
@@ -112,7 +63,7 @@ function RelatedProducts() {
 
             <div className="related-wrap">
                 <div className="related-products-container">
-                    {relatedProducts.map(product => <FeaturingProduct product={product} key={v4()}/>)}
+                    {relatedProducts.map(product => <ProductSM product={product} key={v4()}/>)}
                 </div>
             </div>
         </div>
