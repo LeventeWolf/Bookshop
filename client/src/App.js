@@ -23,26 +23,6 @@ document.body.style.backgroundColor = '#F0F0F0';
 
 
 export default function App(){
-    const dispatch = useDispatch();
-
-    function loadCachedUser() {
-        if (localStorage.login === undefined) return;
-
-        const user = JSON.parse(localStorage.login);
-        dispatch(login(user))
-    }
-
-    function loadCachedBasket() {
-        if (localStorage.basket === undefined) return;
-
-        const basketProducts = JSON.parse(localStorage.basket);
-        dispatch(initBasketProducts(basketProducts));
-    }
-
-    useEffect(() => {
-        loadCachedUser();
-        loadCachedBasket();
-    }, [])
 
 
     return (
