@@ -122,7 +122,7 @@ export function Register() {
 
 function SuccessfulLogin() {
     const alert = useAlert()
-    alert.success('OK!');
+    alert.success('Login successful!');
 
     return (
         <Navigate to={'/'} />

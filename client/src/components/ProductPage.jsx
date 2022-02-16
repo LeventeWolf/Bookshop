@@ -1,20 +1,11 @@
 import React, {useEffect, useState} from "react";
 
-import {useDispatch, useSelector} from "react-redux";
-import {
-    ActionsContainer, BasketButton,
-    Container,
-    DescriptionContainer,
-    Main,
-    PageTitle, ProductAuthor,
-    ProductContainer,
-    ProductImage, ProductTitle, ProductType, Section, WishlistButton
-} from "../styles/Component.styles";
+import {useSelector} from "react-redux";
+import {Main, PageTitle,} from "../styles/Component.styles";
 import Axios from "axios";
-import {numberWithSpaces, shuffleArray} from "../lib/helper";
+import {shuffleArray} from "../lib/helper";
 import {v4} from "uuid";
 import '../styles/relatedProducts.scss'
-import {addProductToBasket} from "../redux/actions/basketActions";
 import {ProductL, ProductSM} from "./templates/TemplateProducts";
 
 
@@ -54,8 +45,6 @@ function RelatedProducts() {
                 console.log(response)
             });
     }, [])
-
-    console.log(relatedProducts)
 
     return (
         <div style={{marginTop: 30}}>

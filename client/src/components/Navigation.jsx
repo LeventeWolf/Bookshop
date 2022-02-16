@@ -14,8 +14,8 @@ function Navigation() {
 
     function handleLogout() {
         dispatch(logout());
-        alert.success('Logout successful!');
         localStorage.removeItem('login');
+        alert.success('Logout successful!');
     }
 
 
