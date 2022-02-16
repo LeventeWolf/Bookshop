@@ -1,20 +1,8 @@
-export const ActionTypes = {
-  SET_PRODUCTS: "SET_PRODUCTS",
-  SELECTED_PRODUCT: "SELECTED_PRODUCT",
-  REMOVE_SELECTED_PRODUCT: "REMOVE_SELECTED_PRODUCT",
-};
-
-export const CounterActionTypes = {
-  INCREMENT: "INCREMENT",
-  DECREMENT: "DECREMENT",
-};
-
 export const BasketActionTypes = {
   ADD_PRODUCT: "ADD_PRODUCT",
   REMOVE_PRODUCT: "REMOVE_PRODUCT",
   CHECKOUT: 'CHECKOUT',
   INIT_PRODUCTS: 'INIT_PRODUCTS'
-
 }
 
 export const UserActionTypes = {
