@@ -59,15 +59,9 @@ export default function Basket() {
         dispatch(setBoughtAmount(user.boughtAmount + productsNum))
         dispatch(updateMember());
 
-        clearBasketCache();
         alert.success('Checkout successful!');
     }
 
-    function clearBasketCache() {
-        if (localStorage.basket === undefined) return;
-
-        localStorage.removeItem('basket');
-    }
 
     return (
         <Main>
