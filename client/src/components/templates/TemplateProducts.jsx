@@ -33,12 +33,12 @@ export function ProductSM ( {product} ) {
 
     return (
         <div className="featuring-product">
-            <Link to={`/product/${product.title}`} >
+            <Link to={`/product/${product.title}`} onClick={() => dispatch(selectProduct(product))} >
                 <img src={product.imageUrl} className="product-image" alt="img"/>
             </Link>
 
             <div className="featuring-product-description-wrap">
-                <Link to={`/product/${product.title}`} >
+                <Link to={`/product/${product.title} `} onClick={() => dispatch(selectProduct(product))} >
                     <h2 className="product-title">
                         {product.title}
                     </h2>
