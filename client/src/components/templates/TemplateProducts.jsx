@@ -228,7 +228,7 @@ export function ProductT( {product} ) {
 
                 <DescriptionContainer>
                     <Section borderBottom>
-                        <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                        <Link to={`/product/${product.title}`} >
                             <ProductTitle fontSize='18pt'>{product.longTitle}</ProductTitle>
                         </Link>
                     </Section>

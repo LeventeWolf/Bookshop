@@ -18,7 +18,6 @@ function getWishlistProducts(username) {
 
     try {
         const userWishlistTitles = wishlist[username];
-        // userWishlistTitles.forEach(title => getProductByTitle(title));
 
         for (const title of userWishlistTitles) {
             products.push(getProductByTitle(title))

@@ -42,14 +42,11 @@ router.post("/api/wishlist", async (req, res) => {
     return res.status(200).send(products);
 });
 
-router.get('/test', async (req, res) =>{
-
 router.get('/api/product/:productTitle', async (req, res) => {
     const productTitle = req.params.productTitle;
+    const product = fileHandler.getProductByTitle(productTitle)
 
-    const product = fileHandler.get
-
-    return res.status(200).send('Working')
+    return res.status(200).send(product)
 });
 
 router.get('/api/profile', (req, res) => {
