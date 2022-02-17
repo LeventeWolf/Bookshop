@@ -34,6 +34,8 @@ function getProductByTitle(title) {
 }
 
 function addProductToWishlist(username, product) {
+    if (wishlist[username].includes(product.title)) return;
+
     wishlist[username].push(product.title);
 }
 

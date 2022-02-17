@@ -15,9 +15,8 @@ import {
     Section, WishlistButton
 } from "../../styles/Component.styles";
 import {
-    addProductToWishlist, handleAddProductToWishlist,
+    handleAddProductToWishlist,
     handleRemoveProductFromWishlist,
-    removeProductFromWishlist
 } from "../../redux/actions/wishlistActions";
 
 

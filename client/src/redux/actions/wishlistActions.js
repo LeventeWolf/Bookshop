@@ -21,7 +21,7 @@ export const handleAddProductToWishlist = (username, product) => async (dispatch
     Axios.post(`http://localhost:3001/api/wishlist/add`, {username, product})
         .then(response => {
             console.log(response.data)
-            dispatch(removeProductFromWishlist(response.data))
+            dispatch(addProductToWishlist(product))
         }).catch(response => {
             console.log(response)
         }
@@ -54,7 +54,7 @@ export const initWishlistProducts = (products) => {
 
 export const addProductToWishlist = (product) => {
     return {
-        type: WishlistActionTypes.ADD_PRODUCT,
+        type: WishlistActionTypes.ADD_PRODUCT_TO_WISHLIST,
         payload: product,
     }
 }

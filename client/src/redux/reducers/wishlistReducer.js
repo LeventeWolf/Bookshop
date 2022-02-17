@@ -7,22 +7,26 @@ export const wishlistReducer = (wishlist = [], {type, payload}) => {
         case WishlistActionTypes.INIT_WISHLIST:
             return payload;
 
-        case WishlistActionTypes.ADD_PRODUCT:
+        case WishlistActionTypes.ADD_PRODUCT_TO_WISHLIST:
+            console.log('ADD_PRODUCT_TO_WISHLIST')
             const product = payload;
 
-            // If already has this product, increase quantity
-            for (const wishlistProduct of wishlist) {
+            console.log('wishlistCopy: ');
+            console.log(wishlistCopy)
+
+            // If already has this product, do not add
+            for (const wishlistProduct of wishlistCopy) {
+                console.log(product.title, wishlistProduct.title)
                 if (wishlistProduct.title === product.title) {
-                    wishlistProduct.quantity++;
-                    return wishlistCopy;
+                    return wishlist;
                 }
             }
 
-            // Else add new product
+            // Add new product
             return [...wishlistCopy, product];
 
         case WishlistActionTypes.REMOVE_PRODUCT:
-            for (const wishlistProduct of wishlist) {
+            for (const wishlistProduct of wishlistCopy) {
                 if (wishlistProduct.title === payload.title) {
                     wishlistProduct.quantity--;
 
