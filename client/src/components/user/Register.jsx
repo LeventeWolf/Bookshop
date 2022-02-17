@@ -110,21 +110,11 @@ export function Register() {
 
                 <ButtonGroup variant="solid" spacing='6'>
                     <Button color='blue.300' mt={15} onClick={handleSubmit}>
-                        Register{user.isLoggedIn ? <SuccessfulLogin /> : ''}
+                        Register{user.isLoggedIn ? <Navigate to={'/'} /> : ''}
                     </Button>
                 </ButtonGroup>
             </FormControl>
         </Box>
         </>
-    )
-}
-
-
-function SuccessfulLogin() {
-    const alert = useAlert()
-    alert.success('Login successful!');
-
-    return (
-        <Navigate to={'/'} />
     )
 }
