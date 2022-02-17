@@ -11,8 +11,8 @@ router.get("/api/all-books", async (req, res) => {
 });
 
 router.post('/api/signin', async (req, res) => {
-    const username = req.body.userdata.name;
-    const password = req.body.userdata.password;
+    const username = req.body.userData.name;
+    const password = req.body.userData.password;
     const user = fileHandler.getUser(username, password)
 
     if (user) {
@@ -42,14 +42,11 @@ router.post("/api/wishlist", async (req, res) => {
     return res.status(200).send(products);
 });
 
-router.get('/test', async (req, res) =>{
-
 router.get('/api/product/:productTitle', async (req, res) => {
     const productTitle = req.params.productTitle;
+    const product = fileHandler.getProductByTitle(productTitle)
 
-    const product = fileHandler.get
-
-    return res.status(200).send('Working')
+    return res.status(200).send(product);
 });
 
 router.get('/api/profile', (req, res) => {

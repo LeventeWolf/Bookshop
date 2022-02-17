@@ -6,7 +6,9 @@ export const BasketActionTypes = {
 }
 
 export const UserActionTypes = {
-  LOGIN: "LOGIN",
+  LOGIN_LOADING: "LOGIN_LOADING",
+  LOGIN_ERROR : "LOGIN_ERROR",
+  LOGIN_SUCCESS:"LOGIN_SUCCESS",
   LOGOUT: "LOGOUT",
   REGISTER: "REGISTER",
   UPDATE_MEMBER: "UPDATE_MEMBER",
@@ -14,6 +16,6 @@ export const UserActionTypes = {
 }
 
 export const ProductActionTypes = {
-  SELECTED_PRODUCT: "SELECT",
+  SELECTED_PRODUCT: "SELECT_PRODUCT",
   REMOVE_SELECTED_PRODUCT: "REMOVE_SELECTED_PRODUCT"
 }

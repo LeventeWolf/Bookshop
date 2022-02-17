@@ -19,9 +19,7 @@ export default function ProductPage() {
     const { productTitle } = useParams();
 
     useEffect(() => {
-        if (productTitle && productTitle !== "") {
-            dispatch(fetchProduct(productTitle));
-        }
+        dispatch(fetchProduct(productTitle));
 
         return () => {dispatch(removeSelectedProduct())};
     }, []);
@@ -38,7 +36,7 @@ export default function ProductPage() {
                         <RelatedProducts />
                     </>
                         :
-                    'Please select a product!:)'
+                    '404 Product Not Found!'
                 }
             </div>
         </Main>
