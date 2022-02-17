@@ -14,6 +14,6 @@ export const UserActionTypes = {
 }
 
 export const ProductActionTypes = {
-  SELECTED_PRODUCT: "SELECT",
+  SELECTED_PRODUCT: "SELECT_PRODUCT",
   REMOVE_SELECTED_PRODUCT: "REMOVE_SELECTED_PRODUCT"
 }
