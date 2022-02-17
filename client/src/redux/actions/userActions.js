@@ -1,10 +1,23 @@
 import {UserActionTypes} from "../constants/action-types";
+import apiClient from "../../http-common"
 
-
-export const login = (userData) => {
+export const loginSuccess = (userData) => {
     return {
-        type: UserActionTypes.LOGIN,
+        type: UserActionTypes.LOGIN_SUCCESS,
         payload: userData
+    }
+}
+
+export const loginLoading = () => {
+    return {
+        type: UserActionTypes.LOGIN_LOADING,
+    }
+}
+
+export const loginError = (error) => {
+    return {
+        type: UserActionTypes.LOGIN_ERROR,
+        payload: error
     }
 }
 
