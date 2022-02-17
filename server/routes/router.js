@@ -11,8 +11,8 @@ router.get("/api/all-books", async (req, res) => {
 });
 
 router.post('/api/signin', async (req, res) => {
-    const username = req.body.userdata.name;
-    const password = req.body.userdata.password;
+    const username = req.body.userData.name;
+    const password = req.body.userData.password;
     const user = fileHandler.getUser(username, password)
 
     if (user) {
