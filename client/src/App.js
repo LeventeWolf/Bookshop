@@ -10,7 +10,8 @@ import {
     Navigation,
     ProductPage,
     Profile,
-    TemplatePage
+    TemplatePage,
+    Wishlist
 } from "./components";
 import React from "react";
 
@@ -35,7 +36,7 @@ export default function App(){
                 <Route path="/product/:productTitle" element={<ProductPage/>}/>
 
                 {/* TemplatePages */}
-                <Route path="/wishlist" element={<TemplatePage name={'Wishlist'} api={'wishlist'}/>}/>
+                <Route path="/wishlist" element={<Wishlist />}/>
                 <Route path="/Books" element={<TemplatePage name={'Books'} api={'all-books'}/>}/>
                 <Route path="/Films" element={<TemplatePage name={'Films'} api={'all-books'}/>}/>
                 <Route path="/Songs" element={<TemplatePage name={'Songs'} api={'all-books'}/>}/>

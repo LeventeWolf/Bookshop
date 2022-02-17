@@ -14,6 +14,11 @@ import {
     ProductTitle, ProductType,
     Section, WishlistButton
 } from "../../styles/Component.styles";
+import {
+    addProductToWishlist, handleAddProductToWishlist,
+    handleRemoveProductFromWishlist,
+    removeProductFromWishlist
+} from "../../redux/actions/wishlistActions";
 
 
 /**
@@ -158,68 +163,12 @@ export function ProductB ( {product} ) {
 
 
 /**
- * L  : Large  - used for ProductPage.jsx
+ * W  : Wishlist - used for Wishlist.jsx
  */
-export function ProductL ( {product} ) {
+export function ProductW ( {product} ) {
     const dispatch = useDispatch();
     const isMember = useSelector(state => state.user.isMember);
-
-
-    return (
-        <Container h={'500px'}>
-            <ProductContainer style={{height: 400}}>
-                <ProductImage w={'280px'} src={product.imageUrl} alt="productImage"/>
-
-                <DescriptionContainer>
-                    <Section borderBottom>
-                        <ProductTitle fontSize='20pt'>{product.longTitle}</ProductTitle>
-                    </Section>
-
-                    <Section style={{marginBottom: 'auto', marginTop: '40px'}}>
-                        <ProductType>{product.type}</ProductType>
-                        <ProductAuthor>By (author): {product.author}</ProductAuthor>
-                    </Section>
-
-                    <Section style={{marginBottom: '20px'}}>
-                        <ProductAuthor>{product.description}</ProductAuthor>
-                    </Section>
-
-                </DescriptionContainer>
-
-            </ProductContainer>
-
-            <ActionsContainer style={{width: 400, marginLeft: 'auto'}}>
-                <Section borderBottom style={{marginBottom: 'auto'}}>
-                    <div className="price-container-row">
-                        {isMember ?
-                            <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
-                            : null
-                        }
-
-                        <h2 className="product-price" style={{fontSize: 25}}>
-                            {numberWithSpaces(isMember ? Math.round(product.price * 0.9) : product.price)} Ft
-                        </h2>
-                    </div>
-                </Section>
-
-                <Section style={{gap: '10px'}}>
-                    <BasketButton style={{width:'300px', height: '40px'}} product={product}>
-                        Add to Basket
-                    </BasketButton>
-                    <WishlistButton w={300} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to wishlist</WishlistButton>
-                </Section>
-            </ActionsContainer>
-        </Container>
-    )
-}
-
-
-/**
- * T  : Template  - used for TemplatePages (Bestsellers, Songs, Films, Books, Wishlist)
- */
-export function ProductT( {product} ) {
-    const dispatch = useDispatch();
-    const isMember = useSelector(state => state.user.isMember);
+    const username = useSelector(state => state.user.username);
 
     return (
         <Container style={{height: '200px'}}>
@@ -264,7 +213,130 @@ export function ProductT( {product} ) {
                             Add to Basket
                         </BasketButton>
 
-                        <WishlistButton w={200} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to wishlist</WishlistButton>
+                        <WishlistButton w={200} h={40} onClick={() => dispatch(handleRemoveProductFromWishlist(username, product))}>
+                            Remove
+                        </WishlistButton>
+                    </Section>
+                </Section>
+            </ProductContainer>
+
+        </Container>
+    )
+}
+
+
+/**
+ * L  : Large  - used for ProductPage.jsx
+ */
+export function ProductL ( {product} ) {
+    const dispatch = useDispatch();
+    const isMember = useSelector(state => state.user.isMember);
+    const user = useSelector(state => state.user);
+
+
+    return (
+        <Container h={'500px'}>
+            <ProductContainer style={{height: 400}}>
+                <ProductImage w={'280px'} src={product.imageUrl} alt="productImage"/>
+
+                <DescriptionContainer>
+                    <Section borderBottom>
+                        <ProductTitle fontSize='20pt'>{product.longTitle}</ProductTitle>
+                    </Section>
+
+                    <Section style={{marginBottom: 'auto', marginTop: '40px'}}>
+                        <ProductType>{product.type}</ProductType>
+                        <ProductAuthor>By (author): {product.author}</ProductAuthor>
+                    </Section>
+
+                    <Section style={{marginBottom: '20px'}}>
+                        <ProductAuthor>{product.description}</ProductAuthor>
+                    </Section>
+
+                </DescriptionContainer>
+
+            </ProductContainer>
+
+            <ActionsContainer style={{width: 400, marginLeft: 'auto'}}>
+                <Section borderBottom style={{marginBottom: 'auto'}}>
+                    <div className="price-container-row">
+                        {isMember ?
+                            <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
+                            : null
+                        }
+
+                        <h2 className="product-price" style={{fontSize: 25}}>
+                            {numberWithSpaces(isMember ? Math.round(product.price * 0.9) : product.price)} Ft
+                        </h2>
+                    </div>
+                </Section>
+
+                <Section style={{gap: '10px'}}>
+                    <BasketButton style={{width:'300px', height: '40px'}} product={product}>
+                        Add to Basket
+                    </BasketButton>
+                    <WishlistButton w={300} h={40} onClick={() => dispatch(handleAddProductToWishlist(user.username, product))}>
+                        Add to wishlist
+                    </WishlistButton>
+                </Section>
+            </ActionsContainer>
+        </Container>
+    )
+}
+
+
+/**
+ * T  : Template  - used for TemplatePages (Bestsellers, Songs, Films, Books, Wishlist)
+ */
+export function ProductT( {product} ) {
+    const dispatch = useDispatch();
+    const isMember = useSelector(state => state.user.isMember);
+    const username = useSelector(state => state.user.username);
+
+    return (
+        <Container style={{height: '200px'}}>
+            <ProductContainer>
+                <ProductImage w={'175px'} h={'180px'} src={product.imageUrl} alt="productImage"/>
+
+                <DescriptionContainer>
+                    <Section borderBottom>
+                        <Link to={`/product/${product.title}`} >
+                            <ProductTitle fontSize='18pt'>{product.longTitle}</ProductTitle>
+                        </Link>
+                    </Section>
+
+                    <Section style={{marginBottom: 'auto', marginTop: '40px'}}>
+                        <ProductType>{product.type}</ProductType>
+                        <ProductAuthor>By (author): {product.author}</ProductAuthor>
+                    </Section>
+
+                    <Section style={{marginBottom: '20px'}}>
+                        <ProductAuthor>{product.description}</ProductAuthor>
+                    </Section>
+
+                </DescriptionContainer>
+
+
+                <Section style={{marginLeft: '50px', width: '200px'}}>
+                    <Section borderBottom style={{marginBottom: 'auto'}}>
+                        <div className="price-container-row">
+                            {isMember ?
+                                <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
+                                : null
+                            }
+
+                            <h2 className="product-price" style={{fontSize: 22}}>
+                                {numberWithSpaces(isMember ? Math.round(product.price * 0.9) : product.price)} Ft
+                            </h2>
+                        </div>
+                    </Section>
+
+                    <Section style={{gap: '10px'}}>
+                        <BasketButton style={{height: 40}} product={product}>
+                            Add to Basket
+                        </BasketButton>
+
+                        <WishlistButton w={200} h={40} onClick={() => dispatch(handleAddProductToWishlist(username, product))}>Add to wishlist</WishlistButton>
                     </Section>
                 </Section>
             </ProductContainer>

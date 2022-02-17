@@ -9,3 +9,4 @@ export { default as Home } from "./home/Home";
 export { default as Basket } from "./Basket";
 export { default as ProductPage } from "./ProductPage";
 export { default as TemplatePage } from "./templates/TemplatePage";
+export { default as Wishlist } from "./Wishlist";

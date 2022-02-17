@@ -33,5 +33,14 @@ function getProductByTitle(title) {
     return books.find(book => book.title === title);
 }
 
+function addProductToWishlist(username, product) {
+    wishlist[username].push(product.title);
+}
 
-module.exports = {getAllBooks, getUser, getWishlistProducts, getProductByTitle}
+function removeProductFromWishlist(username, product) {
+    wishlist[username] = wishlist[username].filter(productTitle => productTitle !== product.title);
+}
+
+
+module.exports = {getAllBooks, getUser, getProductByTitle,
+    getWishlistProducts, addProductToWishlist, removeProductFromWishlist}
