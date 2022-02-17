@@ -34,6 +34,8 @@ router.post('/api/registration', async (req, res) =>{
     }
 })
 
+// Wishlist
+
 router.post("/api/wishlist", async (req, res) => {
     const username = req.body.username;
 
@@ -41,6 +43,26 @@ router.post("/api/wishlist", async (req, res) => {
 
     return res.status(200).send(products);
 });
+
+router.post("/api/wishlist/add", async (req, res) => {
+    const username = req.body.username;
+    const product = req.body.product;
+
+    fileHandler.addProductToWishlist(username, product);
+
+    return res.status(200).send(`[DB-WISHLIST] Add '${product.title}'`);
+});
+
+router.post("/api/wishlist/remove", async (req, res) => {
+    const username = req.body.username;
+    const product = req.body.product;
+
+    fileHandler.removeProductFromWishlist(username, product);
+
+    return res.status(200).send(`[DB-WISHLIST] Removed '${product.title}'`);
+});
+
+
 
 router.get('/api/product/:productTitle', async (req, res) => {
     const productTitle = req.params.productTitle;
