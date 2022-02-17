@@ -13,7 +13,7 @@ import {uuid} from "uuidv4";
 import {numberWithSpaces} from "../../lib/helper";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {select} from "../../redux/actions/productActions";
+import {selectProduct} from "../../redux/actions/productActions";
 import {addProductToBasket} from "../../redux/actions/basketActions";
 import BasketButton from "./BasketButton";
 
@@ -54,7 +54,7 @@ function TemplateProduct( {product} ) {
 
                 <DescriptionContainer>
                     <Section borderBottom>
-                        <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                        <Link to={`/product/${product.title}`} onClick={() => dispatch(selectProduct(product))}>
                             <ProductTitle fontSize='18pt'>{product.longTitle}</ProductTitle>
                         </Link>
                     </Section>

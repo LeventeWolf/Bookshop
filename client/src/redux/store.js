@@ -1,6 +1,9 @@
-import {createStore} from "redux";
+import {createStore, applyMiddleware, compose} from "redux";
 import reducers from "./reducers/index";
 import {loadState, saveState} from "../lib/localStorage"
+import thunk from "redux-thunk";
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const preloadedStates = {
     product: loadState('product'),
@@ -11,7 +14,7 @@ const preloadedStates = {
 const store = createStore(
     reducers,
     preloadedStates,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeEnhancers(applyMiddleware(thunk))
 );
 
 store.subscribe(() => {

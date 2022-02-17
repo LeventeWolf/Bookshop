@@ -36,7 +36,7 @@ export default function App(){
                 <Route path="/Join" element={<Join/>}/>
                 <Route path="/wishlist" element={<TemplatePage name={'Wishlist'}/>}/>
                 <Route path="/basket" element={<Basket/>}/>
-                <Route path="/product/:productName" element={<ProductPage/>}/>
+                <Route path="/product/:productTitle" element={<ProductPage/>}/>
                 <Route path="/Profile" element={<Profile/>}/>
                 <Route path="/Books" element={<TemplatePage name={'Books'}/>}/>
                 <Route path="/Films" element={<TemplatePage name={'Films'}/>}/>

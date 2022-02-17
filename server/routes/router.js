@@ -36,9 +36,13 @@ router.post('/api/registration', async (req, res) =>{
     }
 })
 
-router.get('/test', async (req, res) =>{
+router.get('/api/product/:productTitle', async (req, res) => {
+    const productTitle = req.params.productTitle;
+
+    const product = fileHandler.get
+
     return res.status(200).send('Working')
-})
+});
 
 router.get('/api/profile', (req, res) => {
     return res.status(200).send("Working properly")
