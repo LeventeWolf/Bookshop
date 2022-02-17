@@ -3,8 +3,6 @@ const mainDAO = require("../dao/main_dao");
 const DAO = new mainDAO()
 const fileHandler = require('../lib/fileHandler');
 
-// Books
-
 router.get("/api/all-books", async (req, res) => {
     // const allBooks = await DAO.getAllBooks();
     const allBooks = fileHandler.getAllBooks();
@@ -36,9 +34,20 @@ router.post('/api/registration', async (req, res) =>{
     }
 })
 
-router.get('/test', async (req, res) =>{
-    return res.status(200).send('Working')
-})
+router.post("/api/wishlist", async (req, res) => {
+    const username = req.body.username;
+
+    const products = fileHandler.getWishlistProducts(username);
+
+    return res.status(200).send(products);
+});
+
+router.get('/api/product/:productTitle', async (req, res) => {
+    const productTitle = req.params.productTitle;
+    const product = fileHandler.getProductByTitle(productTitle)
+
+    return res.status(200).send(product);
+});
 
 router.get('/api/profile', (req, res) => {
     return res.status(200).send("Working properly")

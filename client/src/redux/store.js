@@ -2,10 +2,9 @@ import {createStore, applyMiddleware, compose} from "redux";
 import reducers from "./reducers/index";
 import thunk from "redux-thunk";
 import {loadState, saveState} from "../lib/localStorage"
+import thunk from "redux-thunk";
 
-//using more than 1 enhancer in createStore gives you parameter problem thus we need composeEnhancers
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose;
-
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const preloadedStates = {
     product: loadState('product'),
@@ -16,7 +15,7 @@ const preloadedStates = {
 const store = createStore(
     reducers,
     preloadedStates,
-    composeEnhancers(applyMiddleware(thunk)),
+    composeEnhancers(applyMiddleware(thunk))
 );
 
 store.subscribe(() => {

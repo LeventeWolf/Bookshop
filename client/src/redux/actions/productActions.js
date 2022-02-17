@@ -1,9 +1,21 @@
-import { ProductActionTypes } from "../constants/action-types";
+import {ProductActionTypes} from "../constants/action-types";
+import Axios from 'axios';
 
+export const fetchProduct = (title) => async (dispatch) => {
+    const response = await Axios.get(`http://localhost:3001/api/product/${title}`);
 
-export const select = (product) => {
+    dispatch({type: ProductActionTypes.SELECTED_PRODUCT, payload: response.data});
+};
+
+export const selectProduct = (product) => {
     return {
-        type: ProductActionTypes.SELECT,
+        type: ProductActionTypes.SELECTED_PRODUCT,
         payload: product
     }
 }
+
+export const removeSelectedProduct = () => {
+    return {
+        type: ProductActionTypes.REMOVE_SELECTED_PRODUCT,
+    };
+};

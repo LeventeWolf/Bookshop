@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {select} from "../../redux/actions/productActions";
+import {selectProduct} from "../../redux/actions/productActions";
 import {numberWithSpaces} from "../../lib/helper";
 import BasketButton from "./BasketButton";
 import React from "react";
@@ -33,12 +33,12 @@ export function ProductSM ( {product} ) {
 
     return (
         <div className="featuring-product">
-            <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+            <Link to={`/product/${product.title}`} >
                 <img src={product.imageUrl} className="product-image" alt="img"/>
             </Link>
 
             <div className="featuring-product-description-wrap">
-                <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                <Link to={`/product/${product.title}`} >
                     <h2 className="product-title">
                         {product.title}
                     </h2>
@@ -69,7 +69,7 @@ export function ProductSM ( {product} ) {
 
 
 /**
- * M  : Medium - used for Supply & Bestsellers
+ * M  : Medium - used for Home.jxs => Supply & Bestsellers
  */
 export function ProductM ( {product} ) {
     const dispatch = useDispatch();
@@ -77,7 +77,7 @@ export function ProductM ( {product} ) {
 
     return (
         <div className="supply-product">
-            <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+            <Link to={`/product/${product.title}`} >
                 <img src={product.imageUrl}
                      className="supply-product-image" alt="img"/>
 
@@ -118,12 +118,12 @@ export function ProductB ( {product} ) {
 
     return (
         <div className="basket-product-wrap">
-            <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+            <Link to={`/product/${product.title}`} >
                 <img className='product-image' src={product.imageUrl} alt="alt"/>
             </Link>
 
             <div className='product-description-container'>
-                <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                <Link to={`/product/${product.title}`} onClick={() => dispatch(selectProduct(product))}>
                     <h3 className="product-title">{product.title}</h3>
                 </Link>
 
@@ -158,7 +158,7 @@ export function ProductB ( {product} ) {
 
 
 /**
- * L  : Large  - used for TemplatePage (Songs, Films, Music, etc...)
+ * L  : Large  - used for ProductPage.jsx
  */
 export function ProductL ( {product} ) {
     const dispatch = useDispatch();
@@ -209,6 +209,66 @@ export function ProductL ( {product} ) {
                     <WishlistButton w={300} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to wishlist</WishlistButton>
                 </Section>
             </ActionsContainer>
+        </Container>
+    )
+}
+
+
+/**
+ * T  : Template  - used for TemplatePages (Bestsellers, Songs, Films, Books, Wishlist)
+ */
+export function ProductT( {product} ) {
+    const dispatch = useDispatch();
+    const isMember = useSelector(state => state.user.isMember);
+
+    return (
+        <Container style={{height: '200px'}}>
+            <ProductContainer>
+                <ProductImage w={'175px'} h={'180px'} src={product.imageUrl} alt="productImage"/>
+
+                <DescriptionContainer>
+                    <Section borderBottom>
+                        <Link to={`/product/${product.title}`} >
+                            <ProductTitle fontSize='18pt'>{product.longTitle}</ProductTitle>
+                        </Link>
+                    </Section>
+
+                    <Section style={{marginBottom: 'auto', marginTop: '40px'}}>
+                        <ProductType>{product.type}</ProductType>
+                        <ProductAuthor>By (author): {product.author}</ProductAuthor>
+                    </Section>
+
+                    <Section style={{marginBottom: '20px'}}>
+                        <ProductAuthor>{product.description}</ProductAuthor>
+                    </Section>
+
+                </DescriptionContainer>
+
+
+                <Section style={{marginLeft: '50px', width: '200px'}}>
+                    <Section borderBottom style={{marginBottom: 'auto'}}>
+                        <div className="price-container-row">
+                            {isMember ?
+                                <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
+                                : null
+                            }
+
+                            <h2 className="product-price" style={{fontSize: 22}}>
+                                {numberWithSpaces(isMember ? Math.round(product.price * 0.9) : product.price)} Ft
+                            </h2>
+                        </div>
+                    </Section>
+
+                    <Section style={{gap: '10px'}}>
+                        <BasketButton style={{height: 40}} product={product}>
+                            Add to Basket
+                        </BasketButton>
+
+                        <WishlistButton w={200} h={40} onClick={() => dispatch(addProductToBasket(product))}>Add to wishlist</WishlistButton>
+                    </Section>
+                </Section>
+            </ProductContainer>
+
         </Container>
     )
 }

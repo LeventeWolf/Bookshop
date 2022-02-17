@@ -12,18 +12,13 @@ import {
     Profile,
     TemplatePage
 } from "./components";
-import React, {useEffect} from "react";
+import React from "react";
 
 import "./styles/index.scss";
-import {login} from "./redux/actions/userActions";
-import {useDispatch} from "react-redux";
-import {addProductToBasket, initBasketProducts} from "./redux/actions/basketActions";
-
-document.body.style.backgroundColor = '#F0F0F0';
 
 
 export default function App(){
-
+    document.body.style.backgroundColor = '#F0F0F0';
 
     return (
         <Router>
@@ -34,15 +29,17 @@ export default function App(){
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/Join" element={<Join/>}/>
-                <Route path="/wishlist" element={<TemplatePage name={'Wishlist'}/>}/>
-                <Route path="/basket" element={<Basket/>}/>
-                <Route path="/product/:productName" element={<ProductPage/>}/>
                 <Route path="/Profile" element={<Profile/>}/>
-                <Route path="/Books" element={<TemplatePage name={'Books'}/>}/>
-                <Route path="/Films" element={<TemplatePage name={'Films'}/>}/>
                 <Route path="/Logout" element={<><Logout/><Join/></>}/>
-                <Route path="/Songs" element={<TemplatePage name={'Songs'}/>}/>
-                <Route path="/Bestsellers" element={<TemplatePage name={'Bestsellers'}/>}/>
+                <Route path="/basket" element={<Basket/>}/>
+                <Route path="/product/:productTitle" element={<ProductPage/>}/>
+
+                {/* TemplatePages */}
+                <Route path="/wishlist" element={<TemplatePage name={'Wishlist'} api={'wishlist'}/>}/>
+                <Route path="/Books" element={<TemplatePage name={'Books'} api={'all-books'}/>}/>
+                <Route path="/Films" element={<TemplatePage name={'Films'} api={'all-books'}/>}/>
+                <Route path="/Songs" element={<TemplatePage name={'Songs'} api={'all-books'}/>}/>
+                <Route path="/Bestsellers" element={<TemplatePage name={'Bestsellers'} api={'all-books'}/>}/>
             </Routes>
 
             {/*<Footer/>*/}
