@@ -1,16 +1,30 @@
 import React, {useEffect, useState} from "react";
-
-import {useSelector} from "react-redux";
-import {Main, PageTitle,} from "../styles/Component.styles";
-import Axios from "axios";
-import {shuffleArray} from "../lib/helper";
 import {v4} from "uuid";
+import Axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import {shuffleArray} from "../lib/helper";
+import {Main, PageTitle,} from "../styles/Component.styles";
 import '../styles/relatedProducts.scss'
 import {ProductL, ProductSM} from "./templates/TemplateProducts";
+import {
+    fetchProduct,
+    removeSelectedProduct,
+} from "../redux/actions/productActions";
+import {useParams} from "react-router-dom";
 
 
 export default function ProductPage() {
     const product = useSelector(state => state.product);
+    const dispatch = useDispatch();
+    const { productTitle } = useParams();
+
+    useEffect(() => {
+        if (productTitle && productTitle !== "") {
+            dispatch(fetchProduct(productTitle));
+        }
+
+        return () => {dispatch(removeSelectedProduct())};
+    }, []);
 
     return (
         <Main>

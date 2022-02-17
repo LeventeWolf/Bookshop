@@ -6,6 +6,12 @@ import {
 } from "../../styles/Component.styles";
 import Axios from "axios";
 import {uuid} from "uuidv4";
+import {numberWithSpaces} from "../../lib/helper";
+import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+import {selectProduct} from "../../redux/actions/productActions";
+import {addProductToBasket} from "../../redux/actions/basketActions";
+import BasketButton from "./BasketButton";
 import {ProductT} from "./TemplateProducts";
 
 
@@ -33,4 +39,3 @@ export default function TemplatePage( {name, api} ) {
         </Main>
     );
 };
-

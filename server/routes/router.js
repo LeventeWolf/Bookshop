@@ -37,15 +37,20 @@ router.post('/api/registration', async (req, res) =>{
 router.post("/api/wishlist", async (req, res) => {
     const username = req.body.username;
 
-
     const products = fileHandler.getWishlistProducts(username);
 
     return res.status(200).send(products);
 });
 
 router.get('/test', async (req, res) =>{
+
+router.get('/api/product/:productTitle', async (req, res) => {
+    const productTitle = req.params.productTitle;
+
+    const product = fileHandler.get
+
     return res.status(200).send('Working')
-})
+});
 
 router.get('/api/profile', (req, res) => {
     return res.status(200).send("Working properly")

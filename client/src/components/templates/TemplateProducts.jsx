@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {select} from "../../redux/actions/productActions";
+import {selectProduct} from "../../redux/actions/productActions";
 import {numberWithSpaces} from "../../lib/helper";
 import BasketButton from "./BasketButton";
 import React from "react";
@@ -33,12 +33,12 @@ export function ProductSM ( {product} ) {
 
     return (
         <div className="featuring-product">
-            <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+            <Link to={`/product/${product.title}`} >
                 <img src={product.imageUrl} className="product-image" alt="img"/>
             </Link>
 
             <div className="featuring-product-description-wrap">
-                <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                <Link to={`/product/${product.title}`} >
                     <h2 className="product-title">
                         {product.title}
                     </h2>
@@ -77,7 +77,7 @@ export function ProductM ( {product} ) {
 
     return (
         <div className="supply-product">
-            <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+            <Link to={`/product/${product.title}`} >
                 <img src={product.imageUrl}
                      className="supply-product-image" alt="img"/>
 
@@ -118,12 +118,12 @@ export function ProductB ( {product} ) {
 
     return (
         <div className="basket-product-wrap">
-            <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+            <Link to={`/product/${product.title}`} >
                 <img className='product-image' src={product.imageUrl} alt="alt"/>
             </Link>
 
             <div className='product-description-container'>
-                <Link to={`/product/${product.title}`} onClick={() => dispatch(select(product))}>
+                <Link to={`/product/${product.title}`} onClick={() => dispatch(selectProduct(product))}>
                     <h3 className="product-title">{product.title}</h3>
                 </Link>
 
