@@ -2,12 +2,9 @@ import {ProductActionTypes} from "../constants/action-types";
 import Axios from 'axios';
 
 export const fetchProduct = (title) => async (dispatch) => {
-    Axios.get(`http://localhost:3001/api/product/${title}`)
-        .then(response => {
-            dispatch({type: ProductActionTypes.SELECTED_PRODUCT, payload: response.data});})
-        .catch(response => {
-            console.log(response)
-        });
+    const response = await Axios.get(`http://localhost:3001/api/product/${title}`);
+
+    dispatch({type: ProductActionTypes.SELECTED_PRODUCT, payload: response.data});
 };
 
 export const selectProduct = (product) => {
