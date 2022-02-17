@@ -1,23 +1,18 @@
 import React from 'react'
 import apiClient from '../http-common'
-import {login} from "../redux/actions/userActions";
+import {loginError, loginLoading, loginSuccess} from "../redux/actions/userActions";
 
-/**
- * Send userdata to server for authentication
- * @param userdata: {username, password}
- * @returns {{isAuthenticated: Promise<AxiosResponse<any>>}}
- */
+export const signin = (userData) => async dispatch => {
+        await apiClient.post("/signin", {userData}).then(res => {
+            dispatch(loginLoading())
+            if (res.data.isAuthenticated){
+                console.log(res)
+                dispatch(loginSuccess(res.data.user))
+                return true
+            }
+            })
+            .catch(error => dispatch(loginError(error.message)));
 
-export async function signin(userdata, dispatch) {
-    const response = await apiClient.post(
-        "/signin",
-        {userdata}
-    )
-    if(response.data.isAuthenticated){
-        response.data.user.password = '*******';
-        dispatch(login(response.data.user))
-    }
-    return response.data
 }
 
 export async function register(emailRef, usernameRef, passwordRef, callback, dispatch) {
@@ -32,8 +27,12 @@ export async function register(emailRef, usernameRef, passwordRef, callback, dis
         }
     )
     if(response){
-        dispatch(login({username:usernameRef, avatar:'', isMember:true}))
+        dispatch(loginSuccess({username:usernameRef, avatar:'', isMember:true}))
     }
+}
+
+export async function getUserData(username){
+    return await apiClient.post('/userdata', {username})
 }
 
 export default {signin, register}

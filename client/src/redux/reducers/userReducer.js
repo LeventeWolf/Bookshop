@@ -6,13 +6,22 @@ const initialUser = {
     avatar: undefined,
     isLoggedIn: false,
     isMember: false,
-    boughtAmount: 0
+    boughtAmount: 0,
+    error: null,
+    userLoggingIn:false
 };
 
 export const userReducer = (user = initialUser, {type, payload}) => {
     switch (type) {
-        case UserActionTypes.LOGIN:
+        case UserActionTypes.LOGIN_SUCCESS:
+            console.log(payload)
             return {...payload, isLoggedIn: true};
+
+        case UserActionTypes.LOGIN_ERROR:
+            return {error:payload, isLoggedIn: false}
+
+        case UserActionTypes.LOGIN_LOADING:
+            return {...payload, userLoggingIn: true}
 
         case UserActionTypes.LOGOUT:
             return initialUser;
