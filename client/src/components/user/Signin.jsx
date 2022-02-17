@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {
     Box,
     Input,
@@ -13,7 +13,6 @@ import {faUser} from '@fortawesome/free-solid-svg-icons'
 import {useDispatch, useSelector} from "react-redux";
 import {signin} from '../../api/UserAPI';
 import { Progress } from '@chakra-ui/react'
-import {useQuery} from "react-query";
 import {Navigate} from "react-router-dom";
 import {useAlert} from "react-alert";
 
@@ -21,13 +20,12 @@ export function Signin() {
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
     const alert = useAlert()
-    const [updateTime, setUpdateTime] = useState(0)
     const [logged, setLogged] = useState(false)
     const [userdata, setUserdata] = useState({name: '', password: ''})
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const {isLoading, refetch: authenticate, error} = useQuery('signin',  () => signin(userdata, dispatch), {enabled: false, refetchOnWindowFocus:false, refetchOnMount:false, retry:false});
 
     const showPassword = () => setPasswordVisible(!passwordVisible);
+
 
     const handleChange = event => {
         const {name, value} = event.target;
@@ -37,21 +35,25 @@ export function Signin() {
         }))
     }
 
-    if (error && !logged) {
-        alert.error('Wrong username or password!');
-        console.log('X USERNAME OR PASSORD X')
-        setLogged(() => true)
 
+    if(user.isLoggedIn){
+        alert.success("Logged in")
     }
 
-    const handleLogin = () => {
-        authenticate()
+    if(user.error && !logged){
+        alert.error("something went wrong")
+        setLogged(() => true)
+    }
+
+    const handleLogin = async () => {
+        await dispatch(signin(userdata))
         setLogged(() => false)
     }
-    //
+
+
     return (
         <>
-        {isLoading ?  <Progress size='xs' isIndeterminate /> : ''}
+        {user.userLoggingIn ?  <Progress size='xs' isIndeterminate /> : ''}
         <Box margin={50}>
             <Text fontSize='2xl' mb={35} ml={2}>Sign in</Text>
             <InputGroup id="Username" mb={2}>
@@ -95,7 +97,7 @@ export function Signin() {
             <ButtonGroup variant="solid" spacing='6'>
                 <Button color='blue.300' mt={15} onClick={handleLogin}>
                     Sign in
-                    {user.isLoggedIn ? <Navigate to="/" /> : ''}
+                    {user.isLoggedIn ? <Navigate to="/"/>: ''}
                 </Button>
             </ButtonGroup>
         </Box>
