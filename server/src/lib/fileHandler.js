@@ -1,8 +1,8 @@
 const fs = require('fs');
 
-const books = JSON.parse(fs.readFileSync('./database/books.json'));
-const users = JSON.parse(fs.readFileSync('./database/users.json'));
-const wishlist = JSON.parse(fs.readFileSync('./database/wishlist.json'));
+const books = JSON.parse(fs.readFileSync('./database/raw_json/books.json'));
+const users = JSON.parse(fs.readFileSync('./database/raw_json/users.json'));
+const wishlist = JSON.parse(fs.readFileSync('./database/raw_json/wishlist.json'));
 
 
 function getAllBooks(){
