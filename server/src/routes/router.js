@@ -1,13 +1,18 @@
 const router = require("express").Router();
-const mainDAO = require("../dao/main_dao");
-const DAO = new mainDAO()
 const fileHandler = require('../lib/fileHandler');
+const dao = require('../dao/main_dao');
 
 router.get("/api/all-books", async (req, res) => {
     // const allBooks = await DAO.getAllBooks();
     const allBooks = fileHandler.getAllBooks();
 
     return res.status(200).send(allBooks);
+});
+
+router.get("/api/test", async (req, res) => {
+    const result = await dao.getAllProducts();
+
+    return res.status(200).send(result);
 });
 
 router.post('/api/signin', async (req, res) => {

@@ -48,7 +48,7 @@ Detailed installation: https://github.com/MaksymBilenko/docker-oracle-12c
 
 2. Download **oracle-client** [Version 19.14.0.0.0] <br>
     https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html <br>
-    [Windows/MacOS]: Change `libPath` location in **server/setup.js** to your downloaded oracle-client path
+    [Windows/MacOS]: Change `libPath` location in **server/example.js** to your downloaded oracle-client path
 
     [Linux]: export to path 
     ```

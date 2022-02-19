@@ -1,8 +1,18 @@
 import React from "react";
 import '../styles/header.scss';
 import {NavLink} from "react-router-dom";
+import Axios from "axios";
 
 function Header() {
+    function handleSearch() {
+        Axios.get(`http://localhost:3001/api/test/`)
+            .then(response => {
+                console.log(response.data.rows)
+            }).catch(response => {
+                console.log(response)
+            })
+    }
+
     return (
         <div className="header-wrap">
             <header className="header">
@@ -25,7 +35,7 @@ function Header() {
                                name="search"
                                className="text-input"/>
 
-                        <button aria-label="Search" className="header-search-btn" type="submit">
+                        <button onClick={handleSearch} aria-label="Search" className="header-search-btn" type="submit">
                             <span className="text">Search</span>
                         </button>
 
@@ -38,7 +48,6 @@ function Header() {
         </div>
     );
 }
-
 
 
 export default Header;
