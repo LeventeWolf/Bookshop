@@ -16,7 +16,6 @@ More: [documentation/screenshots](https://github.com/LeventeWolf/Bookshop/tree/m
 
 
 ## Setup & Run
-<hr>
 
 ### Prerequisites:
 Client & Server
