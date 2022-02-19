@@ -69,12 +69,16 @@ Detailed installation: https://github.com/MaksymBilenko/docker-oracle-12c
 
 #### Database
 
-Run docker image
+##### Run docker image
+**[Windows]:** <br> 
+Start oracle-12c in your Docker desktop app
+
+**[Linux]:** 
 ```
-docker run -p 8080:8080 -p 1521:1521 -v truevoly/oracle-12c
+    docker run -p 8080:8080 -p 1521:1521 truevoly/oracle-12c
 ```
 
-Start Apache server
+##### Start Apache server
 ```
 sudo /opt/lampp/xampp start
 ```
