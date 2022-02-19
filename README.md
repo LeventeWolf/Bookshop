@@ -16,7 +16,6 @@ More: [documentation/screenshots](https://github.com/LeventeWolf/Bookshop/tree/m
 
 
 ## Setup & Run
-<hr>
 
 ### Prerequisites:
 Client & Server
@@ -48,13 +47,11 @@ Detailed installation: https://github.com/MaksymBilenko/docker-oracle-12c
 
 2. Download **oracle-client** [Version 19.14.0.0.0] <br>
     https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html <br>
-    [Windows/MacOS]: Change `libPath` location in **server/src/dao/main_dao.js** to your downloaded oracle-client path
+    [Windows/MacOS]: Change `libPath` location in **server/src/dao/main_dao.js** to your downloaded oracle-client path <br>
     [Linux]: export to path 
     ```
     PATH="$PATH:/your/path/to/instantclient_19_14";export PATH
-    ```
-[3. Xampp php.ini enable oci8 - ?not relevant?]
- 
+    ``` 
 <hr>
 
 ### Run
@@ -78,10 +75,3 @@ Start oracle-12c in your Docker desktop app
 ```
 docker run -p 8080:8080 -p 1521:1521 truevoly/oracle-12c
 ```
-
-##### Start Apache server
-
-```
-sudo /opt/lampp/xampp start
-```
-
