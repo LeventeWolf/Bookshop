@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 
 import {
-    ButtonStyle,
     Main,
     PageTitle
 } from "../styles/Component.styles";

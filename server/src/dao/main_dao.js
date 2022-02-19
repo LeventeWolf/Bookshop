@@ -31,11 +31,48 @@ const options = {
     // fetchArraySize:   100                 // internal buffer allocation size for tuning
 };
 
+
+function convertKeysLowercase(obj) {
+    let key, keys = Object.keys(obj);
+    let n = keys.length;
+    let result = {};
+    while (n--) {
+        key = keys[n];
+        result[key.toLowerCase()] = obj[key];
+    }
+
+    return result;
+}
+
+function formatRow(rows) {
+    const result = [];
+
+    rows.forEach(row => result.push(convertKeysLowercase(row)))
+
+    return result;
+}
+
 async function getAllProducts() {
-    const sql = `SELECT * FROM PRODUCT`;
+    const sql = `SELECT *
+                 FROM PRODUCT`;
 
     return await connection.execute(sql, binds, options);
 }
 
+async function getAllBooks() {
+    const sql = `SELECT *
+                 FROM PRODUCT
+                 INNER JOIN BOOK ON BOOK.ID = PRODUCT.ID`;
 
-module.exports = {getAllProducts}
+    try {
+        const result =  await connection.execute(sql, binds, options)
+
+        return formatRow(result.rows);
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+}
+
+
+module.exports = {getAllProducts, getAllBooks}

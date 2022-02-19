@@ -4,13 +4,13 @@ const dao = require('../dao/main_dao');
 
 router.get("/api/all-books", async (req, res) => {
     // const allBooks = await DAO.getAllBooks();
-    const allBooks = fileHandler.getAllBooks();
+    const allBooks = await dao.getAllBooks();
 
     return res.status(200).send(allBooks);
 });
 
 router.get("/api/test", async (req, res) => {
-    const result = await dao.getAllProducts();
+    const result = await dao.getAllBooks();
 
     return res.status(200).send(result);
 });

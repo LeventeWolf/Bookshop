@@ -37,14 +37,14 @@ export function ProductSM ( {product} ) {
 
     return (
         <div className="featuring-product">
-            <Link to={`/product/${product.title}`} onClick={() => dispatch(selectProduct(product))} >
-                <img src={product.imageUrl} className="product-image" alt="img"/>
+            <Link to={`/product/${product.name}`} onClick={() => dispatch(selectProduct(product))} >
+                <img src={product.imageurl} className="product-image" alt="img"/>
             </Link>
 
             <div className="featuring-product-description-wrap">
-                <Link to={`/product/${product.title} `} onClick={() => dispatch(selectProduct(product))} >
+                <Link to={`/product/${product.name} `} onClick={() => dispatch(selectProduct(product))} >
                     <h2 className="product-title">
-                        {product.title}
+                        {product.name}
                     </h2>
                 </Link>
 
@@ -81,12 +81,12 @@ export function ProductM ( {product} ) {
 
     return (
         <div className="supply-product">
-            <Link to={`/product/${product.title}`} >
-                <img src={product.imageUrl}
+            <Link to={`/product/${product.name}`} >
+                <img src={product.imageurl}
                      className="supply-product-image" alt="img"/>
 
                 <h2 className="product-title">
-                    {product.title}
+                    {product.name}
                 </h2>
             </Link>
 
@@ -122,13 +122,13 @@ export function ProductB ( {product} ) {
 
     return (
         <div className="basket-product-wrap">
-            <Link to={`/product/${product.title}`} >
-                <img className='product-image' src={product.imageUrl} alt="alt"/>
+            <Link to={`/product/${product.name}`} >
+                <img className='product-image' src={product.imageurl} alt="alt"/>
             </Link>
 
             <div className='product-description-container'>
-                <Link to={`/product/${product.title}`} onClick={() => dispatch(selectProduct(product))}>
-                    <h3 className="product-title">{product.title}</h3>
+                <Link to={`/product/${product.name}`} onClick={() => dispatch(selectProduct(product))}>
+                    <h3 className="product-title">{product.name}</h3>
                 </Link>
 
                 <h4 className="product-author">{product.author}</h4>
@@ -176,7 +176,7 @@ export function ProductW ( {product} ) {
 
                 <DescriptionContainer>
                     <Section borderBottom>
-                        <Link to={`/product/${product.title}`} >
+                        <Link to={`/product/${product.name}`} >
                             <ProductTitle fontSize='18pt'>{product.longTitle}</ProductTitle>
                         </Link>
                     </Section>
@@ -295,11 +295,11 @@ export function ProductT( {product} ) {
     return (
         <Container style={{height: '200px'}}>
             <ProductContainer>
-                <ProductImage w={'175px'} h={'180px'} src={product.imageUrl} alt="productImage"/>
+                <ProductImage w={'175px'} h={'180px'} src={product.imageurl} alt="productImage"/>
 
                 <DescriptionContainer>
                     <Section borderBottom>
-                        <Link to={`/product/${product.title}`} >
+                        <Link to={`/product/${product.name}`} >
                             <ProductTitle fontSize='18pt'>{product.longTitle}</ProductTitle>
                         </Link>
                     </Section>
