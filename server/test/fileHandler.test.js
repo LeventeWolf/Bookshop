@@ -1,4 +1,4 @@
-const fileHandler = require('../lib/fileHandler');
+const fileHandler = require('../src/lib/fileHandler');
 
 test('getWishlistProducts: Should get Selim\'s wishlist', () => {
     const result = fileHandler.getWishlistProducts('selim');

@@ -6,7 +6,7 @@ const app = express();
 
 app.use(cors({origin: 'http://localhost:3000'}));
 
-const router = require('./routes/router.js');
+const router = require('./src/routes/router.js');
 
 const PORT = 3001
 
