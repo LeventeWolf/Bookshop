@@ -75,7 +75,7 @@ Start oracle-12c in your Docker desktop app
 
 **[Linux]:** 
 ```
-    docker run -p 8080:8080 -p 1521:1521 truevoly/oracle-12c
+docker run -p 8080:8080 -p 1521:1521 truevoly/oracle-12c
 ```
 
 ##### Start Apache server
