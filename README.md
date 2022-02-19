@@ -50,7 +50,7 @@ Detailed installation: https://github.com/MaksymBilenko/docker-oracle-12c
     [Windows/MacOS]: Change `libPath` location in **server/src/dao/main_dao.js** to your downloaded oracle-client path <br>
     [Linux]: export to path 
     ```
-    PATH="$PATH:/your/path/to/instantclient_19_14";export PATH
+    export LD_LIBRARY_PATH=/home/user/oracle/instantclient_19_14:$LD_LIBRARY_PATH
     ``` 
 <hr>
 
