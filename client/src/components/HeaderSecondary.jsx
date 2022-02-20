@@ -51,7 +51,7 @@ function HeaderSecondary() {
                     <div className="basket-wrap">
                         <NavLink className="navlink" to="/basket">
                             <span>{basketNumberOfProducts}</span>
-                            <img className="basket-icon" src="https://image.flaticon.com/icons/png/512/68/68892.png"
+                            <img className="basket-icon" src="https://icon-library.com/images/basket-icon/basket-icon-24.jpg"
                                  alt="B"/>
                         </NavLink>
                     </div>
