@@ -3,7 +3,6 @@ const fileHandler = require('../lib/fileHandler');
 const dao = require('../dao/main_dao');
 
 router.get("/api/all-books", async (req, res) => {
-    // const allBooks = await DAO.getAllBooks();
     const allBooks = await dao.getAllBooks();
 
     return res.status(200).send(allBooks);
