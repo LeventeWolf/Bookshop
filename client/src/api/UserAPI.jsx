@@ -27,6 +27,7 @@ export async function register(emailRef, usernameRef, passwordRef, callback, dis
         }
     )
     if(response){
+        console.log(response.data)
         dispatch(loginSuccess({username:usernameRef, avatar:'', isMember:true}))
     }
 }

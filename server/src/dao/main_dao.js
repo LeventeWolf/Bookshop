@@ -74,5 +74,19 @@ async function getAllBooks() {
     }
 }
 
+async function registerUser({username, password, email}) {
+    const sql = `INSERT INTO WOLF.CLIENT (username, email, ppassword, FIRSTNAME, LASTNAME, AVATAR) 
+                 VALUES ('${username}', '${email}', '${password}', 'firstname', 'lastname', 'avatar')`;
 
-module.exports = {getAllProducts, getAllBooks}
+    try {
+        await connection.execute(sql, binds, options);
+        console.log(`[DB-CLIENT] Register successful!`);
+        return `[DB-CLIENT] Register successful!`;
+    } catch (error) {
+        console.log(error.message);
+        console.log(sql)
+        return `[DB-CLIENT] Error in Register!`;
+    }
+}
+
+module.exports = {getAllProducts, getAllBooks, registerUser}

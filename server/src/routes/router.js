@@ -30,11 +30,14 @@ router.post('/api/signin', async (req, res) => {
 
 router.post('/api/registration', async (req, res) =>{
     const userData = req.body;
-    if(req.body.username === 'edem46'){
-        return res.status(200).send(true)
-    }else{
-        // JSON formaban kell vissza amelyinel problema annal true legyen
-        return res.status(400).json({username: true, password: false, email: false})
+
+    try {
+        const result = await dao.registerUser(userData);
+        return res.status(200).send(result);
+    } catch (error) {
+        console.log(`[ROUTER-REGISTER] Error!`);
+        console.log(error);
+        return res.status(400);
     }
 })
 
