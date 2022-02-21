@@ -8,17 +8,27 @@ function HeaderSecondary() {
     const basket = useSelector(state => state.basket)
     const user = useSelector(state => state.user);
 
-    let basketNumberOfProducts = 0;
-    let sum = 0;
+    function getProductsLen() {
+        let basketNumberOfProducts = 0;
 
-    basket.forEach(product => {
-        basketNumberOfProducts += product.quantity;
-        if (user.isMember) {
-            sum += product.quantity * Math.round(product.price * 0.9);
-        } else {
-            sum += product.quantity * product.price;
-        }
-    })
+        basket.forEach(product => basketNumberOfProducts += product.quantity);
+
+        return basketNumberOfProducts;
+    }
+
+    function getSum() {
+        let sum = 0;
+        basket.forEach(product => {
+            if (user.isMember) {
+                sum += product.quantity * Math.round(product.price * 0.9);
+            } else {
+                sum += product.quantity * product.price;
+            }
+        })
+
+        return sum;
+    }
+
 
     return (
         <div className="header-secondary-wrap">
@@ -43,15 +53,16 @@ function HeaderSecondary() {
 
                 <div className="right-section">
                     <div className="total">
-                        {numberWithSpaces(sum)} Ft
+                        {numberWithSpaces(getSum())} Ft
                     </div>
 
                     <div className="line"/>
 
                     <div className="basket-wrap">
                         <NavLink className="navlink" to="/basket">
-                            <span>{basketNumberOfProducts}</span>
-                            <img className="basket-icon" src="https://icon-library.com/images/basket-icon/basket-icon-24.jpg"
+                            <span>{getProductsLen()}</span>
+                            <img className="basket-icon"
+                                 src="https://icon-library.com/images/basket-icon/basket-icon-24.jpg"
                                  alt="B"/>
                         </NavLink>
                     </div>

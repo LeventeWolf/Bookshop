@@ -5,7 +5,20 @@ const dao = require('../dao/main_dao');
 router.get("/api/all-books", async (req, res) => {
     const allBooks = await dao.getAllBooks();
 
-    return res.status(200).send(allBooks);
+    const result = initQuantity(allBooks);
+
+    return res.status(200).send(result);
+
+    function initQuantity(allBooks) {
+        const result = []
+
+        allBooks.forEach(product => {
+            product['quantity'] = 1;
+            result.push(product)
+        })
+
+        return result;
+    }
 });
 
 router.get("/api/test", async (req, res) => {

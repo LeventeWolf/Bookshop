@@ -16,8 +16,8 @@ export const wishlistReducer = (wishlist = [], {type, payload}) => {
 
             // If already has this product, do not add
             for (const wishlistProduct of wishlistCopy) {
-                console.log(product.title, wishlistProduct.title)
-                if (wishlistProduct.title === product.title) {
+                console.log(product.name, wishlistProduct.name)
+                if (wishlistProduct.name === product.name) {
                     return wishlist;
                 }
             }
@@ -27,7 +27,7 @@ export const wishlistReducer = (wishlist = [], {type, payload}) => {
 
         case WishlistActionTypes.REMOVE_PRODUCT:
             for (const wishlistProduct of wishlistCopy) {
-                if (wishlistProduct.title === payload.title) {
+                if (wishlistProduct.name === payload.name) {
                     wishlistProduct.quantity--;
 
                     break;

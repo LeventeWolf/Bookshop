@@ -12,7 +12,7 @@ export const basketReducer = (basket = [], {type, payload}) => {
 
             // If already has this product, increase quantity
             for (const basketProduct of basket) {
-                if (basketProduct.title === product.title) {
+                if (basketProduct.name === product.name) {
                     basketProduct.quantity++;
                     return basketCopy;
                 }
@@ -23,7 +23,7 @@ export const basketReducer = (basket = [], {type, payload}) => {
 
         case BasketActionTypes.REMOVE_PRODUCT:
             for (const basketProduct of basket) {
-                if (basketProduct.title === payload.title) {
+                if (basketProduct.name === payload.name) {
                     basketProduct.quantity--;
 
                     break;

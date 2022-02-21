@@ -34,6 +34,22 @@ const options = {
 };
 
 
+function getDate() {
+    function pad2(n) {
+        return (n < 10 ? '0' : '') + n;
+    }
+
+    const date = new Date();
+    const month = pad2(date.getMonth() + 1);//months (0-11)
+    const day = pad2(date.getDate());//day (1-31)
+    const year = date.getFullYear();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+    const sec = date.getSeconds();
+
+    return year + "/" + month + "/" + day + "T" + hour + ':' + minute + ':' + sec;
+}
+
 function convertKeysLowercase(obj) {
     let key, keys = Object.keys(obj);
     let n = keys.length;
@@ -64,10 +80,10 @@ async function getAllProducts() {
 async function getAllBooks() {
     const sql = `SELECT *
                  FROM PRODUCT
-                 INNER JOIN BOOK ON BOOK.ID = PRODUCT.ID`;
+                          INNER JOIN BOOK ON BOOK.ID = PRODUCT.ID`;
 
     try {
-        const result =  await connection.execute(sql, binds, options)
+        const result = await connection.execute(sql, binds, options)
 
         return formatRow(result.rows);
     } catch (error) {
@@ -77,7 +93,7 @@ async function getAllBooks() {
 }
 
 async function registerUser({username, password, email}) {
-    const sql = `INSERT INTO CLIENT (username, email, ppassword, FIRSTNAME, LASTNAME, AVATAR) 
+    const sql = `INSERT INTO CLIENT (username, email, ppassword, FIRSTNAME, LASTNAME, AVATAR)
                  VALUES ('${username}', '${email}', '${password}', 'firstname', 'lastname', 'avatar')`;
 
     try {
@@ -93,9 +109,11 @@ async function registerUser({username, password, email}) {
 
 async function checkout(username, products) {
     const result = []
+    const date = getDate();
 
     for (const product of products) {
-        const sql = `INSERT INTO PURCHASE (username, productId) VALUES ('${username}', '${product.id}' )`;
+        const sql = `INSERT INTO PURCHASE (username, productId, quantity, pdate)
+                     VALUES ('${username}', ${product.id}, ${product.quantity}, '${date}')`;
 
         try {
             await connection.execute(sql, binds, options);
