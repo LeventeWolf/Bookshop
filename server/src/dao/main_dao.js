@@ -4,6 +4,7 @@ const fs = require('fs');
 const oracledb = require('oracledb');
 const dbConfig = require('../../config/db');
 const {restartable} = require("nodemon/lib/config/defaults");
+const {user} = require("../../config/db");
 
 let libPath; // [Linux]: export LD_LIBRARY_PATH=/path/to/your/instantclient_19_14:$LD_LIBRARY_PATH
 
@@ -130,4 +131,22 @@ async function checkout(username, products) {
     return result;
 }
 
-module.exports = {getAllProducts, getAllBooks, registerUser, checkout}
+async function getWishlistProducts(username) {
+    const sql = `SELECT *
+                 FROM WOLF.WISHLIST
+                          INNER JOIN PRODUCT ON WISHLIST.PRODUCT_ID = PRODUCT.ID
+                          INNER JOIN BOOK ON BOOK.ID = PRODUCT.ID
+                          INNER JOIN WOLF.CLIENT ON CLIENT.USERNAME = WISHLIST.USERNAME
+                 WHERE WISHLIST.USERNAME = '${username}'`;
+
+    try {
+        const result = await connection.execute(sql, binds, options)
+
+        return formatRow(result.rows);
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+}
+
+module.exports = {getAllProducts, getAllBooks, registerUser, checkout, getWishlistProducts}
