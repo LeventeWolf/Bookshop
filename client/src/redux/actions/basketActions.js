@@ -1,4 +1,6 @@
 import { BasketActionTypes } from "../constants/action-types";
+import {initWishlistProducts} from "./wishlistActions";
+import Axios from "axios";
 
 export const initBasketProducts = (products) => {
     return {
@@ -20,6 +22,21 @@ export const removeProductFromBasket = (product) => {
         payload: product
     }
 }
+
+
+export const handleCheckoutAction = (username, products)  => async (dispatch) => {
+    Axios.post(`http://localhost:3001/api/checkout/`, {
+        username,
+        products
+    }).then(response => {
+        console.log(response)
+    }).catch(response => {
+        console.log(response)
+    });
+
+    dispatch(checkout())
+}
+
 
 export const checkout = () => {
     return {

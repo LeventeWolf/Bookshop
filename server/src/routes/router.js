@@ -41,6 +41,24 @@ router.post('/api/registration', async (req, res) =>{
     }
 })
 
+
+// Basket
+
+router.post('/api/checkout', async (req, res) =>{
+    const username = req.body.username;
+    const products = req.body.products;
+
+    try {
+        const result = await dao.checkout(username, products);
+        return res.status(200).send(result);
+    } catch (error) {
+        console.log(`[ROUTER-REGISTER] Error!`);
+        console.log(error);
+        return res.status(400);
+    }
+})
+
+
 // Wishlist
 
 router.post("/api/wishlist", async (req, res) => {

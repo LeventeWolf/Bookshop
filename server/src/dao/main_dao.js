@@ -3,6 +3,7 @@ process.env.ORA_SDTZ = 'UTC';
 const fs = require('fs');
 const oracledb = require('oracledb');
 const dbConfig = require('../../config/db');
+const {restartable} = require("nodemon/lib/config/defaults");
 
 let libPath; // [Linux]: export LD_LIBRARY_PATH=/path/to/your/instantclient_19_14:$LD_LIBRARY_PATH
 
@@ -26,6 +27,7 @@ let connection;
 const binds = {};
 const options = {
     outFormat: oracledb.OUT_FORMAT_OBJECT,   // query result format
+    autoCommit: true
     // extendedMetaData: true,               // get extra metadata
     // prefetchRows:     100,                // internal buffer allocation size for tuning
     // fetchArraySize:   100                 // internal buffer allocation size for tuning
@@ -75,7 +77,7 @@ async function getAllBooks() {
 }
 
 async function registerUser({username, password, email}) {
-    const sql = `INSERT INTO WOLF.CLIENT (username, email, ppassword, FIRSTNAME, LASTNAME, AVATAR) 
+    const sql = `INSERT INTO CLIENT (username, email, ppassword, FIRSTNAME, LASTNAME, AVATAR) 
                  VALUES ('${username}', '${email}', '${password}', 'firstname', 'lastname', 'avatar')`;
 
     try {
@@ -89,4 +91,25 @@ async function registerUser({username, password, email}) {
     }
 }
 
-module.exports = {getAllProducts, getAllBooks, registerUser}
+async function checkout(username, products) {
+    const result = []
+
+    for (const product of products) {
+        const sql = `INSERT INTO PURCHASE (username, productId) VALUES ('${username}', '${product.id}' )`;
+
+        try {
+            await connection.execute(sql, binds, options);
+            const message = `[DB-PURCHASE] ${sql}`;
+            result.push(message);
+        } catch (error) {
+            result.push(error.message);
+            console.log(error.message);
+            console.log(sql)
+        }
+    }
+
+    result.forEach(message => console.log(message))
+    return result;
+}
+
+module.exports = {getAllProducts, getAllBooks, registerUser, checkout}
