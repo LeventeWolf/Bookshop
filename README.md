@@ -19,7 +19,7 @@ More: [documentation/screenshots](https://github.com/LeventeWolf/Bookshop/tree/m
 
 ### Prerequisites:
 Client & Server
-- NodeJS version: 16
+- NodeJS version: 16 (not supported: 17)
 - Web browser: Chrome, Mozilla firefox,
 
 Database
