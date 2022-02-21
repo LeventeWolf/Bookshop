@@ -48,7 +48,10 @@ Detailed installation: https://github.com/MaksymBilenko/docker-oracle-12c
 2. Download **oracle-client** [Version 19.14.0.0.0] <br>
     https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html <br>
     [Windows/MacOS]: Change `libPath` location in **server/src/dao/main_dao.js** to your downloaded oracle-client path <br>
-    [Linux]: export to path 
+    [Linux]: download libaio1 && export oracle-client to path 
+    ```
+    sudo apt-get install libaio1
+    ```
     ```
     export LD_LIBRARY_PATH=/home/user/oracle/instantclient_19_14:$LD_LIBRARY_PATH
     ``` 
