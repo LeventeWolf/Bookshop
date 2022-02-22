@@ -78,7 +78,7 @@ router.post("/api/wishlist", async (req, res) => {
     const username = req.body.username;
 
     const products = fileHandler.getWishlistProducts(username);
-    const products = dao.getWishlistProducts(username);
+    // const products = dao.getWishlistProducts(username);
 
     return res.status(200).send(products);
 });
