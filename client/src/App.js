@@ -33,7 +33,7 @@ export default function App(){
                 <Route path="/Profile" element={<Profile/>}/>
                 <Route path="/Logout" element={<><Logout/><Join/></>}/>
                 <Route path="/basket" element={<Basket/>}/>
-                <Route path="/product/:productTitle" element={<ProductPage/>}/>
+                <Route path="/product/:id/:productTitle" element={<ProductPage/>}/>
 
                 {/* TemplatePages */}
                 <Route path="/wishlist" element={<Wishlist />}/>

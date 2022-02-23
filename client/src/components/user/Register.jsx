@@ -45,7 +45,7 @@ export function Register() {
         if(textLength > 6 && numbersInText && isFirstElementCapital){
             isValidText(() => true)
         }else{
-            isValidText(() => false)
+            isValidText(() => true)
         }
     }
 
@@ -82,7 +82,7 @@ export function Register() {
                 <InputGroup id="Password" mb={2}>
                     <InputLeftElement ml={3} mr={1}
                         children={
-                            <Button variant='subtle' size="xs" h="full" onClick={showPassword}>
+                            <Button variant='subtle' size="xs" h="full" onClick={showPassword} tabIndex={-1}>
                                 {passwordVisible ?
                                     <img className="pwd-eye" src="https://cdn-icons-png.flaticon.com/512/159/159078.png" alt={'Show'}/>
                                     :

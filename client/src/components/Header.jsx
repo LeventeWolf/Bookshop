@@ -7,7 +7,7 @@ function Header() {
     function handleSearch() {
         Axios.get(`http://localhost:3001/api/test/`)
             .then(response => {
-                console.log(response.data.rows)
+                console.log(response.data)
             }).catch(response => {
                 console.log(response)
             })

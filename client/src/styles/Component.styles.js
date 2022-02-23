@@ -40,6 +40,8 @@ export const ProductContainer = styled.div`
   padding: 10px 20px;
   background-color: white;
 
+  width: 100%;
+  
   display: flex;
   box-shadow: ${boxShadow};
 `
@@ -66,6 +68,7 @@ export const DescriptionContainer = styled.div`
   margin-left: 40px;
 
   display: flex;
+  flex-grow: 2;
   flex-direction: column;
   justify-content: space-between;
 `;
