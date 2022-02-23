@@ -35,4 +35,4 @@ function formatRow(rows) {
 }
 
 
-module.exports = {getDate, convertKeysLowercase, formatRow}
+module.exports = {getDate, formatRow}

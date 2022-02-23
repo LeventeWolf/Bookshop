@@ -7,6 +7,7 @@ import {
 import Axios from "axios";
 import {uuid} from "uuidv4";
 import {ProductT} from "./TemplateProducts";
+import v4 from "uuid/v4";
 
 
 export default function TemplatePage( {name, api} ) {
@@ -28,7 +29,7 @@ export default function TemplatePage( {name, api} ) {
             <div id="product-page">
                 <PageTitle>{name}</PageTitle>
 
-                {products.map(product => <ProductT product={product} key={uuid()}/>)}
+                {products.map(product => <ProductT product={product} key={v4()}/>)}
             </div>
         </Main>
     );

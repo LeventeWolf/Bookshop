@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {v4} from "uuid";
 import Axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {shuffleArray} from "../lib/helper";
 import {Main, PageTitle,} from "../styles/Component.styles";
 import '../styles/relatedProducts.scss'
@@ -16,12 +16,16 @@ import {useParams} from "react-router-dom";
 export default function ProductPage() {
     const product = useSelector(state => state.product);
     const dispatch = useDispatch();
-    const { productTitle } = useParams();
+
+    const {id} = useParams();
+    const {productTitle} = useParams();
 
     useEffect(() => {
-        dispatch(fetchProduct(productTitle));
+        dispatch(fetchProduct(id, productTitle));
 
-        return () => {dispatch(removeSelectedProduct())};
+        return () => {
+            dispatch(removeSelectedProduct())
+        };
     }, []);
 
     return (
@@ -33,9 +37,9 @@ export default function ProductPage() {
                     <>
                         <ProductL product={product}/>
 
-                        <RelatedProducts />
+                        <RelatedProducts/>
                     </>
-                        :
+                    :
                     '404 Product Not Found!'
                 }
             </div>

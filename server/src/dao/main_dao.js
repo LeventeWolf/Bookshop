@@ -21,17 +21,34 @@ const options = {
 
 
 class dao {
+
     async getAllProducts() {
         const sql = `SELECT *
-                 FROM PRODUCT`;
+                     FROM PRODUCT`;
 
         return await connection.execute(sql, binds, options);
     }
 
+    async getProductByID(productID) {
+        const sql = `SELECT *
+                     FROM PRODUCT
+                              INNER JOIN BOOK ON BOOK.ID = PRODUCT.ID
+                     WHERE BOOK.ID = '${productID}'`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+            return helper.formatRow(result.rows)[0];
+        } catch (error) {
+            console.log(error);
+            console.log(sql)
+            return [];
+        }
+    }
+
     async getAllBooks() {
         const sql = `SELECT *
-                 FROM PRODUCT
-                          INNER JOIN BOOK ON BOOK.ID = PRODUCT.ID`;
+                     FROM PRODUCT
+                              INNER JOIN BOOK ON BOOK.ID = PRODUCT.ID`;
 
         try {
             const result = await connection.execute(sql, binds, options)
@@ -45,7 +62,7 @@ class dao {
 
     async registerUser({username, password, email}) {
         const sql = `INSERT INTO CLIENT (username, email, ppassword, FIRSTNAME, LASTNAME, AVATAR)
-                 VALUES ('${username}', '${email}', '${password}', 'firstname', 'lastname', 'avatar')`;
+                     VALUES ('${username}', '${email}', '${password}', 'firstname', 'lastname', 'avatar')`;
 
         try {
             await connection.execute(sql, binds, options);
@@ -64,7 +81,7 @@ class dao {
 
         for (const product of products) {
             const sql = `INSERT INTO PURCHASE (username, productId, quantity, pdate)
-                     VALUES ('${username}', ${product.id}, ${product.quantity}, '${date}')`;
+                         VALUES ('${username}', ${product.id}, ${product.quantity}, '${date}')`;
 
             try {
                 await connection.execute(sql, binds, options);
@@ -86,11 +103,11 @@ class dao {
 
     async getWishlistProducts(username) {
         const sql = `SELECT *
-                 FROM WOLF.WISHLIST
-                          INNER JOIN PRODUCT ON WISHLIST.PRODUCT_ID = PRODUCT.ID
-                          INNER JOIN BOOK ON BOOK.ID = PRODUCT.ID
-                          INNER JOIN WOLF.CLIENT ON CLIENT.USERNAME = WISHLIST.USERNAME
-                 WHERE WISHLIST.USERNAME = '${username}'`;
+                     FROM WOLF.WISHLIST
+                              INNER JOIN PRODUCT ON WISHLIST.PRODUCT_ID = PRODUCT.ID
+                              INNER JOIN BOOK ON BOOK.ID = PRODUCT.ID
+                              INNER JOIN WOLF.CLIENT ON CLIENT.USERNAME = WISHLIST.USERNAME
+                     WHERE WISHLIST.USERNAME = '${username}'`;
 
         try {
             const result = await connection.execute(sql, binds, options)
@@ -103,7 +120,8 @@ class dao {
     }
 
     async addProductIDToWishlist(username, productId) {
-        const sql = `INSERT INTO WISHLIST (username, product_id) VALUES ('${username}', ${0})`;
+        const sql = `INSERT INTO WISHLIST (username, product_id)
+                     VALUES ('${username}', ${productId})`;
 
         try {
             await connection.execute(sql, binds, options);
@@ -116,9 +134,11 @@ class dao {
     }
 
     async removeProductIDFromWishlist(username, productID) {
-        const sql = `DELETE FROM WISHLIST
-                 WHERE username = '${username}' AND product_ID = ${productID}
-                `;
+        const sql = `DELETE
+                     FROM WISHLIST
+                     WHERE username = '${username}'
+                       AND product_ID = ${productID}
+        `;
 
         try {
             await connection.execute(sql, binds, options);

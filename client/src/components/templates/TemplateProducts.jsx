@@ -37,7 +37,7 @@ export function ProductSM ( {product} ) {
 
     return (
         <div className="featuring-product">
-            <Link to={`/product/${product.name}`} onClick={() => dispatch(selectProduct(product))} >
+            <Link to={`/product/${product.id}/${product.name}`} onClick={() => dispatch(selectProduct(product))} >
                 <img src={product.imageurl} className="product-image" alt="img"/>
             </Link>
 
@@ -81,7 +81,7 @@ export function ProductM ( {product} ) {
 
     return (
         <div className="supply-product">
-            <Link to={`/product/${product.name}`} >
+            <Link to={`/product/${product.id}/${product.name}`} >
                 <img src={product.imageurl}
                      className="supply-product-image" alt="img"/>
 
@@ -236,11 +236,11 @@ export function ProductL ( {product} ) {
     return (
         <Container h={'500px'}>
             <ProductContainer style={{height: 400}}>
-                <ProductImage w={'280px'} src={product.imageUrl} alt="productImage"/>
+                <ProductImage w={'280px'} src={product.imageurl} alt="productImage"/>
 
                 <DescriptionContainer>
                     <Section borderBottom>
-                        <ProductTitle fontSize='20pt'>{product.longTitle}</ProductTitle>
+                        <ProductTitle fontSize='20pt'>{product.name}</ProductTitle>
                     </Section>
 
                     <Section style={{marginBottom: 'auto', marginTop: '40px'}}>

@@ -88,10 +88,10 @@ router.post("/api/wishlist", async (req, res) => {
 
 router.post("/api/wishlist/add", async (req, res) => {
     const username = req.body.username;
-    const product = req.body.product;
+    const productID = req.body.productID;
 
     try {
-        const result = await dao.addProductIDToWishlist(username, product);
+        const result = await dao.addProductIDToWishlist(username, productID);
         return res.status(200).send(result);
     } catch (error) {
         console.log(`[ROUTER-WISHLIST-ADD] Error!`);
@@ -116,13 +116,20 @@ router.post("/api/wishlist/remove", async (req, res) => {
 
 });
 
+// ProductPage
 
+router.get('/api/product/:id/:productTitle', async (req, res) => {
+    const productID = req.params.id;
 
-router.get('/api/product/:productTitle', async (req, res) => {
-    const productTitle = req.params.productTitle;
-    const product = fileHandler.getProductByTitle(productTitle)
+    try {
+        const product = await dao.getProductByID(productID)
+        return res.status(200).send(product);
+    } catch (error) {
+        console.log(`[ROUTER-PRODUCT] Get product error!`)
+        console.log(error)
+        return res.status(400).send(error);
+    }
 
-    return res.status(200).send(product);
 });
 
 router.get('/api/profile', (req, res) => {
