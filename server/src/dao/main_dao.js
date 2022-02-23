@@ -3,8 +3,7 @@ process.env.ORA_SDTZ = 'UTC';
 const fs = require('fs');
 const oracledb = require('oracledb');
 const dbConfig = require('../../config/db');
-const {restartable} = require("nodemon/lib/config/defaults");
-const {user} = require("../../config/db");
+const helper = require('../lib/daoHelper')
 
 let libPath; // [Linux]: export LD_LIBRARY_PATH=/path/to/your/instantclient_19_14:$LD_LIBRARY_PATH
 
@@ -35,42 +34,6 @@ const options = {
 };
 
 
-function getDate() {
-    function pad2(n) {
-        return (n < 10 ? '0' : '') + n;
-    }
-
-    const date = new Date();
-    const month = pad2(date.getMonth() + 1);//months (0-11)
-    const day = pad2(date.getDate());//day (1-31)
-    const year = date.getFullYear();
-    const hour = date.getHours();
-    const minute = date.getMinutes();
-    const sec = date.getSeconds();
-
-    return year + "/" + month + "/" + day + "T" + hour + ':' + minute + ':' + sec;
-}
-
-function convertKeysLowercase(obj) {
-    let key, keys = Object.keys(obj);
-    let n = keys.length;
-    let result = {};
-    while (n--) {
-        key = keys[n];
-        result[key.toLowerCase()] = obj[key];
-    }
-
-    return result;
-}
-
-function formatRow(rows) {
-    const result = [];
-
-    rows.forEach(row => result.push(convertKeysLowercase(row)))
-
-    return result;
-}
-
 async function getAllProducts() {
     const sql = `SELECT *
                  FROM PRODUCT`;
@@ -86,7 +49,7 @@ async function getAllBooks() {
     try {
         const result = await connection.execute(sql, binds, options)
 
-        return formatRow(result.rows);
+        return helper.formatRow(result.rows);
     } catch (error) {
         console.log(error);
         return [];
@@ -110,7 +73,7 @@ async function registerUser({username, password, email}) {
 
 async function checkout(username, products) {
     const result = []
-    const date = getDate();
+    const date = helper.getDate();
 
     for (const product of products) {
         const sql = `INSERT INTO PURCHASE (username, productId, quantity, pdate)
@@ -142,7 +105,7 @@ async function getWishlistProducts(username) {
     try {
         const result = await connection.execute(sql, binds, options)
 
-        return formatRow(result.rows);
+        return helper.formatRow(result.rows);
     } catch (error) {
         console.log(error);
         return [];
