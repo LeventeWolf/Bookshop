@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const fileHandler = require('../lib/fileHandler');
-const dao = require('../dao/main_dao');
+const main_dao = require('../dao/main_dao');
+const dao = new main_dao.dao();
 
 function initQuantity(products) {
     const result = []
