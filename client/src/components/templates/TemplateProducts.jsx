@@ -172,12 +172,12 @@ export function ProductW ( {product} ) {
     return (
         <Container style={{height: '200px'}}>
             <ProductContainer>
-                <ProductImage w={'175px'} h={'180px'} src={product.imageUrl} alt="productImage"/>
+                <ProductImage w={'175px'} h={'180px'} src={product.imageurl} alt="productImage"/>
 
                 <DescriptionContainer>
                     <Section borderBottom>
                         <Link to={`/product/${product.name}`} >
-                            <ProductTitle fontSize='18pt'>{product.longTitle}</ProductTitle>
+                            <ProductTitle style={{width: '600px'}} fontSize='18pt'>{product.name}</ProductTitle>
                         </Link>
                     </Section>
 

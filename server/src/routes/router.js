@@ -2,23 +2,22 @@ const router = require("express").Router();
 const fileHandler = require('../lib/fileHandler');
 const dao = require('../dao/main_dao');
 
+function initQuantity(products) {
+    const result = []
+
+    products.forEach(product => {
+        product['quantity'] = 1;
+        result.push(product)
+    })
+
+    return result;
+}
+
 router.get("/api/all-books", async (req, res) => {
     const allBooks = await dao.getAllBooks();
-
     const result = initQuantity(allBooks);
 
     return res.status(200).send(result);
-
-    function initQuantity(allBooks) {
-        const result = []
-
-        allBooks.forEach(product => {
-            product['quantity'] = 1;
-            result.push(product)
-        })
-
-        return result;
-    }
 });
 
 router.get("/api/test", async (req, res) => {
@@ -77,19 +76,27 @@ router.post('/api/checkout', async (req, res) =>{
 router.post("/api/wishlist", async (req, res) => {
     const username = req.body.username;
 
-    const products = fileHandler.getWishlistProducts(username);
-    // const products = dao.getWishlistProducts(username);
-
-    return res.status(200).send(products);
+    try {
+        const products = await dao.getWishlistProducts(username);
+        const result = initQuantity(products);
+        return res.status(200).send(result);
+    } catch (e) {
+        console.log(e)
+    }
 });
 
 router.post("/api/wishlist/add", async (req, res) => {
     const username = req.body.username;
     const product = req.body.product;
 
-    fileHandler.addProductToWishlist(username, product);
-
-    return res.status(200).send(`[DB-WISHLIST] Add '${product.title}'`);
+    try {
+        const result = await dao.addProductIDToWishlist(username, product);
+        return res.status(200).send(result);
+    } catch (error) {
+        console.log(`[ROUTER-WISHLIST-ADD] Error!`);
+        console.log(error);
+        return res.status(400);
+    }
 });
 
 router.post("/api/wishlist/remove", async (req, res) => {

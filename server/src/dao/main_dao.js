@@ -104,7 +104,7 @@ async function getWishlistProducts(username) {
 
     try {
         const result = await connection.execute(sql, binds, options)
-
+        console.log(`[DB-WISHLIST] Selecting all products for user ${username}!`);
         return helper.formatRow(result.rows);
     } catch (error) {
         console.log(error);
@@ -112,4 +112,18 @@ async function getWishlistProducts(username) {
     }
 }
 
-module.exports = {getAllProducts, getAllBooks, registerUser, checkout, getWishlistProducts}
+async function addProductIDToWishlist(username, productId) {
+    const sql = `INSERT INTO WISHLIST (username, product_id) VALUES ('${username}', ${0})`;
+
+    try {
+        await connection.execute(sql, binds, options);
+        return `[DB-WISHLIST] ${sql}`
+    } catch (error) {
+        console.log(error.message);
+        console.log(sql)
+        return error.message;
+    }
+}
+
+
+module.exports = {getAllProducts, getAllBooks, registerUser, checkout, getWishlistProducts, addProductIDToWishlist}
