@@ -170,9 +170,9 @@ export function ProductW ( {product} ) {
     const username = useSelector(state => state.user.username);
 
     return (
-        <Container style={{height: '200px'}}>
+        <Container>
             <ProductContainer>
-                <ProductImage w={'175px'} h={'180px'} src={product.imageurl} alt="productImage"/>
+                <ProductImage w={'175px'} h={'230px'} src={product.imageurl} alt="productImage"/>
 
                 <DescriptionContainer>
                     <Section borderBottom>

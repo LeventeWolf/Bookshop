@@ -94,6 +94,10 @@ async function checkout(username, products) {
     return result;
 }
 
+
+
+// Wishlist
+
 async function getWishlistProducts(username) {
     const sql = `SELECT *
                  FROM WOLF.WISHLIST
@@ -125,5 +129,19 @@ async function addProductIDToWishlist(username, productId) {
     }
 }
 
+async function removeProductIDFromWishlist(username, productID) {
+    const sql = `DELETE FROM WISHLIST
+                 WHERE username = '${username}' AND product_ID = ${productID}
+                `;
 
-module.exports = {getAllProducts, getAllBooks, registerUser, checkout, getWishlistProducts, addProductIDToWishlist}
+    try {
+        await connection.execute(sql, binds, options);
+        return `[DB-WISHLIST] ${sql}`
+    } catch (error) {
+        throw error
+    }
+}
+
+
+module.exports = {getAllProducts, getAllBooks, registerUser, checkout, getWishlistProducts, addProductIDToWishlist,
+                removeProductIDFromWishlist}

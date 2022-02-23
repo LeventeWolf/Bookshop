@@ -103,9 +103,16 @@ router.post("/api/wishlist/remove", async (req, res) => {
     const username = req.body.username;
     const product = req.body.product;
 
-    fileHandler.removeProductFromWishlist(username, product);
+    try {
+        const result = await dao.removeProductIDFromWishlist(username, product.id);
+        console.log(result)
+        return res.status(200).send(`[DB-WISHLIST] ${result}`);
+    } catch (error) {
+        console.log(`[DB-WISHLIST-REMOVE] Error!`);
+        console.log(error);
+        return res.status(400);
+    }
 
-    return res.status(200).send(`[DB-WISHLIST] Removed '${product.title}'`);
 });
 
 
