@@ -30,11 +30,10 @@ export const handleCheckoutAction = (username, products)  => async (dispatch) =>
         products
     }).then(response => {
         console.log(response)
+        dispatch(checkout())
     }).catch(response => {
         console.log(response)
     });
-
-    dispatch(checkout())
 }
 
 
