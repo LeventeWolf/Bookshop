@@ -44,14 +44,18 @@ export default function Basket() {
             return;
         }
 
-        // Save data in database
-        dispatch(handleCheckoutAction(user.username, basket));
+        dispatch(handleCheckoutAction(user.username, basket)) // Save purchase in database
+            .then(response => {
+                // Set to member if purchased more than five Products
+                dispatch(setBoughtAmount(user.boughtAmount + productsNum))
+                dispatch(updateMember());
 
-        // Set to member if purchased more than five Products
-        dispatch(setBoughtAmount(user.boughtAmount + productsNum))
-        dispatch(updateMember());
-
-        alert.success('Checkout successful!');
+                alert.success('Checkout successful!');
+            })
+            .catch(response => {
+                console.log(response)
+                alert.error('Something went wrong!');
+            });
     }
 
 

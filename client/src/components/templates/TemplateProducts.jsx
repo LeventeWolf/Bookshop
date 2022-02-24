@@ -43,7 +43,7 @@ export function ProductSM ( {product} ) {
             </Link>
 
             <div className="featuring-product-description-wrap">
-                <Link to={`/product/${product.name} `} onClick={() => dispatch(selectProduct(product))} >
+                <Link to={`/product/${product.id}/${product.name} `} onClick={() => dispatch(selectProduct(product))} >
                     <h2 className="product-title">
                         {product.name}
                     </h2>
