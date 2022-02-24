@@ -26,6 +26,8 @@ export const userReducer = (user = initialUser, {type, payload}) => {
             return initialUser;
 
         case UserActionTypes.UPDATE_MEMBER:
+            if (user.isMember) return user;
+
             if (user.boughtAmount >= 5) {
                 return {...user, isMember: true};
             }

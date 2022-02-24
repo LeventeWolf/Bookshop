@@ -3,6 +3,7 @@ import '../styles/headerSecondary.scss';
 import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {numberOfProducts, numberWithSpaces, sumOfProducts} from "../lib/helper";
+import basketIcon from '../assets/basketIcon.svg'
 
 function HeaderSecondary() {
     const basket = useSelector(state => state.basket)
@@ -39,9 +40,7 @@ function HeaderSecondary() {
                     <div className="basket-wrap">
                         <NavLink className="navlink" to="/basket">
                             <span>{numberOfProducts(basket)}</span>
-                            <img className="basket-icon"
-                                 src="https://icon-library.com/images/basket-icon/basket-icon-24.jpg"
-                                 alt="B"/>
+                            <img src={basketIcon} className="basket-icon" alt="B"/>
                         </NavLink>
                     </div>
                 </div>
