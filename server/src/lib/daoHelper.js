@@ -26,7 +26,7 @@ function convertKeysLowercase(obj) {
     return result;
 }
 
-function formatRow(rows) {
+function formatRows(rows) {
     const result = [];
 
     rows.forEach(row => result.push(convertKeysLowercase(row)))
@@ -35,4 +35,4 @@ function formatRow(rows) {
 }
 
 
-module.exports = {getDate, formatRow}
+module.exports = {getDate, formatRow: formatRows}

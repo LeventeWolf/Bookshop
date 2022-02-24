@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const fileHandler = require('../lib/fileHandler');
 const main_dao = require('../dao/main_dao');
 const dao = new main_dao.dao();
 
@@ -30,18 +29,37 @@ router.get("/api/test", async (req, res) => {
 router.post('/api/signin', async (req, res) => {
     const username = req.body.userData.name;
     const password = req.body.userData.password;
-    const user = fileHandler.getUser(username, password)
 
-    if (user) {
-        console.log(`[SIGN-IN] Welcome ${username}!`)
-        return res.status(200).send({user, isAuthenticated: user});
-    } else {
-        return res.status(404).send(`[SIGN-IN] Wrong Username || Password!`);
+    try {
+        const user = await dao.getUser(username, password);
+
+        if (user) {
+            console.log(`[SIGN-IN] Welcome ${username}!`)
+            //TODO: Refactor this spaghetti :)
+            user['username'] = user.USERNAME;
+            delete user.USERNAME;
+            user['avatar'] = user.AVATAR;
+            delete user.AVATAR;
+            user['email'] = user.EMAIL;
+            delete user.EMAIL;
+            user['firstName'] = user.FIRSTNAME;
+            delete user.FIRSTNAME;
+            user['lastName'] = user.LASTNAME;
+            delete user.LASTNAME;
+
+            return res.status(200).send({user, isAuthenticated: user});
+        } else {
+            return res.status(404).send(`[SIGN-IN] Wrong Username || Password!`);
+        }
+    } catch (e) {
+        return res.status(400).end();
     }
+
+
 
 });
 
-router.post('/api/registration', async (req, res) =>{
+router.post('/api/registration', async (req, res) => {
     const userData = req.body;
 
     try {
@@ -57,7 +75,7 @@ router.post('/api/registration', async (req, res) =>{
 
 // Basket
 
-router.post('/api/checkout', async (req, res) =>{
+router.post('/api/checkout', async (req, res) => {
     const username = req.body.username;
     const products = req.body.products;
 

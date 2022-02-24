@@ -41,7 +41,7 @@ export function Signin() {
     }
 
     if(user.error && !logged){
-        alert.error("something went wrong")
+        alert.error("Invalid username or password!")
         setLogged(() => true)
     }
 

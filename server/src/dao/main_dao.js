@@ -147,6 +147,29 @@ class dao {
             throw error
         }
     }
+
+    async getUser(username, password) {
+        const sql = `SELECT username, email, firstname, lastname, avatar
+                     FROM CLIENT
+                     WHERE username = '${username}'
+                       AND ppassword = '${password}'`;
+
+        try {
+            const result = await connection.execute(sql, binds, options);
+
+            if (!result.rows[0]) {
+                console.log(`[DB] getUser: Invalid username or password!`)
+                return undefined;
+            }
+
+            console.log(`[DB] getUser: ${username} found!`)
+            return result.rows[0];
+        } catch (error) {
+            console.log(error.message);
+            console.log(sql)
+            return undefined;
+        }
+    }
 }
 
 module.exports = {dao}
