@@ -6,7 +6,6 @@ export const signin = (userData) => async dispatch => {
         await apiClient.post("/signin", {userData}).then(res => {
             dispatch(loginLoading())
             if (res.data.isAuthenticated){
-                console.log(res)
                 dispatch(loginSuccess(res.data.user))
                 return true
             }
@@ -27,7 +26,6 @@ export async function register(emailRef, usernameRef, passwordRef, callback, dis
         }
     )
     if(response){
-        console.log(response.data)
         dispatch(loginSuccess({username:usernameRef, avatar:'', isMember:true}))
     }
 }

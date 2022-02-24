@@ -12,7 +12,6 @@ function Navigation() {
     const dispatch = useDispatch();
     const alert = useAlert();
 
-    console.table(user);
 
     function handleLogout() {
         dispatch(logout());

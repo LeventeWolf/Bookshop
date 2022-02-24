@@ -121,24 +121,6 @@ export const ButtonStyle = styled.button`
   }
 `;
 
-export const WishlistButton = styled.button`
-  border-radius: 5px;
-
-  background-color: #f0f0f0;
-  color: #666666;
-  font-size: 11pt;
-  font-family: Roboto, sans-serif;
-
-  transition: all .3s;
-
-  width: ${props => props.w + 'px'};
-  height: ${props => props.h + 'px'};
-
-  &:hover {
-    background-color: #CECECE;
-  }
-`;
-
 export const ActionsContainer = styled.div`
   background-color: white;
 

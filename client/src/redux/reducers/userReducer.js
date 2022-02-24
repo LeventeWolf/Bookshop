@@ -14,7 +14,6 @@ const initialUser = {
 export const userReducer = (user = initialUser, {type, payload}) => {
     switch (type) {
         case UserActionTypes.LOGIN_SUCCESS:
-            console.log(payload)
             return {...payload, isLoggedIn: true};
 
         case UserActionTypes.LOGIN_ERROR:

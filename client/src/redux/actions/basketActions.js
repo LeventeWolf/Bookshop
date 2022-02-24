@@ -29,7 +29,6 @@ export const handleCheckoutAction = (username, products)  => async (dispatch) =>
         username,
         products
     }).then(response => {
-        console.log(response)
         dispatch(checkout())
     }).catch(response => {
         console.log(response)
