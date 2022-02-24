@@ -165,7 +165,7 @@ export function ProductB ( {product} ) {
 /**
  * W  : Wishlist - used for Wishlist.jsx
  */
-export function ProductW ( {product} ) {
+export function ProductWishlist ({product} ) {
     const isMember = useSelector(state => state.user.isMember);
 
     return (
@@ -211,10 +211,9 @@ export function ProductW ( {product} ) {
                             Add to Basket
                         </BasketButton>
 
-
-                        {/*<WishlistButtonStyle w={200} h={40} onClick={() => dispatch(handleRemoveProductFromWishlist(username, product))}>*/}
-                        {/*    Remove*/}
-                        {/*</WishlistButtonStyle>*/}
+                        <WishlistButton style={{height: '40px'}} product={product} type={'remove'}>
+                            Remove
+                        </WishlistButton>
                     </Section>
                 </Section>
             </ProductContainer>

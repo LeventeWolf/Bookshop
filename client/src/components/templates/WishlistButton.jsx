@@ -2,7 +2,11 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {addProductToBasket} from "../../redux/actions/basketActions";
 import styled from "styled-components";
-import {handleAddProductToWishlist} from "../../redux/actions/wishlistActions";
+import {
+    handleAddProductToWishlist,
+    handleRemoveProductFromWishlist,
+    removeProductFromWishlist
+} from "../../redux/actions/wishlistActions";
 import {useAlert} from "react-alert";
 
 export const WishlistButtonStyle = styled.button`
@@ -23,7 +27,7 @@ export const WishlistButtonStyle = styled.button`
   }
 `;
 
-export default function WishlistButton ( {children, product, style} ) {
+export default function WishlistButton ( {children, product, style, type} ) {
     const dispatch = useDispatch();
     const username = useSelector(state => state.user.username)
     const alert = useAlert();
@@ -40,9 +44,21 @@ export default function WishlistButton ( {children, product, style} ) {
             });
     }
 
+    function removeProductFromWishlist() {
+        dispatch(handleRemoveProductFromWishlist(username, product))
+            .then(response => {
+                alert.success('Product removed from wishlist!')
+            })
+            .catch(response => {
+                alert.error('Something went wrong!');
+                console.log(`[DISPATCH] ERROR IN: Removing product from wishlist!`)
+                console.log(response)
+            });
+    }
+
 
     return (
-        <WishlistButtonStyle style={style} onClick={addProductToWishlist}>
+        <WishlistButtonStyle style={style} onClick={type === 'remove' ? removeProductFromWishlist : addProductToWishlist}>
             {children}
         </WishlistButtonStyle>
     )
