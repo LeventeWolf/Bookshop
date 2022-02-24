@@ -1,16 +1,15 @@
 import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {v4} from "uuid";
-
-import '../styles/basket.scss'
-import {ButtonStyle, Main, PageTitle} from "../styles/Component.styles";
-import {numberWithSpaces} from "../lib/helper";
-import styled from "styled-components";
 import {useAlert} from "react-alert";
-import {checkout, handleCheckoutAction} from "../redux/actions/basketActions";
+import {useDispatch, useSelector} from "react-redux";
+import {handleCheckoutAction} from "../redux/actions/basketActions";
 import {useNavigate} from "react-router-dom";
 import {setBoughtAmount, updateMember} from "../redux/actions/userActions";
+
 import {ProductB} from "./templates/TemplateProducts";
+import {numberWithSpaces} from "../lib/helper";
+import {ButtonStyle, Main, PageTitle} from "../styles/Component.styles";
+import '../styles/basket.scss'
+import styled from "styled-components";
 
 const BasketDetails = styled.div`
   padding: 10px;
@@ -31,6 +30,11 @@ export default function Basket() {
     const basket = useSelector(state => state.basket)
     const user = useSelector(state => state.user)
 
+    useEffect(() => {
+        document.title = "Your basket"
+    }, []);
+
+
     let productsNum = 0;
     let sum = 0;
 
@@ -42,10 +46,6 @@ export default function Basket() {
             sum += product.quantity * product.price;
         }
     })
-
-    useEffect(() => {
-        document.title = "Your basket"
-    }, []);
 
 
     async function handleCheckout() {
@@ -88,7 +88,7 @@ export default function Basket() {
 
                 <div className="basket-page-container">
                     {basket.length !== 0 ?
-                        basket.map(product => <ProductB product={product} key={v4()}/>)
+                        basket.map(product => <ProductB product={product} key={product.id}/>)
                         :
                         null
                     }

@@ -2,33 +2,11 @@ import React from "react";
 import '../styles/headerSecondary.scss';
 import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {numberWithSpaces} from "../lib/helper";
+import {numberOfProducts, numberWithSpaces, sumOfProducts} from "../lib/helper";
 
 function HeaderSecondary() {
     const basket = useSelector(state => state.basket)
     const user = useSelector(state => state.user);
-
-    function getProductsLen() {
-        let basketNumberOfProducts = 0;
-
-        basket.forEach(product => basketNumberOfProducts += product.quantity);
-
-        return basketNumberOfProducts;
-    }
-
-    function getSum() {
-        let sum = 0;
-        basket.forEach(product => {
-            if (user.isMember) {
-                sum += product.quantity * Math.round(product.price * 0.9);
-            } else {
-                sum += product.quantity * product.price;
-            }
-        })
-
-        return sum;
-    }
-
 
     return (
         <div className="header-secondary-wrap">
@@ -53,14 +31,14 @@ function HeaderSecondary() {
 
                 <div className="right-section">
                     <div className="total">
-                        {numberWithSpaces(getSum())} Ft
+                        {numberWithSpaces(sumOfProducts(basket, user.isMember))} Ft
                     </div>
 
                     <div className="line"/>
 
                     <div className="basket-wrap">
                         <NavLink className="navlink" to="/basket">
-                            <span>{getProductsLen()}</span>
+                            <span>{numberOfProducts(basket)}</span>
                             <img className="basket-icon"
                                  src="https://icon-library.com/images/basket-icon/basket-icon-24.jpg"
                                  alt="B"/>

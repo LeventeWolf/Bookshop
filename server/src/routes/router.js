@@ -46,6 +46,8 @@ router.post('/api/signin', async (req, res) => {
             delete user.FIRSTNAME;
             user['lastName'] = user.LASTNAME;
             delete user.LASTNAME;
+            user['isMember'] = user.IS_MEMBER;
+            delete user.IS_MEMBER;
 
             return res.status(200).send({user, isAuthenticated: user});
         } else {
