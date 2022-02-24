@@ -283,14 +283,14 @@ export function ProductT( {product} ) {
     const isMember = useSelector(state => state.user.isMember);
 
     return (
-        <Container style={{height: '200px'}}>
+        <Container>
             <ProductContainer>
-                <ProductImage w={'175px'} h={'180px'} src={product.imageurl} alt="productImage"/>
+                <ProductImage w={'160px'} h={'180px'} src={product.imageurl} alt="productImage"/>
 
                 <DescriptionContainer>
                     <Section borderBottom>
                         <Link to={`/product/${product.name}`} >
-                            <ProductTitle fontSize='18pt'>{product.longTitle}</ProductTitle>
+                            <ProductTitle fontSize='18pt'>{product.name}</ProductTitle>
                         </Link>
                     </Section>
 
@@ -310,7 +310,7 @@ export function ProductT( {product} ) {
                     <Section borderBottom style={{marginBottom: 'auto'}}>
                         <div className="price-container-row">
                             {isMember ?
-                                <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
+                                <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(product.price)} Ft</h3>
                                 : null
                             }
 

@@ -6,15 +6,16 @@ import {
 } from "../../styles/Component.styles";
 import Axios from "axios";
 import {ProductT} from "./TemplateProducts";
-import v4 from "uuid/v4";
-import {useDispatch} from "react-redux";
 
 
 export default function TemplatePage( {name, api} ) {
-    const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
+        fetchProducts();
+    }, [products])
+
+    function fetchProducts() {
         Axios.get(`http://localhost:3001/api/${api}`)
             .then(response => {
                 setProducts(response.data);
@@ -22,7 +23,7 @@ export default function TemplatePage( {name, api} ) {
             .catch(response => {
                 console.log(response)
             })
-    }, [])
+    }
 
 
     return (
@@ -30,7 +31,7 @@ export default function TemplatePage( {name, api} ) {
             <div id="product-page">
                 <PageTitle>{name}</PageTitle>
 
-                {products.map(product => <ProductT product={product} key={v4()}/>)}
+                {products.map(product => <ProductT product={product} key={product.id}/>)}
             </div>
         </Main>
     );
