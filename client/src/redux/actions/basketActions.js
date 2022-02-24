@@ -1,5 +1,4 @@
 import { BasketActionTypes } from "../constants/action-types";
-import {initWishlistProducts} from "./wishlistActions";
 import Axios from "axios";
 
 export const initBasketProducts = (products) => {

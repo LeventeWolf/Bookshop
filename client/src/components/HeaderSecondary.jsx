@@ -14,7 +14,7 @@ function HeaderSecondary() {
             <div className="header-secondary-primary-wrap">
                 <ul>
                     <li>
-                        <a>Shop by category</a>
+                        <span>Shop by category</span>
                     </li>
                     <li>
                         <NavLink className="navlink" to="/bestsellers">Bestsellers</NavLink>

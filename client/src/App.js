@@ -1,7 +1,6 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {
     Basket,
-    Footer,
     Header,
     HeaderSecondary,
     Home,

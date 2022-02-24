@@ -1,11 +1,9 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addProductToBasket} from "../../redux/actions/basketActions";
 import styled from "styled-components";
 import {
     handleAddProductToWishlist,
     handleRemoveProductFromWishlist,
-    removeProductFromWishlist
 } from "../../redux/actions/wishlistActions";
 import {useAlert} from "react-alert";
 

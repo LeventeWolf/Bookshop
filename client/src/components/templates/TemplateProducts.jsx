@@ -14,10 +14,6 @@ import {
     ProductTitle, ProductType,
     Section
 } from "../../styles/Component.styles";
-import {
-    handleAddProductToWishlist,
-    handleRemoveProductFromWishlist,
-} from "../../redux/actions/wishlistActions";
 import WishlistButton from "./WishlistButton";
 
 
@@ -77,7 +73,6 @@ export function ProductSM ( {product} ) {
  * M  : Medium - used for Home.jxs => Supply & Bestsellers
  */
 export function ProductM ( {product} ) {
-    const dispatch = useDispatch();
     const isMember = useSelector(state => state.user.isMember);
 
     return (
@@ -285,9 +280,7 @@ export function ProductL ( {product} ) {
  * T  : Template  - used for TemplatePages (Bestsellers, Songs, Films, Books, Wishlist)
  */
 export function ProductT( {product} ) {
-    const dispatch = useDispatch();
     const isMember = useSelector(state => state.user.isMember);
-    const username = useSelector(state => state.user.username);
 
     return (
         <Container style={{height: '200px'}}>

@@ -5,12 +5,13 @@ import {
     PageTitle,
 } from "../../styles/Component.styles";
 import Axios from "axios";
-import {uuid} from "uuidv4";
 import {ProductT} from "./TemplateProducts";
 import v4 from "uuid/v4";
+import {useDispatch} from "react-redux";
 
 
 export default function TemplatePage( {name, api} ) {
+    const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
 
     useEffect(() => {

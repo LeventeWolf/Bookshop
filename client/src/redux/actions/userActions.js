@@ -1,5 +1,4 @@
 import {UserActionTypes} from "../constants/action-types";
-import apiClient from "../../http-common"
 
 export const loginSuccess = (userData) => {
     return {

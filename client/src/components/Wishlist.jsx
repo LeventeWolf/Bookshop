@@ -16,7 +16,7 @@ export default function Wishlist( ) {
 
     useEffect(() => {
         dispatch(fetchWishlistProducts(user.username));
-    }, [])
+    }, [dispatch, user.username])
 
     return (
         <Main>

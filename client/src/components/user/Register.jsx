@@ -12,9 +12,7 @@ import {
 } from '@chakra-ui/react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt} from '@fortawesome/free-solid-svg-icons'
-import {login} from "../../redux/actions/userActions";
-import {motion} from 'framer-motion';
-import {register} from '../../api/UserAPI'
+import {register} from '../../api/userAPI.js'
 import {useQuery} from "react-query";
 import {useDispatch, useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
@@ -34,7 +32,7 @@ export function Register() {
     const usernameRef = useRef('');
     const passwordRef = useRef('');
 
-    const { data: userData, refetch: submitUser, error: registerError, isLoading } = useQuery('register', () => register(emailRef.current.value, usernameRef.current.value, passwordRef.current.value, setErrors, dispatch)
+    const { refetch: submitUser, isLoading } = useQuery('register', () => register(emailRef.current.value, usernameRef.current.value, passwordRef.current.value, setErrors, dispatch)
         , {enabled: false, refetchOnWindowFocus:false, refetchOnMount:false, retry:false});
 
 
