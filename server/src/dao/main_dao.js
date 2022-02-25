@@ -54,9 +54,10 @@ class dao {
 
     async getProductByID(productID) {
         const sql = `SELECT *
-                     FROM PRODUCT
-                              INNER JOIN BOOK ON BOOK.ID = PRODUCT.ID
-                     WHERE BOOK.ID = '${productID}'`;
+                     FROM PRODUCT,
+                          BOOK,
+                          SONG
+                     WHERE PRODUCT.ID = ${productID}`;
 
         try {
             const result = await connection.execute(sql, binds, options)

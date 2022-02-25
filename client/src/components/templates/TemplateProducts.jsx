@@ -289,7 +289,7 @@ export function ProductTemplate({product} ) {
 
                 <DescriptionContainer style={{width: '500px'}}>
                     <Section borderBottom>
-                        <Link to={`/product/${product.name}`} >
+                        <Link to={`/product/${product.id}/${product.name}`} >
                             <ProductTitle fontSize='18pt'>{product.name}</ProductTitle>
                         </Link>
                     </Section>
