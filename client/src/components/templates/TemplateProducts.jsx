@@ -12,12 +12,9 @@ import {
     ProductContainer,
     ProductImage,
     ProductTitle, ProductType,
-    Section, WishlistButton
+    Section
 } from "../../styles/Component.styles";
-import {
-    handleAddProductToWishlist,
-    handleRemoveProductFromWishlist,
-} from "../../redux/actions/wishlistActions";
+import WishlistButton from "./WishlistButton";
 
 
 /**
@@ -42,7 +39,7 @@ export function ProductSM ( {product} ) {
             </Link>
 
             <div className="featuring-product-description-wrap">
-                <Link to={`/product/${product.name} `} onClick={() => dispatch(selectProduct(product))} >
+                <Link to={`/product/${product.id}/${product.name} `} onClick={() => dispatch(selectProduct(product))} >
                     <h2 className="product-title">
                         {product.name}
                     </h2>
@@ -76,7 +73,6 @@ export function ProductSM ( {product} ) {
  * M  : Medium - used for Home.jxs => Supply & Bestsellers
  */
 export function ProductM ( {product} ) {
-    const dispatch = useDispatch();
     const isMember = useSelector(state => state.user.isMember);
 
     return (
@@ -164,10 +160,8 @@ export function ProductB ( {product} ) {
 /**
  * W  : Wishlist - used for Wishlist.jsx
  */
-export function ProductW ( {product} ) {
-    const dispatch = useDispatch();
+export function ProductWishlist ({product} ) {
     const isMember = useSelector(state => state.user.isMember);
-    const username = useSelector(state => state.user.username);
 
     return (
         <Container>
@@ -212,7 +206,7 @@ export function ProductW ( {product} ) {
                             Add to Basket
                         </BasketButton>
 
-                        <WishlistButton w={200} h={40} onClick={() => dispatch(handleRemoveProductFromWishlist(username, product))}>
+                        <WishlistButton style={{height: '40px'}} product={product} type={'remove'}>
                             Remove
                         </WishlistButton>
                     </Section>
@@ -228,10 +222,7 @@ export function ProductW ( {product} ) {
  * L  : Large  - used for ProductPage.jsx
  */
 export function ProductL ( {product} ) {
-    const dispatch = useDispatch();
     const isMember = useSelector(state => state.user.isMember);
-    const user = useSelector(state => state.user);
-
 
     return (
         <Container h={'500px'}>
@@ -274,9 +265,10 @@ export function ProductL ( {product} ) {
                     <BasketButton style={{width:'300px', height: '40px'}} product={product}>
                         Add to Basket
                     </BasketButton>
-                    <WishlistButton w={300} h={40} onClick={() => dispatch(handleAddProductToWishlist(user.username, product))}>
-                        Add to wishlist
-                    </WishlistButton>
+
+                     <WishlistButton style={{height: '40px'}} product={product} >
+                         Add to wishlist
+                     </WishlistButton>
                 </Section>
             </ActionsContainer>
         </Container>
@@ -287,20 +279,18 @@ export function ProductL ( {product} ) {
 /**
  * T  : Template  - used for TemplatePages (Bestsellers, Songs, Films, Books, Wishlist)
  */
-export function ProductT( {product} ) {
-    const dispatch = useDispatch();
+export function ProductTemplate({product} ) {
     const isMember = useSelector(state => state.user.isMember);
-    const username = useSelector(state => state.user.username);
 
     return (
-        <Container style={{height: '200px'}}>
+        <Container>
             <ProductContainer>
-                <ProductImage w={'175px'} h={'180px'} src={product.imageurl} alt="productImage"/>
+                <ProductImage h={'190px'} src={product.imageurl} alt="productImage"/>
 
-                <DescriptionContainer>
+                <DescriptionContainer style={{width: '500px'}}>
                     <Section borderBottom>
                         <Link to={`/product/${product.name}`} >
-                            <ProductTitle fontSize='18pt'>{product.longTitle}</ProductTitle>
+                            <ProductTitle fontSize='18pt'>{product.name}</ProductTitle>
                         </Link>
                     </Section>
 
@@ -320,7 +310,7 @@ export function ProductT( {product} ) {
                     <Section borderBottom style={{marginBottom: 'auto'}}>
                         <div className="price-container-row">
                             {isMember ?
-                                <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
+                                <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(product.price)} Ft</h3>
                                 : null
                             }
 
@@ -335,7 +325,9 @@ export function ProductT( {product} ) {
                             Add to Basket
                         </BasketButton>
 
-                        <WishlistButton w={200} h={40} onClick={() => dispatch(handleAddProductToWishlist(username, product))}>Add to wishlist</WishlistButton>
+                        <WishlistButton style={{height: '40px'}} product={product}>
+                            Add to wishlist
+                        </WishlistButton>
                     </Section>
                 </Section>
             </ProductContainer>

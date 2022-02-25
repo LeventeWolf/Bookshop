@@ -22,6 +22,29 @@ const options = {
 
 class dao {
 
+    async getUser(username, password) {
+        const sql = `SELECT username, email, firstname, lastname, avatar, is_member
+                     FROM CLIENT
+                     WHERE username = '${username}'
+                       AND ppassword = '${password}'`;
+
+        try {
+            const result = await connection.execute(sql, binds, options);
+
+            if (!result.rows[0]) {
+                console.log(`[DB] getUser: Invalid username or password!`)
+                return undefined;
+            }
+
+            console.log(`[DB] getUser: ${username} found!`)
+            return result.rows[0];
+        } catch (error) {
+            console.log(error.message);
+            console.log(sql)
+            return undefined;
+        }
+    }
+
     async getAllProducts() {
         const sql = `SELECT *
                      FROM PRODUCT`;
@@ -98,6 +121,23 @@ class dao {
         return result;
     }
 
+    // Songs
+
+    async getAllSongs() {
+        const sql = `SELECT *
+                     FROM PRODUCT
+                              INNER JOIN SONG ON SONG.ID = PRODUCT.ID`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
 
     // Wishlist
 
@@ -147,6 +187,7 @@ class dao {
             throw error
         }
     }
+
 }
 
 module.exports = {dao}

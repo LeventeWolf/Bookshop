@@ -5,17 +5,17 @@ import {logout} from "../../redux/actions/userActions";
 import {Text} from "@chakra-ui/react";
 import {Navigate} from "react-router-dom";
 
-export default function Logout(){
+export default function Logout() {
     const dispatch = useDispatch()
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(logout())
-    }, [])
+    }, [dispatch])
 
-    return(
+    return (
         <>
-            <Text>You are succesfully loged out</Text>
-            <Navigate to="/Join" />
+            <Text>You are successfully longed out!</Text>
+            <Navigate to="/Join"/>
         </>
     )
 }

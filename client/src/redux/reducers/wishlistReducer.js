@@ -8,15 +8,10 @@ export const wishlistReducer = (wishlist = [], {type, payload}) => {
             return payload;
 
         case WishlistActionTypes.ADD_PRODUCT_TO_WISHLIST:
-            console.log('ADD_PRODUCT_TO_WISHLIST')
             const product = payload;
-
-            console.log('wishlistCopy: ');
-            console.log(wishlistCopy)
 
             // If already has this product, do not add
             for (const wishlistProduct of wishlistCopy) {
-                console.log(product.name, wishlistProduct.name)
                 if (wishlistProduct.name === product.name) {
                     return wishlist;
                 }

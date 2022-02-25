@@ -1,5 +1,4 @@
 import {UserActionTypes} from "../constants/action-types";
-import {setMember} from "../actions/userActions";
 
 const initialUser = {
     username: undefined,
@@ -14,7 +13,6 @@ const initialUser = {
 export const userReducer = (user = initialUser, {type, payload}) => {
     switch (type) {
         case UserActionTypes.LOGIN_SUCCESS:
-            console.log(payload)
             return {...payload, isLoggedIn: true};
 
         case UserActionTypes.LOGIN_ERROR:
@@ -27,6 +25,8 @@ export const userReducer = (user = initialUser, {type, payload}) => {
             return initialUser;
 
         case UserActionTypes.UPDATE_MEMBER:
+            if (user.isMember) return user;
+
             if (user.boughtAmount >= 5) {
                 return {...user, isMember: true};
             }

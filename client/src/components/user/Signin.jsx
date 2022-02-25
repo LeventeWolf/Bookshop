@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useState} from "react";
 import {
     Box,
     Input,
@@ -11,7 +11,7 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser} from '@fortawesome/free-solid-svg-icons'
 import {useDispatch, useSelector} from "react-redux";
-import {signin} from '../../api/UserAPI';
+import {signin} from '../../api/userAPI.js';
 import { Progress } from '@chakra-ui/react'
 import {Navigate} from "react-router-dom";
 import {useAlert} from "react-alert";
@@ -41,7 +41,7 @@ export function Signin() {
     }
 
     if(user.error && !logged){
-        alert.error("something went wrong")
+        alert.error("Invalid username or password!")
         setLogged(() => true)
     }
 

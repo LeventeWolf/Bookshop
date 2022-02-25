@@ -1,5 +1,4 @@
 import { BasketActionTypes } from "../constants/action-types";
-import {initWishlistProducts} from "./wishlistActions";
 import Axios from "axios";
 
 export const initBasketProducts = (products) => {
@@ -29,7 +28,6 @@ export const handleCheckoutAction = (username, products)  => async (dispatch) =>
         username,
         products
     }).then(response => {
-        console.log(response)
         dispatch(checkout())
     }).catch(response => {
         console.log(response)

@@ -1,16 +1,16 @@
 import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {v4} from "uuid";
-
-import '../styles/basket.scss'
-import {ButtonStyle, Main, PageTitle} from "../styles/Component.styles";
-import {numberWithSpaces} from "../lib/helper";
-import styled from "styled-components";
 import {useAlert} from "react-alert";
-import {checkout, handleCheckoutAction} from "../redux/actions/basketActions";
+import {useDispatch, useSelector} from "react-redux";
+import {handleCheckoutAction} from "../redux/actions/basketActions";
 import {useNavigate} from "react-router-dom";
 import {setBoughtAmount, updateMember} from "../redux/actions/userActions";
+
 import {ProductB} from "./templates/TemplateProducts";
+import {numberOfProducts, numberWithSpaces, sumOfProducts} from "../lib/helper";
+import {ButtonStyle, Main, PageTitle} from "../styles/Component.styles";
+import '../styles/basket.scss'
+import styled from "styled-components";
+import basketIcon from '../assets/basketIcon.svg'
 
 const BasketDetails = styled.div`
   padding: 10px;
@@ -30,36 +30,32 @@ export default function Basket() {
     const navigate = useNavigate();
     const basket = useSelector(state => state.basket)
     const user = useSelector(state => state.user)
-
-    let productsNum = 0;
-    let sum = 0;
-
-    basket.forEach(product => {
-        productsNum += product.quantity;
-        if (user.isMember) {
-            sum += product.quantity * Math.round(product.price * 0.9);
-        } else {
-            sum += product.quantity * product.price;
-        }
-    })
+    let productsNum = numberOfProducts(basket);
+    let sum = sumOfProducts(basket);
 
     useEffect(() => {
         document.title = "Your basket"
     }, []);
 
-
-    async function handleCheckout() {
+    function handleCheckout() {
         if (!user.isLoggedIn) {
             navigate('/join')
             alert.error('You have to be an user to buy products!');
             return;
         }
 
-        dispatch(handleCheckoutAction(user.username, basket));
-        dispatch(setBoughtAmount(user.boughtAmount + productsNum))
-        dispatch(updateMember());
+        dispatch(handleCheckoutAction(user.username, basket)) // Save purchase in database
+            .then(response => {
+                // Set to member if purchased more than five Products
+                dispatch(setBoughtAmount(user.boughtAmount + productsNum))
+                dispatch(updateMember());
 
-        alert.success('Checkout successful!');
+                alert.success('Checkout successful!');
+            })
+            .catch(response => {
+                console.log(response)
+                alert.error('Something went wrong!');
+            });
     }
 
 
@@ -71,7 +67,7 @@ export default function Basket() {
                 {basket.length !== 0 ?
                     <BasketDetailsContainer>
                         <BasketDetails>
-                            <img src="https://image.flaticon.com/icons/png/512/68/68892.png" alt={'basket'}
+                            <img src={basketIcon} alt={'basket'}
                                  style={{width: '20px', display: 'inline', marginRight: 5, marginBottom: 6}}/>
                             <span>
                                  You have {productsNum} item{productsNum === 1 ? '' : 's'} for a total of <b>{numberWithSpaces(sum)}</b> Ft in your basket.
@@ -88,7 +84,7 @@ export default function Basket() {
 
                 <div className="basket-page-container">
                     {basket.length !== 0 ?
-                        basket.map(product => <ProductB product={product} key={v4()}/>)
+                        basket.map(product => <ProductB product={product} key={product.id}/>)
                         :
                         null
                     }

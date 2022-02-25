@@ -1,7 +1,6 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {
     Basket,
-    Footer,
     Header,
     HeaderSecondary,
     Home,
@@ -39,7 +38,7 @@ export default function App(){
                 <Route path="/wishlist" element={<Wishlist />}/>
                 <Route path="/Books" element={<TemplatePage name={'Books'} api={'all-books'}/>}/>
                 <Route path="/Films" element={<TemplatePage name={'Films'} api={'all-books'}/>}/>
-                <Route path="/Songs" element={<TemplatePage name={'Songs'} api={'all-books'}/>}/>
+                <Route path="/Songs" element={<TemplatePage name={'Songs'} api={'all-songs'}/>}/>
                 <Route path="/Bestsellers" element={<TemplatePage name={'Bestsellers'} api={'all-books'}/>}/>
             </Routes>
 

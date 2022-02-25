@@ -101,8 +101,8 @@
 .price-container {
   display: flex;
   flex-direction: column;
-  justify-content: end;
-  justify-items: end;
+  justify-content: flex-end;
+  justify-items: flex-end;
 
   margin-top: auto;
 }

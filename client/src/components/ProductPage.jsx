@@ -26,7 +26,7 @@ export default function ProductPage() {
         return () => {
             dispatch(removeSelectedProduct())
         };
-    }, []);
+    }, [dispatch, id, productTitle]);
 
     return (
         <Main>

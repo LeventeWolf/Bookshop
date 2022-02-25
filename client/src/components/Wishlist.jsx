@@ -4,11 +4,9 @@ import {
     Main,
     PageTitle
 } from "../styles/Component.styles";
-import {uuid} from "uuidv4";
 import {useDispatch, useSelector} from "react-redux";
-import {ProductW} from "./templates/TemplateProducts";
+import {ProductWishlist} from "./templates/TemplateProducts";
 import {fetchWishlistProducts} from "../redux/actions/wishlistActions";
-import v4 from "uuid/v4";
 
 
 export default function Wishlist( ) {
@@ -18,14 +16,14 @@ export default function Wishlist( ) {
 
     useEffect(() => {
         dispatch(fetchWishlistProducts(user.username));
-    }, [])
+    }, [dispatch, user.username])
 
     return (
         <Main>
             <div id="product-page">
                 <PageTitle>Wishlist</PageTitle>
 
-                {wishlistProducts.map(product => <ProductW product={product} key={product.id}/>)}
+                {wishlistProducts.map(product => <ProductWishlist product={product} key={product.id}/>)}
             </div>
         </Main>
     );
