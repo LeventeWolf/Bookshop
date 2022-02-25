@@ -121,6 +121,23 @@ class dao {
         return result;
     }
 
+    // Songs
+
+    async getAllSongs() {
+        const sql = `SELECT *
+                     FROM PRODUCT
+                              INNER JOIN SONG ON SONG.ID = PRODUCT.ID`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
 
     // Wishlist
 

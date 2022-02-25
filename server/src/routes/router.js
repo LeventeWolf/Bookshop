@@ -15,13 +15,12 @@ function initQuantity(products) {
 
 router.get("/api/all-books", async (req, res) => {
     const allBooks = await dao.getAllBooks();
-    const result = initQuantity(allBooks);
 
-    return res.status(200).send(result);
+    return res.status(200).send(allBooks);
 });
 
-router.get("/api/test", async (req, res) => {
-    const result = await dao.getAllBooks();
+router.get("/api/all-songs", async (req, res) => {
+    const result = await dao.getAllSongs();
 
     return res.status(200).send(result);
 });

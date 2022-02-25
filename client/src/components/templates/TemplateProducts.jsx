@@ -287,7 +287,7 @@ export function ProductT( {product} ) {
             <ProductContainer>
                 <ProductImage w={'160px'} h={'180px'} src={product.imageurl} alt="productImage"/>
 
-                <DescriptionContainer>
+                <DescriptionContainer style={{width: '500px'}}>
                     <Section borderBottom>
                         <Link to={`/product/${product.name}`} >
                             <ProductTitle fontSize='18pt'>{product.name}</ProductTitle>
