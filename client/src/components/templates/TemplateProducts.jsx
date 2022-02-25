@@ -279,13 +279,13 @@ export function ProductL ( {product} ) {
 /**
  * T  : Template  - used for TemplatePages (Bestsellers, Songs, Films, Books, Wishlist)
  */
-export function ProductT( {product} ) {
+export function ProductTemplate({product} ) {
     const isMember = useSelector(state => state.user.isMember);
 
     return (
         <Container>
             <ProductContainer>
-                <ProductImage w={'160px'} h={'180px'} src={product.imageurl} alt="productImage"/>
+                <ProductImage h={'190px'} src={product.imageurl} alt="productImage"/>
 
                 <DescriptionContainer style={{width: '500px'}}>
                     <Section borderBottom>

@@ -5,7 +5,7 @@ import {
     PageTitle,
 } from "../../styles/Component.styles";
 import Axios from "axios";
-import {ProductT} from "./TemplateProducts";
+import {ProductTemplate} from "./TemplateProducts";
 
 
 export default function TemplatePage( {name, api} ) {
@@ -31,7 +31,7 @@ export default function TemplatePage( {name, api} ) {
             <div id="product-page">
                 <PageTitle>{name}</PageTitle>
 
-                {products.map(product => <ProductT product={product} key={product.id}/>)}
+                {products.map(product => <ProductTemplate product={product} key={product.id}/>)}
             </div>
         </Main>
     );
