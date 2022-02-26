@@ -189,6 +189,31 @@ class dao {
         }
     }
 
+    // Bestsellers
+
+    async getBestsellers() {
+        const sql = `SELECT DISTINCT *
+                     FROM PRODUCT
+                              INNER JOIN (SELECT PRODUCTID, SUM(PURCHASE.QUANTITY) as "SOLD_AMOUNT"
+                                          FROM PURCHASE
+                                          GROUP BY PRODUCTID
+                                          ORDER BY SOLD_AMOUNT DESC) SOLD ON SOLD.PRODUCTID = PRODUCT.ID
+
+                              LEFT JOIN BOOK B on PRODUCT.ID = B.ID
+                              LEFT JOIN SONG S on PRODUCT.ID = S.ID
+                     ORDER BY SOLD.SOLD_AMOUNT DESC`
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+            console.log(`[DB-BESTSELLER] Selecting bestsellers! [1-5]`);
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+
+    }
+
 }
 
 module.exports = {dao}
