@@ -144,10 +144,10 @@ class dao {
 
     async getWishlistProducts(username) {
         const sql = `SELECT *
-                     FROM WOLF.WISHLIST
-                              INNER JOIN PRODUCT ON WISHLIST.PRODUCT_ID = PRODUCT.ID
-                              INNER JOIN BOOK ON BOOK.ID = PRODUCT.ID
-                              INNER JOIN WOLF.CLIENT ON CLIENT.USERNAME = WISHLIST.USERNAME
+                     FROM WISHLIST
+                              LEFT JOIN PRODUCT ON WISHLIST.PRODUCT_ID = PRODUCT.ID
+                              LEFT JOIN BOOK ON BOOK.ID = PRODUCT.ID
+                              LEFT JOIN CLIENT ON CLIENT.USERNAME = WISHLIST.USERNAME
                      WHERE WISHLIST.USERNAME = '${username}'`;
 
         try {
