@@ -119,7 +119,7 @@ class dao {
             }
         }
 
-        result.forEach(message => console.log(message))
+        result.forEach(message => log(message))
         return result;
     }
 
@@ -205,11 +205,11 @@ class dao {
                      ORDER BY SOLD.SOLD_AMOUNT DESC`
 
         try {
-            const result = await connection.execute(sql, binds, options)
-            log(`[DB-BESTSELLER] Selecting bestsellers! [1-5]`)
+            const result = await connection.execute(sql, binds, options);
+            log(`[DB-BESTSELLER] Selecting bestsellers! [1-5]`);
             return helper.formatRow(result.rows);
         } catch (error) {
-            console.log(error);
+            log(error);
             return [];
         }
 
