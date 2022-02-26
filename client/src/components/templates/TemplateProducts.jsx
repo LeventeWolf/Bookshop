@@ -168,7 +168,7 @@ export function ProductWishlist ({product} ) {
             <ProductContainer>
                 <ProductImage w={'175px'} h={'230px'} src={product.imageurl} alt="productImage"/>
 
-                <DescriptionContainer>
+                <DescriptionContainer style={{width: '1000px'}}>
                     <Section borderBottom>
                         <Link to={`/product/${product.name}`} >
                             <ProductTitle style={{width: '600px'}} fontSize='18pt'>{product.name}</ProductTitle>
@@ -289,7 +289,7 @@ export function ProductTemplate({product} ) {
 
                 <DescriptionContainer style={{width: '500px'}}>
                     <Section borderBottom>
-                        <Link to={`/product/${product.name}`} >
+                        <Link to={`/product/${product.id}/${product.name}`} >
                             <ProductTitle fontSize='18pt'>{product.name}</ProductTitle>
                         </Link>
                     </Section>

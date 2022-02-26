@@ -8,7 +8,7 @@ export default function Bestsellers() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/api/all-books')
+        Axios.get('http://localhost:3001/api/bestsellers')
             .then(response => {
                 // shuffleArray(response.data);
                 setProducts(response.data.splice(0, 5));

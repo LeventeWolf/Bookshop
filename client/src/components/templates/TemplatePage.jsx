@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 
 import {
     Main,
@@ -11,9 +11,9 @@ import {ProductTemplate} from "./TemplateProducts";
 export default function TemplatePage( {name, api} ) {
     const [products, setProducts] = useState([]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         fetchProducts();
-    }, [products])
+    }, [name])
 
     function fetchProducts() {
         Axios.get(`http://localhost:3001/api/${api}`)

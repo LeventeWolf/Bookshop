@@ -1,6 +1,7 @@
 const oracledb = require("oracledb");
 const helper = require('../lib/daoHelper')
 const dbConfig = require("../../config/db");
+const {log} = require("../lib/logger")
 
 let connection;
 
@@ -54,9 +55,10 @@ class dao {
 
     async getProductByID(productID) {
         const sql = `SELECT *
-                     FROM PRODUCT
-                              INNER JOIN BOOK ON BOOK.ID = PRODUCT.ID
-                     WHERE BOOK.ID = '${productID}'`;
+                     FROM PRODUCT,
+                          BOOK,
+                          SONG
+                     WHERE PRODUCT.ID = ${productID}`;
 
         try {
             const result = await connection.execute(sql, binds, options)
@@ -117,7 +119,7 @@ class dao {
             }
         }
 
-        result.forEach(message => console.log(message))
+        result.forEach(message => log(message))
         return result;
     }
 
@@ -143,10 +145,10 @@ class dao {
 
     async getWishlistProducts(username) {
         const sql = `SELECT *
-                     FROM WOLF.WISHLIST
-                              INNER JOIN PRODUCT ON WISHLIST.PRODUCT_ID = PRODUCT.ID
-                              INNER JOIN BOOK ON BOOK.ID = PRODUCT.ID
-                              INNER JOIN WOLF.CLIENT ON CLIENT.USERNAME = WISHLIST.USERNAME
+                     FROM WISHLIST
+                              LEFT JOIN PRODUCT ON WISHLIST.PRODUCT_ID = PRODUCT.ID
+                              LEFT JOIN BOOK ON BOOK.ID = PRODUCT.ID
+                              LEFT JOIN CLIENT ON CLIENT.USERNAME = WISHLIST.USERNAME
                      WHERE WISHLIST.USERNAME = '${username}'`;
 
         try {
@@ -186,6 +188,31 @@ class dao {
         } catch (error) {
             throw error
         }
+    }
+
+    // Bestsellers
+
+    async getBestsellers() {
+        const sql = `SELECT DISTINCT *
+                     FROM PRODUCT
+                              INNER JOIN (SELECT PRODUCTID, SUM(PURCHASE.QUANTITY) as "SOLD_AMOUNT"
+                                          FROM PURCHASE
+                                          GROUP BY PRODUCTID
+                                          ORDER BY SOLD_AMOUNT DESC) SOLD ON SOLD.PRODUCTID = PRODUCT.ID
+
+                              LEFT JOIN BOOK B on PRODUCT.ID = B.ID
+                              LEFT JOIN SONG S on PRODUCT.ID = S.ID
+                     ORDER BY SOLD.SOLD_AMOUNT DESC`
+
+        try {
+            const result = await connection.execute(sql, binds, options);
+            log(`[DB-BESTSELLER] Selecting bestsellers! [1-5]`);
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            log(error);
+            return [];
+        }
+
     }
 
 }

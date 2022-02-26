@@ -155,4 +155,12 @@ router.get('/api/profile', (req, res) => {
     return res.status(200).send("Working properly")
 })
 
+// Bestsellers
+
+router.get('/api/bestsellers', async (req, res) => {
+    const result = await dao.getBestsellers();
+
+    return res.status(200).send(result);
+})
+
 module.exports = router;
