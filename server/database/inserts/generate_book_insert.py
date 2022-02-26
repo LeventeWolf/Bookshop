@@ -20,8 +20,8 @@ def insert_to_books(id, book):
 
 
 def insert_to_products(id, book):
-    template = "INSERT INTO WOLF.PRODUCT (ID, PRICE, NAME, GENRE, RELEASE, IMAGEURL) " \
-               "VALUES ({id}, {price}, '{name}', '{genre}', '{date}', '{imageURL}');"
+    template = "INSERT INTO WOLF.PRODUCT (ID, PRICE, NAME, GENRE, RELEASE, LANGUAGE, IMAGEURL, DESCRIPTION) " \
+               "VALUES ({id}, {price}, '{name}', '{genre}', '{date}', '{language}', '{imageURL}', '{description}');"
 
     result = template.format(
         id=id,
@@ -30,6 +30,8 @@ def insert_to_products(id, book):
         date='2020-02-19',
         genre='Programming',
         imageURL=book['imageUrl'],
+        language=book['language'],
+        description=book['description'].replace("'", "\'\'"),
     )
 
     return result
