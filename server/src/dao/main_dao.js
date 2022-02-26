@@ -1,6 +1,7 @@
 const oracledb = require("oracledb");
 const helper = require('../lib/daoHelper')
 const dbConfig = require("../../config/db");
+const {log} = require("../lib/logger")
 
 let connection;
 
@@ -205,7 +206,7 @@ class dao {
 
         try {
             const result = await connection.execute(sql, binds, options)
-            console.log(`[DB-BESTSELLER] Selecting bestsellers! [1-5]`);
+            log(`[DB-BESTSELLER] Selecting bestsellers! [1-5]`)
             return helper.formatRow(result.rows);
         } catch (error) {
             console.log(error);
