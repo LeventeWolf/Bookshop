@@ -25,7 +25,6 @@ Client & Server
 Database
 - Docker
 - Oracle [db] version: oracle-12c
-- Xampp
 
 <hr>
 
