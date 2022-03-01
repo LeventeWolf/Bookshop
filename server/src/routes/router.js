@@ -163,4 +163,12 @@ router.get('/api/bestsellers', async (req, res) => {
     return res.status(200).send(result);
 })
 
+// Featuring Products (2022)
+
+router.get('/api/featuring-products', async (req, res) => {
+    const result = await dao.getFeaturingProducts();
+
+    return res.status(200).send(result);
+})
+
 module.exports = router;
