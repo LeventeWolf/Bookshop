@@ -34,16 +34,16 @@ function HeaderSecondary() {
 
                 <div className="right-section">
                     <div className="total">
-                        {numberWithSpaces(sumOfProducts(basket))} Ft
-                        {/*<Odometer animation="count" format="d" duration={1000} value={sumOfProducts(basket)}/> Ft*/}
+                        {/*{numberWithSpaces(sumOfProducts(basket))} Ft*/}
+                        <Odometer animation="count" format="( ddd)" duration={500} value={sumOfProducts(basket)}/> Ft
                     </div>
 
                     <div className="line"/>
 
                     <div className="basket-wrap">
                         <NavLink className="navlink" to="/basket">
-                            {numberWithSpaces(numberOfProducts(basket))}
-                            {/*<Odometer format="d" duration={1000} value={numberOfProducts(basket)}/>*/}
+                            {/*{numberWithSpaces(numberOfProducts(basket))}*/}
+                            <Odometer format="d" duration={200} value={numberOfProducts(basket)}/>
                             <img src={basketIcon} className="basket-icon" alt="B"/>
                         </NavLink>
                     </div>

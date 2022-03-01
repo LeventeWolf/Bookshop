@@ -66,6 +66,12 @@
   display: flex;
   justify-content: center;
 
+  .total {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
   .total, .basket-wrap {
     height: 50%;
     text-align: center;
@@ -76,10 +82,11 @@
     font-size: 12pt;
 
     padding: 0 10px;
+  }
 
-
-    display: inline;
-
+  .basket-wrap {
+    position: relative;
+    bottom: 3px
   }
 
   .line {
