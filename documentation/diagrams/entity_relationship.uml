@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.ADDRESS</OriginalElement>
+  <nodes>
+    <node x="1382.2227660865303" y="38.96761739335784">3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.ADDRESS</node>
+    <node x="606.2676581446856" y="-145.9268999377001">3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.STORAGE</node>
+    <node x="1014.5681934820675" y="275.8030211200659">3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.PURCHASE</node>
+    <node x="1010.5681934820676" y="569.0565031203961">3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.WISHLIST</node>
+    <node x="1388.7227660865303" y="338.6868832660198">3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.CLIENT</node>
+    <node x="183.4994878549955" y="574.879760057835">3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.BOOK</node>
+    <node x="589.7676581446856" y="87.96761739335784">3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.STORED_PRODUCTS</node>
+    <node x="194.9994878549955" y="411.18688326601995">3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.FLIM</node>
+    <node x="191.4994878549955" y="247.49400647420487">3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.SONG</node>
+    <node x="578.2676581446856" y="326.68688326602">3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.PRODUCT</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.STORED_PRODUCTS" target="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.PRODUCT" relationship="REFERENCES">
+      <point x="-0.0" y="0.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.PURCHASE" target="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.CLIENT" relationship="REFERENCES">
+      <point x="-0.0" y="0.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.BOOK" target="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.PRODUCT" relationship="REFERENCES">
+      <point x="-0.0" y="0.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.FLIM" target="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.PRODUCT" relationship="REFERENCES">
+      <point x="-0.0" y="0.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.WISHLIST" target="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.PRODUCT" relationship="REFERENCES">
+      <point x="-0.0" y="0.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.PURCHASE" target="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.PRODUCT" relationship="REFERENCES">
+      <point x="-0.0" y="0.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.SONG" target="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.PRODUCT" relationship="REFERENCES">
+      <point x="-0.0" y="0.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.STORED_PRODUCTS" target="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.STORAGE" relationship="REFERENCES">
+      <point x="-0.0" y="0.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.CLIENT" target="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.ADDRESS" relationship="REFERENCES">
+      <point x="-0.0" y="0.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.WISHLIST" target="3cf67669-35a7-4c77-b380-b3f15eb87991.TABLE:WOLF.CLIENT" relationship="REFERENCES">
+      <point x="-0.0" y="0.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Circular" zoom="1.4250524109014675" showDependencies="false" x="893.412061892938" y="260.831649652384" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Comments</Category>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
