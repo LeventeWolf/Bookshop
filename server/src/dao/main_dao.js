@@ -215,6 +215,28 @@ class dao {
 
     }
 
+    // Featuring
+
+    async getFeaturingProducts() {
+        const sql = `SELECT *
+                     FROM PRODUCT
+                              LEFT JOIN BOOK B on PRODUCT.ID = B.ID
+                              LEFT JOIN SONG S on PRODUCT.ID = S.ID
+                     WHERE EXTRACT(YEAR FROM (TO_DATE(RELEASE, 'yyyy-mm-dd'))) = '2022'
+                     ORDER BY RELEASE DESC`
+
+        try {
+            const result = await connection.execute(sql, binds, options);
+            log(`[DB-BESTSELLER] Selecting featuringProducts!`);
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            log(error);
+            return [];
+        }
+
+    }
+
+
 }
 
 module.exports = {dao}

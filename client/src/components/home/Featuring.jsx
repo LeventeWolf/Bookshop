@@ -14,11 +14,9 @@ export default function Featuring() {
     let autoScrollInterval;
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/api/all-books')
+        Axios.get('http://localhost:3001/api/featuring-products')
             .then(response => {
-                // shuffleArray(response.data);
                 setProducts(response.data);
-
                 featuringContainer = document.getElementsByClassName('container-wrap')[0];
                 startAutoScroll()
             })

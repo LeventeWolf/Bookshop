@@ -4,6 +4,8 @@ import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {numberOfProducts, numberWithSpaces, sumOfProducts} from "../lib/helper";
 import basketIcon from '../assets/basketIcon.svg'
+import Odometer from 'react-odometerjs';
+import "odometer/themes/odometer-theme-default.css";
 
 function HeaderSecondary() {
     const basket = useSelector(state => state.basket)
@@ -32,14 +34,16 @@ function HeaderSecondary() {
 
                 <div className="right-section">
                     <div className="total">
-                        {numberWithSpaces(sumOfProducts(basket, user.isMember))} Ft
+                        {/*{numberWithSpaces(sumOfProducts(basket))} Ft*/}
+                        <Odometer animation="count" format="( ddd)" duration={500} value={sumOfProducts(basket)}/> Ft
                     </div>
 
                     <div className="line"/>
 
                     <div className="basket-wrap">
                         <NavLink className="navlink" to="/basket">
-                            <span>{numberOfProducts(basket)}</span>
+                            {/*{numberWithSpaces(numberOfProducts(basket))}*/}
+                            <Odometer format="d" duration={200} value={numberOfProducts(basket)}/>
                             <img src={basketIcon} className="basket-icon" alt="B"/>
                         </NavLink>
                     </div>
