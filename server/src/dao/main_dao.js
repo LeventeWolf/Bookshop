@@ -256,7 +256,7 @@ class dao {
     // Client
 
     async getClient(username) {
-        const sql = `SELECT USERNAME, FIRSTNAME, LASTNAME, EMAIL
+        const sql = `SELECT USERNAME, FIRSTNAME, LASTNAME, EMAIL, AVATAR
                      FROM CLIENT
                      WHERE USERNAME = '${username}'`;
 
