@@ -175,9 +175,8 @@ router.get('/api/featuring-products', async (req, res) => {
 
 // Profile
 
-router.get('/api/profile', async (req, res) => {
-    //const username = req.body.username;
-    const username = "wolf";
+router.post('/api/profile', async (req, res) => {
+    const username = req.body.username;
     const result = await dao.getProfile(username);
 
     console.log(result);
