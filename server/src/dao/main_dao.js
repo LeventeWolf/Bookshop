@@ -236,7 +236,22 @@ class dao {
 
     }
 
+    // Films
 
+    async getAllFilms() {
+        const sql = `SELECT *
+                     FROM PRODUCT
+                              INNER JOIN FILM ON FILM.ID = PRODUCT.ID`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
 }
 
 module.exports = {dao}

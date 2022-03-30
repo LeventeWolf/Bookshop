@@ -25,6 +25,12 @@ router.get("/api/all-songs", async (req, res) => {
     return res.status(200).send(result);
 });
 
+router.get("/api/all-films", async (req, res) => {
+    const result = await dao.getAllFilms();
+
+    return res.status(200).send(result);
+});
+
 router.post('/api/signin', async (req, res) => {
     const username = req.body.userData.name;
     const password = req.body.userData.password;
