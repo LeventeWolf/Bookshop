@@ -256,7 +256,7 @@ class dao {
     // Client
 
     async getClient(username) {
-        const sql = `SELECT USERNAME, FIRSTNAME, LASTNAME, EMAIL
+        const sql = `SELECT USERNAME, FIRSTNAME, LASTNAME, EMAIL, AVATAR
                      FROM CLIENT
                      WHERE USERNAME = '${username}'`;
 
@@ -315,12 +315,14 @@ class dao {
         return {client: client[0], address: address[0], card: card[0]};
     }
 
+    // Purchases
 
-    // Storages
-
-    async getStorages() {
-        const sql = `SELECT *
-                     FROM STORAGE`;
+    async getPurchases(username) {
+        const sql = `SELECT PURCHASE.*
+            FROM CLIENT_PURCHACES
+                INNER JOIN CLIENT on CLIENT_PURCHACES.CLIENT_ID = CLIENT.USERNAME
+                INNER JOIN PURCHASE on CLIENT_PURCHACES.PURCHASE_ID = PURCHASE.ID
+            WHERE USERNAME = '${username}'`;
 
         try {
             const result = await connection.execute(sql, binds, options)
@@ -332,7 +334,41 @@ class dao {
         }
     }
 
+    // Purchase products
 
+    async getPurchaseProducts(purchaseID) {
+        const sql = `SELECT PRODUCT.*
+                     FROM PURCHASE_INFO
+                              INNER JOIN PURCHASE on PURCHASE_INFO.PURCHASE_ID = PURCHASE.ID
+                              INNER JOIN PRODUCT on PURCHASE_INFO.PRODUCT_ID = PRODUCT.ID
+                     WHERE PURCHASE.ID = ${purchaseID}`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    // Purchases with products
+
+    async getPurchasesWithProducts(username) {
+        const purchases = await this.getPurchases(username);
+
+        const result = [];
+
+        for (const purchase of purchases) {
+            purchase.products = await this.getPurchaseProducts(purchase.id);
+            result.push(purchase);
+        }
+
+        console.log(result);
+
+        return result;
+    }
 }
 
 module.exports = {dao}
