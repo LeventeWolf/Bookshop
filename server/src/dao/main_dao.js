@@ -252,6 +252,68 @@ class dao {
             return [];
         }
     }
+
+    // Client
+
+    async getClient(username) {
+        const sql = `SELECT USERNAME, FIRSTNAME, LASTNAME, EMAIL
+                     FROM CLIENT
+                     WHERE USERNAME = '${username}'`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    // Address
+
+    async getAddress(username) {
+        const sql = `SELECT ADDRESS.CITY, ADDRESS.ZIPCODE, ADDRESS.STREET, ADDRESS.HOUSE_NUMBER
+                     FROM CLIENT
+                              INNER JOIN ADDRESS ON ADDRESS.ID = CLIENT.ADDRESS_ID
+                     WHERE CLIENT.USERNAME = '${username}'`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    // Credit Card
+
+    async getCard(username) {
+        const sql = `SELECT NAME, CVC, EXPIRATION_DATE
+                     FROM CREDIT_CARD
+                     WHERE USERNAME = '${username}'`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    // Full Profile
+
+    async getProfile(username) {
+        const client = await this.getClient(username);
+        const address = await this.getAddress(username);
+        const card = await this.getCard(username);
+
+        return {client: client[0], address: address[0], card: card[0]};
+    }
 }
 
 module.exports = {dao}

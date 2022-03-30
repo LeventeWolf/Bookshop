@@ -157,10 +157,6 @@ router.get('/api/product/:id/:productTitle', async (req, res) => {
 
 });
 
-router.get('/api/profile', (req, res) => {
-    return res.status(200).send("Working properly")
-})
-
 // Bestsellers
 
 router.get('/api/bestsellers', async (req, res) => {
@@ -175,6 +171,18 @@ router.get('/api/featuring-products', async (req, res) => {
     const result = await dao.getFeaturingProducts();
 
     return res.status(200).send(result);
+})
+
+// Profile
+
+router.get('/api/profile', async (req, res) => {
+    //const username = req.body.username;
+    const username = "wolf";
+    const result = await dao.getProfile(username);
+
+    console.log(result);
+
+    return res.status(200).send(result)
 })
 
 module.exports = router;
