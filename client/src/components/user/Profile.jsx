@@ -118,16 +118,14 @@ const Purchase = ({purchaseInfo}) => {
 
     return (
         <div className="purchases-wrap">
-            <h3><b>date:</b> {formatDate(purchaseInfo.ddate)}</h3>
-            <h3><b>products</b></h3>
             <div className="products-container">
                 <table className="table table-light">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>ID</th>
-                        <th>ID</th>
-                        <th>ID</th>
+                        <th>Product Name</th>
+                        <th>Product Genre</th>
+                        <th>Product Price</th>
+                        <th>Quantity</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -135,6 +133,7 @@ const Purchase = ({purchaseInfo}) => {
                     </tbody>
                 </table>
             </div>
+            <h3 className="date">purchase date: {formatDate(purchaseInfo.ddate)}</h3>
         </div>
     )
 }
@@ -142,10 +141,10 @@ const Purchase = ({purchaseInfo}) => {
 const Product = ({productInfo}) => {
     return (
         <tr>
-            <td>{productInfo.id}</td>
-            <td>{productInfo.id}</td>
-            <td>{productInfo.id}</td>
-            <td>{productInfo.id}</td>
+            <td>{productInfo.name}</td>
+            <td>{productInfo.genre}</td>
+            <td>{productInfo.price}</td>
+            <td>{productInfo.quantity}</td>
         </tr>
     )
 }
