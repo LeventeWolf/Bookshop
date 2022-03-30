@@ -236,7 +236,169 @@ class dao {
 
     }
 
+    // Films
 
+    async getAllFilms() {
+        const sql = `SELECT *
+                     FROM PRODUCT
+                              INNER JOIN FILM ON FILM.ID = PRODUCT.ID`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    // Client
+
+    async getClient(username) {
+        const sql = `SELECT USERNAME, FIRSTNAME, LASTNAME, EMAIL, AVATAR
+                     FROM CLIENT
+                     WHERE USERNAME = '${username}'`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    // Address
+
+    async getAddress(username) {
+        const sql = `SELECT ADDRESS.CITY, ADDRESS.ZIPCODE, ADDRESS.STREET, ADDRESS.HOUSE_NUMBER
+                     FROM CLIENT
+                              INNER JOIN ADDRESS ON ADDRESS.ID = CLIENT.ADDRESS_ID
+                     WHERE CLIENT.USERNAME = '${username}'`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    // Credit Card
+
+    async getCard(username) {
+        const sql = `SELECT NAME, CVC, EXPIRATION_DATE
+                     FROM CREDIT_CARD
+                     WHERE USERNAME = '${username}'`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    // Full Profile
+
+    async getProfile(username) {
+        const client = await this.getClient(username);
+        const address = await this.getAddress(username);
+        const card = await this.getCard(username);
+
+        return {client: client[0], address: address[0], card: card[0]};
+    }
+
+    // Purchases
+
+    async getPurchases(username) {
+        const sql = `SELECT PURCHASE.*
+            FROM CLIENT_PURCHACES
+                INNER JOIN CLIENT on CLIENT_PURCHACES.CLIENT_ID = CLIENT.USERNAME
+                INNER JOIN PURCHASE on CLIENT_PURCHACES.PURCHASE_ID = PURCHASE.ID
+            WHERE USERNAME = '${username}'`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    // Purchase products
+
+    async getPurchaseProducts(purchaseID) {
+        const sql = `SELECT PRODUCT.*
+                     FROM PURCHASE_INFO
+                              INNER JOIN PURCHASE on PURCHASE_INFO.PURCHASE_ID = PURCHASE.ID
+                              INNER JOIN PRODUCT on PURCHASE_INFO.PRODUCT_ID = PRODUCT.ID
+                     WHERE PURCHASE.ID = ${purchaseID}`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    // Purchases with products
+
+    async getPurchasesWithProducts(username) {
+        const purchases = await this.getPurchases(username);
+
+        const result = [];
+
+        for (const purchase of purchases) {
+            purchase.products = await this.getPurchaseProducts(purchase.id);
+            result.push(purchase);
+        }
+
+        return result;
+    }
+
+    async getStorages() {
+        const sql = `SELECT *
+                     FROM STORAGE`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    // Storage Products
+
+    async getStorageProducts(storageID) {
+        const sql = `SELECT PRODUCT.ID, PRODUCT.PRICE, PRODUCT.NAME, PRODUCT.GENRE, PRODUCT.RELEASE, PRODUCT.IMAGEURL, PRODUCT.LANGUAGE, PRODUCT.DESCRIPTION, PRODUCT.LONGNAME, STORED_PRODUCTS.QUANTITY
+                     FROM STORED_PRODUCTS
+                              INNER JOIN PRODUCT on PRODUCT.ID = STORED_PRODUCTS.PRODUCT_ID
+                     WHERE STORAGE_ID = ${storageID}`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
 }
 
 module.exports = {dao}

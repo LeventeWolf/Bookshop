@@ -10,3 +10,6 @@ export { default as Basket } from "./Basket";
 export { default as ProductPage } from "./ProductPage";
 export { default as TemplatePage } from "./templates/TemplatePage";
 export { default as Wishlist } from "./Wishlist";
+export { default as Books } from "./products/Books";
+export { default as Films } from "./products/Films";
+export { default as Songs } from "./products/Songs";

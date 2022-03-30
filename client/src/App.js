@@ -15,6 +15,10 @@ import {
 import React from "react";
 
 import "./styles/index.scss";
+import Books from "./components/products/Books";
+import Films from "./components/products/Films";
+import Songs from "./components/products/Songs";
+import Storages from "./components/storages/Storages";
 
 
 export default function App(){
@@ -36,9 +40,10 @@ export default function App(){
 
                 {/* TemplatePages */}
                 <Route path="/wishlist" element={<Wishlist />}/>
-                <Route path="/Books" element={<TemplatePage name={'Books'} api={'all-books'}/>}/>
-                <Route path="/Films" element={<TemplatePage name={'Films'} api={'all-books'}/>}/>
-                <Route path="/Songs" element={<TemplatePage name={'Songs'} api={'all-songs'}/>}/>
+                <Route path="/Books" element={<Books/>}/>
+                <Route path="/Films" element={<Films/>}/>
+                <Route path="/Songs" element={<Songs/>}/>
+                <Route path="/Storages" element={<Storages/>}/>
                 <Route path="/Bestsellers" element={<TemplatePage name={'Bestsellers'} api={'bestsellers'}/>}/>
             </Routes>
 

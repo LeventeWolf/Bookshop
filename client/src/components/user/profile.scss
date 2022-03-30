@@ -1,0 +1,73 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: white;
+  box-shadow: 1px 1px 2px rgba(198, 174, 174, 0.72);
+  padding: 20px;
+
+  h1, h2 {
+    font-weight: bold;
+  }
+
+  h1 {
+    font-size: 20pt;
+  }
+
+  h2 {
+    margin-bottom: 5px;
+  }
+
+  .client-data-container {
+    display: flex;
+    gap: 20px;
+
+    .profile-picture {
+      border-radius: 50%
+    }
+
+    .client-info-container {
+      display: flex;
+      flex-direction: column;
+      //justify-content: space-between;
+      //gap: 10px;
+    }
+  }
+
+  .address-container {
+
+  }
+
+  .credit-card-container {
+
+  }
+
+
+}
+
+
+.purchases-info-container {
+  .purchases-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .purchases-wrap {
+      padding-bottom: 10px;
+      border: 1px solid rgba(128, 128, 128, 0.47);
+      box-shadow: 1px 1px 2px rgba(198, 174, 174, 0.72);
+
+      .products-container {
+        table tr td:first-child {
+          width: 700px !important;
+        }
+      }
+
+      .date {
+        font-size: 16px;
+        font-style: italic;
+        margin-left: 10px;
+      }
+    }
+  }
+}
