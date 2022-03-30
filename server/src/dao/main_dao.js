@@ -365,9 +365,21 @@ class dao {
             result.push(purchase);
         }
 
-        console.log(result);
-
         return result;
+    }
+
+    async getStorages() {
+        const sql = `SELECT *
+                     FROM STORAGE`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
     }
 }
 

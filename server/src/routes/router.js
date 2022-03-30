@@ -175,27 +175,30 @@ router.get('/api/featuring-products', async (req, res) => {
 
 // Profile
 
-router.get('/api/profile', async (req, res) => {
-    //const username = req.body.username;
-    const username = "wolf";
+router.post('/api/profile', async (req, res) => {
+    const username = req.body.username;
     const result = await dao.getProfile(username);
-
-    console.log(result);
 
     return res.status(200).send(result)
 })
 
 // Purchases
 
-router.get('/api/purchases', async (req, res) => {
-    //const username = req.body.username;
-    const username = "wolf";
+router.post('/api/purchases', async (req, res) => {
+    const username = req.body.username;
 
     const result = await dao.getPurchasesWithProducts(username);
 
-    console.log(result);
+    return res.status(200).send(result);
+})
+
+// Storage
+
+router.get('/api/storages', async (req, res) => {
+    const result = await dao.getStorages();
 
     return res.status(200).send(result);
 })
+
 
 module.exports = router;

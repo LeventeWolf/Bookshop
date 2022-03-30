@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 
 import "./profile.scss"
 import Axios from "axios";
+import v4 from "uuid/v4";
 
 const defaultUserInfo = {
     client: {
@@ -43,6 +44,15 @@ function Profile() {
         Axios.post(`http://localhost:3001/api/profile`, {username: user.username}).then((response) => {
             console.log(response.data)
             setUserInfo(response.data)
+        }).catch((response) => {
+            console.log(`[Profile] ERROR!`);
+            console.log(response)
+        });
+
+
+        Axios.post(`http://localhost:3001/api/purchases`, {username: user.username}).then((response) => {
+            console.log(response.data)
+            setPurchases(response.data)
         }).catch((response) => {
             console.log(`[Profile] ERROR!`);
             console.log(response)
@@ -89,7 +99,7 @@ function Profile() {
 
                 <div className="purchases-info-container">
                     <h2>Purchases</h2>
-                    {purchases.map(pInfo => <Purchase purchaseInfo={pInfo} />)}
+                    {purchases.map(pInfo => <Purchase key={v4()} purchaseInfo={pInfo} />)}
                 </div>
             </div>
         </Main>
