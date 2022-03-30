@@ -42,8 +42,14 @@
 
   }
 
-  .purchases-container {
+  .purchases-info-container {
 
+
+    .purchases-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
   }
 }
 

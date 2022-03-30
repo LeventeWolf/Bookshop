@@ -18,6 +18,7 @@ import "./styles/index.scss";
 import Books from "./components/products/Books";
 import Films from "./components/products/Films";
 import Songs from "./components/products/Songs";
+import Storages from "./components/storages/Storages";
 
 
 export default function App(){
@@ -42,6 +43,7 @@ export default function App(){
                 <Route path="/Books" element={<Books/>}/>
                 <Route path="/Films" element={<Films/>}/>
                 <Route path="/Songs" element={<Songs/>}/>
+                <Route path="/Storages" element={<Storages/>}/>
                 <Route path="/Bestsellers" element={<TemplatePage name={'Bestsellers'} api={'bestsellers'}/>}/>
             </Routes>
 

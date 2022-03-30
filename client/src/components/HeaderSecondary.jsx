@@ -30,6 +30,9 @@ function HeaderSecondary() {
                     <li>
                         <NavLink className="navlink" to="/books">Books</NavLink>
                     </li>
+                    <li>
+                        <NavLink className="navlink" to="/storages">Storages</NavLink>
+                    </li>
                 </ul>
 
                 <div className="right-section">

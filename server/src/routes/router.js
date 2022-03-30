@@ -184,4 +184,12 @@ router.post('/api/profile', async (req, res) => {
     return res.status(200).send(result)
 })
 
+// Storages
+router.get('/api/storages', async (req, res) => {
+    const result = await dao.getStorages();
+
+    return res.status(200).send(result)
+})
+
+
 module.exports = router;

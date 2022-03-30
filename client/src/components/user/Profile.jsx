@@ -32,6 +32,7 @@ function Profile() {
     const user = useSelector(state => state.user);
     const navigate = useNavigate();
     const [userInfo, setUserInfo] = useState(defaultUserInfo);
+    const [purchases, setPurchases] = useState([]);
 
     if (!user.isLoggedIn) {
         console.log('Should be navigating???');
@@ -46,6 +47,8 @@ function Profile() {
             console.log(`[Profile] ERROR!`);
             console.log(response)
         });
+
+
     }, []);
 
     return (
@@ -84,15 +87,24 @@ function Profile() {
                     <h3>&nbsp;CVC: ***</h3>
                 </div>
 
-                <div className="purchases-container">
+                <div className="purchases-info-container">
                     <h2>Purchases</h2>
+                    {purchases.map(pInfo => <Purchase purchaseInfo={pInfo} />)}
                 </div>
             </div>
         </Main>
-
-
     );
+}
 
+const Purchase = ({purchaseInfo}) => {
+    return (
+        <div className="purchase">
+            <h2>date: {purchaseInfo.date}</h2>
+            <h2>sum: </h2>
+
+            <h2>products: {purchaseInfo.date}</h2>
+        </div>
+    )
 }
 
 export default Profile

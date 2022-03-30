@@ -314,6 +314,25 @@ class dao {
 
         return {client: client[0], address: address[0], card: card[0]};
     }
+
+
+    // Storages
+
+    async getStorages() {
+        const sql = `SELECT *
+                     FROM STORAGE`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+
 }
 
 module.exports = {dao}
