@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import { Main } from '../../styles/Component.styles';
+import {Main} from '../../styles/Component.styles';
 import './storages.scss'
 import Axios from "axios";
+import {Product} from "../user/Profile";
+import {v4} from "uuid";
 
 type Storage = {
     city: string,
@@ -16,9 +18,8 @@ const Storages = () => {
     useEffect(() => {
         Axios.get(`http://localhost:3001/api/storages`)
             .then((response) => {
-            console.log(response.data)
-            setStorages(response.data)
-        }).catch((response) => {
+                setStorages(response.data)
+            }).catch((response) => {
             console.log(`[Storage] ERROR!`);
             console.log(response)
         });
@@ -30,7 +31,7 @@ const Storages = () => {
                 <h1>Storages</h1>
 
                 <div className="storages-container">
-                    {storages.map(s => <Storage key={s.id} storageInfo={s} />)}
+                    {storages.map(s => <Storage key={s.id} storageInfo={s}/>)}
                 </div>
             </div>
         </Main>
@@ -41,9 +42,20 @@ type StorageProps = {
     storageInfo: Storage
 }
 
-const Storage: React.FC<StorageProps> = ( {storageInfo} ) => {
-    function handleShowProducts() {
+const Storage: React.FC<StorageProps> = ({storageInfo}) => {
+    const [products, setProducts] = useState([]);
+    const [showProducts, setShowProducts] = useState(false);
 
+    function handleShowProducts() {
+        Axios.get(`http://localhost:3001/api/storages/${storageInfo.id}`)
+            .then((response) => {
+                setProducts(response.data)
+            }).catch((response) => {
+            console.log(`[Storage] ERROR!`);
+            console.log(response)
+        });
+
+        setShowProducts(!showProducts);
     }
 
     return (
@@ -55,15 +67,35 @@ const Storage: React.FC<StorageProps> = ( {storageInfo} ) => {
             <div className="product-info-wrap">
                 <div className="title-wrap">
                     <h2>Products</h2>
-                    <img className="down-arrow" src="http://assets.stickpng.com/images/58f8bcf70ed2bdaf7c128307.png" alt="arrow"
-                        onClick={handleShowProducts}
+                    <img className="down-arrow" src="http://assets.stickpng.com/images/58f8bcf70ed2bdaf7c128307.png"
+                         alt="arrow"
+                         onClick={handleShowProducts}
                     />
                 </div>
 
 
-                <div className="product-container">
+                {
+                    showProducts ?
+                        <div className="product-container">
+                            <table className="table table-light">
+                                <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Product Genre</th>
+                                    <th>Product Price</th>
+                                    <th>Quantity</th>
+                                </tr>
+                                </thead>
 
-                </div>
+                                <tbody>
+                                {products.map(p => <Product key={v4()} productInfo={p}/>)}
+                                </tbody>
+                            </table>
+                        </div>
+                        : <></>
+                }
+
+
             </div>
 
         </div>

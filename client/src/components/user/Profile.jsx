@@ -121,12 +121,12 @@ const Purchase = ({purchaseInfo}) => {
             <div className="products-container">
                 <table className="table table-light">
                     <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Product Genre</th>
-                        <th>Product Price</th>
-                        <th>Quantity</th>
-                    </tr>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Genre</th>
+                            <th>Product Price</th>
+                            <th>Quantity</th>
+                        </tr>
                     </thead>
                     <tbody>
                          {purchaseInfo.products.map(p => <Product key={v4()} productInfo={p}/>)}
@@ -138,7 +138,7 @@ const Purchase = ({purchaseInfo}) => {
     )
 }
 
-const Product = ({productInfo}) => {
+export const Product = ({productInfo}) => {
     return (
         <tr>
             <td>{productInfo.name}</td>
