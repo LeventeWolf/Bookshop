@@ -385,7 +385,7 @@ class dao {
     // Storage Products
 
     async getStorageProducts(storageID) {
-        const sql = `SELECT PRODUCT.*
+        const sql = `SELECT PRODUCT.ID, PRODUCT.PRICE, PRODUCT.NAME, PRODUCT.GENRE, PRODUCT.RELEASE, PRODUCT.IMAGEURL, PRODUCT.LANGUAGE, PRODUCT.DESCRIPTION, PRODUCT.LONGNAME, STORED_PRODUCTS.QUANTITY
                      FROM STORED_PRODUCTS
                               INNER JOIN PRODUCT on PRODUCT.ID = STORED_PRODUCTS.PRODUCT_ID
                      WHERE STORAGE_ID = ${storageID}`;
