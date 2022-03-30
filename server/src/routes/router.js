@@ -200,5 +200,13 @@ router.get('/api/storages', async (req, res) => {
     return res.status(200).send(result);
 })
 
+// Storage Products
+
+router.get('/api/storages/:id', async (req, res) => {
+    const result = await dao.getStorageProducts(req.params.id);
+
+    return res.status(200).send(result);
+})
+
 
 module.exports = router;

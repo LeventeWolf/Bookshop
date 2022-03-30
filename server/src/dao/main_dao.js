@@ -381,6 +381,24 @@ class dao {
             return [];
         }
     }
+
+    // Storage Products
+
+    async getStorageProducts(storageID) {
+        const sql = `SELECT PRODUCT.*
+                     FROM STORED_PRODUCTS
+                              INNER JOIN PRODUCT on PRODUCT.ID = STORED_PRODUCTS.PRODUCT_ID
+                     WHERE STORAGE_ID = ${storageID}`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
 }
 
 module.exports = {dao}
