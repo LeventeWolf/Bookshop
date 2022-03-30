@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Main} from '../../styles/Component.styles';
 import './storages.scss'
+import '../../styles/animations.scss'
 import Axios from "axios";
 import {Product} from "../user/Profile";
 import {v4} from "uuid";
@@ -76,7 +77,7 @@ const Storage: React.FC<StorageProps> = ({storageInfo}) => {
 
                 {
                     showProducts ?
-                        <div className="product-container">
+                        <div className="product-container appear">
                             <table className="table table-light">
                                 <thead>
                                 <tr>

@@ -5,6 +5,8 @@ import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
 import "./profile.scss"
+import '../../styles/animations.scss'
+
 import Axios from "axios";
 import v4 from "uuid/v4";
 
