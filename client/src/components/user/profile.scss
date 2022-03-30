@@ -42,14 +42,25 @@
 
   }
 
-  .purchases-info-container {
+
+}
 
 
-    .purchases-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+.purchases-info-container {
+  .purchases-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .purchases-wrap {
+      padding: 5px;
+      border: 1px solid rgba(128, 128, 128, 0.47);
+      box-shadow: 1px 1px 2px rgba(198, 174, 174, 0.72);
+
+      .products-container {
+        padding-left: 10px;
+        //border: 1px solid blue;
+      }
     }
   }
 }
-

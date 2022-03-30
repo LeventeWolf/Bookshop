@@ -87,7 +87,7 @@ function Profile() {
                     <h2>Address Info</h2>
                     <h3>&nbsp;Zipcode: {userInfo.address.zipcode}</h3>
                     <h3>&nbsp;City: {userInfo.address.city}</h3>
-                    <h3>&nbsp;House number: {userInfo.address.house_number}  {userInfo.address.street}.</h3>
+                    <h3>&nbsp;House number: {userInfo.address.street} {userInfo.address.house_number}.</h3>
                 </div>
 
                 <div className="credit-card-container">
@@ -99,7 +99,9 @@ function Profile() {
 
                 <div className="purchases-info-container">
                     <h2>Purchases</h2>
-                    {purchases.map(pInfo => <Purchase key={v4()} purchaseInfo={pInfo} />)}
+                    <div className="purchases-container">
+                        {purchases.map(pInfo => <Purchase key={v4()} purchaseInfo={pInfo}/>)}
+                    </div>
                 </div>
             </div>
         </Main>
@@ -107,13 +109,44 @@ function Profile() {
 }
 
 const Purchase = ({purchaseInfo}) => {
-    return (
-        <div className="purchase">
-            <h2>date: {purchaseInfo.date}</h2>
-            <h2>sum: </h2>
+    function formatDate(date) {
+        let splitDate = date.split("T");
+        splitDate[1] = splitDate[1].replace(".000Z", "");
 
-            <h2>products: {purchaseInfo.date}</h2>
+        return `${splitDate[0]} ${splitDate[1]}`;
+    }
+
+    return (
+        <div className="purchases-wrap">
+            <h3><b>date:</b> {formatDate(purchaseInfo.ddate)}</h3>
+            <h3><b>products</b></h3>
+            <div className="products-container">
+                <table className="table table-light">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ID</th>
+                        <th>ID</th>
+                        <th>ID</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                         {purchaseInfo.products.map(p => <Product key={v4()} productInfo={p}/>)}
+                    </tbody>
+                </table>
+            </div>
         </div>
+    )
+}
+
+const Product = ({productInfo}) => {
+    return (
+        <tr>
+            <td>{productInfo.id}</td>
+            <td>{productInfo.id}</td>
+            <td>{productInfo.id}</td>
+            <td>{productInfo.id}</td>
+        </tr>
     )
 }
 
