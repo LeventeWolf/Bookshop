@@ -185,4 +185,16 @@ router.get('/api/profile', async (req, res) => {
     return res.status(200).send(result)
 })
 
+// Purchases
+
+router.get('/api/purchases', async (req, res) => {
+    //const username = req.body.username;
+    const username = "wolf";
+    const result = await dao.getPurchasesWithProducts(username);
+
+    console.log(result);
+
+    return res.status(200).send(result)
+})
+
 module.exports = router;
