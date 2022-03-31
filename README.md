@@ -77,3 +77,5 @@ Start oracle-12c in your Docker desktop app
 ```
 docker run -p 8080:8080 -p 1521:1521 truevoly/oracle-12c
 ```
+
+You can use SQLDeveloper for managing the database
