@@ -343,10 +343,10 @@ class dao {
 
     async getPurchases(username) {
         const sql = `SELECT PURCHASE.*
-            FROM CLIENT_PURCHACES
-                INNER JOIN CLIENT on CLIENT_PURCHACES.CLIENT_ID = CLIENT.USERNAME
-                INNER JOIN PURCHASE on CLIENT_PURCHACES.PURCHASE_ID = PURCHASE.ID
-            WHERE USERNAME = '${username}'`;
+                     FROM CLIENT_PURCHACES
+                              INNER JOIN CLIENT on CLIENT_PURCHACES.CLIENT_ID = CLIENT.USERNAME
+                              INNER JOIN PURCHASE on CLIENT_PURCHACES.PURCHASE_ID = PURCHASE.ID
+                     WHERE USERNAME = '${username}'`;
 
         try {
             const result = await connection.execute(sql, binds, options)
@@ -409,7 +409,16 @@ class dao {
     // Storage Products
 
     async getStorageProducts(storageID) {
-        const sql = `SELECT PRODUCT.ID, PRODUCT.PRICE, PRODUCT.NAME, PRODUCT.GENRE, PRODUCT.RELEASE, PRODUCT.IMAGEURL, PRODUCT.LANGUAGE, PRODUCT.DESCRIPTION, PRODUCT.LONGNAME, STORED_PRODUCTS.QUANTITY
+        const sql = `SELECT PRODUCT.ID,
+                            PRODUCT.PRICE,
+                            PRODUCT.NAME,
+                            PRODUCT.GENRE,
+                            PRODUCT.RELEASE,
+                            PRODUCT.IMAGEURL,
+                            PRODUCT.LANGUAGE,
+                            PRODUCT.DESCRIPTION,
+                            PRODUCT.LONGNAME,
+                            STORED_PRODUCTS.QUANTITY
                      FROM STORED_PRODUCTS
                               INNER JOIN PRODUCT on PRODUCT.ID = STORED_PRODUCTS.PRODUCT_ID
                      WHERE STORAGE_ID = ${storageID}`;
@@ -425,9 +434,18 @@ class dao {
     }
 
     async updateProduct(product) {
-        const sql = `UPDATE PRODUCT
-                     SET PRODUCT.PRICE = ${product.PRICE}, PRODUCT.NAME = ${product.NAME}, PRODUCT.GENRE = ${product.GENRE}, PRODUCT.RELEASE = ${product.RELEASE}, PRODUCT.IMAGEURL = ${product.IMAGEURL}, PRODUCT.LANGUAGE = ${product.LANGUAGE}, PRODUCT.DESCRIPTION = ${product.DESCRIPTION}, PRODUCT.LONGNAME = ${product.LONGNAME},
-                     WHERE PRODUCT.ID = ${product.id}`;
+        const sql = `UPDATE WOLF.PRODUCT
+                     SET PRODUCT.PRICE       = ${product.price},
+                         PRODUCT.NAME        = '${product.name}',
+                         PRODUCT.GENRE       = '${product.genre}',
+                         PRODUCT.RELEASE     = '${product.release}',
+                         PRODUCT.IMAGEURL    = '${product.imageurl}',
+                         PRODUCT.LANGUAGE    = '${product.language}',
+                         PRODUCT.DESCRIPTION = '${product.description}',
+                         PRODUCT.LONGNAME    = '${product.longname}',
+                         WHERE PRODUCT.ID = ${product.id}`;
+
+        console.log(sql);
 
         try {
             const result = await connection.execute(sql, binds, options)
