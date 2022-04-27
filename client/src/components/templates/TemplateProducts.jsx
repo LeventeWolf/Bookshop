@@ -15,7 +15,7 @@ import {
     Section, Wrapper
 } from "../../styles/Component.styles";
 import WishlistButton from "./WishlistButton";
-import {Axios} from "axios";
+import Axios from "axios";
 
 
 /**
@@ -283,6 +283,7 @@ export function ProductL({product}) {
  */
 export function ProductEditL({product}) {
     function handleSubmit(event) {
+        console.log("- form submitted - ")
         event.preventDefault();
 
         product.imageurl = event.target.imageurl.value;
@@ -290,7 +291,7 @@ export function ProductEditL({product}) {
         product.type = event.target.type.value;
         product.description = event.target.description.value;
 
-        Axios.post("localhost:3001/api/updateProduct", {product})
+        Axios.post("http://localhost:3001/api/update/product", {product})
             .then(_ =>  {
                 console.log("Product updated!");
             })
@@ -298,6 +299,7 @@ export function ProductEditL({product}) {
                 console.error(`[ERROR] While updating product!`);
                 console.error(error);
             })
+
     }
 
     return (
@@ -357,6 +359,7 @@ export function ProductEditL({product}) {
                     {/*        Add to Basket*/}
                     {/*    </BasketButton>*/}
 
+                    <button type="submit">Confirm</button>
                     {/*    <WishlistButton style={{height: '40px'}} product={product}>*/}
                     {/*        Add to wishlist*/}
                     {/*    </WishlistButton>*/}

@@ -26,7 +26,6 @@ export default function ProductPage() {
         getUserData(user.username)
             .then(response => {
                 setMyUser(response.data);
-                console.log(response.data)
             })
             .catch(error => {
                 console.error(`[USER-DATA] Error while fetching user data`);
