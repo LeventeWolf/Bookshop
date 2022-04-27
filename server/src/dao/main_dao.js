@@ -125,8 +125,8 @@ class dao {
     }
 
     async checkout(username, products) {
-        const date = helper.getDate();
-        let sqlCommands = [];
+        const today = new Date();
+        const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
         let clientPurchaseID = await this.getLatestID('CLIENT_PURCHACES');
         clientPurchaseID = clientPurchaseID.LASTID + 1;
@@ -135,7 +135,7 @@ class dao {
         }
 
         const sql = `INSERT INTO PURCHASE (DELIVERY_OPTION, DDATE, STATUS, CLIENT_PURCHASE_ID)
-                         VALUES ('UPS', TO_DATE('1989-12-09','YYYY-MM-DD'), 'In Warehouse', ${clientPurchaseID})`;
+                         VALUES ('UPS', TO_DATE('${date}','YYYY-MM-DD'), 'In Warehouse', ${clientPurchaseID})`;
 
         try {
             await connection.execute(sql, binds, options);
@@ -145,13 +145,19 @@ class dao {
         }
 
         let purchaseID = await this.getLatestID('PURCHASE');
-        purchaseID = purchaseID.LASTID + 1;
+        purchaseID = purchaseID.LASTID;
         if (!purchaseID) {
             purchaseID = 1;
         }
 
-        const sql2 = `INSERT INTO CLIENT_PURCHACES (CLIENT_ID, PURCHASE_ID)
-                         VALUES ('${username}', ${purchaseID})`;
+        let cp_id = await this.getLatestID('CLIENT_PURCHACES');
+        cp_id = cp_id.LASTID;
+        if (!cp_id) {
+            cp_id = 1;
+        }
+
+        const sql2 = `INSERT INTO CLIENT_PURCHACES (CLIENT_ID, PURCHASE_ID, ID)
+                         VALUES ('${username}', ${purchaseID}, ${cp_id})`;
 
         try {
             await connection.execute(sql2, binds, options);

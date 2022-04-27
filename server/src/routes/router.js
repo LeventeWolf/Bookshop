@@ -213,6 +213,9 @@ router.post('/api/purchases', async (req, res) => {
 
     const result = await dao.getPurchasesWithProducts(username);
 
+    console.log('purchaces');
+    console.log(result)
+
     return res.status(200).send(result);
 })
 

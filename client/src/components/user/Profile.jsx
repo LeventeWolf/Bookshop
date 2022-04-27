@@ -43,16 +43,17 @@ function Profile() {
     }
 
     useEffect(() => {
+        console.log('- mount -')
+
         Axios.post(`http://localhost:3001/api/profile`, {username: user.username}).then((response) => {
-            console.log(response.data)
             setUserInfo(response.data)
         }).catch((response) => {
             console.log(`[Profile] ERROR!`);
             console.log(response)
         });
 
-
         Axios.post(`http://localhost:3001/api/purchases`, {username: user.username}).then((response) => {
+            console.log('purchases: ')
             console.log(response.data)
             setPurchases(response.data)
         }).catch((response) => {
@@ -113,9 +114,7 @@ function Profile() {
 const Purchase = ({purchaseInfo}) => {
     function formatDate(date) {
         let splitDate = date.split("T");
-        splitDate[1] = splitDate[1].replace(".000Z", "");
-
-        return `${splitDate[0]} ${splitDate[1]}`;
+        return `${splitDate[0]}`;
     }
 
     return (
