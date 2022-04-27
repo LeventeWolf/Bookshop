@@ -126,15 +126,20 @@ class dao {
 
     async checkout(username, products) {
         const date = helper.getDate();
-
-        const clientPurchaseID = await this.getLatestID('CLIENT_PURCHASES') + 1;
-
         let sqlCommands = [];
+
+        let clientPurchaseID = await this.getLatestID('CLIENT_PURCHASES') + 1;
+        if (!clientPurchaseID) {
+            clientPurchaseID = 1;
+        }
 
         sqlCommands.push(`INSERT INTO PURCHASE (DELIVERY_OPTION, DDATE, STATUS, CLIENT_PURCHASE_ID)
                          VALUES ('UPS', '${date}', 'In Warehouse', ${clientPurchaseID})`);
 
-        const purchaseID = await this.getLatestID('PURCHASE');
+        let purchaseID = await this.getLatestID('PURCHASE');
+        if (!purchaseID) {
+            purchaseID = 1;
+        }
 
         sqlCommands.push(`INSERT INTO CLIENT_PURCHASES (CLIENT_ID, PURCHASE_ID)
                          VALUES ('${username}', ${purchaseID})`);
@@ -161,6 +166,7 @@ class dao {
 
         try {
             result = await connection.execute(sql, binds, options);
+            result = result.rows[0];
         } catch (error) {
             console.error(error);
             console.error(`[DAO] Error in getLatestID, see error above.`)
