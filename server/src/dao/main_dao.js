@@ -434,16 +434,16 @@ class dao {
     }
 
     async updateProduct(product) {
-        const sql = `UPDATE WOLF.PRODUCT
-                     SET PRODUCT.PRICE       = ${product.price},
-                         PRODUCT.NAME        = '${product.name}',
-                         PRODUCT.GENRE       = '${product.genre}',
-                         PRODUCT.RELEASE     = '${product.release}',
-                         PRODUCT.IMAGEURL    = '${product.imageurl}',
-                         PRODUCT.LANGUAGE    = '${product.language}',
-                         PRODUCT.DESCRIPTION = '${product.description}',
-                         PRODUCT.LONGNAME    = '${product.longname}',
-                         WHERE PRODUCT.ID = ${product.id}`;
+        const sql = `UPDATE PRODUCT
+                     SET PRICE       = ${product.price},
+                         NAME        = '${product.name}',
+                         GENRE       = '${product.genre}',
+                         RELEASE     = '${product.release}',
+                         IMAGEURL    = '${product.imageurl}',
+                         LANGUAGE    = '${product.language}',
+                         DESCRIPTION = '${product.description}',
+                         LONGNAME    = '${product.longname}'
+                     WHERE ID = ${product.id}`;
 
         console.log(sql);
 
