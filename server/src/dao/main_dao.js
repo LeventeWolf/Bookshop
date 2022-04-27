@@ -128,26 +128,26 @@ class dao {
         const date = helper.getDate();
         let sqlCommands = [];
 
-        let clientPurchaseID = await this.getLatestID('CLIENT_PURCHASES') + 1;
-        clientPurchaseID = clientPurchaseID.LASTID;
+        let clientPurchaseID = await this.getLatestID('CLIENT_PURCHACES');
+        clientPurchaseID = clientPurchaseID.LASTID + 1;
         if (!clientPurchaseID) {
             clientPurchaseID = 1;
         }
 
         sqlCommands.push(`INSERT INTO PURCHASE (DELIVERY_OPTION, DDATE, STATUS, CLIENT_PURCHASE_ID)
-                         VALUES ('UPS', '${date}', 'In Warehouse', ${clientPurchaseID})`);
+                         VALUES ('UPS', TO_DATE('1989-12-09','YYYY-MM-DD'), 'In Warehouse', ${clientPurchaseID})`);
 
         let purchaseID = await this.getLatestID('PURCHASE');
-        purchaseID = purchaseID.LASTID;
+        purchaseID = purchaseID.LASTID + 1;
         if (!purchaseID) {
             purchaseID = 1;
         }
 
-        sqlCommands.push(`INSERT INTO CLIENT_PURCHASES (CLIENT_ID, PURCHASE_ID)
+        sqlCommands.push(`INSERT INTO CLIENT_PURCHACES (CLIENT_ID, PURCHASE_ID)
                          VALUES ('${username}', ${purchaseID})`);
 
         for (const product of products) {
-            sqlCommands.push(`INSERT INTO CLIENT_PURCHASES (PURCHASE_ID, PRODUCT_ID, QUANTITY)
+            sqlCommands.push(`INSERT INTO PURCHASE_INFO (PURCHASE_ID, PRODUCT_ID, QUANTITY)
                          VALUES (${purchaseID}, ${product.id}, ${product.quantity})`);
         }
 
