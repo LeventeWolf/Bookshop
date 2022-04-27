@@ -423,6 +423,21 @@ class dao {
             return [];
         }
     }
+
+    async updateProduct(product) {
+        const sql = `UPDATE PRODUCT
+                     SET PRODUCT.PRICE = ${product.PRICE}, PRODUCT.NAME = ${product.NAME}, PRODUCT.GENRE = ${product.GENRE}, PRODUCT.RELEASE = ${product.RELEASE}, PRODUCT.IMAGEURL = ${product.IMAGEURL}, PRODUCT.LANGUAGE = ${product.LANGUAGE}, PRODUCT.DESCRIPTION = ${product.DESCRIPTION}, PRODUCT.LONGNAME = ${product.LONGNAME},
+                     WHERE PRODUCT.ID = ${product.id}`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
 }
 
 module.exports = {dao}

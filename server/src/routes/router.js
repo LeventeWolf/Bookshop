@@ -188,6 +188,20 @@ router.post('/api/user', async (req, res) => {
     const username = req.body.username;
     const result = await dao.getUserByUsername(username);
 
+    console.log(username);
+
+    return res.status(200).send(result)
+})
+
+// Update product
+
+router.post('/api/update/product', async (req, res) => {
+    let product = req.body.product;
+
+    const result = await dao.updateProduct(product);
+
+    console.log(product);
+
     return res.status(200).send(result)
 })
 
