@@ -12,7 +12,7 @@ import {
     ProductContainer,
     ProductImage,
     ProductTitle, ProductType,
-    Section
+    Section, Wrapper
 } from "../../styles/Component.styles";
 import WishlistButton from "./WishlistButton";
 
@@ -275,6 +275,66 @@ export function ProductL ( {product} ) {
     )
 }
 
+/**
+ * Edit L  : Large  - used for ProductPage.jsx when Admin
+ */
+export function ProductEditL ( {product} ) {
+    const isMember = useSelector(state => state.user.isMember);
+
+    return (
+        <Container h={'500px'}>
+            <ProductContainer style={{height: 400}}>
+                <ProductImage w={'280px'} src={product.imageurl} alt="productImage"/>
+
+                <DescriptionContainer>
+                    <Section borderBottom>
+                        <Wrapper>
+                            <label> Product Name </label>
+                            <input style={{border: '1px solid black'}} value={product.name} />
+                        </Wrapper>
+                        {/*<ProductTitle fontSize='20pt'>{product.name}</ProductTitle>*/}
+                    </Section>
+
+                    <Section style={{marginBottom: 'auto', marginTop: '40px'}}>
+                        <ProductType>{product.type}</ProductType>
+                        <ProductAuthor>By (author): {product.author}</ProductAuthor>
+                    </Section>
+
+                    <Section style={{marginBottom: '20px'}}>
+                        <ProductAuthor>{product.description}</ProductAuthor>
+                    </Section>
+
+                </DescriptionContainer>
+
+            </ProductContainer>
+
+            <ActionsContainer style={{width: 400, marginLeft: 'auto'}}>
+                <Section borderBottom style={{marginBottom: 'auto'}}>
+                    <div className="price-container-row">
+                        {isMember ?
+                            <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
+                            : null
+                        }
+
+                        <h2 className="product-price" style={{fontSize: 25}}>
+                            {numberWithSpaces(isMember ? Math.round(product.price * 0.9) : product.price)} Ft
+                        </h2>
+                    </div>
+                </Section>
+
+                <Section style={{gap: '10px'}}>
+                    <BasketButton style={{width:'300px', height: '40px'}} product={product}>
+                        Add to Basket
+                    </BasketButton>
+
+                    <WishlistButton style={{height: '40px'}} product={product} >
+                        Add to wishlist
+                    </WishlistButton>
+                </Section>
+            </ActionsContainer>
+        </Container>
+    )
+}
 
 /**
  * T  : Template  - used for TemplatePages (Bestsellers, Songs, Films, Books, Wishlist)

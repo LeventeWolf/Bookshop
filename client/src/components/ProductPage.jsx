@@ -3,19 +3,36 @@ import {v4} from "uuid";
 import Axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {shuffleArray} from "../lib/helper";
-import {Main, PageTitle,} from "../styles/Component.styles";
+import {Main, PageTitle, Wrapper} from "../styles/Component.styles";
 import '../styles/relatedProducts.scss'
-import {ProductL, ProductSM} from "./templates/TemplateProducts";
+import {ProductEditL, ProductL, ProductSM} from "./templates/TemplateProducts";
 import {
     fetchProduct,
     removeSelectedProduct,
 } from "../redux/actions/productActions";
 import {useParams} from "react-router-dom";
+import {initialUser} from "../model/user";
+import {getUserData} from "../api/userAPI";
 
 
 export default function ProductPage() {
+    const [myUser, setMyUser] = useState(initialUser);
+    const user = useSelector(state => state.user);
     const product = useSelector(state => state.product);
+    const [isEdit, setIsEdit] = useState(false)
     const dispatch = useDispatch();
+
+    useEffect( () => {
+        getUserData(user.username)
+            .then(response => {
+                setMyUser(response.data);
+                console.table(response.data)
+            })
+            .catch(error => {
+                console.error(`[USER-DATA] Error while fetching user data`);
+                console.error(error);
+            });
+    }, [])
 
     const {id} = useParams();
     const {productTitle} = useParams();
@@ -28,10 +45,59 @@ export default function ProductPage() {
         };
     }, [dispatch, id, productTitle]);
 
+
+    function toggleEditMode() {
+        console.log('toggling edit:')
+
+        if (isEdit) {
+            setIsEdit(false);
+        } else {
+            setIsEdit(true);
+        }
+
+        console.log(isEdit)
+    }
+
+    if (isEdit) {
+        return (
+            <Main>
+                <div id="product-page">
+                    <Wrapper onClick={toggleEditMode} >
+                        <PageTitle>Edit Product</PageTitle>
+                        <img style={{height: '2em', cursor: 'pointer'}}
+                             src="https://upload.wikimedia.org/wikipedia/commons/6/64/Edit_icon_%28the_Noun_Project_30184%29.svg"
+                             alt="edit"/>
+                    </Wrapper>
+
+                    {Object.keys(product).length !== 0 ?
+                        <>
+                            <ProductEditL product={product}/>
+
+                            <RelatedProducts/>
+                        </>
+                        :
+                        '404 Product Not Found!'
+                    }
+                </div>
+            </Main>
+        );
+    }
+
+
+
     return (
         <Main>
             <div id="product-page">
-                <PageTitle>Product Details</PageTitle>
+                {myUser.IS_ADMIN === 0 ?
+                    <PageTitle>Product Details</PageTitle> :
+                    <Wrapper onClick={toggleEditMode}>
+                        <PageTitle>Product Details</PageTitle>
+                        <img style={{height: '2em', cursor: 'pointer'}}
+                             src="https://upload.wikimedia.org/wikipedia/commons/6/64/Edit_icon_%28the_Noun_Project_30184%29.svg"
+                             alt="edit"/>
+                    </Wrapper>
+                }
+
 
                 {Object.keys(product).length !== 0 ?
                     <>
@@ -45,6 +111,7 @@ export default function ProductPage() {
             </div>
         </Main>
     );
+
 };
 
 

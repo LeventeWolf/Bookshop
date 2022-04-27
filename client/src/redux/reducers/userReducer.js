@@ -5,6 +5,7 @@ const initialUser = {
     avatar: undefined,
     isLoggedIn: false,
     isMember: false,
+    isAdmin: false,
     boughtAmount: 0,
     error: null,
     userLoggingIn:false

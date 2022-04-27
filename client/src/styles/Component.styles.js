@@ -140,3 +140,12 @@ export const ActionsContainer = styled.div`
   height: 400px;
   width: 400px;
 `;
+
+
+// Wrapper
+
+export const Wrapper = styled.div`
+  display: flex;
+
+  gap: 1em;
+`;

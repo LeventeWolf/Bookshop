@@ -30,7 +30,7 @@ export async function register(emailRef, usernameRef, passwordRef, callback, dis
 }
 
 export async function getUserData(username){
-    return await apiClient.post('/userdata', {username})
+    return await apiClient.post('/user', {username})
 }
 
 export default {signin, register}

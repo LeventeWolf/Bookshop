@@ -182,6 +182,16 @@ router.post('/api/profile', async (req, res) => {
     return res.status(200).send(result)
 })
 
+// User
+
+router.post('/api/user', async (req, res) => {
+    const username = req.body.username;
+    const result = await dao.getUserByUsername(username);
+
+    return res.status(200).send(result)
+})
+
+
 // Purchases
 
 router.post('/api/purchases', async (req, res) => {
