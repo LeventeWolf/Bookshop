@@ -216,6 +216,17 @@ router.post('/api/purchases', async (req, res) => {
     return res.status(200).send(result);
 })
 
+
+// Storage delete
+
+router.post('/api/delete/storage', async (req, res) => {
+    const storageID = req.body.storageID;
+
+    const result = await dao.deleteStorage(storageID);
+
+    return res.status(200).send(result);
+})
+
 // Storage
 
 router.get('/api/storages', async (req, res) => {

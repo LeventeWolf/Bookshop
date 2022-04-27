@@ -406,6 +406,23 @@ class dao {
         }
     }
 
+    // Delete Storage
+
+    async deleteStorage(storageID) {
+        const sql = `DELETE
+                     FROM STORAGE
+                     WHERE ID = ${storageID}`;
+
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
     // Storage Products
 
     async getStorageProducts(storageID) {
