@@ -125,30 +125,37 @@ class dao {
     }
 
     async checkout(username, products) {
-        const result = []
         const date = helper.getDate();
 
-        for (const product of products) {
-            const sql = `INSERT INTO PURCHASE (username, productId, quantity, pdate)
-                         VALUES ('${username}', ${product.id}, ${product.quantity}, '${date}')`;
+        const clientPurchaseID = await this.getLatestID('CLIENT_PURCHASES') + 1;
 
-            try {
-                await connection.execute(sql, binds, options);
-                const message = `[DB-PURCHASE] ${sql}`;
-                result.push(message);
-            } catch (error) {
-                result.push(error.message);
-                console.log(error.message);
-                console.log(sql)
-            }
+        let sqlCommands = [];
+
+        sqlCommands.push(`INSERT INTO PURCHASE (DELIVERY_OPTION, DDATE, STATUS, CLIENT_PURCHASE_ID)
+                         VALUES ('UPS', '${date}', 'In Warehouse', ${clientPurchaseID})`);
+
+        const purchaseID = await this.getLatestID('PURCHASE');
+
+        sqlCommands.push(`INSERT INTO CLIENT_PURCHASES (CLIENT_ID, PURCHASE_ID)
+                         VALUES ('${username}', ${purchaseID})`);
+
+        for (const product of products) {
+            sqlCommands.push(`INSERT INTO CLIENT_PURCHASES (PURCHASE_ID, PRODUCT_ID, QUANTITY)
+                         VALUES (${purchaseID}, ${product.id}, ${product.quantity})`);
         }
 
-        result.forEach(message => log(message))
-        return result;
+        for (const sqlCommand of sqlCommands) {
+            try {
+                await connection.execute(sqlCommand, binds, options);
+            } catch (error) {
+                console.log(error.message);
+                console.log(sqlCommand)
+            }
+        }
     }
 
     async getLatestID(tableName) {
-        const sql = `SELECT MAX(ID) AS LastID FROM WOLF.${tableName}`;
+        const sql = `SELECT MAX(ID) AS LastID FROM ${tableName}`;
 
         let result = -1;
 
