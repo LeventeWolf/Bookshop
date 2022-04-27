@@ -3,7 +3,7 @@ export interface User {
     avatar: string,
     isLoggedIn: boolean,
     isMember: 0 | 1,
-    is_admin: 0 | 1,
+    IS_ADMIN: 0 | 1,
     boughtAmount: number,
     error: string,
     userLoggingIn: boolean
@@ -14,7 +14,7 @@ export const initialUser: User = {
     avatar: '',
     isLoggedIn: false,
     isMember: 0,
-    is_admin: 0,
+    IS_ADMIN: 0,
     boughtAmount: 0,
     error: '',
     userLoggingIn:false

@@ -5,6 +5,9 @@ import '../../styles/animations.scss'
 import Axios from "axios";
 import {Product} from "../user/Profile";
 import {v4} from "uuid";
+import {initialUser} from "../../model/user";
+import {useDispatch, useSelector} from "react-redux";
+import {getUserData} from "../../api/userAPI";
 
 type Storage = {
     city: string,
@@ -16,6 +19,10 @@ type Storage = {
 const Storages = () => {
     const [storages, setStorages] = useState<Storage[]>([]);
 
+    const [myUser, setMyUser] = useState(initialUser);
+    // @ts-ignore
+    const user = useSelector(state => state.user);
+
     useEffect(() => {
         Axios.get(`http://localhost:3001/api/storages`)
             .then((response) => {
@@ -24,6 +31,15 @@ const Storages = () => {
             console.log(`[Storage] ERROR!`);
             console.log(response)
         });
+
+        getUserData(user.username)
+            .then(response => {
+                setMyUser(response.data);
+            })
+            .catch(error => {
+                console.error(`[USER-DATA] Error while fetching user data`);
+                console.error(error);
+            });
     }, [])
 
     return (
@@ -32,7 +48,7 @@ const Storages = () => {
                 <h1>Storages</h1>
 
                 <div className="storages-container">
-                    {storages.map(s => <Storage key={s.id} storageInfo={s}/>)}
+                    {storages.map(s => <Storage key={s.id} storageInfo={s} isAdmin={myUser.IS_ADMIN === 1}/>)}
                 </div>
             </div>
         </Main>
@@ -40,10 +56,11 @@ const Storages = () => {
 };
 
 type StorageProps = {
-    storageInfo: Storage
+    storageInfo: Storage,
+    isAdmin: boolean,
 }
 
-const Storage: React.FC<StorageProps> = ({storageInfo}) => {
+const Storage: React.FC<StorageProps> = ({storageInfo, isAdmin}) => {
     const [products, setProducts] = useState([]);
     const [showProducts, setShowProducts] = useState(false);
 
@@ -98,6 +115,14 @@ const Storage: React.FC<StorageProps> = ({storageInfo}) => {
 
 
             </div>
+
+            { isAdmin ?
+                <button type="submit" className="btn btn-danger">
+                    Delete
+                </button>
+                :
+                <></>
+            }
 
         </div>
     );
