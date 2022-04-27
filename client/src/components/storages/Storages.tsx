@@ -9,6 +9,9 @@ import {initialUser} from "../../model/user";
 import {useDispatch, useSelector} from "react-redux";
 import {getUserData} from "../../api/userAPI";
 
+// @ts-ignore
+import {useAlert} from "react-alert";
+
 type Storage = {
     city: string,
     capacity: number,
@@ -63,6 +66,7 @@ type StorageProps = {
 const Storage: React.FC<StorageProps> = ({storageInfo, isAdmin}) => {
     const [products, setProducts] = useState([]);
     const [showProducts, setShowProducts] = useState(false);
+    const alert = useAlert();
 
     function handleShowProducts() {
         Axios.get(`http://localhost:3001/api/storages/${storageInfo.id}`)
@@ -76,55 +80,67 @@ const Storage: React.FC<StorageProps> = ({storageInfo, isAdmin}) => {
         setShowProducts(!showProducts);
     }
 
-    return (
-        <div className="storage-wrap">
-            <h2>Name: {storageInfo.name}</h2>
-            <h2>City: {storageInfo.city}</h2>
-            <h2>Capacity: {storageInfo.capacity}</h2>
+    function deleteStorage() {
+        Axios.post("http://localhost:3001/api/delete/storage", {storageID: storageInfo.id})
+            .then(_ => {
+                alert.success('Storage deleted!');
+            })
+            .catch(error => {
+                alert.error("Error occured!");
+            });
+    }
 
-            <div className="product-info-wrap">
-                <div className="title-wrap">
-                    <h2>Products</h2>
-                    <img className="down-arrow" src="http://assets.stickpng.com/images/58f8bcf70ed2bdaf7c128307.png"
-                         alt="arrow"
-                         onClick={handleShowProducts}
-                    />
+
+
+    return (
+            <div className="storage-wrap">
+                <h2>Name: {storageInfo.name}</h2>
+                <h2>City: {storageInfo.city}</h2>
+                <h2>Capacity: {storageInfo.capacity}</h2>
+
+                <div className="product-info-wrap">
+                    <div className="title-wrap">
+                        <h2>Products</h2>
+                        <img className="down-arrow" src="http://assets.stickpng.com/images/58f8bcf70ed2bdaf7c128307.png"
+                             alt="arrow"
+                             onClick={handleShowProducts}
+                        />
+                    </div>
+
+
+                    {
+                        showProducts ?
+                            <div className="product-container appear">
+                                <table className="table table-light">
+                                    <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Product Genre</th>
+                                        <th>Product Price</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {products.map(p => <Product key={v4()} productInfo={p}/>)}
+                                    </tbody>
+                                </table>
+                            </div>
+                            : <></>
+                    }
+
+
                 </div>
 
+                {isAdmin ?
+                    <button type="submit" className="btn btn-danger" onClick={deleteStorage}>
+                        Delete
+                    </button>
 
-                {
-                    showProducts ?
-                        <div className="product-container appear">
-                            <table className="table table-light">
-                                <thead>
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th>Product Genre</th>
-                                    <th>Product Price</th>
-                                    <th>Quantity</th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                {products.map(p => <Product key={v4()} productInfo={p}/>)}
-                                </tbody>
-                            </table>
-                        </div>
-                        : <></>
+                    :
+                    <></>
                 }
-
-
             </div>
-
-            { isAdmin ?
-                <button type="submit" className="btn btn-danger">
-                    Delete
-                </button>
-                :
-                <></>
-            }
-
-        </div>
     );
 };
 
