@@ -147,6 +147,21 @@ class dao {
         return result;
     }
 
+    async getLatestID(tableName) {
+        const sql = `SELECT MAX(ID) AS LastID FROM WOLF.${tableName}`;
+
+        let result = -1;
+
+        try {
+            result = await connection.execute(sql, binds, options);
+        } catch (error) {
+            console.error(error);
+            console.error(`[DAO] Error in getLatestID, see error above.`)
+        }
+
+        return result;
+    }
+
     // Songs
 
     async getAllSongs() {
