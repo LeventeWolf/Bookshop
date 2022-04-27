@@ -287,6 +287,7 @@ export function ProductEditL({product}) {
         event.preventDefault();
 
         product.imageurl = event.target.imageurl.value;
+        product.price = event.target.price.value;
         product.name = event.target.name.value;
         product.type = event.target.type.value;
         product.description = event.target.description.value;
@@ -347,7 +348,7 @@ export function ProductEditL({product}) {
                         <div className="price-container-row">
                             <Wrapper>
                                 <label>Price</label>
-                                <input type="text" style={{border: '1px solid black', width: '100%', height: '2em'}}
+                                <input type="text"  name="price" style={{border: '1px solid black', width: '100%', height: '2em'}}
                                        defaultValue={product.price}/>
                             </Wrapper>
                         </div>
