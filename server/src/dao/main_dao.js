@@ -445,8 +445,6 @@ class dao {
                          LONGNAME    = '${product.longname}'
                      WHERE ID = ${product.id}`;
 
-        console.log(sql);
-
         try {
             const result = await connection.execute(sql, binds, options)
 
