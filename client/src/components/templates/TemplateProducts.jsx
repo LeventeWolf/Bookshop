@@ -15,6 +15,7 @@ import {
     Section, Wrapper
 } from "../../styles/Component.styles";
 import WishlistButton from "./WishlistButton";
+import {Axios} from "axios";
 
 
 /**
@@ -28,18 +29,18 @@ import WishlistButton from "./WishlistButton";
 /**
  * SM : Small - used for Featuring, Related products
  */
-export function ProductSM ( {product} ) {
+export function ProductSM({product}) {
     const dispatch = useDispatch();
     const isMember = useSelector(state => state.user.isMember);
 
     return (
         <div className="featuring-product">
-            <Link to={`/product/${product.id}/${product.name}`} onClick={() => dispatch(selectProduct(product))} >
+            <Link to={`/product/${product.id}/${product.name}`} onClick={() => dispatch(selectProduct(product))}>
                 <img src={product.imageurl} className="product-image" alt="img"/>
             </Link>
 
             <div className="featuring-product-description-wrap">
-                <Link to={`/product/${product.id}/${product.name} `} onClick={() => dispatch(selectProduct(product))} >
+                <Link to={`/product/${product.id}/${product.name} `} onClick={() => dispatch(selectProduct(product))}>
                     <h2 className="product-title">
                         {product.name}
                     </h2>
@@ -72,12 +73,12 @@ export function ProductSM ( {product} ) {
 /**
  * M  : Medium - used for Home.jxs => Supply & Bestsellers
  */
-export function ProductM ( {product} ) {
+export function ProductM({product}) {
     const isMember = useSelector(state => state.user.isMember);
 
     return (
         <div className="supply-product">
-            <Link to={`/product/${product.id}/${product.name}`} >
+            <Link to={`/product/${product.id}/${product.name}`}>
                 <img src={product.imageurl}
                      className="supply-product-image" alt="img"/>
 
@@ -101,7 +102,8 @@ export function ProductM ( {product} ) {
                 </h2>
             </div>
 
-            <BasketButton style={{width:'100%', height: '37px', marginTop: 10, backgroundColor: '#10bbd5'}} product={product}>
+            <BasketButton style={{width: '100%', height: '37px', marginTop: 10, backgroundColor: '#10bbd5'}}
+                          product={product}>
                 Add to Basket
             </BasketButton>
         </div>
@@ -112,13 +114,13 @@ export function ProductM ( {product} ) {
 /**
  * B  : Basket - used for Basket
  */
-export function ProductB ( {product} ) {
+export function ProductB({product}) {
     const dispatch = useDispatch();
     const isMember = useSelector(state => state.user.isMember);
 
     return (
         <div className="basket-product-wrap">
-            <Link to={`/product/${product.name}`} >
+            <Link to={`/product/${product.name}`}>
                 <img className='product-image' src={product.imageurl} alt="alt"/>
             </Link>
 
@@ -160,7 +162,7 @@ export function ProductB ( {product} ) {
 /**
  * W  : Wishlist - used for Wishlist.jsx
  */
-export function ProductWishlist ({product} ) {
+export function ProductWishlist({product}) {
     const isMember = useSelector(state => state.user.isMember);
 
     return (
@@ -170,7 +172,7 @@ export function ProductWishlist ({product} ) {
 
                 <DescriptionContainer style={{width: '1000px'}}>
                     <Section borderBottom>
-                        <Link to={`/product/${product.name}`} >
+                        <Link to={`/product/${product.name}`}>
                             <ProductTitle style={{width: '600px'}} fontSize='18pt'>{product.name}</ProductTitle>
                         </Link>
                     </Section>
@@ -191,7 +193,8 @@ export function ProductWishlist ({product} ) {
                     <Section borderBottom style={{marginBottom: 'auto'}}>
                         <div className="price-container-row">
                             {isMember ?
-                                <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
+                                <h3 className="original-price"
+                                    style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
                                 : null
                             }
 
@@ -221,7 +224,7 @@ export function ProductWishlist ({product} ) {
 /**
  * L  : Large  - used for ProductPage.jsx
  */
-export function ProductL ( {product} ) {
+export function ProductL({product}) {
     const isMember = useSelector(state => state.user.isMember);
 
     return (
@@ -236,7 +239,6 @@ export function ProductL ( {product} ) {
 
                     <Section style={{marginBottom: 'auto', marginTop: '40px'}}>
                         <ProductType>{product.type}</ProductType>
-                        <ProductAuthor>By (author): {product.author}</ProductAuthor>
                     </Section>
 
                     <Section style={{marginBottom: '20px'}}>
@@ -251,7 +253,8 @@ export function ProductL ( {product} ) {
                 <Section borderBottom style={{marginBottom: 'auto'}}>
                     <div className="price-container-row">
                         {isMember ?
-                            <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
+                            <h3 className="original-price"
+                                style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
                             : null
                         }
 
@@ -262,72 +265,11 @@ export function ProductL ( {product} ) {
                 </Section>
 
                 <Section style={{gap: '10px'}}>
-                    <BasketButton style={{width:'300px', height: '40px'}} product={product}>
+                    <BasketButton style={{width: '300px', height: '40px'}} product={product}>
                         Add to Basket
                     </BasketButton>
 
-                     <WishlistButton style={{height: '40px'}} product={product} >
-                         Add to wishlist
-                     </WishlistButton>
-                </Section>
-            </ActionsContainer>
-        </Container>
-    )
-}
-
-/**
- * Edit L  : Large  - used for ProductPage.jsx when Admin
- */
-export function ProductEditL ( {product} ) {
-    const isMember = useSelector(state => state.user.isMember);
-
-    return (
-        <Container h={'500px'}>
-            <ProductContainer style={{height: 400}}>
-                <ProductImage w={'280px'} src={product.imageurl} alt="productImage"/>
-
-                <DescriptionContainer>
-                    <Section borderBottom>
-                        <Wrapper>
-                            <label> Product Name </label>
-                            <input style={{border: '1px solid black'}} value={product.name} />
-                        </Wrapper>
-                        {/*<ProductTitle fontSize='20pt'>{product.name}</ProductTitle>*/}
-                    </Section>
-
-                    <Section style={{marginBottom: 'auto', marginTop: '40px'}}>
-                        <ProductType>{product.type}</ProductType>
-                        <ProductAuthor>By (author): {product.author}</ProductAuthor>
-                    </Section>
-
-                    <Section style={{marginBottom: '20px'}}>
-                        <ProductAuthor>{product.description}</ProductAuthor>
-                    </Section>
-
-                </DescriptionContainer>
-
-            </ProductContainer>
-
-            <ActionsContainer style={{width: 400, marginLeft: 'auto'}}>
-                <Section borderBottom style={{marginBottom: 'auto'}}>
-                    <div className="price-container-row">
-                        {isMember ?
-                            <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(isMember ? product.price : '')} Ft</h3>
-                            : null
-                        }
-
-                        <h2 className="product-price" style={{fontSize: 25}}>
-                            {numberWithSpaces(isMember ? Math.round(product.price * 0.9) : product.price)} Ft
-                        </h2>
-                    </div>
-                </Section>
-
-                <Section style={{gap: '10px'}}>
-                    <BasketButton style={{width:'300px', height: '40px'}} product={product}>
-                        Add to Basket
-                    </BasketButton>
-
-                    <WishlistButton style={{height: '40px'}} product={product} >
+                    <WishlistButton style={{height: '40px'}} product={product}>
                         Add to wishlist
                     </WishlistButton>
                 </Section>
@@ -337,9 +279,98 @@ export function ProductEditL ( {product} ) {
 }
 
 /**
+ * Edit L  : Large  - used for ProductPage.jsx when Admin
+ */
+export function ProductEditL({product}) {
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        product.imageurl = event.target.imageurl.value;
+        product.name = event.target.name.value;
+        product.type = event.target.type.value;
+        product.description = event.target.description.value;
+
+        Axios.post("localhost:3001/api/updateProduct", {product})
+            .then(_ =>  {
+                console.log("Product updated!");
+            })
+            .catch(error => {
+                console.error(`[ERROR] While updating product!`);
+                console.error(error);
+            })
+    }
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <Container h={'500px'}>
+                <ProductContainer style={{height: 400}}>
+                    {/* Edit ImageURL */}
+                    <Wrapper>
+                        <label> Image </label>
+                        <input type="text" name="imageurl" style={{border: '1px solid black'}} defaultValue={product.imageurl} />
+                    </Wrapper>
+
+                    <DescriptionContainer>
+                        {/* Edit Name */}
+                        <Section borderBottom>
+                            <Wrapper>
+                                <label> Product Name </label>
+                                <input type="text" name="name" style={{border: '1px solid black'}} defaultValue={product.name}/>
+                            </Wrapper>
+                        </Section>
+
+                        {/* Edit Type */}
+                        <Section style={{marginBottom: 'auto', marginTop: '40px'}}>
+                            <Wrapper>
+                                <label>Type</label>
+                                <input type="text" name="type" style={{border: '1px solid black'}} defaultValue={product.type}/>
+                            </Wrapper>
+                        </Section>
+
+                        {/* Edit Description */}
+                        <Section style={{marginBottom: '20px'}}>
+                            <Wrapper>
+                                <label>Description</label>
+                                <input type="text" name="description" style={{border: '1px solid black', width: '100%', height: '2em'}}
+                                       defaultValue={product.description}/>
+                            </Wrapper>
+                        </Section>
+                    </DescriptionContainer>
+
+                </ProductContainer>
+
+                <ActionsContainer style={{width: 400, marginLeft: 'auto'}}>
+                    {/* Edit Price */}
+                    <Section borderBottom style={{marginBottom: 'auto'}}>
+                        <div className="price-container-row">
+                            <Wrapper>
+                                <label>Price</label>
+                                <input type="text" style={{border: '1px solid black', width: '100%', height: '2em'}}
+                                       defaultValue={product.price}/>
+                            </Wrapper>
+                        </div>
+                    </Section>
+
+                    {/* Buttons */}
+                    {/*<Section style={{gap: '10px'}}>*/}
+                    {/*    <BasketButton style={{width: '300px', height: '40px'}} product={product}>*/}
+                    {/*        Add to Basket*/}
+                    {/*    </BasketButton>*/}
+
+                    {/*    <WishlistButton style={{height: '40px'}} product={product}>*/}
+                    {/*        Add to wishlist*/}
+                    {/*    </WishlistButton>*/}
+                    {/*</Section>*/}
+                </ActionsContainer>
+            </Container>
+        </form>
+    )
+}
+
+/**
  * T  : Template  - used for TemplatePages (Bestsellers, Songs, Films, Books, Wishlist)
  */
-export function ProductTemplate({product} ) {
+export function ProductTemplate({product}) {
     const isMember = useSelector(state => state.user.isMember);
 
     return (
@@ -349,7 +380,7 @@ export function ProductTemplate({product} ) {
 
                 <DescriptionContainer style={{width: '500px'}}>
                     <Section borderBottom>
-                        <Link to={`/product/${product.id}/${product.name}`} >
+                        <Link to={`/product/${product.id}/${product.name}`}>
                             <ProductTitle fontSize='18pt'>{product.name}</ProductTitle>
                         </Link>
                     </Section>
@@ -370,7 +401,8 @@ export function ProductTemplate({product} ) {
                     <Section borderBottom style={{marginBottom: 'auto'}}>
                         <div className="price-container-row">
                             {isMember ?
-                                <h3 className="original-price" style={{fontSize: 17}}>{numberWithSpaces(product.price)} Ft</h3>
+                                <h3 className="original-price"
+                                    style={{fontSize: 17}}>{numberWithSpaces(product.price)} Ft</h3>
                                 : null
                             }
 

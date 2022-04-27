@@ -26,7 +26,7 @@ export default function ProductPage() {
         getUserData(user.username)
             .then(response => {
                 setMyUser(response.data);
-                console.table(response.data)
+                console.log(response.data)
             })
             .catch(error => {
                 console.error(`[USER-DATA] Error while fetching user data`);
@@ -47,15 +47,11 @@ export default function ProductPage() {
 
 
     function toggleEditMode() {
-        console.log('toggling edit:')
-
         if (isEdit) {
             setIsEdit(false);
         } else {
             setIsEdit(true);
         }
-
-        console.log(isEdit)
     }
 
     if (isEdit) {
