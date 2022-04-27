@@ -134,8 +134,15 @@ class dao {
             clientPurchaseID = 1;
         }
 
-        sqlCommands.push(`INSERT INTO PURCHASE (DELIVERY_OPTION, DDATE, STATUS, CLIENT_PURCHASE_ID)
-                         VALUES ('UPS', TO_DATE('1989-12-09','YYYY-MM-DD'), 'In Warehouse', ${clientPurchaseID})`);
+        const sql = `INSERT INTO PURCHASE (DELIVERY_OPTION, DDATE, STATUS, CLIENT_PURCHASE_ID)
+                         VALUES ('UPS', TO_DATE('1989-12-09','YYYY-MM-DD'), 'In Warehouse', ${clientPurchaseID})`;
+
+        try {
+            await connection.execute(sql, binds, options);
+        } catch (error) {
+            console.log(error.message);
+            console.log(sql)
+        }
 
         let purchaseID = await this.getLatestID('PURCHASE');
         purchaseID = purchaseID.LASTID + 1;
@@ -143,20 +150,25 @@ class dao {
             purchaseID = 1;
         }
 
-        sqlCommands.push(`INSERT INTO CLIENT_PURCHACES (CLIENT_ID, PURCHASE_ID)
-                         VALUES ('${username}', ${purchaseID})`);
+        const sql2 = `INSERT INTO CLIENT_PURCHACES (CLIENT_ID, PURCHASE_ID)
+                         VALUES ('${username}', ${purchaseID})`;
 
-        for (const product of products) {
-            sqlCommands.push(`INSERT INTO PURCHASE_INFO (PURCHASE_ID, PRODUCT_ID, QUANTITY)
-                         VALUES (${purchaseID}, ${product.id}, ${product.quantity})`);
+        try {
+            await connection.execute(sql2, binds, options);
+        } catch (error) {
+            console.log(error.message);
+            console.log(sql2)
         }
 
-        for (const sqlCommand of sqlCommands) {
+        for (const product of products) {
+            const sql = `INSERT INTO PURCHASE_INFO (PURCHASE_ID, PRODUCT_ID, QUANTITY)
+                         VALUES (${purchaseID}, ${product.id}, ${product.quantity})`;
+
             try {
-                await connection.execute(sqlCommand, binds, options);
+                await connection.execute(sql, binds, options);
             } catch (error) {
                 console.log(error.message);
-                console.log(sqlCommand)
+                console.log(sql)
             }
         }
     }
