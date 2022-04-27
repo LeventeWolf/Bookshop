@@ -129,6 +129,7 @@ class dao {
         let sqlCommands = [];
 
         let clientPurchaseID = await this.getLatestID('CLIENT_PURCHASES') + 1;
+        clientPurchaseID = clientPurchaseID.LASTID;
         if (!clientPurchaseID) {
             clientPurchaseID = 1;
         }
@@ -137,6 +138,7 @@ class dao {
                          VALUES ('UPS', '${date}', 'In Warehouse', ${clientPurchaseID})`);
 
         let purchaseID = await this.getLatestID('PURCHASE');
+        purchaseID = purchaseID.LASTID;
         if (!purchaseID) {
             purchaseID = 1;
         }
