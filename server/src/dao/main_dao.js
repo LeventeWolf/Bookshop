@@ -94,6 +94,12 @@ class dao {
         }
     }
 
+    // People who bought this product also bought these products
+    async getRelatedProduct(productID) {
+
+    }
+
+
     async getAllBooks() {
         const sql = `SELECT *
                      FROM PRODUCT
