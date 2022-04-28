@@ -269,11 +269,11 @@ class dao {
     async getBestsellers() {
         const sql = `SELECT DISTINCT *
                      FROM PRODUCT
-                              INNER JOIN (SELECT ID, SUM(QUANTITY) as "SOLD_AMOUNT"
+                              INNER JOIN (SELECT PRODUCT_ID, SUM(QUANTITY) as "SOLD_AMOUNT"
                                           FROM PURCHASE_INFO
-                                          GROUP BY ID
-                                          ORDER BY SOLD_AMOUNT DESC) SOLD ON SOLD.ID = PRODUCT.ID
-                              LEFT JOIN FILM F on PRODCUT.ID = F.ID
+                                          GROUP BY PRODUCT_ID
+                                          ORDER BY SOLD_AMOUNT DESC) SOLD ON SOLD.PRODUCT_ID = PRODUCT.ID
+                              LEFT JOIN FILM F on PRODUCT.ID = F.ID
                               LEFT JOIN BOOK B on PRODUCT.ID = B.ID
                               LEFT JOIN SONG S on PRODUCT.ID = S.ID
                      ORDER BY SOLD.SOLD_AMOUNT DESC`
