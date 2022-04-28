@@ -280,7 +280,7 @@ class dao {
 
         try {
             const result = await connection.execute(sql, binds, options);
-            log(`[DB-BESTSELLER] Selecting bestsellers!`);
+            // log(`[DB-BESTSELLER] Selecting bestsellers!`);
             return helper.formatRow(result.rows);
         } catch (error) {
             log(error);
@@ -296,6 +296,7 @@ class dao {
                      FROM PRODUCT
                               LEFT JOIN BOOK B on PRODUCT.ID = B.ID
                               LEFT JOIN SONG S on PRODUCT.ID = S.ID
+                              LEFT JOIN FILM F on PRODUCT.ID = F.ID
                      WHERE EXTRACT(YEAR FROM (TO_DATE(RELEASE, 'yyyy-mm-dd'))) = '2022'
                      ORDER BY RELEASE DESC`
 
@@ -410,7 +411,6 @@ class dao {
 
     // Purchase products
 
-    // TODO - Fix: Quantity is always 1 bug
     async getPurchaseProducts(purchaseID) {
         const sql = `SELECT PRODUCT.*, PURCHASE_INFO.QUANTITY as B_QUANTITY
                      FROM PURCHASE_INFO
