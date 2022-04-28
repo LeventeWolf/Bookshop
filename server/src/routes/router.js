@@ -210,11 +210,7 @@ router.post('/api/update/product', async (req, res) => {
 
 router.post('/api/purchases', async (req, res) => {
     const username = req.body.username;
-
     const result = await dao.getPurchasesWithProducts(username);
-
-    console.log('purchaces');
-    console.log(result)
 
     return res.status(200).send(result);
 })

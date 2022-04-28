@@ -145,7 +145,7 @@ export const Product = ({productInfo}) => {
             <td>{productInfo.name}</td>
             <td>{productInfo.genre}</td>
             <td>{productInfo.price}</td>
-            <td>{productInfo.quantity}</td>
+            <td>{productInfo.b_quantity}</td>
         </tr>
     )
 }

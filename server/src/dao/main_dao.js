@@ -154,6 +154,8 @@ class dao {
         cp_id = cp_id.LASTID;
         if (!cp_id) {
             cp_id = 1;
+        } else {
+            cp_id += 1;
         }
 
         const sql2 = `INSERT INTO CLIENT_PURCHACES (CLIENT_ID, PURCHASE_ID, ID)
@@ -267,18 +269,18 @@ class dao {
     async getBestsellers() {
         const sql = `SELECT DISTINCT *
                      FROM PRODUCT
-                              INNER JOIN (SELECT PRODUCTID, SUM(PURCHASE.QUANTITY) as "SOLD_AMOUNT"
-                                          FROM PURCHASE
-                                          GROUP BY PRODUCTID
-                                          ORDER BY SOLD_AMOUNT DESC) SOLD ON SOLD.PRODUCTID = PRODUCT.ID
-
+                              INNER JOIN (SELECT ID, SUM(QUANTITY) as "SOLD_AMOUNT"
+                                          FROM PURCHASE_INFO
+                                          GROUP BY ID
+                                          ORDER BY SOLD_AMOUNT DESC) SOLD ON SOLD.ID = PRODUCT.ID
+                              LEFT JOIN FILM F on PRODCUT.ID = F.ID
                               LEFT JOIN BOOK B on PRODUCT.ID = B.ID
                               LEFT JOIN SONG S on PRODUCT.ID = S.ID
                      ORDER BY SOLD.SOLD_AMOUNT DESC`
 
         try {
             const result = await connection.execute(sql, binds, options);
-            log(`[DB-BESTSELLER] Selecting bestsellers! [1-5]`);
+            log(`[DB-BESTSELLER] Selecting bestsellers!`);
             return helper.formatRow(result.rows);
         } catch (error) {
             log(error);
@@ -408,8 +410,9 @@ class dao {
 
     // Purchase products
 
+    // TODO - Fix: Quantity is always 1 bug
     async getPurchaseProducts(purchaseID) {
-        const sql = `SELECT PRODUCT.*
+        const sql = `SELECT PRODUCT.*, PURCHASE_INFO.QUANTITY as B_QUANTITY
                      FROM PURCHASE_INFO
                               INNER JOIN PURCHASE on PURCHASE_INFO.PURCHASE_ID = PURCHASE.ID
                               INNER JOIN PRODUCT on PURCHASE_INFO.PRODUCT_ID = PRODUCT.ID
