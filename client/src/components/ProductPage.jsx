@@ -98,7 +98,7 @@ export default function ProductPage() {
                     <>
                         <ProductL product={product}/>
 
-                        <RelatedProducts/>
+                        <RelatedProducts productID={product.id}/>
                     </>
                     :
                     '404 Product Not Found!'
@@ -110,11 +110,11 @@ export default function ProductPage() {
 };
 
 
-function RelatedProducts() {
+function RelatedProducts( {productID} ) {
     const [relatedProducts, setRelatedProducts] = useState([]);
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/api/all-books')
+        Axios.get(`http://localhost:3001/api/related-products/${productID}`)
             .then(response => {
                 shuffleArray(response.data);
                 setRelatedProducts(response.data.splice(0, 6));

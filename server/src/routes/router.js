@@ -157,6 +157,27 @@ router.get('/api/product/:id/:productTitle', async (req, res) => {
 
 });
 
+// ProductPage/RelatedProducts
+
+router.get('/api/related-products/:id/', async (req, res) => {
+    const productID = req.params.id;
+
+    let result = [];
+
+    try {
+        result = await dao.getRelatedProducts(productID)
+    } catch (error) {
+        console.error(`[ROUTER-PRODUCT] Get relatedProducts error!`)
+        console.error(error)
+    }
+
+    return res.status(200).send(result);
+
+
+});
+
+
+
 // Bestsellers
 
 router.get('/api/bestsellers', async (req, res) => {

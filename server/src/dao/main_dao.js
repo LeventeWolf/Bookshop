@@ -95,8 +95,29 @@ class dao {
     }
 
     // People who bought this product also bought these products
-    async getRelatedProduct(productID) {
+    async getRelatedProducts(productID) {
+        const sql = `SELECT *
+                     FROM WOLF.PRODUCT
+                              LEFT JOIN WOLF.BOOK B on PRODUCT.ID = B.ID
+                              LEFT JOIN WOLF.FILM F on PRODUCT.ID = F.ID
+                              LEFT JOIN WOLF.SONG S on PRODUCT.ID = S.ID
+                     WHERE WOLF.PRODUCT.ID IN (SELECT PRODUCT_ID
+                                               FROM CLIENT_PURCHACES
+                                                        INNER JOIN PURCHASE_INFO PI on CLIENT_PURCHACES.PURCHASE_ID = PI.PURCHASE_ID
+                                               WHERE CLIENT_ID IN (SELECT CLIENT_ID AS "username"
+                                                                   FROM PURCHASE_INFO
+                                                                            INNER JOIN CLIENT_PURCHACES CP on PURCHASE_INFO.PURCHASE_ID = CP.PURCHASE_ID
+                                                                   WHERE PRODUCT_ID = ${productID})
+                                               GROUP BY PRODUCT_ID)`;
 
+        try {
+            const result = await connection.execute(sql, binds, options)
+
+            return helper.formatRow(result.rows);
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
     }
 
 
