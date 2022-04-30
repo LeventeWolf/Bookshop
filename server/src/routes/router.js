@@ -176,6 +176,19 @@ router.get('/api/related-products/:id/', async (req, res) => {
 
 });
 
+// Number of members
+router.get('/api/members/', async (req, res) => {
+    let members = 0;
+    try {
+        members = await dao.getNumberOfMembers();
+        console.log(members)
+    } catch (error) {
+        console.log('Error while getting number of members')
+        // console.error(error)
+    }
+
+    return res.status(200).send({members});
+});
 
 
 // Bestsellers
